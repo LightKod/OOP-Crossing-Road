@@ -14,25 +14,27 @@ bool CrossingRoadGame::OnUserUpdate(float fElapsedTime)
 {
 	switch (gameState) {
 	case STATE_MENU:
-		MenuHandler(fElapsedTime);
-		break;
+		return MenuHandler(fElapsedTime);
 	case STATE_PLAY:
-		GameHandler(fElapsedTime);
-		break;
+		return GameHandler(fElapsedTime);
 	case STATE_LOADGAME:
-		LoadHandler(fElapsedTime);
-		break;
+		return LoadHandler(fElapsedTime);
 	case STATE_SETTING:
-		SettingHandler(fElapsedTime);
-		break;
+		return SettingHandler(fElapsedTime);
 	case STATE_LEADERBOARD:
-		LeaderboardHandler (fElapsedTime);
-		break;
+		return LeaderboardHandler (fElapsedTime);
 	case STATE_CREDIT:
-		CreditHandler(fElapsedTime);
-		break;
+		return CreditHandler(fElapsedTime);
+	case STATE_EXIT:
+		return ExitHandler(fElapsedTime);
+	default:
+		return true;
 	}
-	return true;
+}
+
+void CrossingRoadGame::UpdateCollisionMatrix() {
+	ClearCollsionMatrix();
+	//THEM MAY CAI UPDATE COLLSION CUA MAY CAI OBJECT VAO
 }
 
 
@@ -69,15 +71,15 @@ void CrossingRoadGame::SetStateCredit() {
 	DrawCredit();
 }
 void CrossingRoadGame::SetStateExit() {
-	m_bAtomActive = false;
+	gameState = STATE_EXIT;
 }
 
-
-void CrossingRoadGame::GameHandler(float fElapsedTime) {
-	gameState = GameState::STATE_MENU;
+bool CrossingRoadGame::GameHandler(float fElapsedTime) {
 	//VIET THEM BEN DUOI
+	UpdateCollisionMatrix();
+	return true;
 }
-void CrossingRoadGame::MenuHandler(float fElapsedTime) {
+bool CrossingRoadGame::MenuHandler(float fElapsedTime) {
 	static float deltaTime = 0;
 	static bool down = false;
 	deltaTime += fElapsedTime;
@@ -136,27 +138,35 @@ void CrossingRoadGame::MenuHandler(float fElapsedTime) {
 			SetStateNewGame();
 			break;
 		}
+		return true;
 	}
 }
-void CrossingRoadGame::LoadHandler(float fElapsedTime) {
+bool CrossingRoadGame::LoadHandler(float fElapsedTime) {
 	if (m_keys[VK_ESCAPE].bReleased) {
 		SetStateMenu();
 	}
+	return true;
 }
-void CrossingRoadGame::LeaderboardHandler(float fElapsedTime) {
+bool CrossingRoadGame::LeaderboardHandler(float fElapsedTime) {
 	if (m_keys[VK_ESCAPE].bReleased) {
 		SetStateMenu();
 	}
+	return true;
 }
-void CrossingRoadGame::CreditHandler(float fElapsedTime) {
+bool CrossingRoadGame::CreditHandler(float fElapsedTime) {
 	if (m_keys[VK_ESCAPE].bReleased) {
 		SetStateMenu();
 	}
+	return true;
 }
-void CrossingRoadGame::SettingHandler(float fElapsedTime) {
+bool CrossingRoadGame::SettingHandler(float fElapsedTime) {
 	if (m_keys[VK_ESCAPE].bReleased) {
 		SetStateMenu();
 	}
+	return true;
+}
+bool CrossingRoadGame::ExitHandler(float fElapsedTime) {
+	return false;
 }
 
 
@@ -201,8 +211,8 @@ void CrossingRoadGame::DrawMenuOptions() {
 }
 void CrossingRoadGame::UpdateMousePosition(int index) {
 	int ofset = index * 7;
-	Fill(20, 36 + ofset, 26, 36 + ofset, L' ', COLOUR::BG_BLACK);
-	Fill(102, 36 + ofset, 108, 36 + ofset, L' ', COLOUR::BG_BLACK);
+	Fill(36, 36 + ofset, 42, 36 + ofset, L' ', COLOUR::BG_BLACK);
+	Fill(138, 36 + ofset, 144, 36 + ofset, L' ', COLOUR::BG_BLACK);
 }
 void CrossingRoadGame::DrawMenuTitle(int innerOfset, int outerOfset) {
 	//Inner

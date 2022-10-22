@@ -94,6 +94,10 @@ int GameEngine::ConstructConsole(int width, int height, int fontw, int fonth)
 	m_bufScreen = new CHAR_INFO[m_nScreenWidth * m_nScreenHeight];
 	memset(m_bufScreen, 0, sizeof(CHAR_INFO) * m_nScreenWidth * m_nScreenHeight);
 
+	//Allocate memory for collision matrix
+	collisionMatrix = new bool[m_nScreenWidth * m_nScreenHeight];
+	memset(collisionMatrix, 0, sizeof(bool) * m_nScreenHeight * m_nScreenWidth);
+	
 	SetConsoleCtrlHandler((PHANDLER_ROUTINE)CloseHandler, TRUE);
 	return 1;
 }
@@ -205,6 +209,14 @@ void GameEngine::DrawLine(int x1, int y1, int x2, int y2, short c, short col)
 	}
 }
 
+void GameEngine::ClearCollsionMatrix() {
+	memset(collisionMatrix, 0, sizeof(bool) * m_nScreenHeight * m_nScreenWidth);
+}
+
+void GameEngine::UpdateCollisionMatrix() {
+
+}
+
 
 GameEngine::~GameEngine()
 {
@@ -285,8 +297,6 @@ void GameEngine::GameThread()
 		if (OnUserDestroy())
 		{
 			// User has permitted destroy, so exit and clean up
-			delete[] m_bufScreen;
-			SetConsoleActiveScreenBuffer(m_hOriginalConsole);
 			m_cvGameFinished.notify_one();
 		}
 		else

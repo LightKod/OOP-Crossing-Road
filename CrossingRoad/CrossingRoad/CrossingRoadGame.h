@@ -12,16 +12,19 @@ protected:
 	virtual bool OnUserCreate();
 	virtual bool OnUserUpdate(float fElapsedTime);
 
+	virtual void UpdateCollisionMatrix();
+
 
 private:
 	//GameHandler
-	void MenuHandler(float fElapsedTime);
-	void LoadHandler(float fElapsedTime);
-	void LeaderboardHandler(float fElapsedTime);
-	void CreditHandler(float fElapsedTime);
-	void SettingHandler(float fElapsedTime);
+	bool MenuHandler(float fElapsedTime);
+	bool LoadHandler(float fElapsedTime);
+	bool LeaderboardHandler(float fElapsedTime);
+	bool CreditHandler(float fElapsedTime);
+	bool SettingHandler(float fElapsedTime);
+	bool ExitHandler(float fElapsedTime);
 
-	void GameHandler(float fElapsedTime);
+	bool GameHandler(float fElapsedTime);
 
 private:
 	void SetStateMenu();
@@ -40,6 +43,7 @@ private:
 		STATE_LOADGAME,
 		STATE_LEADERBOARD,
 		STATE_CREDIT,
+		STATE_EXIT,
 	};
 	GameState gameState = GameState::STATE_MENU;
 

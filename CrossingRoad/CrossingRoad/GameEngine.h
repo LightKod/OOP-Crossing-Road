@@ -80,6 +80,11 @@ public:
 
 	~GameEngine();
 
+protected:
+	void ClearCollsionMatrix();
+
+	virtual void UpdateCollisionMatrix();
+
 public:
 	void Start();
 
@@ -124,6 +129,7 @@ protected:
 	int m_nScreenWidth;
 	int m_nScreenHeight;
 	CHAR_INFO* m_bufScreen;
+	bool* collisionMatrix;
 	std::wstring m_sAppName;
 	HANDLE m_hOriginalConsole;
 	CONSOLE_SCREEN_BUFFER_INFO m_OriginalConsoleInfo;
