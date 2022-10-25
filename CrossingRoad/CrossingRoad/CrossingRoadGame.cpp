@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "CrossingRoadGame.h"
 #include <iostream>
-
+#include "Tile.h"
 int optionIndex = 0;
 
 bool CrossingRoadGame::OnUserCreate()
@@ -49,6 +49,11 @@ void CrossingRoadGame::SetStateNewGame() {
 	gameState = GameState::STATE_PLAY;
 	//VIET THEM BEN DUOI
 	DrawGame();
+
+	//Khoi tao may cai tile
+	Tile t;
+	t.Draw(*this, 10, 10);
+
 }
 void CrossingRoadGame::SetStateLoadGame() {
 	gameState = GameState::STATE_LOADGAME;
@@ -76,7 +81,7 @@ void CrossingRoadGame::SetStateExit() {
 
 bool CrossingRoadGame::GameHandler(float fElapsedTime) {
 	//VIET THEM BEN DUOI
-	UpdateCollisionMatrix();
+	//UpdateCollisionMatrix();
 	return true;
 }
 bool CrossingRoadGame::MenuHandler(float fElapsedTime) {

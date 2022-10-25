@@ -16,8 +16,8 @@ void Object::SetCollisionMatrix(bool* colliderMatrix, int m_nScreenWidth, int m_
 	}
 }
 
-void Object::Draw(CHAR_INFO* m_bufScreen) {
-		
+void Object::Draw(CrossingRoadGame &game, int x, int y) {
+
 }
 
 bool Object::CheckCollided(bool* colliderMatrix, int m_nScreenWidth, int m_nScreenHeight) {
