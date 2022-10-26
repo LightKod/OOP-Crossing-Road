@@ -1,9 +1,4 @@
 ﻿  CrossingRoadGame.cpp
-C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(9,16): warning C4066: characters beyond first in wide-character constant ignored
-  Object.cpp
-C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(9,16): warning C4066: characters beyond first in wide-character constant ignored
-  Tile.cpp
-C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(9,16): warning C4066: characters beyond first in wide-character constant ignored
-  Generating Code...
-C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.cpp(148): warning C4715: 'CrossingRoadGame::MenuHandler': not all control paths return a value
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(12,16): warning C4066: characters beyond first in wide-character constant ignored
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.cpp(161): warning C4715: 'CrossingRoadGame::MenuHandler': not all control paths return a value
   CrossingRoad.vcxproj -> C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe

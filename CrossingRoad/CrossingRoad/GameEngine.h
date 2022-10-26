@@ -78,6 +78,9 @@ public:
 
 	void DrawLine(int x1, int y1, int x2, int y2, short c = 0x2588, short col = 0x000F);
 
+	void SetCollisionMatrix(int x, int y, bool state);
+	void FillCollisionMatrix(int x1, int y1, int x2, int y2, bool state);
+	bool CheckCollision(int x, int y);
 	~GameEngine();
 
 protected:

@@ -1,8 +1,8 @@
 ﻿#pragma once
 #include "CrossingRoadGame.h"
-#include <iostream>
 #include "Tile.h"
 int optionIndex = 0;
+static Tile tile;
 
 bool CrossingRoadGame::OnUserCreate()
 {
@@ -34,7 +34,19 @@ bool CrossingRoadGame::OnUserUpdate(float fElapsedTime)
 
 void CrossingRoadGame::UpdateCollisionMatrix() {
 	ClearCollsionMatrix();
-	//THEM MAY CAI UPDATE COLLSION CUA MAY CAI OBJECT VAO
+	tile.SetCollisionMatrix(*this);
+	//THEM MAY CAI SET COLLSION CUA MAY CAI OBJECT VAO
+}
+
+void CrossingRoadGame::UpdateGameScreen() {
+	DrawGame();
+	tile.Draw(*this);
+	//THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
+}
+
+void CrossingRoadGame::UpdateGameState(float fElapsedTime) {
+	tile.Update(*this, fElapsedTime);
+	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
 }
 
 
@@ -51,8 +63,7 @@ void CrossingRoadGame::SetStateNewGame() {
 	DrawGame();
 
 	//Khoi tao may cai tile
-	Tile t;
-	t.Draw(*this, 10, 10);
+	tile = { 10,10,16,16 };
 
 }
 void CrossingRoadGame::SetStateLoadGame() {
@@ -81,7 +92,9 @@ void CrossingRoadGame::SetStateExit() {
 
 bool CrossingRoadGame::GameHandler(float fElapsedTime) {
 	//VIET THEM BEN DUOI
-	//UpdateCollisionMatrix();
+	UpdateGameState(fElapsedTime);
+	UpdateCollisionMatrix();
+	UpdateGameScreen();
 	return true;
 }
 bool CrossingRoadGame::MenuHandler(float fElapsedTime) {

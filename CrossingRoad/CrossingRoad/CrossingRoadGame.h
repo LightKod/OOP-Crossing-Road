@@ -2,17 +2,24 @@
 #include <iostream>
 #include "GameEngine.h"
 
+//KHONG DUOC INCLUDE MAY CAI LIEN QUAN TOI OBJECT O DAY, QUA BEN .CPP INCLUDE
 
 class CrossingRoadGame : public GameEngine {
+
+
 public:
 	CrossingRoadGame() {
 		m_sAppName = L'CrossingRoad';
 	}
+	int GetGameWidth() { return gameScreenWidth; };
+	int GetGameHeight() { return gameScreenHeight; };
 protected:
 	virtual bool OnUserCreate();
 	virtual bool OnUserUpdate(float fElapsedTime);
 
-	virtual void UpdateCollisionMatrix();
+	void UpdateCollisionMatrix();
+	void UpdateGameScreen();
+	void UpdateGameState(float);
 
 
 private:
@@ -36,6 +43,8 @@ private:
 	void SetStateExit();
 
 private:
+	int gameScreenWidth = 112;
+	int gameScreenHeight = 96;
 	enum GameState {
 		STATE_MENU,
 		STATE_PLAY,
