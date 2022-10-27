@@ -3,7 +3,6 @@
 #include "Tile.h"
 #include "Player.h"
 int optionIndex = 0;
-<<<<<<< Updated upstream
 static Tile tile;
 Player* pPlayer = nullptr;
 
@@ -11,9 +10,8 @@ Player* pPlayer = nullptr;
 #define VK_D 0x44
 #define VK_S 0x53
 #define VK_W 0x57
-=======
+
 static Tile tile,tile1[56];
->>>>>>> Stashed changes
 
 bool CrossingRoadGame::OnUserCreate()
 {
@@ -96,9 +94,9 @@ void CrossingRoadGame::SetStateNewGame() {
 	DrawGame();
 
 	//Khoi tao may cai tile
-<<<<<<< Updated upstream
+
 	tile = { 8,8,16,16 };
-=======
+
 	int h = 0;
 	/*tile1[0] = { 0,64,8,8 };
 	tile1[1] = { 8,64,8,8 };*/
@@ -114,7 +112,7 @@ void CrossingRoadGame::SetStateNewGame() {
 			tile1[h] = { i * 8,64 + f * 8,8,8 };
 			h++;
 		}
->>>>>>> Stashed changes
+
 
 }
 void CrossingRoadGame::SetStateLoadGame() {
