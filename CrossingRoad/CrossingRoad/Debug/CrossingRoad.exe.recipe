@@ -2,7 +2,11 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
+<<<<<<< Updated upstream
       <FullPath>D:\AllIn1\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe</FullPath>
+=======
+      <FullPath>D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe</FullPath>
+>>>>>>> Stashed changes
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

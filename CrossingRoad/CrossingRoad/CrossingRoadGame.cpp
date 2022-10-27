@@ -3,6 +3,7 @@
 #include "Tile.h"
 #include "Player.h"
 int optionIndex = 0;
+<<<<<<< Updated upstream
 static Tile tile;
 Player* pPlayer = nullptr;
 
@@ -10,6 +11,9 @@ Player* pPlayer = nullptr;
 #define VK_D 0x44
 #define VK_S 0x53
 #define VK_W 0x57
+=======
+static Tile tile,tile1[56];
+>>>>>>> Stashed changes
 
 bool CrossingRoadGame::OnUserCreate()
 {
@@ -55,14 +59,22 @@ void CrossingRoadGame::UpdateCollisionMatrix() {
 
 void CrossingRoadGame::UpdateGameScreen() {
 	DrawGame();
-	tile.Draw(*this);
+	
 	//THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
 	pPlayer->Draw(*this);
 }
 
 
 void CrossingRoadGame::UpdateGameState(float fElapsedTime) {
-	tile.Update(*this, fElapsedTime);
+	Fill(0, 0, m_nScreenWidth, m_nScreenHeight, L' ', COLOUR::BG_BLACK);
+	/*tile1[0].Update1(*this, fElapsedTime);
+	tile1[1].Update2(*this, fElapsedTime);*/
+	for (int i = 0; i < 56; i++)
+	{
+		if (i % 2 == 0)
+			tile1[i].Update1(*this, fElapsedTime);
+		else tile1[i].Update2(*this, fElapsedTime);
+	}
 	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
 	if (m_keys[VK_W].bReleased) pPlayer->MoveUp(*this);
 	if (m_keys[VK_S].bReleased) pPlayer->MoveDown(*this);
@@ -84,7 +96,25 @@ void CrossingRoadGame::SetStateNewGame() {
 	DrawGame();
 
 	//Khoi tao may cai tile
+<<<<<<< Updated upstream
 	tile = { 8,8,16,16 };
+=======
+	int h = 0;
+	/*tile1[0] = { 0,64,8,8 };
+	tile1[1] = { 8,64,8,8 };*/
+	for(int f=0;f<=1;f++)
+		for (int i = 0; i < 14; i++)
+		{
+			tile1[h] = { i * 8,32 + f * 8,8,8 };
+			h++;
+		}
+	for (int f = 0; f <= 1; f++)
+		for (int i = 0; i < 14; i++)
+		{
+			tile1[h] = { i * 8,64 + f * 8,8,8 };
+			h++;
+		}
+>>>>>>> Stashed changes
 
 }
 void CrossingRoadGame::SetStateLoadGame() {
@@ -422,8 +452,52 @@ void CrossingRoadGame::DrawMenuTitle(int innerOfset, int outerOfset) {
 
 
 void CrossingRoadGame::DrawGame() {
-	Fill(0, 0, m_nScreenWidth, m_nScreenHeight, L' ', COLOUR::BG_BLUE);
-	DrawString(5, 5, L"GAME SCREEN", BG_BLACK + BG_BLUE);
+	//DrawString(5, 5, L"GAME SCREEN", BG_BLACK + BG_BLUE);
+	//LANE XE
+	//6,1 LA DIEM XUAT PHAT VA DIEM DUNG:0
+	//2,4 LA LANE XE:1
+	//3,5 LA LANE NUOC:2
+	//Fill(0, 0, m_nScreenWidth, m_nScreenHeight, L' ', COLOUR::BG_BLACK);
+	//LANE START VA END
+
+	Fill(0, 0, m_nScreenWidth - 49, 15, L' ', COLOUR::BG_BLACK);
+	Fill(0, m_nScreenHeight - 15, m_nScreenWidth - 49, m_nScreenHeight, L' ', COLOUR::BG_BLACK);
+
+	//LANE XE
+	int f = 8;
+	Fill(0, 16, m_nScreenWidth - 49, 16 + 2, L' ', COLOUR::BG_GREEN);
+	Fill(0, 19, m_nScreenWidth - 49, 13 + 16, L' ', COLOUR::BG_GREY);
+	Fill(0, 29, m_nScreenWidth - 49, 31, L' ', COLOUR::BG_GREEN);
+	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+
+	Fill(0, 48, m_nScreenWidth - 49, 50, L' ', COLOUR::BG_GREEN);
+	f = 8;
+	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(0, 51, m_nScreenWidth - 49, 44 + 16, L' ', COLOUR::BG_GREY);
+	Fill(0, 61, m_nScreenWidth - 49, 60 + 3, L' ', COLOUR::BG_GREEN);
+	f = 8;
+	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
+	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
+	f += 32;
 }
 void CrossingRoadGame::DrawLoadGame() {
 	Fill(0, 0, m_nScreenWidth, m_nScreenHeight, L' ', COLOUR::BG_BLUE);

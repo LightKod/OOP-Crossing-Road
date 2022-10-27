@@ -1,1 +1,19 @@
+<<<<<<< Updated upstream
 ﻿
+=======
+﻿  CrossingRoadGame.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(12,16): warning C4066: characters beyond first in wide-character constant ignored
+  GameEngine.cpp
+  Object.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(12,16): warning C4066: characters beyond first in wide-character constant ignored
+  Tile.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(12,16): warning C4066: characters beyond first in wide-character constant ignored
+  Vehicle.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(12,16): warning C4066: characters beyond first in wide-character constant ignored
+  main.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.h(12,16): warning C4066: characters beyond first in wide-character constant ignored
+  Generating Code...
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\CrossingRoadGame.cpp(183): warning C4715: 'CrossingRoadGame::MenuHandler': not all control paths return a value
+  LINK : D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe not found or not built by the last incremental link; performing full link
+  CrossingRoad.vcxproj -> D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe
+>>>>>>> Stashed changes
