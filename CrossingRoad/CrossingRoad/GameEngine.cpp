@@ -1,7 +1,5 @@
 #include "GameEngine.h"
 
-
-
 GameEngine::GameEngine()
 	{
 		m_nScreenWidth = 80;
@@ -308,6 +306,7 @@ void GameEngine::GameThread()
 			wchar_t s[256];
 			swprintf_s(s, 256, L"Crossing Road - Group 6 - FPS: %3.2f", 1.0f / fElapsedTime);
 			SetConsoleTitle(s);
+
 			WriteConsoleOutput(m_hConsole, m_bufScreen, { (short)m_nScreenWidth, (short)m_nScreenHeight }, { 0,0 }, &m_rectWindow);
 		}
 

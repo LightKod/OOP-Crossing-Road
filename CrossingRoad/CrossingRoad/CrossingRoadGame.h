@@ -9,7 +9,7 @@ class CrossingRoadGame : public GameEngine {
 
 public:
 	CrossingRoadGame() {
-		m_sAppName = L'CrossingRoad';
+		m_sAppName = L"CrossingRoad";
 	}
 	int GetGameWidth() { return gameScreenWidth; };
 	int GetGameHeight() { return gameScreenHeight; };
@@ -68,4 +68,16 @@ private:
 	void DrawLeaderboard();
 	void DrawSetting();
 	void DrawCredit();
+
+
+	public:
+		void ConsOutput()
+		{
+			WriteConsoleOutput(m_hConsole, m_bufScreen, { (short)m_nScreenWidth, (short)m_nScreenHeight }, { 0,0 }, &m_rectWindow);
+		}
+		void ClearSprite(const int& x, const int& y, const int& w, const int& h)
+		{
+			Fill(x, y, x + w -1, y + h-1, L' ', COLOUR::BG_WHITE);
+			ConsOutput();
+		}
 };

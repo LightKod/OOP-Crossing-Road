@@ -1,17 +1,27 @@
 ﻿#pragma once
 #include "CrossingRoadGame.h"
 #include "Tile.h"
+#include "Player.h"
 int optionIndex = 0;
 static Tile tile;
+Player* pPlayer = nullptr;
+
+#define VK_A 0x41
+#define VK_D 0x44
+#define VK_S 0x53
+#define VK_W 0x57
 
 bool CrossingRoadGame::OnUserCreate()
 {
 	SetStateMenu();
+	pPlayer = new Player();
+
 	return true;
 }
 
 bool CrossingRoadGame::OnUserUpdate(float fElapsedTime)
 {
+
 	switch (gameState) {
 	case STATE_MENU:
 		return MenuHandler(fElapsedTime);
@@ -30,6 +40,11 @@ bool CrossingRoadGame::OnUserUpdate(float fElapsedTime)
 	default:
 		return true;
 	}
+
+	//pPlayer->Draw();
+
+
+	return 1;
 }
 
 void CrossingRoadGame::UpdateCollisionMatrix() {
@@ -42,11 +57,17 @@ void CrossingRoadGame::UpdateGameScreen() {
 	DrawGame();
 	tile.Draw(*this);
 	//THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
+	pPlayer->Draw(*this);
 }
+
 
 void CrossingRoadGame::UpdateGameState(float fElapsedTime) {
 	tile.Update(*this, fElapsedTime);
 	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
+	if (m_keys[VK_W].bReleased) pPlayer->MoveUp(*this);
+	if (m_keys[VK_S].bReleased) pPlayer->MoveDown(*this);
+	if (m_keys[VK_A].bReleased) pPlayer->MoveLeft(*this);
+	if (m_keys[VK_D].bReleased) pPlayer->MoveRight(*this);
 }
 
 
@@ -63,7 +84,7 @@ void CrossingRoadGame::SetStateNewGame() {
 	DrawGame();
 
 	//Khoi tao may cai tile
-	tile = { 10,10,16,16 };
+	tile = { 8,8,16,16 };
 
 }
 void CrossingRoadGame::SetStateLoadGame() {
