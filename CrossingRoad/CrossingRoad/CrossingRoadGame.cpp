@@ -6,15 +6,12 @@ int optionIndex = 0;
 static Tile tile;
 Player* pPlayer = nullptr;
 
-#define VK_A 0x41
-#define VK_D 0x44
-#define VK_S 0x53
-#define VK_W 0x57
+
 
 bool CrossingRoadGame::OnUserCreate()
 {
 	SetStateMenu();
-	pPlayer = new Player();
+	pPlayer = new Player(*this);
 
 	return true;
 }
@@ -64,10 +61,7 @@ void CrossingRoadGame::UpdateGameScreen() {
 void CrossingRoadGame::UpdateGameState(float fElapsedTime) {
 	tile.Update(*this, fElapsedTime);
 	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
-	if (m_keys[VK_W].bReleased) pPlayer->MoveUp(*this);
-	if (m_keys[VK_S].bReleased) pPlayer->MoveDown(*this);
-	if (m_keys[VK_A].bReleased) pPlayer->MoveLeft(*this);
-	if (m_keys[VK_D].bReleased) pPlayer->MoveRight(*this);
+	pPlayer->Update(*this, fElapsedTime);
 }
 
 

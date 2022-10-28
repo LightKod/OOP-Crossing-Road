@@ -11,7 +11,7 @@ void Tile::Update(CrossingRoadGame& game, float fElapsedTime) {
 	static float time = 0;
 	time += fElapsedTime;
 
-	if (time > 0.5f) {
+	if (time > 0.1f) {
 		Move(-1, 0);
 		if (x + width < 0) {
 			x = game.GetGameWidth();

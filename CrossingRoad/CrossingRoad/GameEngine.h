@@ -273,7 +273,7 @@ public:
 	virtual bool OnUserDestroy();
 
 
-protected:
+public:
 
 
 	struct sKeyState
