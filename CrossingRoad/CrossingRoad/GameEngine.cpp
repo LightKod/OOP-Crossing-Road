@@ -111,8 +111,8 @@ void GameEngine::Draw(int x, int y, short c, short col)
 
 void GameEngine::Fill(int x1, int y1, int x2, int y2, short c, short col)
 {
-	Clip(x1, y1);
-	Clip(x2, y2);
+	//Clip(x1, y1);
+	//Clip(x2, y2);
 	for (int x = x1; x <= x2; x++)
 		for (int y = y1; y <= y2; y++)
 			Draw(x, y, c, col);

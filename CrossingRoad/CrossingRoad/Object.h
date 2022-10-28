@@ -38,5 +38,9 @@ public:
 
 	//Check coi Object co dang de` len CollisionMatrix ko
 	bool CheckCollided(CrossingRoadGame& game);
+
+
+	//OVERLOAD DAU ==
+	bool Compare(Object* o);
 };
 

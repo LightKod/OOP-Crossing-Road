@@ -58,7 +58,7 @@ public:
 	// Handle moving player
 	virtual void MoveUp(CrossingRoadGame& game, const int& dY = cellSize)
 	{
-		game.ClearSprite(x, y, width, height);
+		//game.ClearSprite(x, y, width, height);
 		Prep(game);
 		if ((this->GetY() - dY) >= 0)
 			this->Move(0, -dY);

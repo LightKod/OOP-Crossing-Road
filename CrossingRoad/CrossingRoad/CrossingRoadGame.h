@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "GameEngine.h"
-
 //KHONG DUOC INCLUDE MAY CAI LIEN QUAN TOI OBJECT O DAY, QUA BEN .CPP INCLUDE
 
 class CrossingRoadGame : public GameEngine {

@@ -60,3 +60,7 @@ bool Object::CheckCollided(CrossingRoadGame& game) {
 
 	return tl || tr || bl || br;
 }
+
+bool Object::Compare(Object* o) {
+	return this == o;
+}

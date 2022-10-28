@@ -1,9 +1,9 @@
 ﻿#pragma once
 #include "CrossingRoadGame.h"
-#include "Tile.h"
+#include "WaterTile.h"
+#include "Vehicle.h"
 #include "Player.h"
 int optionIndex = 0;
-static Tile tile;
 Player* pPlayer = nullptr;
 
 #define VK_A 0x41
@@ -11,7 +11,8 @@ Player* pPlayer = nullptr;
 #define VK_S 0x53
 #define VK_W 0x57
 
-static Tile tile,tile1[56];
+static WaterTile tile,tile1[56];
+static Vehicle car1,car2,car3, car4, car5, car6;
 
 bool CrossingRoadGame::OnUserCreate()
 {
@@ -59,7 +60,18 @@ void CrossingRoadGame::UpdateGameScreen() {
 	DrawGame();
 	
 	//THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
+	for (int i = 0; i < 56; i++)
+	{
+		tile1[i].Draw(*this);
+	}
+	
 	pPlayer->Draw(*this);
+	car1.Draw(*this);
+	car2.Draw(*this);
+	car3.Draw(*this);
+	car4.Draw(*this);
+	car5.Draw(*this);
+	car6.Draw(*this);
 }
 
 
@@ -69,10 +81,16 @@ void CrossingRoadGame::UpdateGameState(float fElapsedTime) {
 	tile1[1].Update2(*this, fElapsedTime);*/
 	for (int i = 0; i < 56; i++)
 	{
-		if (i % 2 == 0)
-			tile1[i].Update1(*this, fElapsedTime);
-		else tile1[i].Update2(*this, fElapsedTime);
+		tile1[i].Update(*this,fElapsedTime);
 	}
+	car1.Update(*this, fElapsedTime);
+	car2.Update(*this, fElapsedTime);
+	car3.Update(*this, fElapsedTime);
+
+	car4.Update(*this, fElapsedTime);
+	car5.Update(*this, fElapsedTime);
+	car6.Update(*this, fElapsedTime);
+	
 	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
 	if (m_keys[VK_W].bReleased) pPlayer->MoveUp(*this);
 	if (m_keys[VK_S].bReleased) pPlayer->MoveDown(*this);
@@ -93,9 +111,14 @@ void CrossingRoadGame::SetStateNewGame() {
 	//VIET THEM BEN DUOI
 	DrawGame();
 
-	//Khoi tao may cai tile
+	car1 = { 10, 16, 8, 8, 0.01f, BG_RED, BG_DARK_RED };
+	car2 = { 10, 24, 8, 8, 0.1f, BG_BLUE, BG_DARK_BLUE };
+	car3 = { 10, 48, 8, 8, 0.05f, BG_GREEN, BG_DARK_GREEN };
 
-	tile = { 8,8,16,16 };
+	car4 = { 50, 16, 8, 8, 0.01f, BG_MAGENTA, BG_DARK_MAGENTA };
+	car5 = { 65, 24, 8, 8, 0.1f, BG_YELLOW, BG_DARK_YELLOW };
+	car6 = { 90, 48, 8, 8, 0.05f, BG_GREY, BG_DARK_GREY };
+	//Khoi tao may cai tile
 
 	int h = 0;
 	/*tile1[0] = { 0,64,8,8 };
