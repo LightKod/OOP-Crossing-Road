@@ -3,6 +3,7 @@
 #include "WaterTile.h"
 #include "Vehicle.h"
 #include "Player.h"
+#include "VehicleTile.h"
 int optionIndex = 0;
 Player* pPlayer = nullptr;
 
@@ -13,6 +14,7 @@ Player* pPlayer = nullptr;
 
 static WaterTile tile,tile1[56];
 static Vehicle car1,car2,car3, car4, car5, car6;
+static VehicleTile VT[14];
 
 bool CrossingRoadGame::OnUserCreate()
 {
@@ -479,46 +481,28 @@ void CrossingRoadGame::DrawGame() {
 	//2,4 LA LANE XE:1
 	//3,5 LA LANE NUOC:2
 	//Fill(0, 0, m_nScreenWidth, m_nScreenHeight, L' ', COLOUR::BG_BLACK);
-	//LANE START VA END
-
-	Fill(0, 0, m_nScreenWidth - 49, 15, L' ', COLOUR::BG_BLACK);
-	Fill(0, m_nScreenHeight - 15, m_nScreenWidth - 49, m_nScreenHeight, L' ', COLOUR::BG_BLACK);
-
 	//LANE XE
-	int f = 8;
-	Fill(0, 16, m_nScreenWidth - 49, 16 + 2, L' ', COLOUR::BG_GREEN);
-	Fill(0, 19, m_nScreenWidth - 49, 13 + 16, L' ', COLOUR::BG_GREY);
-	Fill(0, 29, m_nScreenWidth - 49, 31, L' ', COLOUR::BG_GREEN);
-	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 30, f + 7, 30, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
+	int h = 0;
+	for (int i = 0; i < 7; i++)
+	{
+		VT[h] = { i * 16,15,16,16 };
+		h++;
+	}
+	for (int i = 0; i < 7; i++)
+	{
+		VT[h] = { i * 16,47,16,16 };
+		h++;
+	}
+	//VT[6].Draw(*this);
+	for (int i = 0; i < 14; i++)
+	{
+		VT[i].Draw(*this);
+		h++;
+	}
+	//LANE START VA END
+	Fill(0, 0, m_nScreenWidth - 49, 15, L' ', COLOUR::BG_BLACK);
+	Fill(0, m_nScreenHeight - 16, m_nScreenWidth - 49, m_nScreenHeight, L' ', COLOUR::BG_GREEN);
 
-	Fill(0, 48, m_nScreenWidth - 49, 50, L' ', COLOUR::BG_GREEN);
-	f = 8;
-	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 49, f + 7, 49, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(0, 51, m_nScreenWidth - 49, 44 + 16, L' ', COLOUR::BG_GREY);
-	Fill(0, 61, m_nScreenWidth - 49, 60 + 3, L' ', COLOUR::BG_GREEN);
-	f = 8;
-	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
-	Fill(f, 62, f + 7, 62, L' ', COLOUR::BG_DARK_GREY);
-	f += 32;
 }
 void CrossingRoadGame::DrawLoadGame() {
 	Fill(0, 0, m_nScreenWidth, m_nScreenHeight, L' ', COLOUR::BG_BLUE);
