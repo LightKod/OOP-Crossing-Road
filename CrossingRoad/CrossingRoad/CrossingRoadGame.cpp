@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include "CrossingRoadGame.h"
 #include "Tile.h"
-#include "Player.h"
+#include "Frog.h"
 int optionIndex = 0;
 static Tile tile;
 Player* pPlayer = nullptr;
@@ -11,7 +11,7 @@ Player* pPlayer = nullptr;
 bool CrossingRoadGame::OnUserCreate()
 {
 	SetStateMenu();
-	pPlayer = new Player(*this);
+	pPlayer = new Frog(*this);
 
 	return true;
 }
