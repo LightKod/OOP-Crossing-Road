@@ -14,6 +14,7 @@ public:
 	//Contructors de Object tuong tac duoc void Game
 	Object();
 	Object(int, int, int, int);
+	Object(int x, int y);
 
 	//Getters
 	int GetX();

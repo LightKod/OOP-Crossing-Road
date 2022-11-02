@@ -13,53 +13,113 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{46d0c0fb-1797-4c3a-910d-b7b0f4d780fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Tiles">
+      <UniqueIdentifier>{dacf0dc7-ba05-4439-aef2-d222f473a258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Vehicles">
+      <UniqueIdentifier>{9d11d07c-cb54-47f1-9304-39c57af09bdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Players">
+      <UniqueIdentifier>{f0217549-1e34-41dc-ae3a-7d02bcc2d764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{82f84a5e-000b-414a-aa83-3af04a8a3a72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Players">
+      <UniqueIdentifier>{bc3c17ab-6a2d-4ddc-915b-9da70cc9525c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Tiles">
+      <UniqueIdentifier>{968876ba-047a-4d5f-b91f-caf02525dfa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Vehicles">
+      <UniqueIdentifier>{59db1e68-438b-4924-9088-d0f7cba72c97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Lanes">
+      <UniqueIdentifier>{e0f54fc6-59fe-497f-b141-d6cea6398ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects\Lanes">
+      <UniqueIdentifier>{989ff981-00ee-4c05-aa07-bda4437a92e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngine.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CrossingRoadGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="WaterTile.cpp">
+      <Filter>Source Files\Objects\Tiles</Filter>
     </ClCompile>
     <ClCompile Include="Vehicle.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Vehicles</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Objects\Players</Filter>
     </ClCompile>
     <ClCompile Include="Frog.cpp">
+      <Filter>Source Files\Objects\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoadTile.cpp">
+      <Filter>Source Files\Objects\Tiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Road.cpp">
+      <Filter>Source Files\Objects\Lanes</Filter>
+    </ClCompile>
+    <ClCompile Include="Lane.cpp">
+      <Filter>Source Files\Objects\Lanes</Filter>
+    </ClCompile>
+    <ClCompile Include="River.cpp">
+      <Filter>Source Files\Objects\Lanes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CrossingRoadGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Tiles</Filter>
     </ClInclude>
-    <ClInclude Include="Vehicle.h">
+    <ClInclude Include="WaterTile.h">
+      <Filter>Header Files\Objects\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Players</Filter>
     </ClInclude>
     <ClInclude Include="Frog.h">
+      <Filter>Header Files\Objects\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Header Files\Objects\Vehicles</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="RoadTile.h">
+      <Filter>Header Files\Objects\Tiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Lane.h">
+      <Filter>Header Files\Objects\Lanes</Filter>
+    </ClInclude>
+    <ClInclude Include="Road.h">
+      <Filter>Header Files\Objects\Lanes</Filter>
+    </ClInclude>
+    <ClInclude Include="River.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

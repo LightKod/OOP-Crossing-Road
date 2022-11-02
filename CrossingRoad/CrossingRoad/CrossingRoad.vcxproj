@@ -142,20 +142,30 @@
     <ClCompile Include="CrossingRoadGame.cpp" />
     <ClCompile Include="Frog.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="Lane.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="River.cpp" />
+    <ClCompile Include="Road.cpp" />
+    <ClCompile Include="RoadTile.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="WaterTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h" />
     <ClInclude Include="Frog.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="Lane.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="River.h" />
+    <ClInclude Include="Road.h" />
+    <ClInclude Include="RoadTile.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="WaterTile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

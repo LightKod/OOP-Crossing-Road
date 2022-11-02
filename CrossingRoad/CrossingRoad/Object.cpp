@@ -13,6 +13,10 @@ Object::Object(int x, int y, int width, int height) {
 	this->width = width;
 	this->height = height;
 }
+Object::Object(int x, int y) {
+	this->x = x;
+	this->y = y;
+}
 
 
 int Object::GetX() {return x;}

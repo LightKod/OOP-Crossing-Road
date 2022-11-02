@@ -1,17 +1,27 @@
 ﻿#pragma once
 #include "CrossingRoadGame.h"
-#include "Tile.h"
+#include "RoadTile.h"
+#include "Road.h"
+#include "River.h"
 #include "Frog.h"
 int optionIndex = 0;
-static Tile tile;
 Player* pPlayer = nullptr;
 
-
+static vector<Object*> objects;
 
 bool CrossingRoadGame::OnUserCreate()
 {
 	SetStateMenu();
 	pPlayer = new Frog(*this);
+	
+	objects.push_back(new Road(0));
+	objects.push_back(new River(16));
+	objects.push_back(new Road(24));
+	objects.push_back(new River(40));
+	objects.push_back(new Road(48));
+	objects.push_back(new Road(64));
+	objects.push_back(new Road(80));
+	objects.push_back(new Road(96));
 
 	return true;
 }
@@ -37,30 +47,29 @@ bool CrossingRoadGame::OnUserUpdate(float fElapsedTime)
 	default:
 		return true;
 	}
-
-	//pPlayer->Draw();
-
-
 	return 1;
 }
 
 void CrossingRoadGame::UpdateCollisionMatrix() {
 	ClearCollsionMatrix();
-	tile.SetCollisionMatrix(*this);
 	//THEM MAY CAI SET COLLSION CUA MAY CAI OBJECT VAO
 }
 
 void CrossingRoadGame::UpdateGameScreen() {
 	DrawGame();
-	tile.Draw(*this);
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->Draw(*this);
+	}
 	//THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
 	pPlayer->Draw(*this);
 }
 
 
 void CrossingRoadGame::UpdateGameState(float fElapsedTime) {
-	tile.Update(*this, fElapsedTime);
 	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->Update(*this, fElapsedTime);
+	}
 	pPlayer->Update(*this, fElapsedTime);
 }
 
@@ -77,8 +86,6 @@ void CrossingRoadGame::SetStateNewGame() {
 	//VIET THEM BEN DUOI
 	DrawGame();
 
-	//Khoi tao may cai tile
-	tile = { 8,8,16,16 };
 
 }
 void CrossingRoadGame::SetStateLoadGame() {
