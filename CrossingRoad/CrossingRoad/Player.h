@@ -1,29 +1,30 @@
 #pragma once
-#ifndef _PLAYER_H_
-#define _PLAYER_H_
-#include "Object.h"
+#include "CrossingRoadGame.h"
+#include <windows.h>
+
+using namespace std;
 
 #define VK_A 0x41
 #define VK_D 0x44
 #define VK_S 0x53
 #define VK_W 0x57
 
-class Player : public Object
+class Player : public CrossingRoadGame::Object
 {
 public:
-	Player(CrossingRoadGame& game, const int& x, const int& y, const int& w, const int& h) 
-		: Object(x, y, w, h)
+	Player(CrossingRoadGame* game, const int& x, const int& y, const int& w, const int& h) 
+		: Object(game, x, y, w, h)
 	{
 	}
 	~Player()
 	{
 	}
 
-	virtual void Update(CrossingRoadGame& game, float fElapsedTime)
+	virtual void Update(float fElapsedTime)
 	{
 	}
 
-	virtual void Draw(CrossingRoadGame& game)
+	virtual void Draw()
 	{
 	}
 
@@ -45,9 +46,9 @@ protected:
 		END,
 	};
 
-private:
+	void Move(int xDir, int yDir) {
+		x += xDir;
+		y += yDir;
+	}
 
 };
-
-
-#endif // !_PLAYER_H_

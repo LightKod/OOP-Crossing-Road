@@ -1,18 +1,16 @@
 #pragma once
 
-#include "Object.h"
+#include "CrossingRoadGame.h"
 
-class Object;
-
-class Tile : public Object
+class Tile : public CrossingRoadGame::Object
 {
 protected:
 	float time = 0;
 	bool spriteIndex = false;
 public:
 	//Thua ke ham constructor
-	Tile() : Object() { width = 8; height = 8; x = 0; y = 0; }
-	Tile(int x, int y, int width, int height) :Object(x, y, width, height) {}
+	Tile(CrossingRoadGame* game) : CrossingRoadGame::Object(game) { width = 8; height = 8; x = 0; y = 0; }
+	Tile(CrossingRoadGame* game, int x, int y, int width, int height) :Object(game, x, y, width, height) {}
 
 };
 

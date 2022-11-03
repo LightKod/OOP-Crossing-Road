@@ -5,16 +5,16 @@ class WaterTile : public Tile
 {
 public:
 	//Thua ke ham constructor
-	WaterTile() : Tile() {}
-	WaterTile(int x, int y) :Tile(x, y, width = 8, height = 8) {}
+	WaterTile(CrossingRoadGame* game) : Tile(game) {}
+	WaterTile(CrossingRoadGame* game,int x, int y) :Tile(game, x, y, width = 8, height = 8) {}
 
 	//Viet lai ham draw de ve
-	void Draw1(CrossingRoadGame& game);
-	void Draw2(CrossingRoadGame& game);
+	void Draw1();
+	void Draw2();
 
 
-	virtual void Draw(CrossingRoadGame& game);
-	virtual void Update(CrossingRoadGame& game, float fElapsedTime);
+	virtual void Draw();
+	virtual void Update(float fElapsedTime);
 
 };
 

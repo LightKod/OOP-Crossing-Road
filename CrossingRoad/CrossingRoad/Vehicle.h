@@ -1,7 +1,7 @@
 #pragma once
-#include "Object.h"
+#include "CrossingRoadGame.h"
 
-class Vehicle : public Object
+class Vehicle : public CrossingRoadGame::Object
 {
 private:
 	COLOUR primaryColor = BG_GREEN;
@@ -11,19 +11,19 @@ private:
 	float time = 0;
 public:
 	//Thua ke ham constructor
-	Vehicle() : Object() {}
-	Vehicle(int x, int y, int width, int height) :Object(x, y, width, height) {}
-	Vehicle(int x, int y, int width, int height, float speed) :Object(x, y, width, height) {
+	Vehicle(CrossingRoadGame* game) : CrossingRoadGame::Object(game) {}
+	Vehicle(CrossingRoadGame* game,int x, int y, int width, int height) : CrossingRoadGame::Object(game, x, y, width, height) {}
+	Vehicle(CrossingRoadGame* game,int x, int y, int width, int height, float speed) : CrossingRoadGame::Object(game, x, y, width, height) {
 		this->speed = speed;
 	}
-	Vehicle(int x, int y, int width, int height, float speed, COLOUR primary, COLOUR dark) :Object(x, y, width, height) {
+	Vehicle(CrossingRoadGame* game, int x, int y, int width, int height, float speed, COLOUR primary, COLOUR dark) :Object(game, x, y, width, height) {
 		primaryColor = primary;
 		darkColor = dark;
 		this->speed = speed;
 	}
 
 	//Viet lai ham draw de ve
-	virtual void Draw(CrossingRoadGame& game);
-	virtual void Update(CrossingRoadGame& game, float fElapsedTime);
+	virtual void Draw();
+	virtual void Update(float fElapsedTime);
 };
 

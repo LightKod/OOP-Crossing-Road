@@ -1,22 +1,26 @@
 #pragma once
-#include "RoadTile.h"
-class Lane : public Object
+#include "Tile.h"
+#include <vector>
+
+using namespace std;
+
+class Lane : public CrossingRoadGame::Object
 {
 protected:
 	vector<Tile*> tiles;
 
 public:
-	Lane(int row) :Object(x = 0, y = row, width = 112, height = 16) {};
+	Lane(CrossingRoadGame*game, int row) :Object(game, x = 0, y = row, width = 112, height = 16) {};
 
-	virtual void Draw(CrossingRoadGame& game) {
+	virtual void Draw() {
 		for (int i = 0; i < tiles.size(); i++) {
-			tiles[i]->Draw(game);
+			tiles[i]->Draw();
 		}
 	}
 
-	virtual void Update(CrossingRoadGame& game, float fElapsedTime) {
+	virtual void Update(float fElapsedTime) {
 		for (int i = 0; i < tiles.size(); i++) {
-			tiles[i]->Update(game, fElapsedTime);
+			tiles[i]->Update(fElapsedTime);
 		}
 	}
 };

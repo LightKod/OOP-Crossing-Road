@@ -249,7 +249,7 @@ public:
 	}
 	// End
 
-protected:
+public:
 	void ClearCollsionMatrix();
 
 	virtual void UpdateCollisionMatrix();

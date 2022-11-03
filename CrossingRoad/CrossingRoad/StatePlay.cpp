@@ -1,0 +1,50 @@
+#include "StatePlay.h"
+
+
+bool StatePlay::OnStateEnter() {
+	pPlayer = new Frog(game);
+
+	objects.push_back(new Road(game, 0));
+	objects.push_back(new River(game, 16));
+	objects.push_back(new Road(game, 24));
+	objects.push_back(new River(game, 40));
+	objects.push_back(new Road(game, 48));
+	objects.push_back(new Road(game, 64));
+	objects.push_back(new Road(game, 80));
+	objects.push_back(new Road(game, 96));
+
+	return true;
+}
+bool StatePlay::OnStateExit() {
+	return true;
+}
+
+bool StatePlay::Update(float fElapsedTime) {
+	UpdateGameState(fElapsedTime);
+	UpdateCollisionMatrix();
+	UpdateGameScreen();
+	return true;
+}
+
+void StatePlay::UpdateCollisionMatrix() {
+	game->ClearCollsionMatrix();
+	//THEM MAY CAI SET COLLSION CUA MAY CAI OBJECT VAO
+}
+
+void StatePlay::UpdateGameScreen() {
+	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->Draw();
+	}
+	//THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
+	pPlayer->Draw();
+}
+
+
+void StatePlay::UpdateGameState(float fElapsedTime) {
+	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->Update(fElapsedTime);
+	}
+	pPlayer->Update(fElapsedTime);
+}

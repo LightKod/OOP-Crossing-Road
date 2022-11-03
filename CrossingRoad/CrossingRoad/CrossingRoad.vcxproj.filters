@@ -43,6 +43,12 @@
     <Filter Include="Header Files\Objects\Lanes">
       <UniqueIdentifier>{989ff981-00ee-4c05-aa07-bda4437a92e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\States">
+      <UniqueIdentifier>{5c0a4993-5c14-44c2-9aaf-4d19c36442ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\States">
+      <UniqueIdentifier>{56716c23-71a1-4c86-bd56-abbe7e1adf4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -50,9 +56,6 @@
     </ClCompile>
     <ClCompile Include="CrossingRoadGame.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>Source Files\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
       <Filter>Source Files\Objects\Tiles</Filter>
@@ -84,6 +87,12 @@
     <ClCompile Include="River.cpp">
       <Filter>Source Files\Objects\Lanes</Filter>
     </ClCompile>
+    <ClCompile Include="StatePlay.cpp">
+      <Filter>Source Files\Objects\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMenu.cpp">
+      <Filter>Source Files\Objects\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -107,9 +116,6 @@
     <ClInclude Include="Vehicle.h">
       <Filter>Header Files\Objects\Vehicles</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>Header Files\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="RoadTile.h">
       <Filter>Header Files\Objects\Tiles</Filter>
     </ClInclude>
@@ -119,8 +125,14 @@
     <ClInclude Include="Road.h">
       <Filter>Header Files\Objects\Lanes</Filter>
     </ClInclude>
+    <ClInclude Include="StateMenu.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StatePlay.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
     <ClInclude Include="River.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Objects\Lanes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
