@@ -23,5 +23,7 @@ public:
 			tiles[i]->Update(fElapsedTime);
 		}
 	}
+
+	virtual void SetCollisionMatrix() {}
 };
 

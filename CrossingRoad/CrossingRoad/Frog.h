@@ -35,6 +35,7 @@ public:
 	}
 	virtual void Update(float fElapsedTime)
 	{
+
 		if (game->m_keys[VK_W].bReleased) this->MoveUp();
 		if (game->m_keys[VK_S].bReleased) this->MoveDown();
 		if (game->m_keys[VK_A].bReleased) this->MoveLeft();
@@ -45,6 +46,7 @@ public:
 		{
 			s_Time = INIT_TIME;
 		}
+		CheckCollided();
 	}
 
 	virtual void Draw()
@@ -54,7 +56,7 @@ public:
 		case ANIMATION_STATE::START:
 			Standing();
 			s_CanMove = 1;
-			break;
+			return;
 
 		case ANIMATION_STATE::READY:
 			ReadyJumpAndLanding();
@@ -77,16 +79,21 @@ public:
 
 		default:
 			Standing();
-			break;
+			return;
 		}
 
-		game->ConsOutput();
 
 		// pause thread
 		//this_thread::sleep_for(std::chrono::milliseconds(int(s_Time)));
 		this_thread::sleep_for(std::chrono::milliseconds(int(24)));
 	}
 protected:
+	void CheckCollided() {
+		if (game->CheckCollision(x, y, width, height)) {
+			this_thread::sleep_for(std::chrono::milliseconds(int(1000)));
+		}
+	}
+
 	virtual void JumpHandle()
 	{
 		static const int sFrameOfJumpState = 4;
@@ -244,6 +251,7 @@ protected:
 			//this->Move(0, -dY);
 			g_Dir = MOVING_DIRECTION::MOVING_UP;
 			g_State = ANIMATION_STATE::READY;
+			s_CanMove = false;
 			return 1;
 		}
 		return 0;
@@ -258,6 +266,7 @@ protected:
 			//this->Move(0, dY);
 			g_Dir = MOVING_DIRECTION::MOVING_DOWN;
 			g_State = ANIMATION_STATE::READY;
+			s_CanMove = false;
 			return 1;
 		}
 		return 0;
@@ -272,6 +281,7 @@ protected:
 			//this->Move(-dX, 0);
 			g_Dir = MOVING_DIRECTION::MOVING_LEFT;
 			g_State = ANIMATION_STATE::READY;
+			s_CanMove = false;
 			return 1;
 		}
 		return 0;
@@ -286,6 +296,7 @@ protected:
 			//this->Move(dX, 0);
 			g_Dir = MOVING_DIRECTION::MONIG_RIGHT;
 			g_State = ANIMATION_STATE::READY;
+			s_CanMove = false;
 			return 1;
 		}
 		return 0;

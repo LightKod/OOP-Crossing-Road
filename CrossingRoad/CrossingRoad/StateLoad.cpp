@@ -1,4 +1,5 @@
 ﻿#include "StateLoad.h"
+#include "StateMenu.h"
 #define MAX_OPTION 4
 
 const int	StateLoad::m_s_X0		= 20;
@@ -27,6 +28,9 @@ bool StateLoad::Update(float fElapsedTime) {
 	}
 	else if (game->GetKey(VK_S).bReleased) {
 		optionIndex = (optionIndex + 1 + MAX_OPTION) % MAX_OPTION;
+	}
+	else if (game->GetKey(VK_ESCAPE).bReleased) {
+		game->SetState(new StateMenu(game));
 	}
 
 	if (game->GetKey(VK_SPACE).bReleased) {

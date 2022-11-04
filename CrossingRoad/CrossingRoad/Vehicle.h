@@ -12,11 +12,11 @@ private:
 public:
 	//Thua ke ham constructor
 	Vehicle(CrossingRoadGame* game) : CrossingRoadGame::Object(game) {}
-	Vehicle(CrossingRoadGame* game,int x, int y, int width, int height) : CrossingRoadGame::Object(game, x, y, width, height) {}
-	Vehicle(CrossingRoadGame* game,int x, int y, int width, int height, float speed) : CrossingRoadGame::Object(game, x, y, width, height) {
+	Vehicle(CrossingRoadGame* game, int x, int y) : CrossingRoadGame::Object(game, x, y, width = 8, height = 8) {}
+	Vehicle(CrossingRoadGame* game,int x, int y, float speed) : CrossingRoadGame::Object(game, x, y, width = 8, height = 8) {
 		this->speed = speed;
 	}
-	Vehicle(CrossingRoadGame* game, int x, int y, int width, int height, float speed, COLOUR primary, COLOUR dark) :Object(game, x, y, width, height) {
+	Vehicle(CrossingRoadGame* game, int x, int y, float speed, COLOUR primary, COLOUR dark) :Object(game, x, y, width = 8, height = 8) {
 		primaryColor = primary;
 		darkColor = dark;
 		this->speed = speed;
@@ -25,5 +25,6 @@ public:
 	//Viet lai ham draw de ve
 	virtual void Draw();
 	virtual void Update(float fElapsedTime);
+	virtual void SetCollisionMatrix();
 };
 

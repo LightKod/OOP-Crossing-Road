@@ -28,3 +28,7 @@ void Vehicle::Update(float fElapsedTime) {
 		time = 0;
 	}
 }
+
+void Vehicle::SetCollisionMatrix() {
+	game->FillCollisionMatrix(x, y, x + width - 1, y + height-1, true);
+}

@@ -39,6 +39,7 @@ bool StateMenu::Update(float fElapsedTime) {
 			game->SetState(new StatePlay(game));
 			break;
 		}
+		return true;
 	}
 
 	if (deltaTime > .5) {

@@ -214,7 +214,7 @@ public:
 
 	void SetCollisionMatrix(int x, int y, bool state);
 	void FillCollisionMatrix(int x1, int y1, int x2, int y2, bool state);
-	bool CheckCollision(int x, int y);
+	bool CheckCollision(int x, int y, int width, int height);
 	~GameEngine();
 
 	// Start: Writer 739 
@@ -271,7 +271,6 @@ public:
 
 	// Optional for clean up 
 	virtual bool OnUserDestroy();
-
 
 public:
 

@@ -18,14 +18,17 @@ public:
 	public:
 		State(CrossingRoadGame* game) { this->game = game; }
 		State() = default;
-		~State() { if (this->game) delete this->game; this->game = nullptr; }
+		//~State() { if (this->game) delete this->game; this->game = nullptr; }
 		virtual bool Update(float fElapsedTime) { return true; }
 		virtual bool OnStateEnter() { return true; }
 		virtual bool OnStateExit() { return true; }
 	};
 
 	void SetState(State* state) {
-		if (this->state != nullptr) this->state->OnStateExit();
+		if (this->state != nullptr) {
+			if (this->state != state)
+				delete this->state;
+		}
 		this->state = state;
 		this->state->OnStateEnter();
 	}
@@ -35,7 +38,7 @@ public:
 	protected:
 		int x, y;
 		int width, height;
-		CrossingRoadGame* game;
+		CrossingRoadGame* game = nullptr;
 
 	public:
 		//Contructors de Object tuong tac duoc void Game
@@ -62,9 +65,6 @@ public:
 		virtual void SetCollisionMatrix() {};
 		//Ve ra man hinh tuy` vi tri x, y
 		virtual void Draw() {};
-
-		//Check coi Object co dang de` len CollisionMatrix ko
-		bool CheckCollided() { return false; };
 	};
 public:
 	CrossingRoadGame() {
@@ -72,7 +72,7 @@ public:
 	}
 	int GetGameWidth() { return gameScreenWidth; };
 	int GetGameHeight() { return gameScreenHeight; };
-	State* state;
+	State* state = nullptr;
 
 protected:
 	virtual bool OnUserCreate();

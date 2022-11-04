@@ -6,6 +6,9 @@ using namespace std;
 
 class Player : public CrossingRoadGame::Object
 {
+
+private:
+
 public:
 	Player(CrossingRoadGame* game, const int& x, const int& y, const int& w, const int& h) 
 		: Object(game, x, y, w, h)
@@ -22,6 +25,8 @@ public:
 	virtual void Draw()
 	{
 	}
+
+	virtual void SetCollisionMatrix() {}
 
 protected:
 	enum class MOVING_DIRECTION

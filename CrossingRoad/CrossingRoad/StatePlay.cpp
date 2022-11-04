@@ -6,12 +6,12 @@ bool StatePlay::OnStateEnter() {
 
 	objects.push_back(new Road(game, 0));
 	objects.push_back(new River(game, 16));
-	objects.push_back(new Road(game, 24));
-	objects.push_back(new River(game, 40));
+	objects.push_back(new River(game, 24));
+	objects.push_back(new Road(game, 32));
 	objects.push_back(new Road(game, 48));
-	objects.push_back(new Road(game, 64));
-	objects.push_back(new Road(game, 80));
-	objects.push_back(new Road(game, 96));
+	objects.push_back(new River(game, 64));
+	objects.push_back(new Road(game, 72));
+	objects.push_back(new River(game, 88));
 
 	return true;
 }
@@ -28,6 +28,10 @@ bool StatePlay::Update(float fElapsedTime) {
 
 void StatePlay::UpdateCollisionMatrix() {
 	game->ClearCollsionMatrix();
+
+	for (int i = 0; i < objects.size(); i++) {
+		objects[i]->SetCollisionMatrix();
+	}
 	//THEM MAY CAI SET COLLSION CUA MAY CAI OBJECT VAO
 }
 

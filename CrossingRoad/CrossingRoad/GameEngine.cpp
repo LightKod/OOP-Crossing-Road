@@ -226,8 +226,13 @@ void GameEngine::FillCollisionMatrix(int x1, int y1, int x2, int y2, bool state)
 			SetCollisionMatrix(x, y, state);
 }
 
-bool GameEngine::CheckCollision(int x, int y) {
-	return collisionMatrix[y * m_nScreenWidth + x];
+bool GameEngine::CheckCollision(int x, int y, int width, int height) {
+	bool tl = collisionMatrix[y * m_nScreenWidth + x];
+	bool tr = collisionMatrix[y * m_nScreenWidth + x + width - 1];
+	bool bl = collisionMatrix[(y+height-1) * m_nScreenWidth + x];
+	bool br = collisionMatrix[(y+height-1) * m_nScreenWidth + x + width - 1];
+
+	return tl || tr || bl || br;
 }
 
 void GameEngine::UpdateCollisionMatrix() {
