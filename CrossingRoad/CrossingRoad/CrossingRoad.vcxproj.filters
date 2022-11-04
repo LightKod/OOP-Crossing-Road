@@ -93,6 +93,12 @@
     <ClCompile Include="StateMenu.cpp">
       <Filter>Source Files\Objects\States</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StateLoad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -133,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="River.h">
       <Filter>Header Files\Objects\Lanes</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateLoad.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

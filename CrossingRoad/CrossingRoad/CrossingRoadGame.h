@@ -2,6 +2,11 @@
 #include <iostream>
 #include "GameEngine.h"
 
+#define VK_A 0x41
+#define VK_D 0x44
+#define VK_S 0x53
+#define VK_W 0x57
+
 //KHONG DUOC INCLUDE MAY CAI LIEN QUAN TOI OBJECT O DAY, QUA BEN .CPP INCLUDE
 class CrossingRoadGame : public GameEngine {
 
@@ -9,9 +14,11 @@ public:
 	class State
 	{
 	protected:
-		CrossingRoadGame* game;
+		CrossingRoadGame* game = nullptr;
 	public:
 		State(CrossingRoadGame* game) { this->game = game; }
+		State() = default;
+		~State() { if (this->game) delete this->game; this->game = nullptr; }
 		virtual bool Update(float fElapsedTime) { return true; }
 		virtual bool OnStateEnter() { return true; }
 		virtual bool OnStateExit() { return true; }
@@ -32,9 +39,10 @@ public:
 
 	public:
 		//Contructors de Object tuong tac duoc void Game
-		Object(CrossingRoadGame* game) { this->game = game; };
-		Object(CrossingRoadGame* game, int x, int y, int width, int height) { this->game = game; this->x = x; this->y = y; this->width = width; this->height = height; };
-		Object(CrossingRoadGame* game, int x, int y) { this->game = game; this->x = x; this->y = y; };
+		Object(CrossingRoadGame* game) : Object(game, 0, 0, 0, 0) {}
+		Object(CrossingRoadGame* game, int x, int y, int width, int height) 
+		{ this->game = game; this->x = x; this->y = y; this->width = width; this->height = height; }
+		Object(CrossingRoadGame* game, int x, int y) : Object(game, x, y, 0, 0) {}
 
 		//Getters
 		int GetX() { return x; };
@@ -81,7 +89,7 @@ private:
 		}
 		void ClearSprite(const int& x, const int& y, const int& w, const int& h)
 		{
-			Fill(x, y, x + w -1, y + h-1, L' ', COLOUR::BG_WHITE);
+			Fill(x, y, x + w - 1, y + h - 1, L' ', COLOUR::BG_WHITE);
 			ConsOutput();
 		}
 };

@@ -12,7 +12,9 @@ private:
 	void DrawMenuOptions();
 	void UpdateMousePosition(int index);
 public:
-	StateMenu(CrossingRoadGame* game) : State(game) {};
+	StateMenu(CrossingRoadGame* game);
+	StateMenu() : State() {}
+	~StateMenu();
 	virtual bool Update(float fElapsedTime);
 	virtual bool OnStateEnter();
 	virtual bool OnStateExit();

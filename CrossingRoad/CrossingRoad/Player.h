@@ -4,11 +4,6 @@
 
 using namespace std;
 
-#define VK_A 0x41
-#define VK_D 0x44
-#define VK_S 0x53
-#define VK_W 0x57
-
 class Player : public CrossingRoadGame::Object
 {
 public:
