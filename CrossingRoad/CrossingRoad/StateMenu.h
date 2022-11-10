@@ -4,18 +4,19 @@
 class StateMenu : public CrossingRoadGame::State
 {
 private:
-	int optionIndex = 0;
-	float deltaTime = 0;
-    bool down = false;
-	void DrawMainMenu( int optionIndex, int titleInnerOfset, int titleOuterOfset);
-	void DrawMenuTitle(int innerOfset, int outerOfset);
-	void DrawMenuOptions();
-	void UpdateMousePosition(int index);
+	static int		m_s_OptionIdx;
+	static float	m_s_DeltaTime;
+	bool down = false;
+
+	void DrawMainMenu();
+
 public:
 	StateMenu(CrossingRoadGame* game);
 	StateMenu() : State() {}
 	~StateMenu();
+
 	virtual bool Update(float fElapsedTime);
 	virtual bool OnStateEnter();
 	virtual bool OnStateExit();
+
 };

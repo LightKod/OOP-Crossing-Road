@@ -5,11 +5,7 @@
 #include <vector>
 #include <wchar.h>
 using namespace std;
-/*
-		Splash3(game, y, FG_DARK_YELLOW, BG_DARK_YELLOW);
-		Splash2(game, y, FG_YELLOW, BG_YELLOW);
-		Splash1(game, y, FG_GREY, BG_GREY);
-*/
+
 class Menu : public StateMenu
 {
 public:
@@ -61,42 +57,13 @@ public:
 
 protected:
 	void UpdateMenuTitle(CrossingRoadGame*& game, const int& innerOfset, const int& outerOfset);
-	void UpdateNewgameUI(CrossingRoadGame*& game, const int& opt) {
-		if (opt == MENU_OPTION::NEWGAME_OPT)
-			DrawOptionalUI(game, C_NEWGAME.X, C_NEWGAME.Y, m_Newgame);
-		else
-			DrawNormalUI(game, C_NEWGAME.X, C_NEWGAME.Y, m_Newgame);
-	}
-	void UpdateLoadgameUI(CrossingRoadGame*& game, const int& opt) {
-		if (opt == MENU_OPTION::LOADGAME_OPT)
-			DrawOptionalUI(game, C_LOADGAME.X, C_LOADGAME.Y, m_Loadgame);
-		else
-			DrawNormalUI(game, C_LOADGAME.X, C_LOADGAME.Y, m_Loadgame);
-	}
-	void UpdateLBUI(CrossingRoadGame*& game, const int& opt) {
-		if (opt == MENU_OPTION::LB_OPT)
-			DrawOptionalUI(game, C_LB.X, C_LB.Y, m_LB);
-		else
-			DrawNormalUI(game, C_LB.X, C_LB.Y, m_LB);
-	}
-	void UpdateSettingUI(CrossingRoadGame*& game, const int& opt) {
-		if (opt == MENU_OPTION::SETTING_OPT)
-			DrawOptionalUI(game, C_SETTING.X, C_SETTING.Y, m_Setting);
-		else
-			DrawNormalUI(game, C_SETTING.X, C_SETTING.Y, m_Setting);
-	}
-	void UpdateCreditUI(CrossingRoadGame*& game, const int& opt) {
-		if (opt == MENU_OPTION::CREDIT_OPT)
-			DrawOptionalUI(game, C_CREDIT.X, C_CREDIT.Y, m_Credit);
-		else
-			DrawNormalUI(game, C_CREDIT.X, C_CREDIT.Y, m_Credit);
-	}
-	void UpdateExitUI(CrossingRoadGame*& game, const int& opt) {
-		if (opt == MENU_OPTION::EXIT_OPT)
-			DrawOptionalUI(game, C_EXIT.X, C_EXIT.Y, m_Exit);
-		else
-			DrawNormalUI(game, C_EXIT.X, C_EXIT.Y, m_Exit);
-	}
+	void UpdateNewgameUI(CrossingRoadGame*& game, const int& opt);
+	void UpdateLoadgameUI(CrossingRoadGame*& game, const int& opt);
+	void UpdateLBUI(CrossingRoadGame*& game, const int& opt);
+	void UpdateSettingUI(CrossingRoadGame*& game, const int& opt);
+	void UpdateCreditUI(CrossingRoadGame*& game, const int& opt);
+	void UpdateExitUI(CrossingRoadGame*& game, const int& opt);
+
 
 private:
 	void DrawNormalUI(CrossingRoadGame* game, const int& x, 

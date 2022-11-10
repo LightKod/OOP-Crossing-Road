@@ -1,6 +1,12 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include "GameEngine.h"
+#include <cwchar>
+#include <cstdlib>
+#include <string>
+#include <conio.h>
+
+using namespace std;
 
 #define VK_A 0x41
 #define VK_D 0x44
@@ -22,6 +28,14 @@ public:
 		virtual bool Update(float fElapsedTime) { return true; }
 		virtual bool OnStateEnter() { return true; }
 		virtual bool OnStateExit() { return true; }
+
+		// offsetX được cập nhật liên tục 
+		// để xuất các chữ không đè lên nhau
+		virtual void char2Pixel(const wchar_t& ch, const int& x,
+			const int& y, const int& fg, const int& bg, int& offsetX);
+
+		virtual void string2Pixel(const wstring& wStr, const int& x,
+			const int& y, const int& fg, const int& bg);
 	};
 
 	void SetState(State* state) {

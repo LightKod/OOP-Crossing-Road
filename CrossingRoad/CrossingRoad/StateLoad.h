@@ -1,7 +1,8 @@
-#pragma once
+﻿#pragma once
 #ifndef _STATE_LOAD_H_
 #define _STATE_LOAD_H_
 #include "CrossingRoadGame.h"
+#include "Data.h"
 
 class StateLoad : public CrossingRoadGame::State
 {
@@ -12,26 +13,53 @@ public:
 
 	StateLoad(CrossingRoadGame* game) : State(game) {};
 
-	void LoadingThread(CrossingRoadGame*& game, const int&);
+	void LoadingThread();
 
 protected:
-	void DrawLoadingScreen(CrossingRoadGame*& game);
-	void DrawCheckbox(CrossingRoadGame*& game, const COORD&);
-	void DrawArrow(CrossingRoadGame*& game);
-						     
-	void LS_FillBackground(CrossingRoadGame*& game);
-	void LS_DrawBorder(CrossingRoadGame*& game);
-	void LS_DecorateScreen(CrossingRoadGame*& game);
+	// Hiệu ứng load data
+	void LoadingAnimation();
 
-	void UpdateArrowCoord(const int&);
+	// Xử lý hiệu ứng cho title
+	void DrawTitle();
+
+	// Xử lý đồ họa arrow & checkbox
+	void UpdateArrowCoord();
 	void SetArrowCoord(const COORD&);
 	void MoveArrow(const int&);
+	void DrawArrow();
 
-	void LoadingAnimation(CrossingRoadGame*& game);
+	void UpdateCheckbox();
+	void UpdateCheckbox1();
+	void UpdateCheckbox2();
+	void UpdateCheckbox3();
+	void UpdateCheckbox4();
+
+	void DrawCheckbox(const COORD&,
+		const short& fg, const short& bg);
+
+	// Xử lý phần thân của bản đồ loadgame
+	void DrawLoadingScreen();
+
+	void LS_FillBackground();
+	void LS_DrawBorder();
+	// Trang trí
+	void LS_DecorateScreen();
+	void DrawMagnifyingGlass();
+	void DrawMarkXTreasure();
+
+	void GetDataRecord();
+	void ShowDataRecord();
+
+	void UpdateDataLine1();
+	void UpdateDataLine2();
+	void UpdateDataLine3();
+	void UpdateDataLine4();
 
 private:
-	COORD m_ArrowCoord{0,0};
-	
+	COORD m_ArrowCoord{ 0,0 };
+	int m_OptionIdx = 0;
+	vector<Data> m_Datas;
+
 	static const int m_s_OFFSET_X;
 	static const int m_s_X0;
 	static const int m_s_X1;
@@ -46,5 +74,3 @@ private:
 };
 
 #endif // !_STATE_LOAD_H_
-
-

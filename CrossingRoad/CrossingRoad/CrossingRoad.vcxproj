@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CrossingRoadGame.cpp" />
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="Frog.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="Lane.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="River.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="RoadTile.cpp" />
+    <ClCompile Include="StateLB.cpp" />
     <ClCompile Include="StateLoad.cpp" />
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePlay.cpp" />
@@ -158,6 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h" />
+    <ClInclude Include="Data.h" />
     <ClInclude Include="Frog.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="Lane.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="River.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="RoadTile.h" />
+    <ClInclude Include="StateLB.h" />
     <ClInclude Include="StateLoad.h" />
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePlay.h" />

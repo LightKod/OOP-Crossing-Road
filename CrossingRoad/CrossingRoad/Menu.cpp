@@ -210,54 +210,47 @@ void Menu::DrawNormalUI(CrossingRoadGame* game, const int& x,
 	game->DrawLine(x0, _y + 7, x1, _y + 7, PIXEL_SOLID, FG_DARK_GREY + BG_DARK_GREY);
 	game->DrawLine(x0 + 1, _y + 8, x1 - 1, _y + 8, PIXEL_SOLID, FG_DARK_GREY + BG_DARK_GREY);
 
-
-	//// Vẽ hiệu ứng
-	//static float dT = 0.f;
-	//static int dT_x1 = x0;
-	//static int dT_y1 = _y;
-	//static int dT_x2 = x1;
-	//static int dT_y2 = _y + 6;
-	//static int coe = 1;
-
-	//dT += 0.1;
-
-	//if (dT >= 0.1f)
-	//{
-	//	dT = 0.f;
-
-	//	dT_x1 += 2 * coe;
-	//	dT_x2 -= 2 * coe;
-
-
-	//	/*if (dT_x1 >= x1)
-	//	{
-	//		coe = -coe;
-	//	}
-	//	else if (dT_x1 <= x0)
-	//	{
-	//		coe = -coe;
-	//	}*/
-
-	//	if (dT_x1 >= x1) {
-	//		game->Draw(dT_x1, dT_y1 + 0, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	//		game->Draw(dT_x1, dT_y1 + 2, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	//		game->Draw(dT_x1, dT_y1 + 4, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	//		dT_x1 = x0;
-	//	}
-	//	if (dT_x2 <= x0) {
-	//		game->Draw(dT_x2, dT_y2 - 0, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	//		game->Draw(dT_x2, dT_y2 - 2, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	//		game->Draw(dT_x2, dT_y2 - 4, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	//		dT_x2 = x1;
-	//	}
-	//}
-	//game->Draw(dT_x1, dT_y1, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	//game->Draw(dT_x2, dT_y2, PIXEL_SOLID, FG_DARK_YELLOW + BG_DARK_YELLOW);
-
 	// Xuất chữ
 	for (int i = 0; i < 3; i++) {
 		game->DrawString(x, y + i, Strings[i], FG_GREY + BG_BLUE);
 	}
+}
+
+void Menu::UpdateNewgameUI(CrossingRoadGame*& game, const int& opt) {
+	if (opt == MENU_OPTION::NEWGAME_OPT)
+		DrawOptionalUI(game, C_NEWGAME.X, C_NEWGAME.Y, m_Newgame);
+	else
+		DrawNormalUI(game, C_NEWGAME.X, C_NEWGAME.Y, m_Newgame);
+}
+void Menu::UpdateLoadgameUI(CrossingRoadGame*& game, const int& opt) {
+	if (opt == MENU_OPTION::LOADGAME_OPT)
+		DrawOptionalUI(game, C_LOADGAME.X, C_LOADGAME.Y, m_Loadgame);
+	else
+		DrawNormalUI(game, C_LOADGAME.X, C_LOADGAME.Y, m_Loadgame);
+}
+void Menu::UpdateLBUI(CrossingRoadGame*& game, const int& opt) {
+	if (opt == MENU_OPTION::LB_OPT)
+		DrawOptionalUI(game, C_LB.X, C_LB.Y, m_LB);
+	else
+		DrawNormalUI(game, C_LB.X, C_LB.Y, m_LB);
+}
+void Menu::UpdateSettingUI(CrossingRoadGame*& game, const int& opt) {
+	if (opt == MENU_OPTION::SETTING_OPT)
+		DrawOptionalUI(game, C_SETTING.X, C_SETTING.Y, m_Setting);
+	else
+		DrawNormalUI(game, C_SETTING.X, C_SETTING.Y, m_Setting);
+}
+void Menu::UpdateCreditUI(CrossingRoadGame*& game, const int& opt) {
+	if (opt == MENU_OPTION::CREDIT_OPT)
+		DrawOptionalUI(game, C_CREDIT.X, C_CREDIT.Y, m_Credit);
+	else
+		DrawNormalUI(game, C_CREDIT.X, C_CREDIT.Y, m_Credit);
+}
+void Menu::UpdateExitUI(CrossingRoadGame*& game, const int& opt) {
+	if (opt == MENU_OPTION::EXIT_OPT)
+		DrawOptionalUI(game, C_EXIT.X, C_EXIT.Y, m_Exit);
+	else
+		DrawNormalUI(game, C_EXIT.X, C_EXIT.Y, m_Exit);
 }
 
 void Menu::UpdateMenuTitle(CrossingRoadGame*& game, 
