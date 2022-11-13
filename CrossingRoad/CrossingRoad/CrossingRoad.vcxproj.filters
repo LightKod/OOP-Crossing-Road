@@ -105,6 +105,9 @@
     <ClCompile Include="StateLB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StateDead.cpp">
+      <Filter>Source Files\Objects\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -157,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="StateLB.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateDead.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

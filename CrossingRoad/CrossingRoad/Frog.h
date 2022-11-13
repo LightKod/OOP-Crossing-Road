@@ -1,6 +1,5 @@
 #pragma once
 #include "Player.h"
-
 #define INIT_TIME float(24.f)
 #define LIMIT_TIME float(28.f)
 
@@ -90,7 +89,7 @@ public:
 protected:
 	void CheckCollided() {
 		if (game->CheckCollision(x, y, width, height)) {
-			this_thread::sleep_for(std::chrono::milliseconds(int(1000)));
+			p_State = PLAYER_STATE::DEAD;
 		}
 	}
 

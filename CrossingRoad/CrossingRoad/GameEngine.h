@@ -77,6 +77,10 @@ public:
 	{
 		if (!Load(sFile))
 			Create(8, 8);
+	}olcSprite(std::wstring sFile,int m)
+	{
+		if (!Load(sFile)&&m==2)
+			Create(160, 96);
 	}
 
 	int nWidth = 0;
@@ -183,7 +187,6 @@ public:
 
 		std::fread(&nWidth, sizeof(int), 1, f);
 		std::fread(&nHeight, sizeof(int), 1, f);
-
 		Create(nWidth, nHeight);
 
 		std::fread(m_Colours, sizeof(short), nWidth * nHeight, f);

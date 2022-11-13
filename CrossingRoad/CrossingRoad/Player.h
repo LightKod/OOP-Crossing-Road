@@ -8,8 +8,13 @@ class Player : public CrossingRoadGame::Object
 {
 
 private:
-
 public:
+	enum class PLAYER_STATE
+	{
+		ALIVE,
+		DEAD,
+	};
+	PLAYER_STATE p_State = PLAYER_STATE::ALIVE;
 	Player(CrossingRoadGame* game, const int& x, const int& y, const int& w, const int& h) 
 		: Object(game, x, y, w, h)
 	{
@@ -25,9 +30,21 @@ public:
 	virtual void Draw()
 	{
 	}
-
+	int GetX()
+	{
+		return x;
+	}
+	int GetY()
+	{
+		return y;
+	}
 	virtual void SetCollisionMatrix() {}
-
+	bool CheckPlayerState()
+	{
+		if (p_State == PLAYER_STATE::DEAD)
+			return true;
+		return false;
+	}
 protected:
 	enum class MOVING_DIRECTION
 	{
@@ -45,7 +62,6 @@ protected:
 		LANDING,
 		END,
 	};
-
 	void Move(int xDir, int yDir) {
 		x += xDir;
 		y += yDir;

@@ -6,7 +6,6 @@
 #include "StateMenu.h"
 int optionIndex = 0;
 Player* pPlayer = nullptr;
-
 static vector<CrossingRoadGame::Object*> objects;
 static CrossingRoadGame::State* state;
 

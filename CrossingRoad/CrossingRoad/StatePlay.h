@@ -4,6 +4,7 @@
 #include "River.h"
 #include "Frog.h"
 #include <vector>
+#include "StateDead.h"
 
 using namespace std;
 
@@ -14,7 +15,8 @@ private:
 	float deltaTime = 0;
 	vector<CrossingRoadGame::Object*> objects;
 	Player* pPlayer = nullptr;
-
+	
+	
 public:
 	StatePlay(CrossingRoadGame* game) : State(game) {};
 	virtual bool Update(float fElapsedTime);
@@ -25,4 +27,5 @@ private:
 	void UpdateCollisionMatrix();
 	void UpdateGameScreen();
 	void UpdateGameState(float fElapsedTime);
+
 };

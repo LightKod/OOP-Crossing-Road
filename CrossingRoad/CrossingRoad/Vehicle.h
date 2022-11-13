@@ -24,6 +24,8 @@ public:
 
 	//Viet lai ham draw de ve
 	virtual void Draw();
+	void DrawAmbulance();
+	void AmbulanceUpdate(float fElapsedTime,bool STOP_OR_CONTINUE);
 	virtual void Update(float fElapsedTime);
 	virtual void SetCollisionMatrix();
 };

@@ -68,7 +68,7 @@ public:
 		int GetHeight() { return height; };
 
 		//Set vi tri
-		bool SetPosition(int x, int y) { this->x = x; this->y = y; };
+		void SetPosition(int x, int y) { this->x = x; this->y = y; };
 
 
 		//Hai ham` ve voi Set Collision

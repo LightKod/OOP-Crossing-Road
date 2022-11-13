@@ -1,6 +1,5 @@
 #include "StatePlay.h"
 
-
 bool StatePlay::OnStateEnter() {
 	pPlayer = new Frog(game);
 
@@ -21,11 +20,17 @@ bool StatePlay::OnStateExit() {
 
 bool StatePlay::Update(float fElapsedTime) {
 	UpdateGameState(fElapsedTime);
-	UpdateCollisionMatrix();
-	UpdateGameScreen();
+	if (pPlayer->CheckPlayerState())
+	{
+		game->SetState(new StateDead(game, pPlayer));
+	}
+	else 
+	{
+		UpdateCollisionMatrix();
+		UpdateGameScreen();
+	}
 	return true;
 }
-
 void StatePlay::UpdateCollisionMatrix() {
 	game->ClearCollsionMatrix();
 
@@ -37,6 +42,7 @@ void StatePlay::UpdateCollisionMatrix() {
 
 void StatePlay::UpdateGameScreen() {
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
+
 	for (int i = 0; i < objects.size(); i++) {
 		objects[i]->Draw();
 	}
@@ -47,8 +53,11 @@ void StatePlay::UpdateGameScreen() {
 
 void StatePlay::UpdateGameState(float fElapsedTime) {
 	//THEM MAY CAI UPDATE CUA MAY CAI OBJECT VAO
-	for (int i = 0; i < objects.size(); i++) {
-		objects[i]->Update(fElapsedTime);
+	if (pPlayer->CheckPlayerState());
+	else {
+		for (int i = 0; i < objects.size(); i++) {
+			objects[i]->Update(fElapsedTime);
+		}
+		pPlayer->Update(fElapsedTime);
 	}
-	pPlayer->Update(fElapsedTime);
 }
