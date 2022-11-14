@@ -95,6 +95,7 @@ protected:
 private:
 	int gameScreenWidth = 112;
 	int gameScreenHeight = 96;
+
 private:
 	public:
 		void ConsOutput()

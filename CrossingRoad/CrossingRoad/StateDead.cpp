@@ -1,6 +1,10 @@
 #include "StateDead.h"
 bool StateDead::OnStateEnter()
 {
+	Sound DeadSound;
+	DeadSound.OpenImpactsSound();
+	DeadSound.PlayImpactsSound();
+	DeadSound.CloseSound();
 	Ambulance = new Vehicle(game, 0, pPlayer->GetY());
 	game->Fill(0, 0, 120, 96, L' ', COLOUR::BG_BLUE);
 	pPlayer->Draw();

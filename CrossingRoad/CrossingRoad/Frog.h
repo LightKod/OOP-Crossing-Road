@@ -23,6 +23,7 @@ public:
 		s_Time = INIT_TIME;
 		g_Dir = MOVING_DIRECTION::INVALID;
 		g_State = ANIMATION_STATE::START;
+		frogsound.OpenFrogSound();
 	}
 	~Frog()
 	{
@@ -35,11 +36,26 @@ public:
 	virtual void Update(float fElapsedTime)
 	{
 
-		if (game->m_keys[VK_W].bReleased) this->MoveUp();
-		if (game->m_keys[VK_S].bReleased) this->MoveDown();
-		if (game->m_keys[VK_A].bReleased) this->MoveLeft();
-		if (game->m_keys[VK_D].bReleased) this->MoveRight();
-
+		if (game->m_keys[VK_W].bReleased)
+		{
+			this->MoveUp();
+			frogsound.PlayFrogSound();
+		}
+		if (game->m_keys[VK_S].bReleased)
+		{
+			this->MoveDown();
+			frogsound.PlayFrogSound();
+		}
+		if (game->m_keys[VK_A].bReleased)
+		{
+			this->MoveLeft();
+			frogsound.PlayFrogSound();
+		}
+		if (game->m_keys[VK_D].bReleased)
+		{
+			this->MoveRight();
+			frogsound.PlayFrogSound();
+		}
 		s_Time += int(fElapsedTime) * 1000;
 		if (s_Time >= LIMIT_TIME)
 		{
@@ -90,6 +106,7 @@ protected:
 	void CheckCollided() {
 		if (game->CheckCollision(x, y, width, height)) {
 			p_State = PLAYER_STATE::DEAD;
+			frogsound.CloseSound();
 		}
 	}
 
@@ -305,5 +322,6 @@ private:
 	olcSprite* sprAvatar = nullptr;
 	MOVING_DIRECTION g_Dir = MOVING_DIRECTION::INVALID;
 	ANIMATION_STATE g_State = ANIMATION_STATE::START;
+	Sound frogsound;
 };
 
