@@ -2,6 +2,7 @@
 #include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateLB.h"
+#include "StateExit.h"
 #include "Menu.h"
 
 int		Menu::m_s_OptionIdx = 0;
@@ -23,7 +24,7 @@ bool StateMenu::Update(float fElapsedTime) {
 		// Tạo state mới
 		switch (this->m_s_OptionIdx) {
 		case 0: game->SetState(new StatePlay(game));
-			;			break;
+			break;
 		case 1: game->SetState(new StateLoad(game));
 			break;
 		case 2: game->SetState(new StateLB(game));
@@ -32,7 +33,7 @@ bool StateMenu::Update(float fElapsedTime) {
 			break;
 			//case 4 : game->SetState(new StateCredit(game));
 			break;
-			//case 5 : game->SetState(new StateExit(game));
+		case 5: game->SetState(new StateExit(game));
 			break;
 		default: /*game->SetState(new StatePlay(game));*/
 			break;

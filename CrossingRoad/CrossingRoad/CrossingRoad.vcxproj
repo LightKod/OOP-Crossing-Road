@@ -151,6 +151,7 @@
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="RoadTile.cpp" />
     <ClCompile Include="StateDead.cpp" />
+    <ClCompile Include="StateExit.cpp" />
     <ClCompile Include="StateLB.cpp" />
     <ClCompile Include="StateLoad.cpp" />
     <ClCompile Include="StateMenu.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Road.h" />
     <ClInclude Include="RoadTile.h" />
     <ClInclude Include="StateDead.h" />
+    <ClInclude Include="StateExit.h" />
     <ClInclude Include="StateLB.h" />
     <ClInclude Include="StateLoad.h" />
     <ClInclude Include="StateMenu.h" />
