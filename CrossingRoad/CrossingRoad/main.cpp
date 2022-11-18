@@ -10,6 +10,5 @@ int main()
 	CrossingRoadGame game;
 	game.ConstructConsole(160, 96, 8, 8);// 160, 96, 8, 8
 	game.Start();
-
 	system("pause>0");
 }
