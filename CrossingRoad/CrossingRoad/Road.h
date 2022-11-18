@@ -20,22 +20,49 @@ public:
 		int randomValue = rand() % 20;
 		int randomValue1 = rand() % 30 + 40;
 		int randomValue2 = rand() % 22 + 90;
+		float speed;
+		//DUMMY
+		int random = rand() % 3;
+		if (random == 1)
+		{
+			speed = 0.07f;
+		}
+		else if(random==2)
+		{
+			speed = -0.09f;
+		}
+		else
+		{
+			speed = 0.05f;
+		}
+
 		for (int i = 0; i < 7; i++)
 		{
 			tiles.push_back(new RoadTile(game, 16 * i, row));
 		}
+		vehicles.push_back(new Vehicle(game, randomValue, row, speed));
+		vehicles.push_back(new Vehicle(game, randomValue1, row,speed));
+		vehicles.push_back(new Vehicle(game, randomValue2, row,speed));
 
-		vehicles.push_back(new Vehicle(game, randomValue, row));
-		vehicles.push_back(new Vehicle(game,randomValue1, row));
-		vehicles.push_back(new Vehicle(game,randomValue2, row));
-
-
+		random = rand() % 3;
+		if (random == 1)
+		{
+			speed = 0.07f;
+		}
+		else if (random == 2)
+		{
+			speed = -0.09f;
+		}
+		else
+		{
+			speed = 0.05f;
+		}
 		randomValue = rand() % 20;
 		randomValue1 = rand() % 30 + 40;
 		randomValue2 = rand() % 22 + 90;
-		vehicles.push_back(new Vehicle(game, randomValue, row + 8));
-		vehicles.push_back(new Vehicle(game, randomValue1, row + 8));
-		vehicles.push_back(new Vehicle(game, randomValue2, row + 8));
+		vehicles.push_back(new Vehicle(game, randomValue, row + 8,speed));
+		vehicles.push_back(new Vehicle(game, randomValue1, row + 8,speed));
+		vehicles.push_back(new Vehicle(game, randomValue2, row + 8,speed));
 	}
 	void Draw() {
 		Lane::Draw();

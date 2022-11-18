@@ -143,10 +143,12 @@
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Frog.cpp" />
     <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GrassTile.cpp" />
     <ClCompile Include="Lane.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RestLane.cpp" />
     <ClCompile Include="River.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="RoadTile.cpp" />
@@ -165,9 +167,11 @@
     <ClInclude Include="Data.h" />
     <ClInclude Include="Frog.h" />
     <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GrassTile.h" />
     <ClInclude Include="Lane.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RestLane.h" />
     <ClInclude Include="River.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="RoadTile.h" />

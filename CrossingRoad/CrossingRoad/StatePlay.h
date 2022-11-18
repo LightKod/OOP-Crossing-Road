@@ -3,6 +3,7 @@
 #include "Road.h"
 #include "River.h"
 #include "Frog.h"
+#include"RestLane.h"
 #include <vector>
 #include "StateDead.h"
 

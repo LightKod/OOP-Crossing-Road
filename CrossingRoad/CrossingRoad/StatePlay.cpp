@@ -7,7 +7,8 @@ bool StatePlay::OnStateEnter() {
 	objects.push_back(new River(game, 16));
 	objects.push_back(new River(game, 24));
 	objects.push_back(new Road(game, 32));
-	objects.push_back(new Road(game, 48));
+	objects.push_back(new RestLane(game, 48));
+	objects.push_back(new RestLane(game, 56));
 	objects.push_back(new River(game, 64));
 	objects.push_back(new Road(game, 72));
 	objects.push_back(new River(game, 88));

@@ -1,1 +1,39 @@
-﻿
+﻿  RestLane.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(16,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(22,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(32,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(37,21): warning C4018: '<': signed/unsigned mismatch
+  StateDead.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(16,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(22,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(18,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(69,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(75,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(81,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(32,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(37,21): warning C4018: '<': signed/unsigned mismatch
+  StateMenu.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(16,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(22,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(18,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(69,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(75,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(81,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(32,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(37,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateMenu.cpp(8,26): warning C4356: 'StateMenu::m_s_OptionIdx': static data member cannot be initialized via derived class
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateMenu.cpp(9,27): warning C4356: 'StateMenu::m_s_DeltaTime': static data member cannot be initialized via derived class
+  StatePlay.cpp
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(16,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(22,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(18,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(69,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(75,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(81,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(32,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(37,21): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(38,20): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(47,20): warning C4018: '<': signed/unsigned mismatch
+D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(59,21): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  CrossingRoad.vcxproj -> D:\KHTN\OOP\CrossTheRoad\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe
