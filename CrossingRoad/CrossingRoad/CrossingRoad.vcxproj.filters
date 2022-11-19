@@ -117,6 +117,9 @@
     <ClCompile Include="RestLane.cpp">
       <Filter>Source Files\Objects\Lanes</Filter>
     </ClCompile>
+    <ClCompile Include="StateCredit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -181,6 +184,9 @@
     </ClInclude>
     <ClInclude Include="RestLane.h">
       <Filter>Header Files\Objects\Lanes</Filter>
+    </ClInclude>
+    <ClInclude Include="StateCredit.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

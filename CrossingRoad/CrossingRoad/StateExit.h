@@ -34,6 +34,7 @@ protected:
 		const short& fg, const short& bg);
 	void Playing(const int& _x, const int& _y,
 		const short& fg, const short& bg);
+	void ByeBye();
 	void Bye(const int& _x, const int& _y,
 		const short& fg, const short& bg);
 
@@ -43,7 +44,6 @@ private:
 	static const int M_S_SRC_Y0;
 	static const int M_S_SRC_Y1;
 
-	bool m_bBack{ false };
 };
 
 #endif // !_STATE_EXIT_H_

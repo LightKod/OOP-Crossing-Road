@@ -2,6 +2,7 @@
 #include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateLB.h"
+#include "StateCredit.h"
 #include "StateExit.h"
 #include "Menu.h"
 
@@ -31,7 +32,7 @@ bool StateMenu::Update(float fElapsedTime) {
 			break;
 			//case 3 : game->SetState(new StateSetting(game));
 			break;
-			//case 4 : game->SetState(new StateCredit(game));
+		case 4: game->SetState(new StateCredit(game));
 			break;
 		case 5: game->SetState(new StateExit(game));
 			break;

@@ -13,20 +13,6 @@ bool StateExit::Update(float fElapsedTime) {
 	game->ConsOutput();
 
 	DrawMessage();
-	//static const int _x1 = M_S_SRC_X0 + 35;
-	//static const int _x2 = _x1 + 44;
-	//static const int _y = M_S_SRC_Y1 - 29;
-
-	//Bye(_x1, _y, FG_DARK_MAGENTA, BG_DARK_MAGENTA);
-	//Bye(_x2, _y, FG_DARK_MAGENTA, BG_DARK_MAGENTA);
-	//
-	//Bye(_x1 + 1, _y - 1, FG_DARK_YELLOW, BG_DARK_YELLOW);
-	//Bye(_x2 + 1, _y - 1, FG_DARK_YELLOW, BG_DARK_YELLOW);
-	//
-	//Bye(_x1 + 2, _y - 2, FG_RED, BG_RED);
-	//Bye(_x2 + 2, _y - 2, FG_RED, BG_RED);
-
-	game->ConsOutput();
 
 	exit(1);
 }
@@ -98,6 +84,34 @@ void StateExit::DrawMessage() {
 		game->ConsOutput();
 	}
 
+	// BYE BYE
+	ByeBye();
+}
+void StateExit::ByeBye() {
+	static const int _x1 = M_S_SRC_X0 + 35;
+	static const int _x2 = _x1 + 44;
+	static const int _y = M_S_SRC_Y1 - 29;
+	static const int  _delayTm = 35;
+
+	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	Bye(_x1, _y, FG_BLACK, BG_BLACK);
+	Bye(_x2, _y, FG_BLACK, BG_BLACK);
+	game->ConsOutput();
+
+	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	Bye(_x1, _y, FG_BLUE, BG_BLUE);
+	Bye(_x2, _y, FG_BLUE, BG_BLUE);
+	game->ConsOutput();
+
+	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	Bye(_x1 + 1, _y - 1, FG_MAGENTA, BG_MAGENTA);
+	Bye(_x2 + 1, _y - 1, FG_MAGENTA, BG_MAGENTA);
+	game->ConsOutput();
+
+	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	Bye(_x1 + 2, _y - 2, FG_RED, BG_RED);
+	Bye(_x2 + 2, _y - 2, FG_RED, BG_RED);
+	game->ConsOutput();
 }
 void StateExit::Thanks(const int& _x, const int& _y,
 	const short& fg, const short& bg)

@@ -152,6 +152,7 @@
     <ClCompile Include="River.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="RoadTile.cpp" />
+    <ClCompile Include="StateCredit.cpp" />
     <ClCompile Include="StateDead.cpp" />
     <ClCompile Include="StateExit.cpp" />
     <ClCompile Include="StateLB.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="River.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="RoadTile.h" />
+    <ClInclude Include="StateCredit.h" />
     <ClInclude Include="StateDead.h" />
     <ClInclude Include="StateExit.h" />
     <ClInclude Include="StateLB.h" />
