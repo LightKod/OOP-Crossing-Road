@@ -15,6 +15,9 @@ public:
 	Data();
 
 	void LoadData(const wstring&);
+	void SaveData(const wstring);
+
+	void SetLaneData(int index, wstring data);
 
 protected:
 	wstring FormatDataPath(const wstring&) const;
@@ -23,6 +26,8 @@ protected:
 	wstring m_Level;
 	wstring m_Date;
 	wstring m_Score;
+
+	wstring laneData[12];
 
 public:
 	friend class StateLoad;

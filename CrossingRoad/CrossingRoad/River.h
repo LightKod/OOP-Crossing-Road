@@ -9,6 +9,7 @@ public:
 		{
 			tiles.push_back(new WaterTile(game, 8 * i, row));
 		}
+		id = L'W';
 	}
 };
 

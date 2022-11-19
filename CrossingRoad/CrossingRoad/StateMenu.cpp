@@ -24,11 +24,14 @@ bool StateMenu::Update(float fElapsedTime) {
 
 		// Tạo state mới
 		switch (this->m_s_OptionIdx) {
-		case 0: game->SetState(new StatePlay(game));
+		case 0: 
+			game->SetState(new StatePlay(game));
 			break;
-		case 1: game->SetState(new StateLoad(game));
+		case 1: 
+			game->SetState(new StateLoad(game));
 			break;
-		case 2: game->SetState(new StateLB(game));
+		case 2: 
+			game->SetState(new StateLB(game));
 			break;
 			//case 3 : game->SetState(new StateSetting(game));
 			break;

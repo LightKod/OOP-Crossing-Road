@@ -3,12 +3,13 @@
 
 class Vehicle : public CrossingRoadGame::Object
 {
-private:
+protected:
 	COLOUR primaryColor = BG_GREEN;
 	COLOUR darkColor = BG_DARK_GREEN;
 	//CANG NHIEU THI CANG CHAM
 	float speed = 0.05f;
 	float time = 0;
+	wchar_t id = L'C';
 public:
 	//Thua ke ham constructor
 	Vehicle(CrossingRoadGame* game) : CrossingRoadGame::Object(game) {}
@@ -31,5 +32,11 @@ public:
 	void AmbulanceUpdate(float fElapsedTime,bool STOP_OR_CONTINUE);
 	virtual void Update(float fElapsedTime);
 	virtual void SetCollisionMatrix();
+
+	virtual wstring GetData() {
+		wstring idStr(1, id);
+		wstring data = idStr + L"|" + to_wstring(x) + L"|" + to_wstring(speed) + L"|" + to_wstring(primaryColor) + L"|" + to_wstring(darkColor) + L"|";
+		return data;
+	}
 };
 
