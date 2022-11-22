@@ -14,7 +14,12 @@ bool StateExit::Update(float fElapsedTime) {
 
 	DrawMessage();
 
-	exit(1);
+	//// clear screen
+	//game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLACK);
+	//this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+	GameEngine::m_bAtomActive = 0;
+	return 0;
 }
 bool StateExit::OnStateEnter() {
 	this->game = game;
@@ -46,7 +51,7 @@ void StateExit::DrawMessage() {
 		else {
 			Thanks(27, 29 - i, FG_BLACK, BG_BLACK);
 		}
-		
+
 		game->ConsOutput();
 	}
 
@@ -84,31 +89,377 @@ void StateExit::DrawMessage() {
 		game->ConsOutput();
 	}
 
+	HeartsEffect();
+
 	// BYE BYE
 	ByeBye();
 }
+
+void StateExit::HeartsEffect() {
+	Heart1(7, 38);
+	Heart2(120, 40);
+	Heart3(135, 60);
+}
+
+void StateExit::Heart3(const int& _x, const int& _y) {
+	Heart3_LeftWing(_x, _y);
+	Heart3_MainHeart(_x, _y);
+	Heart3_RightWing(_x, _y);
+	Heart3_SubHeart(_x, _y);
+	Heart3_SubHeart(_x, _y);
+}
+void StateExit::Heart3_SubHeart(const int& _x, const int& _y) {
+	Plus(_x - 4, _y + 4);
+	MiniHeart(_x + 10, _y + 7);
+}
+void StateExit::Heart3_LeftWing(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x, _y, _x + 1, _y, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x, _y + 1, _x + 1, _y + 2, 9608, FG_BLACK + BG_BLACK);
+	
+	// Vẽ nền
+	game->Draw(_x + 1, _y + 1, 9608, FG_GREY + BG_GREY);
+}
+void StateExit::Heart3_MainHeart(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x + 3, _y , _x + 4, _y , 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 6, _y , _x + 7, _y , 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 2, _y + 1, _x + 2, _y + 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 8, _y + 1, _x + 8, _y + 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 3, _y + 4, _x + 5, _y + 6, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 6, _y + 5, _x + 7, _y + 4, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 5, _y + 1, 9608, FG_BLACK + BG_BLACK);
+
+	//Vẽ bóng
+	game->DrawLine(_x + 5, _y + 4, _x + 7, _y + 2, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 5, _y + 5, _x + 7, _y + 3, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->Draw(_x + 4, _y + 4, 9608, FG_DARK_RED + BG_DARK_RED);
+
+	// Vẽ nền
+	game->DrawLine(_x + 3, _y + 1, _x + 4, _y + 1, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 6, _y + 1, _x + 7, _y + 1, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 3, _y + 2, _x + 6, _y + 2, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 3, _y + 3, _x + 5, _y + 3, 9608, FG_RED + BG_RED);
+
+	// Vẽ ánh sáng
+	game->Draw(_x + 3, _y + 1, 9608, FG_WHITE + BG_WHITE);
+}
+void StateExit::Heart3_RightWing(const int& _x, const int& _y) {
+	game->DrawLine(_x + 9, _y, _x + 10, _y, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 9, _y + 2, _x + 10, _y + 1, 9608, FG_BLACK + BG_BLACK);
+
+	// Vẽ nền
+	game->Draw(_x + 9, _y + 1, 9608, FG_GREY + BG_GREY);
+}
+
+void StateExit::Heart2(const int& _x, const int& _y) {
+	Heart2_LeftWing(_x, _y);
+	Heart2_MainHeart(_x, _y);
+	Heart2_RightWing(_x, _y);
+	Heart2_SubHeart(_x, _y);
+	Heart2_SubHeart(_x, _y);
+}
+void StateExit::Heart2_SubHeart(const int& _x, const int& _y) {
+	Plus(_x + 5, _y - 1);
+	Plus(_x +16, _y + 13);
+	MiniHeart(_x + 1, _y + 16);
+	MiniHeart(_x + 22, _y - 4);
+}
+void StateExit::Heart2_LeftWing(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x + 1, _y + 3, _x + 2, _y + 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x	 , _y + 6, _x	 , _y + 7, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 1, _y + 8, _x + 1, _y + 9, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 4, _y + 7, _x + 4, _y + 9, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 2, _y +10, _x + 3, _y +10, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x	 , _y + 4, _x + 2, _y + 6, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 3, _y + 4, _x + 5, _y + 6, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 2, _y + 8, 9608, FG_BLACK + BG_BLACK);
+
+	// Vẽ bóng
+	game->Draw(_x + 3, _y + 9, 9608, FG_GREY + BG_GREY);
+
+	// Vẽ nền
+	game->DrawLine(_x + 1, _y + 4, _x + 2, _y + 4, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 2, _y + 5, _x + 3, _y + 5, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 3, _y + 6, _x + 4, _y + 6, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 1, _y + 6, _x + 1, _y + 7, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 2, _y + 7, _x + 3, _y + 7, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 2, _y + 9, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 3, _y + 8, 9608, FG_WHITE + BG_WHITE);
+}
+void StateExit::Heart2_MainHeart(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x + 6, _y + 5, _x + 7, _y + 5, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 8, _y + 6, _x + 9, _y + 7, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x +10, _y + 6, _x +10, _y + 8, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x +12, _y + 4, _x +14, _y + 4, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x +16, _y + 6, _x +16, _y + 9, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 8, _y +13, _x + 9, _y +13, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x +10, _y +14, _x +11, _y +14, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 5, _y +10, _x + 7, _y +12, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x +12, _y +13, _x +15, _y +10, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 11, _y + 5, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 15, _y + 5, 9608, FG_BLACK + BG_BLACK);
+
+	//Vẽ bóng
+	game->DrawLine(_x + 10, _y + 13, _x + 11, _y + 13, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 12, _y + 12, _x + 14, _y + 10, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 13, _y +  5, _x + 14, _y + 5, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 14, _y +  6, _x + 15, _y + 6, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 15, _y +  7, _x + 15, _y + 9, 9608, FG_DARK_RED + BG_DARK_RED);
+
+	// Vẽ nền
+	game->DrawLine(_x + 6, _y + 6, _x + 7, _y + 6, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 7, _y + 7, _x + 8, _y + 7, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 6, _y + 8, _x + 9, _y + 8, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 7, _y + 9, _x +14, _y + 9, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 8, _y +10, _x +13, _y +10, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 7, _y +11, _x +12, _y +11, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 8, _y +12, _x +11, _y +12, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 5, _y + 7, _x + 5, _y +9, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x +11, _y + 6, _x +13, _y +6, 9608, FG_RED + BG_RED);
+	game->Draw(_x + 12, _y +  5, 9608, FG_RED + BG_RED);
+	game->Draw(_x +  6, _y + 10, 9608, FG_RED + BG_RED);
+	game->Fill(_x + 11, _y +  7, _x + 14, _y + 8, 9608, FG_RED + BG_RED);
+
+	// Vẽ ánh sáng
+	game->DrawLine(_x + 6, _y + 9, _x + 7, _y + 10, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 6, _y + 7, 9608, FG_WHITE + BG_WHITE);
+}
+void StateExit::Heart2_RightWing(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x + 15, _y + 2, _x + 15, _y + 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 17, _y    , _x + 18, _y	   , 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 19, _y + 3, _x + 19, _y	+ 4, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 19, _y + 6, _x + 19, _y	+ 7, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 17, _y + 7, _x + 18, _y	+ 8, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 17, _y + 3, _x + 19, _y	+ 1, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 16, _y + 1, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 18, _y + 5, 9608, FG_BLACK + BG_BLACK);
+
+	// Vẽ bóng
+	game->DrawLine(_x + 15, _y + 4, _x + 18, _y + 7, 9608, FG_GREY + BG_GREY);
+
+	// Vẽ nền
+	game->DrawLine(_x + 17, _y + 1, _x + 18, _y + 1, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 16, _y + 2, _x + 17, _y + 2, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 16, _y + 3, _x + 17, _y + 4, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 16, _y + 4, _x + 18, _y + 6, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 18, _y + 3, _x + 18, _y + 4, 9608, FG_WHITE + BG_WHITE);
+}
+
+void StateExit::Heart1(const int& _x, const int& _y) {
+	Heart1_LeftWing(_x, _y);
+	Heart1_MainHeart(_x, _y);
+	Heart1_RightWing(_x, _y);
+	Heart1_SubHeart(_x, _y);
+	Heart1_SubHeart(_x, _y);
+}
+void StateExit::Heart1_SubHeart(const int& _x, const int& _y) {
+	Plus(_x + 14, _y + 3);
+	Plus(_x + 27, _y + 19);
+	MiniHeart(_x + 4, _y + 8);
+	MiniHeart(_x +20, _y - 2);
+	MiniHeart(_x + 19, _y + 26);
+}
+void StateExit::Heart1_RightWing(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x + 25, _y + 6, _x + 25, _y + 7, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 26, _y + 4, _x + 26, _y + 5, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 28, _y + 2, _x + 29, _y + 2, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 30, _y + 3, _x + 30, _y + 5, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 31, _y + 5, _x + 31, _y + 8, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 32, _y + 8, _x + 32, _y +10, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 31, _y +11, _x + 31, _y +13, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 27, _y +15, _x + 29, _y +15, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 24, _y + 8, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 27, _y + 3, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 28, _y + 7, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 29, _y + 6, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 29, _y +10, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 30, _y + 9, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 30, _y +12, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 30, _y +14, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 26, _y +14, 9608, FG_BLACK + BG_BLACK);
+
+	// Vẽ bóng
+	game->DrawLine(_x + 29, _y + 3, _x + 29, _y + 5, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 30, _y + 6, _x + 30, _y + 8, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 31, _y + 9, _x + 31, _y +10, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 27, _y +14, _x + 29, _y +14, 9608, FG_GREY + BG_GREY);
+	game->Draw(_x + 28, _y + 6, 9608, FG_GREY + BG_GREY);
+	game->Draw(_x + 29, _y + 9, 9608, FG_GREY + BG_GREY);
+	game->Draw(_x + 30, _y +11, 9608, FG_GREY + BG_GREY);
+	game->Draw(_x + 30, _y +13, 9608, FG_GREY + BG_GREY);
+
+	// Vẽ nền
+	game->DrawLine(_x + 25, _y + 8, _x + 25, _y + 10, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 26, _y + 6, _x + 26, _y + 13, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 27, _y + 4, _x + 27, _y + 13, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 28, _y + 3, _x + 28, _y +  5, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 28, _y + 8, _x + 28, _y + 13, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 29, _y + 7, _x + 29, _y +  8, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 29, _y +11, _x + 29, _y + 13, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 30, _y + 10, 9608, FG_WHITE + BG_WHITE);
+}
+void StateExit::Heart1_MainHeart(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x + 10, _y + 15, _x + 10, _y + 17, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 12, _y + 13, _x + 15, _y + 13, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 16, _y + 14, _x + 17, _y + 14, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 17, _y + 11, _x + 17, _y + 13, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 18, _y + 9, _x + 18, _y + 10, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 19, _y + 8, _x + 22, _y + 8, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 23, _y + 9, _x + 24, _y + 9, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 25, _y + 11, _x + 25, _y + 17, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 24, _y + 18, _x + 24, _y + 19, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 16, _y + 22, _x + 21, _y + 22, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 11, _y + 14, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 24, _y + 10, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 22, _y + 21, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 23, _y + 20, 9608, FG_BLACK + BG_BLACK);
+
+	//Vẽ bóng
+	game->DrawLine(_x + 21, _y + 9, _x + 22, _y + 9, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 22, _y + 10, _x + 23, _y + 10, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 22, _y + 17, _x + 24, _y + 17, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 22, _y + 18, _x + 23, _y + 18, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 21, _y + 19, _x + 23, _y + 19, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 20, _y + 20, _x + 22, _y + 20, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->DrawLine(_x + 19, _y + 21, _x + 21, _y + 21, 9608, FG_DARK_RED + BG_DARK_RED);
+	game->Fill(_x + 23, _y + 11, _x + 24, _y + 16, 9608, FG_DARK_RED + BG_DARK_RED);
+
+	// Vẽ nền
+	game->DrawLine(_x + 19, _y + 9, _x + 20, _y + 9, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 19, _y + 10, _x + 21, _y + 10, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 12, _y + 14, _x + 15, _y + 14, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 11, _y + 15, _x + 22, _y + 15, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 13, _y + 16, _x + 22, _y + 16, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 13, _y + 17, _x + 21, _y + 17, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 14, _y + 18, _x + 21, _y + 18, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 16, _y + 19, _x + 20, _y + 19, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 13, _y + 20, _x + 19, _y + 20, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 15, _y + 21, _x + 18, _y + 21, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 11, _y + 16, _x + 11, _y + 18, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 12, _y + 18, _x + 12, _y + 19, 9608, FG_RED + BG_RED);
+	game->DrawLine(_x + 13, _y + 19, _x + 14, _y + 19, 9608, FG_RED + BG_RED);
+	game->Fill(_x + 18, _y + 11, _x + 22, _y + 14, 9608, FG_RED + BG_RED);
+
+	// Vẽ ánh sáng
+	game->DrawLine(_x + 12, _y + 16, _x + 12, _y + 17, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 13, _y + 18, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 15, _y + 19, 9608, FG_WHITE + BG_WHITE);
+}
+void StateExit::Heart1_LeftWing(const int& _x, const int& _y) {
+	// Vẽ viền
+	game->DrawLine(_x, _y + 20, _x, _y + 21, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 1, _y + 19, _x + 2, _y + 19, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 3, _y + 18, _x + 4, _y + 18, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 5, _y + 17, _x + 8, _y + 17, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 9, _y + 18, _x + 10, _y + 18, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 13, _y + 21, _x + 14, _y + 21, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 15, _y + 22, _x + 15, _y + 24, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 6, _y + 22, _x + 7, _y + 22, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 11, _y + 26, _x + 13, _y + 26, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 8, _y + 26, _x + 9, _y + 26, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 5, _y + 25, _x + 7, _y + 25, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x + 2, _y + 23, _x + 5, _y + 23, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 1, _y + 22, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 11, _y + 19, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 12, _y + 20, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 4, _y + 24, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 8, _y + 24, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 9, _y + 23, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 10, _y + 25, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 11, _y + 24, 9608, FG_BLACK + BG_BLACK);
+	game->Draw(_x + 14, _y + 25, 9608, FG_BLACK + BG_BLACK);
+
+	// Vẽ bóng
+	game->DrawLine(_x + 2, _y + 22, _x + 5, _y + 22, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 5, _y + 24, _x + 7, _y + 24, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 8, _y + 25, _x + 9, _y + 25, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 12, _y + 25, _x + 13, _y + 25, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 13, _y + 24, _x + 14, _y + 24, 9608, FG_GREY + BG_GREY);
+	game->DrawLine(_x + 14, _y + 22, _x + 14, _y + 23, 9608, FG_GREY + BG_GREY);
+	game->Draw(_x + 1, _y + 21, 9608, FG_GREY + BG_GREY);
+	game->Draw(_x + 8, _y + 23, 9608, FG_GREY + BG_GREY);
+
+	// Vẽ nền
+	game->DrawLine(_x + 5, _y + 18, _x + 8, _y + 18, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 3, _y + 19, _x + 10, _y + 19, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 1, _y + 20, _x + 11, _y + 20, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 2, _y + 21, _x + 12, _y + 21, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 8, _y + 22, _x + 13, _y + 22, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 10, _y + 23, _x + 13, _y + 23, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 6, _y + 23, _x + 7, _y + 23, 9608, FG_WHITE + BG_WHITE);
+	game->DrawLine(_x + 9, _y + 24, _x + 10, _y + 24, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 12, _y + 24, 9608, FG_WHITE + BG_WHITE);
+	game->Draw(_x + 11, _y + 25, 9608, FG_WHITE + BG_WHITE);
+}
+
+void StateExit::Plus(const int& _x, const int& _y) {
+	// Vẽ nền
+	game->Draw(_x + 1, _y, 9608, FG_MAGENTA + BG_MAGENTA);
+	game->Draw(_x + 1, _y + 2, 9608, FG_MAGENTA + BG_MAGENTA);
+	game->DrawLine(_x, _y + 1, _x + 2, _y + 1, 9608, FG_MAGENTA + BG_MAGENTA);
+
+	// Vẽ bóng
+	game->Draw(_x, _y + 2, 9608, FG_DARK_MAGENTA + BG_DARK_MAGENTA);
+	game->Draw(_x + 2, _y + 2, 9608, FG_DARK_MAGENTA + BG_DARK_MAGENTA);
+	game->Draw(_x + 1, _y + 3, 9608, FG_DARK_MAGENTA + BG_DARK_MAGENTA);
+}
+void StateExit::MiniHeart(const int& _x, const int& _y) {
+	// Vẽ nền
+	game->DrawLine(_x, _y, _x + 1, _y, 9608, FG_YELLOW + BG_YELLOW);
+	game->DrawLine(_x + 3, _y, _x + 4, _y, 9608, FG_YELLOW + BG_YELLOW);
+	game->DrawLine(_x, _y + 1, _x + 4, _y + 1, 9608, FG_YELLOW + BG_YELLOW);
+	game->DrawLine(_x + 1, _y + 2, _x + 3, _y + 2, 9608, FG_YELLOW + BG_YELLOW);
+	game->Draw(_x + 2, _y + 3, 9608, FG_YELLOW + BG_YELLOW);
+
+	// Vẽ bóng
+	game->Draw(_x	 , _y + 2, 9608, FG_DARK_YELLOW + BG_DARK_YELLOW);
+	game->Draw(_x + 1, _y + 3, 9608, FG_DARK_YELLOW + BG_DARK_YELLOW);
+	game->Draw(_x + 2, _y + 4, 9608, FG_DARK_YELLOW + BG_DARK_YELLOW);
+	game->Draw(_x + 3, _y + 3, 9608, FG_DARK_YELLOW + BG_DARK_YELLOW);
+	game->Draw(_x + 4, _y + 2, 9608, FG_DARK_YELLOW + BG_DARK_YELLOW);
+}
+
 void StateExit::ByeBye() {
 	static const int _x1 = M_S_SRC_X0 + 35;
 	static const int _x2 = _x1 + 44;
 	static const int _y = M_S_SRC_Y1 - 29;
-	static const int  _delayTm = 35;
+	static const int  _delayTm = 50;
 
 	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
-	Bye(_x1, _y, FG_BLACK, BG_BLACK);
-	Bye(_x2, _y, FG_BLACK, BG_BLACK);
+	Bye(_x1 - 1, _y + 1, FG_DARK_GREY, BG_DARK_GREY);
+	Bye(_x2 - 1, _y + 1, FG_DARK_GREY, BG_DARK_GREY);
 	game->ConsOutput();
 
 	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	// Xóa cũ
+	Bye(_x1 - 1, _y + 1, FG_CYAN, BG_CYAN);
+	Bye(_x2 - 1, _y + 1, FG_CYAN, BG_CYAN);
+	// Vẽ mới
+	Bye(_x1, _y, FG_DARK_BLUE, BG_DARK_BLUE);
+	Bye(_x2, _y, FG_DARK_BLUE, BG_DARK_BLUE);
+	game->ConsOutput();
+
+	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	// Xóa cũ
 	Bye(_x1, _y, FG_BLUE, BG_BLUE);
 	Bye(_x2, _y, FG_BLUE, BG_BLUE);
+	// Vẽ mới
+	Bye(_x1 + 1, _y - 1, FG_DARK_MAGENTA, BG_DARK_MAGENTA);
+	Bye(_x2 + 1, _y - 1, FG_DARK_MAGENTA, BG_DARK_MAGENTA);
 	game->ConsOutput();
 
+
 	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	// Xóa cũ
 	Bye(_x1 + 1, _y - 1, FG_MAGENTA, BG_MAGENTA);
 	Bye(_x2 + 1, _y - 1, FG_MAGENTA, BG_MAGENTA);
-	game->ConsOutput();
-
-	this_thread::sleep_for(std::chrono::milliseconds(_delayTm));
+	// Vẽ mới
 	Bye(_x1 + 2, _y - 2, FG_RED, BG_RED);
 	Bye(_x2 + 2, _y - 2, FG_RED, BG_RED);
 	game->ConsOutput();
@@ -253,40 +604,40 @@ void StateExit::Bye(const int& _x, const int& _y,
 	const short& fg, const short& bg) 
 {
 	// B
-	game->DrawLine(_x + 1, _y, _x + 7, _y, 9608, fg + bg);
-	game->DrawLine(_x, _y + 1, _x + 8, _y + 1, 9608, fg + bg);
-	game->DrawLine(_x, _y + 2, _x + 9, _y + 2, 9608, fg + bg);
-	game->Fill(_x, _y + 3, _x + 2, _y + 11, 9608, fg + bg);
+	game->DrawLine(_x + 1, _y	  , _x + 7, _y	   , 9608, fg + bg);
+	game->DrawLine(_x	 , _y + 1 , _x + 8, _y + 1 , 9608, fg + bg);
+	game->DrawLine(_x	 , _y + 2 , _x + 9, _y + 2 , 9608, fg + bg);
+	game->Fill(	   _x	 , _y + 3 , _x + 2, _y + 11, 9608, fg + bg);
 	game->DrawLine(_x + 1, _y + 14, _x + 7, _y + 14, 9608, fg + bg);
-	game->DrawLine(_x, _y + 13, _x + 8, _y + 13, 9608, fg + bg);
-	game->DrawLine(_x, _y + 12, _x + 9, _y + 12, 9608, fg + bg);
-	game->DrawLine(_x + 7, _y + 3, _x + 9, _y + 3, 9608, fg + bg);
-	game->DrawLine(_x + 6, _y + 4, _x + 9, _y + 4, 9608, fg + bg);
-	game->DrawLine(_x + 5, _y + 5, _x + 8, _y + 5, 9608, fg + bg);
-	game->DrawLine(_x + 3, _y + 6, _x + 7, _y + 6, 9608, fg + bg);
-	game->DrawLine(_x + 3, _y + 7, _x + 8, _y + 7, 9608, fg + bg);
-	game->DrawLine(_x + 3, _y + 8, _x + 9, _y + 8, 9608, fg + bg);
-	game->DrawLine(_x + 6, _y + 9, _x + 9, _y + 9, 9608, fg + bg);
-	game->DrawLine(_x + 7, _y +10, _x + 9, _y +10, 9608, fg + bg);
-	game->DrawLine(_x + 6, _y +11, _x + 9, _y +11, 9608, fg + bg);
-
-	// E
-	game->DrawLine(_x + 14, _y, _x + 21, _y, 9608, fg + bg);
-	game->DrawLine(_x + 13, _y + 1, _x + 21, _y + 1, 9608, fg + bg);
-	game->DrawLine(_x + 12, _y + 2, _x + 21, _y + 2, 9608, fg + bg);
-	game->DrawLine(_x + 14, _y + 14, _x + 21, _y + 14, 9608, fg + bg);
-	game->DrawLine(_x + 13, _y + 13, _x + 21, _y + 13, 9608, fg + bg);
-	game->DrawLine(_x + 12, _y + 12, _x + 21, _y + 12, 9608, fg + bg);
-	game->Fill(_x + 12, _y + 3, _x + 14, _y + 11, 9608, fg + bg);
-	game->Fill(_x + 15, _y + 6, _x + 19, _y + 8, 9608, fg + bg);
+	game->DrawLine(_x	 , _y + 13, _x + 8, _y + 13, 9608, fg + bg);
+	game->DrawLine(_x	 , _y + 12, _x + 9, _y + 12, 9608, fg + bg);
+	game->DrawLine(_x + 7, _y +  3, _x + 9, _y + 3 , 9608, fg + bg);
+	game->DrawLine(_x + 6, _y +  4, _x + 9, _y + 4 , 9608, fg + bg);
+	game->DrawLine(_x + 5, _y +  5, _x + 8, _y + 5 , 9608, fg + bg);
+	game->DrawLine(_x + 3, _y +  6, _x + 7, _y + 6 , 9608, fg + bg);
+	game->DrawLine(_x + 3, _y +  7, _x + 8, _y + 7 , 9608, fg + bg);
+	game->DrawLine(_x + 3, _y +  8, _x + 9, _y + 8 , 9608, fg + bg);
+	game->DrawLine(_x + 6, _y +  9, _x + 9, _y + 9 , 9608, fg + bg);
+	game->DrawLine(_x + 7, _y + 10, _x + 9, _y +10 , 9608, fg + bg);
+	game->DrawLine(_x + 6, _y + 11, _x + 9, _y +11 , 9608, fg + bg);
 
 	// Y
-	game->DrawLine(_x + 24, _y + 7, _x + 34, _y + 7, 9608, fg + bg);
-	game->DrawLine(_x + 25, _y + 8, _x + 33, _y + 8, 9608, fg + bg);
-	game->DrawLine(_x + 26, _y + 9, _x + 32, _y + 9, 9608, fg + bg);
-	game->Fill(_x + 28, _y + 10, _x + 30, _y + 14, 9608, fg + bg);
-	game->Fill(_x + 24, _y, _x + 26, _y + 6, 9608, fg + bg);
-	game->Fill(_x + 32, _y, _x + 34, _y + 6, 9608, fg + bg);
+	game->DrawLine(_x + 12, _y + 7, _x + 22, _y + 7,  9608, fg + bg);
+	game->DrawLine(_x + 13, _y + 8, _x + 21, _y + 8,  9608, fg + bg);
+	game->DrawLine(_x + 14, _y + 9, _x + 20, _y + 9,  9608, fg + bg);
+	game->Fill(	   _x + 16, _y + 10,_x + 18, _y + 14, 9608, fg + bg);
+	game->Fill(	   _x + 12, _y,		_x + 14, _y + 6,  9608, fg + bg);
+	game->Fill(	   _x + 20, _y,		_x + 22, _y + 6,  9608, fg + bg);
+
+	// E
+	game->DrawLine(_x + 27, _y	   , _x + 34, _y     , 9608, fg + bg);
+	game->DrawLine(_x + 26, _y + 1 , _x + 34, _y + 1 , 9608, fg + bg);
+	game->DrawLine(_x + 25, _y + 2 , _x + 34, _y + 2 , 9608, fg + bg);
+	game->DrawLine(_x + 27, _y + 14, _x + 34, _y + 14, 9608, fg + bg);
+	game->DrawLine(_x + 26, _y + 13, _x + 34, _y + 13, 9608, fg + bg);
+	game->DrawLine(_x + 25, _y + 12, _x + 34, _y + 12, 9608, fg + bg);
+	game->Fill(	   _x + 25, _y + 3 , _x + 27, _y + 11, 9608, fg + bg);
+	game->Fill(	   _x + 28, _y + 6 , _x + 32, _y + 8 , 9608, fg + bg);
 }
 
 void StateExit::DecorateExitScreen() {

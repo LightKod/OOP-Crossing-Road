@@ -18,7 +18,7 @@ bool StateLoad::Update(float fElapsedTime) {
 	// Xử lý load data
 	if (game->GetKey(VK_SPACE).bReleased) {
 		LoadingThread();
-		return true;
+		exit(1);
 	}
 
 	// Xử lý quay về main menu
@@ -30,19 +30,30 @@ bool StateLoad::Update(float fElapsedTime) {
 	// Xử lý tương tác với người dùng
 	if (game->GetKey(VK_W).bReleased) {
 		m_OptionIdx = (m_OptionIdx - 1 + MAX_OPTION) % MAX_OPTION;
+
+		// Xử lý đồ họa load screen
+		UpdateArrowCoord();
+		this->DrawLoadingScreen();
+
+		return 1;
 	}
 	else if (game->GetKey(VK_S).bReleased) {
 		m_OptionIdx = (m_OptionIdx + 1 + MAX_OPTION) % MAX_OPTION;
-	}
 
-	// Xử lý đồ họa load screen
-	UpdateArrowCoord();
-	this->DrawLoadingScreen();
+		// Xử lý đồ họa load screen
+		UpdateArrowCoord();
+		this->DrawLoadingScreen();
+
+		return 1;
+	}
 
 	return true;
 }
 bool StateLoad::OnStateEnter() {
 	this->game = game;
+
+	// clear screen
+	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
 	// Get saved data
 	GetDataRecord();
@@ -58,9 +69,6 @@ bool StateLoad::OnStateExit() {
 
 
 void StateLoad::DrawLoadingScreen() {
-	// clear screen
-	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
-
 	// Tô màu nền
 	LS_FillBackground();
 

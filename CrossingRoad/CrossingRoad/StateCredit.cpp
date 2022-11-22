@@ -1,4 +1,5 @@
 ﻿#include "StateCredit.h"
+#include "StateMenu.h"
 
 const int StateCredit::M_S_SRC_X0 = 4;
 const int StateCredit::M_S_SRC_Y0 = 5;
@@ -9,11 +10,14 @@ bool StateCredit::Update(float fElapsedTime) {
 
 	DrawProjectorScreen();
 	Introduction();
-
 	InstroduceInstructor();
 	InstroduceMember();
+	CloseProjectorScreen();
 
-	exit(1);
+	// Xử lý quay về main menu
+	this_thread::sleep_for(std::chrono::milliseconds(100));
+	game->SetState(new StateMenu(game));
+
 	return 1;
 }
 bool StateCredit::OnStateEnter() {
@@ -28,6 +32,60 @@ bool StateCredit::OnStateExit() {
 	return 0;
 }
 
+
+void StateCredit::CloseProjectorScreen() {
+	this_thread::sleep_for(std::chrono::milliseconds(800));
+	// clear screen
+	int tmpOffsetX = M_S_SRC_X1 - 2;
+	for (int i = 0; i < 18; i += 1) {
+		this_thread::sleep_for(std::chrono::milliseconds(20));// 20
+
+		game->Fill(tmpOffsetX - 7, M_S_SRC_Y0 + 25, tmpOffsetX, M_S_SRC_Y1 - 1,
+			L' ', FG_CYAN + BG_CYAN);
+		// FG_BLACK + BG_BLACK
+		// FG_CYAN + BG_CYAN
+		game->ConsOutput();
+
+		tmpOffsetX -= 8;
+	}
+
+	// tắt máy chiếu
+	game->Fill(M_S_SRC_X0 + 1, M_S_SRC_Y0 + 1, M_S_SRC_X1 - 1, M_S_SRC_Y1 - 1, L' ', COLOUR::BG_GREY);
+	game->ConsOutput();
+	this_thread::sleep_for(std::chrono::milliseconds(500));
+
+	static const int _tm = 40;
+
+	for (int i = 4; i > 0; --i) {
+		this_thread::sleep_for(std::chrono::milliseconds(_tm));
+
+		if (i == 1) {
+			// Xóa thanh ngang cũ
+			game->Fill(M_S_SRC_X0 - 2, M_S_SRC_Y1 / 4 * i + 1,
+					   M_S_SRC_X1 + 2, M_S_SRC_Y1 / 4 * i + 1, L' ', COLOUR::BG_BLUE);
+
+			// Tô lại nền
+			game->Fill(M_S_SRC_X0, M_S_SRC_Y0 + 1,
+					   M_S_SRC_X1, M_S_SRC_Y0 +18, L' ', COLOUR::BG_BLUE);
+		}
+		else {
+			// Xóa thanh ngang cũ
+			game->Fill(M_S_SRC_X0 - 2, M_S_SRC_Y1 / 4 * i + 1, 
+					   M_S_SRC_X1 + 2, M_S_SRC_Y1 / 4 * i + 1, L' ', COLOUR::BG_BLUE);
+
+			// Vẽ thanh ngang mới
+			game->Fill(M_S_SRC_X0 - 2, M_S_SRC_Y1 / 4 * (i - 1) + 1, 
+					   M_S_SRC_X1 + 2, M_S_SRC_Y1 / 4 * (i - 1) + 1, L' ', COLOUR::BG_BLACK);
+
+			// Tô lại nền
+			game->Fill(M_S_SRC_X0, M_S_SRC_Y1 / 4 * (i - 1) + 2,
+					   M_S_SRC_X1, M_S_SRC_Y1 / 4 * i, L' ', COLOUR::BG_BLUE);
+		}
+	
+		game->ConsOutput();
+	}
+
+}
 
 void StateCredit::InstroduceMember() {
 	static const int _tm = 10;
@@ -242,7 +300,8 @@ void StateCredit::InstroduceInstructor() {
 	const int _y2 = _y1 + 24;
 
 	static const int _tm = 10;
-
+	
+	this_thread::sleep_for(std::chrono::milliseconds(600));
 	INSTRUCTOR(_x1, _y1, FG_RED, BG_RED);
 	game->ConsOutput();
 	for (int i = 1; i < 5; i += 1) {
@@ -273,8 +332,7 @@ void StateCredit::InstroduceInstructor() {
 		game->ConsOutput();
 	}
 
-	this_thread::sleep_for(std::chrono::milliseconds(500));
-
+	this_thread::sleep_for(std::chrono::milliseconds(900));
 	// clear screen
 	int tmpOffsetX = M_S_SRC_X0 + 2;
 	for (int i = 0; i < 18; i += 1) {
@@ -381,11 +439,12 @@ void StateCredit::FROM_TEAM6(const int& x, const int& y,
 }
 
 void StateCredit::DrawProjectorScreen() {
+	static const int _tm = 40;
+
 	// Khung màn chiếu
+	this_thread::sleep_for(std::chrono::milliseconds(_tm));
 	ProjectorScreenFrame();
 	game->ConsOutput();
-
-	static const int _tm = 10;
 
 	// Hiệu ứng màn chiếu
 	this_thread::sleep_for(std::chrono::milliseconds(_tm));
@@ -396,7 +455,7 @@ void StateCredit::DrawProjectorScreen() {
 	ProjectorScreen2();
 	game->ConsOutput();
 
-	this_thread::sleep_for(std::chrono::milliseconds(_tm));
+	this_thread::sleep_for(std::chrono::milliseconds(_tm)); 
 	ProjectorScreen3();
 	game->ConsOutput();
 
@@ -404,7 +463,7 @@ void StateCredit::DrawProjectorScreen() {
 	ProjectorScreen4();
 	game->ConsOutput();
 
-	this_thread::sleep_for(std::chrono::milliseconds(400));
+	this_thread::sleep_for(std::chrono::milliseconds(500));
 	game->Fill(M_S_SRC_X0 + 1, M_S_SRC_Y0 + 1, M_S_SRC_X1 - 1, M_S_SRC_Y0 + 23,
 		L' ', FG_DARK_CYAN + BG_DARK_CYAN);
 	game->Fill(M_S_SRC_X0 + 1, M_S_SRC_Y0 + 24, M_S_SRC_X1 - 1, M_S_SRC_Y0 + 24,
@@ -428,7 +487,7 @@ void StateCredit::ProjectorScreenFrame() {
 
 	// Tô màu nền
 	game->Fill(M_S_SRC_X0 - 1, M_S_SRC_Y0 - 2, M_S_SRC_X1 + 1, M_S_SRC_Y0 - 1,
-		L' ', FG_GREY + BG_GREY);//FG_GREY + BG_GREY
+		L' ', FG_DARK_GREY + BG_DARK_GREY);//FG_GREY + BG_GREY
 }
 void StateCredit::ProjectorScreen1() {
 	static const int y0 = M_S_SRC_Y0 + 1;

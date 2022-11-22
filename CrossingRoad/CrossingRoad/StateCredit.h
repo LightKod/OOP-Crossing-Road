@@ -13,6 +13,9 @@ public:
 	StateCredit(CrossingRoadGame* game) : State(game) {};
 
 protected:
+	void CloseProjectorScreen();
+
+
 	void InstroduceMember();
 	void ClearOldName(const int& _x0, const int& _x1,
 		const short& fg, const short& bg);

@@ -11,7 +11,31 @@ public:
 	virtual bool OnStateExit();
 
 	StateExit(CrossingRoadGame* game) : State(game) {};
+
 protected:
+	void HeartsEffect();
+
+	void Heart3(const int& _x, const int& _y);
+	void Heart3_SubHeart(const int& _x, const int& _y);
+	void Heart3_LeftWing(const int& _x, const int& _y);
+	void Heart3_MainHeart(const int& _x, const int& _y);
+	void Heart3_RightWing(const int& _x, const int& _y);
+
+	void Heart2(const int& _x, const int& _y);
+	void Heart2_SubHeart(const int& _x, const int& _y);
+	void Heart2_LeftWing(const int& _x, const int& _y);
+	void Heart2_MainHeart(const int& _x, const int& _y);
+	void Heart2_RightWing(const int& _x, const int& _y);
+
+	void Heart1(const int& _x, const int& _y);
+	void Heart1_SubHeart(const int& _x, const int& _y);
+	void Heart1_LeftWing(const int& _x, const int& _y);
+	void Heart1_MainHeart(const int& _x, const int& _y);
+	void Heart1_RightWing(const int& _x, const int& _y);
+
+	void Plus(const int& _x, const int& _y);
+	void MiniHeart(const int& _x, const int& _y);
+
 	void OpenWindowEffect();
 	void DrawShadow1(const short& fg, const short& bg);
 	void DrawShadow2(const short& fg, const short& bg);

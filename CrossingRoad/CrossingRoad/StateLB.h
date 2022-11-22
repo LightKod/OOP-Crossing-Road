@@ -14,7 +14,12 @@ public:
 	StateLB(CrossingRoadGame* game) : State(game) {};
 
 protected:
-	void DrawCrown();
+	void Intro();
+
+	void PostEffect();
+	void DrawCrown(const int& _x, const int& _y);
+	void Firework(const int& _x, const int& _y);
+
 	void DrawPodium(const int& x, const int& y);
 	void DrawMedal(const int& x, const int& y,
 		const int& rank);

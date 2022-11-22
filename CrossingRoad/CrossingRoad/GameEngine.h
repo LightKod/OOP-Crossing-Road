@@ -313,9 +313,10 @@ protected:
 
 	// These need to be static because of the OnDestroy call the OS may make. The OS
 	// spawns a special thread just for that
-	static std::atomic<bool> m_bAtomActive;
 	static std::condition_variable m_cvGameFinished;
 	static std::mutex m_muxGame;
+public:
+	static std::atomic<bool> m_bAtomActive;
 };
 class Sound
 {
