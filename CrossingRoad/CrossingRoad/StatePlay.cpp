@@ -1,9 +1,11 @@
 #include "StatePlay.h"
 
 bool StatePlay::OnStateEnter() {
-	pPlayer = new Frog(game);
+	//pPlayer = new Frog(game);
 
+	pPlayer = new Dog(game);
 	GenerateNewLevel();
+
 
 	return true;
 }
@@ -13,9 +15,10 @@ bool StatePlay::OnStateExit() {
 
 bool StatePlay::Update(float fElapsedTime) {
 	HandleInput();
-	UpdateGameScreen();
+	//UpdateGameScreen();
 	if (pause) return true;
 	UpdateGameState(fElapsedTime);
+
 	if (pPlayer->CheckPlayerState())
 	{
 		game->SetState(new StateDead(game, pPlayer));
@@ -25,6 +28,7 @@ bool StatePlay::Update(float fElapsedTime) {
 		UpdateCollisionMatrix();
 		UpdateGameScreen();
 	}
+
 	return true;
 }
 void StatePlay::UpdateCollisionMatrix() {
@@ -41,14 +45,15 @@ void StatePlay::UpdateGameScreen() {
 	for (int i = 0; i < lanes.size(); i++) {
 		lanes[i]->Draw();
 	}
-	//THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
+	
+	// THEM MAY CAI DRAW CUA MAY CAI OBJECT VAO
 	pPlayer->Draw();
 
-	if (pause) {
-		string2Pixel(L"PAUSE", 0, 0, FG_WHITE, BG_BLUE);
-	}
+	//if (pause) {
+	//	string2Pixel(L"PAUSE", 0, 0, FG_WHITE, BG_BLUE);
+	//}
 
-	string2Pixel(to_wstring(level), 140, 0, FG_WHITE, BG_BLUE);
+	//string2Pixel(to_wstring(level), 140, 0, FG_WHITE, BG_BLUE);
 }
 
 void StatePlay::NextLevel() {

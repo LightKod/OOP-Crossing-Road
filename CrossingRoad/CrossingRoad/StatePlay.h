@@ -3,7 +3,8 @@
 #include "Road.h"
 #include "River.h"
 #include "Frog.h"
-#include"RestLane.h"
+#include "Dog.h"
+#include "RestLane.h"
 #include "Data.h"
 #include <vector>
 #include "StateDead.h"
@@ -43,6 +44,5 @@ private:
 	void NextLevel();
 
 	Data* ExportGameData();
-
 	
 };

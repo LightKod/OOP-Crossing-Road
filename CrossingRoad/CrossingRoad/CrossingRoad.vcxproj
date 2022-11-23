@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="CrossingRoadGame.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Frog.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GrassTile.cpp" />
@@ -166,6 +167,7 @@
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h" />
     <ClInclude Include="Data.h" />
+    <ClInclude Include="Dog.h" />
     <ClInclude Include="Frog.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GrassTile.h" />

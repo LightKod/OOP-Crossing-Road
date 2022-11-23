@@ -24,7 +24,7 @@ public:
 	public:
 		State(CrossingRoadGame* game) { this->game = game; }
 		State() = default;
-		//~State() { if (this->game) delete this->game; this->game = nullptr; }
+		//virtual ~State() { if (this->game) delete this->game; this->game = nullptr; }
 		virtual bool Update(float fElapsedTime) { return true; }
 		virtual bool OnStateEnter() { return true; }
 		virtual bool OnStateExit() { return true; }

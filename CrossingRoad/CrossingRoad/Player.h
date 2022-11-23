@@ -4,67 +4,61 @@
 
 using namespace std;
 
-class Player : public CrossingRoadGame::Object
-{
-
+class Player : public CrossingRoadGame::Object {
 private:
 public:
-	enum class PLAYER_STATE
-	{
-		ALIVE,
+	enum class PLAYER_STATE {
+		ALIVE = 0,
 		DEAD,
 	};
+
 	PLAYER_STATE p_State = PLAYER_STATE::ALIVE;
-	Player(CrossingRoadGame* game, const int& x, const int& y, const int& w, const int& h) 
+
+	Player(CrossingRoadGame* game, const int& x, const int& y, const int& w, const int& h)
 		: Object(game, x, y, w, h)
 	{
 	}
-	~Player()
+
+	virtual ~Player()
 	{
 	}
 
-	virtual void Update(float fElapsedTime)
-	{
-	}
+	virtual void Update(float fElapsedTime) = 0;
+	virtual void Draw() = 0;
 
-	virtual void Draw()
-	{
-	}
-	int GetX()
-	{
-		return x;
-	}
-	int GetY()
-	{
-		return y;
-	}
+	virtual int GetX() final { return x; }
+	virtual int GetY() final { return y; }
+
 	virtual void SetCollisionMatrix() {}
-	bool CheckPlayerState()
-	{
+	virtual bool CheckPlayerState() {
 		if (p_State == PLAYER_STATE::DEAD)
 			return true;
 		return false;
 	}
+
 protected:
-	enum class MOVING_DIRECTION
-	{
+	enum GAME_SCREEN_LIMIT : short {
+		TOP = 0,
+		BOT = 96,
+		LEFT = 0,
+		RIGHT = 106,
+	};
+	enum class MOVING_DIRECTION {
 		INVALID = 0,
 		MOVING_UP,
 		MOVING_DOWN,
 		MOVING_LEFT,
 		MONIG_RIGHT,
 	};
-	enum class ANIMATION_STATE
-	{
-		START = 0,
-		READY,
-		JUMP,
-		LANDING,
-		END,
-	};
-	void Move(int xDir, int yDir) {
+	virtual void Move(int xDir, int yDir) final {
 		x += xDir;
 		y += yDir;
 	}
-
+	enum class ANIMATION_STATE {
+		START = 0,
+		READY = 1,
+		JUMP  = 2,
+		LANDING=3,
+		END	  = 4,
+	};
 };
