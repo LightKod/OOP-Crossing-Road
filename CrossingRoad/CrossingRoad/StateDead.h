@@ -3,19 +3,20 @@
 #define _STATE_DEAD_H_
 #include "CrossingRoadGame.h"
 #include "Frog.h"
-#include "Vehicle.h"
 #include "StatePlay.h"
 #include "StateMenu.h"
+#include "Ambulance.h"
 class StateDead: public CrossingRoadGame::State
 {
 	Player* pPlayer = nullptr;
 	int optionIndex=0;
-	Vehicle* Ambulance = nullptr;
+	Ambulance* ambulance=nullptr;
 	//DUMMY
 	int h = 0;
 	bool DeadChoice;
 	float time = 0;
-
+	short col=COLOUR::BG_BLACK;
+	int m=0;
 public:
 	StateDead(CrossingRoadGame* game, Player* pplayer)
 	{
@@ -28,10 +29,9 @@ public:
 
 	void DeadAnimation(float fElapsedTime, bool Option);
 	bool DeadOption(float fElapsedTime);
-	void DrawDeadBoard();
-	void DrawCryFrog(int x,int y);
-	void DrawHappyFrog(int x, int y);
+	void DrawDeadBoard(float fElapsedTime);
+	void DrawOption(int x,int y,short col);
 	void DrawDeadScreen();
-	void DrawSaveScreen();
+	void DrawSavedScreen();
 };
 #endif

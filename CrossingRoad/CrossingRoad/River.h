@@ -1,6 +1,7 @@
 #pragma once
 #include "Lane.h"
 #include "WaterTile.h"
+#include "Duck.h"
 class River : public Lane
 {
 public:

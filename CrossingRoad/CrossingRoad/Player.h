@@ -8,7 +8,7 @@ class Player : public CrossingRoadGame::Object {
 private:
 public:
 	enum class PLAYER_STATE {
-		ALIVE = 0,
+		ALIVE,
 		DEAD,
 	};
 

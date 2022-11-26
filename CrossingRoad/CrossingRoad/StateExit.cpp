@@ -23,13 +23,15 @@ bool StateExit::Update(float fElapsedTime) {
 }
 bool StateExit::OnStateEnter() {
 	this->game = game;
-
+	ByeSound.OpenByeSound();
+	ByeSound.PlayByeSound();
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
 	return 1;
 }
 bool StateExit::OnStateExit() {
+	ByeSound.CloseSound();
 	return 1;
 }
 

@@ -35,6 +35,7 @@ void Dog::Update(float fElapsedTime) {
 			//
 		}
 	}
+	CheckCollided();
 }
 
 void Dog::Draw() {

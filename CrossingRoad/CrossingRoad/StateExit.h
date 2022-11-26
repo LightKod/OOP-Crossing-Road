@@ -68,6 +68,7 @@ private:
 	static const int M_S_SRC_Y0;
 	static const int M_S_SRC_Y1;
 
+	Sound ByeSound;
 };
 
 #endif // !_STATE_EXIT_H_

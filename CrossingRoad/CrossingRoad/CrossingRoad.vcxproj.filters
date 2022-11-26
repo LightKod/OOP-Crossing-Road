@@ -123,6 +123,12 @@
     <ClCompile Include="Dog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ambulance.cpp">
+      <Filter>Source Files\Objects\Vehicles</Filter>
+    </ClCompile>
+    <ClCompile Include="Duck.cpp">
+      <Filter>Source Files\Objects\Vehicles</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -193,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="Dog.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Ambulance.h">
+      <Filter>Header Files\Objects\Vehicles</Filter>
+    </ClInclude>
+    <ClInclude Include="Duck.h">
+      <Filter>Header Files\Objects\Vehicles</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

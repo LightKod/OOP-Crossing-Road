@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ambulance.cpp" />
     <ClCompile Include="CrossingRoadGame.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Dog.cpp" />
     <ClCompile Include="Frog.cpp" />
+    <ClCompile Include="Duck.cpp" />
     <ClCompile Include="GameEngine.cpp" />
     <ClCompile Include="GrassTile.cpp" />
     <ClCompile Include="Lane.cpp" />
@@ -165,10 +167,12 @@
     <ClCompile Include="WaterTile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ambulance.h" />
     <ClInclude Include="CrossingRoadGame.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Dog.h" />
     <ClInclude Include="Frog.h" />
+    <ClInclude Include="Duck.h" />
     <ClInclude Include="GameEngine.h" />
     <ClInclude Include="GrassTile.h" />
     <ClInclude Include="Lane.h" />

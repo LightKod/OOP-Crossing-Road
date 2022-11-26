@@ -196,7 +196,54 @@ public:
 		return true;
 	}
 };
-
+class Sound
+{
+public:
+	void OpenFrogSound()
+	{
+		mciSendString(TEXT("open \"sound/frog bounce.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	}
+	void CloseSound()
+	{
+		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
+	}
+	void PlayFrogSound()
+	{
+		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
+	}
+	void OpenImpactsSound()
+	{
+		mciSendString(TEXT("open \"sound/vehicles collided.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	}
+	void PlayImpactsSound()
+	{
+		mciSendString(TEXT("play mp3 wait"), NULL, 0, NULL);
+	}
+	void OpenBGSound()
+	{
+		mciSendString(TEXT("open \"sound/background sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	}
+	void PlayBGSound()
+	{
+		mciSendString(TEXT("play mp3 repeat"), NULL, 0, NULL);
+	}
+	void PauseBGSound()
+	{
+		mciSendString(TEXT("pause mp3"), NULL, 0, NULL);
+	}
+	void ResumeBGSound()
+	{
+		mciSendString(TEXT("resume mp3"), NULL, 0, NULL);
+	}
+	void OpenByeSound()
+	{
+		mciSendString(TEXT("open \"sound/bye sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	}
+	void PlayByeSound()
+	{
+		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+	}
+};
 class GameEngine
 {
 public:
@@ -276,7 +323,7 @@ public:
 	virtual bool OnUserDestroy();
 
 public:
-
+	Sound Effects;
 
 	struct sKeyState
 	{
@@ -318,43 +365,4 @@ protected:
 public:
 	static std::atomic<bool> m_bAtomActive;
 };
-class Sound
-{
-public:
-	void OpenFrogSound()
-	{
-		mciSendString(TEXT("open \"sound/frog bounce.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
-	}
-	void CloseSound()
-	{
-		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
-	}
-	void PlayFrogSound()
-	{
-		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
-	}
-	void OpenImpactsSound()
-	{
-		mciSendString(TEXT("open \"sound/vehicles collided.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
-	}
-	void PlayImpactsSound()
-	{
-		mciSendString(TEXT("play mp3 wait"), NULL, 0, NULL);
-	}
-	void OpenBGSound()
-	{
-		mciSendString(TEXT("open \"sound/background sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
-	}
-	void PlayBGSound()
-	{
-		mciSendString(TEXT("play mp3 repeat"), NULL, 0, NULL);
-	}
-	void PauseBGSound()
-	{
-		mciSendString(TEXT("pause mp3"), NULL, 0, NULL);
-	}
-	void ResumeBGSound()
-	{
-		mciSendString(TEXT("resume mp3"), NULL, 0, NULL);
-	}
-};
+

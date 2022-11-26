@@ -14,9 +14,6 @@ public:
 	}
 	void Draw() {
 		Lane::Draw();
-		for (int i = 0; i < vehicles.size(); i++) {
-			vehicles[i]->DrawTree();
-		}
 	}
 	virtual void SetCollisionMatrix() {
 		for (int i = 0; i < vehicles.size(); i++) {

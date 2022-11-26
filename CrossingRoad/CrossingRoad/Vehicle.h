@@ -27,9 +27,6 @@ public:
 	virtual void Draw();
 	void Draw1();
 	void Draw2();
-	void DrawAmbulance();
-	void DrawTree();
-	void AmbulanceUpdate(float fElapsedTime,bool STOP_OR_CONTINUE);
 	virtual void Update(float fElapsedTime);
 	virtual void SetCollisionMatrix();
 

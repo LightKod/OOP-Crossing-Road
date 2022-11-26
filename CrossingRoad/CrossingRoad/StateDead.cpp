@@ -1,20 +1,16 @@
 #include "StateDead.h"
 bool StateDead::OnStateEnter()
 {
-	Sound DeadSound;
-	DeadSound.OpenImpactsSound();
-	DeadSound.PlayImpactsSound();
-	DeadSound.CloseSound();
-	Ambulance = new Vehicle(game, 0, pPlayer->GetY());
+	ambulance=new Ambulance(game, 0, pPlayer->GetY());
 	game->Fill(0, 0, 120, 96, L' ', COLOUR::BG_BLUE);
 	pPlayer->Draw();
-	Ambulance->DrawAmbulance();
+	ambulance->Draw();
 	return true;
 }
 bool StateDead::Update(float fElapsedTime)
 {
 	if (h == 0) {
-		DrawDeadBoard();
+		DrawDeadBoard(fElapsedTime);
 		if (game->GetKey(VK_SPACE).bReleased)
 		{
 			switch (optionIndex)
@@ -50,20 +46,20 @@ bool StateDead::Update(float fElapsedTime)
 }
 void StateDead::DeadAnimation(float fElapsedTime,bool Option)
 {
-	if (Ambulance->GetX() == game->GetGameWidth()-8)
+	if (ambulance->GetX() == game->GetGameWidth()-8)
 	{
 		if (Option)
 		{
-			DrawSaveScreen();
+			DrawSavedScreen();
 			time += fElapsedTime;
-			if (time > 1.0f)
+			if (time > 2.0f)
 				game->SetState(new StatePlay(game));
 		}
 		else
 		{
 			DrawDeadScreen();
 			time += fElapsedTime;
-			if (time > 1.0f)
+			if (time > 2.0f)
 				game->SetState(new StateMenu(game));
 		}
 	}
@@ -71,25 +67,25 @@ void StateDead::DeadAnimation(float fElapsedTime,bool Option)
 		game->Fill(0, 0, 120, 96, L' ', COLOUR::BG_BLUE);
 		if (optionIndex != 2)
 		{
-			if (pPlayer->GetX() <= Ambulance->GetX())
+			if (pPlayer->GetX() <= ambulance->GetX())
 				if (Option);
 				else pPlayer->Draw();
 			else pPlayer->Draw();
-			Ambulance->DrawAmbulance();
-			Ambulance->AmbulanceUpdate(fElapsedTime, true);
+			ambulance->Draw();
+			ambulance->AmbulanceUpdate(fElapsedTime, true);
 			if (Option)
 			{
-				if (Ambulance->GetX() == pPlayer->GetX())
+				if (ambulance->GetX() == pPlayer->GetX())
 				{
-					Ambulance->AmbulanceUpdate(fElapsedTime, false);
-					Ambulance->AmbulanceUpdate(fElapsedTime, true);
+					ambulance->AmbulanceUpdate(fElapsedTime, false);
+					ambulance->AmbulanceUpdate(fElapsedTime, true);
 				}
 			}
 
 		}
 	}
 }
-void StateDead::DrawSaveScreen()
+void StateDead::DrawSavedScreen()
 {
 	game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_WHITE);
 	string2Pixel(L"NICE", 160 / 2-8, 96 / 2, COLOUR::FG_YELLOW, COLOUR::BG_WHITE);
@@ -99,51 +95,11 @@ void StateDead::DrawDeadScreen()
 	game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_BLACK);
 	string2Pixel(L"REJECTED", 160 / 2 - 20, 96 / 2, COLOUR::FG_RED, COLOUR::BG_BLACK);
 }
-void StateDead::DrawCryFrog(int x,int y)
-{
-	game->Fill(x + 1, y, x + 2, y, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 5, y, x + 6, y, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x, y + 1, x, y + 2, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 3, y + 1, x + 4, y + 2, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 7, y + 1, x + 7, y + 2, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 1, y + 3, x + 6, y + 3, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 2, y + 4, x + 5, y + 4, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 1, y + 5, x + 6, y + 6, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x, y + 7, x + 2, y + 7, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 5, y + 7, x + 7, y + 7, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 3, y + 4, x + 4, y + 4, L' ', COLOUR::BG_RED);
-	game->Fill(x + 2, y + 5, x + 5, y + 6, L' ', COLOUR::BG_GREEN);
-	game->Fill(x + 3, y + 6, x + 4, y + 6, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 2, y + 2, x + 2, y + 2, L' ', COLOUR::BG_BLACK);
-	game->Fill(x + 5, y + 2, x + 5, y + 2, L' ', COLOUR::BG_BLACK);
-	game->Fill(x + 2, y + 3, x + 2, y + 3, L' ', COLOUR::BG_BLUE);
-	game->Fill(x + 5, y + 3, x + 5, y + 3, L' ', COLOUR::BG_BLUE);
-}
-void StateDead::DrawHappyFrog(int x, int y)
-{
-	game->Fill(x + 1, y, x + 2, y, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 5, y, x + 6, y, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x, y + 1, x, y + 2, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 3, y + 1, x + 4, y + 2, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 7, y + 1, x + 7, y + 2, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 1, y + 3, x + 6, y + 3, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 2, y + 4, x + 5, y + 4, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 1, y + 5, x + 6, y + 6, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x, y + 7, x + 2, y + 7, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 5, y + 7, x + 7, y + 7, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 3, y + 4, x + 4, y + 4, L' ', COLOUR::BG_RED);
-	game->Fill(x + 2, y + 5, x + 5, y + 6, L' ', COLOUR::BG_GREEN);
-	game->Fill(x + 3, y + 6, x + 4, y + 6, L' ', COLOUR::BG_DARK_GREEN);
-	game->Fill(x + 2, y + 2, x + 2, y + 2, L' ', COLOUR::BG_BLACK);
-	game->Fill(x + 5, y + 2, x + 5, y + 2, L' ', COLOUR::BG_BLACK);
-	game->Fill(x + 1, y + 3, x + 1, y + 3, L' ', COLOUR::BG_RED);
-	game->Fill(x + 6, y + 3, x + 6, y + 3, L' ', COLOUR::BG_RED);
-}
-void StateDead::DrawDeadBoard()
+void StateDead::DrawDeadBoard(float fElapsedTime)
 {
 	//WHITE BOARD
-	int x = Ambulance->GetX() + 10;
-	int y = Ambulance->GetY() - 44 - 2;
+	int x = ambulance->GetX() + 10;
+	int y = ambulance->GetY() - 44 - 2;
 	if (x > game->GetGameWidth() - 55)
 		x = game->GetGameWidth() / 2 - 15;
 	if (y < 0)
@@ -154,26 +110,69 @@ void StateDead::DrawDeadBoard()
 	game->Fill(x - 1, y + 44, x, y + 45, L' ', COLOUR::BG_WHITE);
 	game->Fill(x + 1, y + 41, x + 3, y + 43, L' ', COLOUR::BG_WHITE);
 	game->Fill(x + 4, y + 37, x + 7, y + 40, L' ', COLOUR::BG_WHITE);
-
+	time += fElapsedTime;
+	if (time > 0.5f)
+	{
+		switch (optionIndex)
+		{
+		case 0:
+		{
+			switch (m)
+			{
+			case 0:
+				col = COLOUR::BG_BLACK;
+				m = 1;
+				break;
+			case 1:
+				col = COLOUR::BG_YELLOW;
+				m = 0;
+				break;
+			}
+			break;
+		}
+		case 1:
+		{
+			switch (m)
+			{
+			case 0:
+				col = COLOUR::BG_BLACK;
+				m = 1;
+				break;
+			case 1:
+				col = COLOUR::BG_RED;
+				m = 0;
+				break;
+			}
+			break;
+		}
+		}
+		time = 0;
+	}
 	//OPTION
 	this->string2Pixel(L"DO YOU WANT", x + 8, y + 8, COLOUR::FG_BLACK, COLOUR::BG_WHITE);
 	this->string2Pixel(L"TO SAVE IT", x + 10, y + 12, COLOUR::FG_BLACK, COLOUR::BG_WHITE);
-	this->string2Pixel(L"YES", x + 8, y + 20, COLOUR::BG_BLACK, COLOUR::BG_WHITE);
-	this->string2Pixel(L"NO", x + 8, y + 28, COLOUR::FG_BLACK, COLOUR::BG_WHITE);
-
-	switch (optionIndex) 
+	this->string2Pixel(L"Y TO PLAY", x + 8, y + 20, COLOUR::BG_BLACK, COLOUR::BG_WHITE);
+	this->string2Pixel(L"N TO EXIT", x + 8, y + 28, COLOUR::FG_BLACK, COLOUR::BG_WHITE);
+	switch (optionIndex)
 	{
 	case 0:
 	{
-		DrawHappyFrog(x + 36, y + 17);
+		DrawOption(x + 64, y + 18, col);
 		break;
 	}
 	case 1:
 	{
-		DrawCryFrog(x + 36, y + 25);
+		DrawOption(x + 64, y + 26, col);
 		break;
 	}
 	}
+}
+void StateDead::DrawOption(int x, int y, short col)
+{
+	game->Fill(x -2, y, x -1, y + 1, L' ', col);
+	game->Fill(x -9, y + 2, x -1, y + 3, L' ', col);
+	game->Fill(x-5, y + 3, x, y + 5, L' ', col);
+	game->Fill(x -4, y + 6, x -1, y + 6, L' ', col);
 }
 bool StateDead::OnStateExit()
 {
