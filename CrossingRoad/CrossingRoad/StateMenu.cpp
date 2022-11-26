@@ -47,10 +47,10 @@ bool StateMenu::Update(float fElapsedTime) {
 	}
 
 	// Xử lý tương tác với người dùng
-	if (game->GetKey(VK_UP).bReleased) {
+	if (game->GetKey(VK_W).bReleased) {
 		m_s_OptionIdx = (m_s_OptionIdx - 1 + MAX_OPT) % MAX_OPT;
 	}
-	if (game->GetKey(VK_DOWN).bReleased) {
+	if (game->GetKey(VK_S).bReleased) {
 		m_s_OptionIdx = (m_s_OptionIdx + 1) % MAX_OPT;
 	}
 

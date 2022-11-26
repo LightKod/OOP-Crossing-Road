@@ -64,7 +64,7 @@ void Dog::Draw() {
 	}
 
 	// pause thread
-	this_thread::sleep_for(std::chrono::milliseconds(100));
+	this_thread::sleep_for(std::chrono::milliseconds(25));
 }
 
 void Dog::CheckCollided() {

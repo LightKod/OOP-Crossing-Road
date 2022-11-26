@@ -6,38 +6,50 @@ const int StateExit::M_S_SRC_X1 = 155;
 const int StateExit::M_S_SRC_Y1 = 91;
 
 bool StateExit::Update(float fElapsedTime) {
+	thread t1(&StateExit::SoundThread, this);
+
 	OpenWindowEffect();
 
 	DrawExitScreen();
 	DecorateExitScreen();
 	game->ConsOutput();
 
+	m_Start = true;
 	DrawMessage();
 
-	//// clear screen
-	//game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLACK);
-	//this_thread::sleep_for(std::chrono::milliseconds(1000));
+	while (!m_bBack);
+	t1.join();
+	ByeSound.CloseSound();
 
-	GameEngine::m_bAtomActive = 0;
+	// clear screen
+	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLACK);
+	this_thread::sleep_for(std::chrono::milliseconds(1200));
+
 	return 0;
 }
 bool StateExit::OnStateEnter() {
 	this->game = game;
-	ByeSound.OpenByeSound();
-	ByeSound.PlayByeSound();
+
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
 	return 1;
 }
 bool StateExit::OnStateExit() {
-	ByeSound.CloseSound();
 	return 1;
 }
 
+void StateExit::SoundThread() {
+	ByeSound.OpenByeSound();
+
+	while (!m_Start);
+	ByeSound.PlayByeSound();
+
+	m_bBack = true;
+}
 
 void StateExit::DrawMessage() {
-	static const int _tm = 10;
+	static const int _tm = 16;
 	this_thread::sleep_for(std::chrono::milliseconds(400));
 
 	Thanks(27, 29, FG_DARK_GREY, BG_DARK_GREY);
@@ -783,7 +795,7 @@ void StateExit::DrawExitScreen() {
 }
 
 void StateExit::OpenWindowEffect() {
-	static const int _tm = 40;
+	static const int _tm = 50;
 	
 	DrawShadow1(FG_GREY, BG_GREY);
 	game->ConsOutput();

@@ -8,15 +8,22 @@
 
 using namespace std;
 
-#define VK_A 0x41
-#define VK_D 0x44
-#define VK_S 0x53
-#define VK_W 0x57
+#define VK_A		0x41
+#define VK_D		0x44
+#define VK_L		0x4C
+#define VK_N		0x4E
+#define VK_S		0x53
+#define VK_T		0x54
+#define VK_W		0x57
+#define VK_Y		0x59
+#define VK_ENTER	0x0D
 
 //KHONG DUOC INCLUDE MAY CAI LIEN QUAN TOI OBJECT O DAY, QUA BEN .CPP INCLUDE
 class CrossingRoadGame : public GameEngine {
 
 public:
+	static Sound sCreditSound;
+	
 	class State
 	{
 	protected:
@@ -36,6 +43,7 @@ public:
 
 		virtual void string2Pixel(const wstring& wStr, const int& x,
 			const int& y, const int& fg, const int& bg);
+
 	};
 
 	void SetState(State* state) {

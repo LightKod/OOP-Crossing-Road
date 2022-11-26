@@ -13,6 +13,8 @@ public:
 	StateExit(CrossingRoadGame* game) : State(game) {};
 
 protected:
+	void SoundThread();
+
 	void HeartsEffect();
 
 	void Heart3(const int& _x, const int& _y);
@@ -69,6 +71,9 @@ private:
 	static const int M_S_SRC_Y1;
 
 	Sound ByeSound;
+	bool m_bBack{ false };
+	bool m_Start{ false };
+
 };
 
 #endif // !_STATE_EXIT_H_

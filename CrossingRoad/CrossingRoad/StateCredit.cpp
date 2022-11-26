@@ -7,11 +7,19 @@ const int StateCredit::M_S_SRC_X1 = 155;
 const int StateCredit::M_S_SRC_Y1 = 93;
 
 bool StateCredit::Update(float fElapsedTime) {
+	thread t1(&StateCredit::SoundThread, this);
 
 	DrawProjectorScreen();
+
+	m_Start = true;
 	Introduction();
 	InstroduceInstructor();
 	InstroduceMember();
+
+	while (!m_bBack);
+	t1.join();
+	CreditSound.CloseCreditSound();
+
 	CloseProjectorScreen();
 
 	// Xử lý quay về main menu
@@ -29,12 +37,20 @@ bool StateCredit::OnStateEnter() {
 	return 1;
 }
 bool StateCredit::OnStateExit() {
-	return 0;
+	return 1;
 }
 
+void StateCredit::SoundThread() {
+	CreditSound.OpenCreditSound();
+
+	//while (!m_Start);
+	CreditSound.PlayCreditSound();
+	
+	m_bBack = true;
+}
 
 void StateCredit::CloseProjectorScreen() {
-	this_thread::sleep_for(std::chrono::milliseconds(800));
+	this_thread::sleep_for(std::chrono::milliseconds(1000));
 	// clear screen
 	int tmpOffsetX = M_S_SRC_X1 - 2;
 	for (int i = 0; i < 18; i += 1) {
@@ -52,7 +68,7 @@ void StateCredit::CloseProjectorScreen() {
 	// tắt máy chiếu
 	game->Fill(M_S_SRC_X0 + 1, M_S_SRC_Y0 + 1, M_S_SRC_X1 - 1, M_S_SRC_Y1 - 1, L' ', COLOUR::BG_GREY);
 	game->ConsOutput();
-	this_thread::sleep_for(std::chrono::milliseconds(500));
+	this_thread::sleep_for(std::chrono::milliseconds(1000));
 
 	static const int _tm = 40;
 
@@ -88,7 +104,7 @@ void StateCredit::CloseProjectorScreen() {
 }
 
 void StateCredit::InstroduceMember() {
-	static const int _tm = 10;
+	static const int _tm = 25;
 	static const int _slpTm = 100;
 
 	const int _x1 = M_S_SRC_X0 + 82;
@@ -189,7 +205,7 @@ void StateCredit::ClearOldName(const int& _x0, const int& _x1,
 	const short& fg, const short& bg)
 {
 	static const int _y = 58;
-	static const int _tm = 5;
+	static const int _tm = 20;
 
 	this_thread::sleep_for(std::chrono::milliseconds(1000));
 	for (int i = 1; i < 20; i += 1) {
@@ -299,9 +315,9 @@ void StateCredit::InstroduceInstructor() {
 	const int _x2 = M_S_SRC_X0 + 33;
 	const int _y2 = _y1 + 24;
 
-	static const int _tm = 10;
+	static const int _tm = 25;
 	
-	this_thread::sleep_for(std::chrono::milliseconds(600));
+	this_thread::sleep_for(std::chrono::milliseconds(650));
 	INSTRUCTOR(_x1, _y1, FG_RED, BG_RED);
 	game->ConsOutput();
 	for (int i = 1; i < 5; i += 1) {
@@ -332,11 +348,11 @@ void StateCredit::InstroduceInstructor() {
 		game->ConsOutput();
 	}
 
-	this_thread::sleep_for(std::chrono::milliseconds(900));
+	this_thread::sleep_for(std::chrono::milliseconds(1000));
 	// clear screen
 	int tmpOffsetX = M_S_SRC_X0 + 2;
 	for (int i = 0; i < 18; i += 1) {
-		this_thread::sleep_for(std::chrono::milliseconds(20));
+		this_thread::sleep_for(std::chrono::milliseconds(45));
 
 		game->Fill(tmpOffsetX, M_S_SRC_Y0 + 25, tmpOffsetX + 7, M_S_SRC_Y1 - 1,
 			L' ', FG_CYAN + BG_CYAN);
@@ -389,7 +405,7 @@ void StateCredit::Introduction() {
 	const int _x2 = M_S_SRC_X0 + 5;
 	const int _y2 = _y1 + 11;
 	
-	static const int _tm = 10;
+	static const int _tm = 25;
 
 	A_PROJECT(_x1, _y1, FG_WHITE, BG_WHITE);
 	FROM_TEAM6(_x2, _y2, FG_WHITE, BG_WHITE);
@@ -463,7 +479,7 @@ void StateCredit::DrawProjectorScreen() {
 	ProjectorScreen4();
 	game->ConsOutput();
 
-	this_thread::sleep_for(std::chrono::milliseconds(500));
+	this_thread::sleep_for(std::chrono::milliseconds(980));
 	game->Fill(M_S_SRC_X0 + 1, M_S_SRC_Y0 + 1, M_S_SRC_X1 - 1, M_S_SRC_Y0 + 23,
 		L' ', FG_DARK_CYAN + BG_DARK_CYAN);
 	game->Fill(M_S_SRC_X0 + 1, M_S_SRC_Y0 + 24, M_S_SRC_X1 - 1, M_S_SRC_Y0 + 24,

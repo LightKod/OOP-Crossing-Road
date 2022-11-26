@@ -15,7 +15,6 @@ public:
 protected:
 	void CloseProjectorScreen();
 
-
 	void InstroduceMember();
 	void ClearOldName(const int& _x0, const int& _x1,
 		const short& fg, const short& bg);
@@ -95,6 +94,12 @@ protected:
 		const short& fg, const short& bg);
 
 private:
+	void SoundThread();
+	
+	Sound CreditSound;
+	bool m_bBack{ false };
+	bool m_Start{ false };
+
 	static const int M_S_SRC_X0;
 	static const int M_S_SRC_X1;
 	static const int M_S_SRC_Y0;

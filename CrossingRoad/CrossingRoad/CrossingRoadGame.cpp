@@ -7,7 +7,6 @@
 int optionIndex = 0;
 static CrossingRoadGame::State* state;
 
-
 bool CrossingRoadGame::OnUserCreate()
 {
 	SetState(new StateMenu(this));

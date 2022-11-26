@@ -345,8 +345,6 @@ int GameEngine::ScreenHeight()
 	// Optional for clean up 
 bool GameEngine::OnUserDestroy() { return true; }
 
-
-
 GameEngine::sKeyState GameEngine::GetKey(int nKeyID) { return m_keys[nKeyID]; }
 bool GameEngine::IsFocused() { return m_bConsoleInFocus; }
 
@@ -375,7 +373,6 @@ BOOL GameEngine::CloseHandler(DWORD evt)
 	}
 	return true;
 }
-
 
 // Define our static variables
 std::atomic<bool> GameEngine::m_bAtomActive(false);

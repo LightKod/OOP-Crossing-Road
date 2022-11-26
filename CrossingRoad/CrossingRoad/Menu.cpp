@@ -11,6 +11,48 @@ static const int x0 = 50;
 static const int x1 = 110;
 static const int DUMMY_ROW = 7;
 
+void Menu::UpdateMenuUI(CrossingRoadGame* game, const int& opt,
+	const int& innerOfset, const int& outerOfset)
+{
+	// clear screen
+	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
+
+	// Update UI
+	UpdateMenuTitle(game, innerOfset, outerOfset);
+
+	UpdateNewgameUI(game, opt);
+	UpdateLoadgameUI(game, opt);
+	UpdateLBUI(game, opt);
+	UpdateSettingUI(game, opt);
+	UpdateCreditUI(game, opt);
+	UpdateExitUI(game, opt);
+}
+
+void Menu::SplashAnimation(CrossingRoadGame* game, const int& opt) {
+	switch (opt) {
+	case MENU_OPTION::NEWGAME_OPT:
+		PressButtonAnimation(game, C_NEWGAME.X, C_NEWGAME.Y, m_Newgame);
+		break;
+	case MENU_OPTION::LOADGAME_OPT:
+		PressButtonAnimation(game, C_LOADGAME.X, C_LOADGAME.Y, m_Loadgame);
+		break;
+	case MENU_OPTION::LB_OPT:
+		PressButtonAnimation(game, C_LB.X, C_LB.Y, m_LB);
+		break;
+	case MENU_OPTION::SETTING_OPT:
+		PressButtonAnimation(game, C_SETTING.X, C_SETTING.Y, m_Setting);
+		break;
+	case MENU_OPTION::CREDIT_OPT:
+		PressButtonAnimation(game, C_CREDIT.X, C_CREDIT.Y, m_Credit);
+		break;
+	case MENU_OPTION::EXIT_OPT:
+		PressButtonAnimation(game, C_EXIT.X, C_EXIT.Y, m_Exit);
+		break;
+	default:
+		break;
+	}
+}
+
 void DrawShadowEffect(CrossingRoadGame* game, int y0)
 {
 	const int y = y0 - 1;

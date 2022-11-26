@@ -196,6 +196,7 @@ public:
 		return true;
 	}
 };
+
 class Sound
 {
 public:
@@ -243,7 +244,19 @@ public:
 	{
 		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
 	}
+
+	void OpenCreditSound() {
+		mciSendString(TEXT("open \"sound/credit sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	}
+	void PlayCreditSound() {
+		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+	}
+	void CloseCreditSound() {
+		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
+	}
+
 };
+
 class GameEngine
 {
 public:
