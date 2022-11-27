@@ -19,9 +19,7 @@ public:
 	{
 	}
 
-	virtual ~Player()
-	{
-	}
+	virtual ~Player() = default;
 
 	virtual void Update(float fElapsedTime) = 0;
 	virtual void Draw() = 0;
@@ -30,13 +28,15 @@ public:
 	virtual int GetY() final { return y; }
 
 	virtual void SetCollisionMatrix() {}
-	virtual bool CheckPlayerState() {
-		if (p_State == PLAYER_STATE::DEAD)
-			return true;
-		return false;
-	}
+	virtual bool CheckPlayerState();
+
+	virtual bool SetY(const int& _y) final;
+	virtual bool SetX(const int& _x) final;
+	virtual void ResetPosition() final;
 
 protected:
+	static const int s_CellSize;
+
 	enum GAME_SCREEN_LIMIT : short {
 		TOP = 0,
 		BOT = 96,
@@ -50,10 +50,7 @@ protected:
 		MOVING_LEFT,
 		MONIG_RIGHT,
 	};
-	virtual void Move(int xDir, int yDir) final {
-		x += xDir;
-		y += yDir;
-	}
+	virtual void Move(int xDir, int yDir) final;
 	enum class ANIMATION_STATE {
 		START = 0,
 		READY = 1,
@@ -61,4 +58,5 @@ protected:
 		LANDING=3,
 		END	  = 4,
 	};
+
 };

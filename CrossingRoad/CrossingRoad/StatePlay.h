@@ -36,6 +36,12 @@ public:
 	}
 
 private:
+	void LevelUp(const int& x = -75, const int& y = 36);
+	void LVUP_Border(const int& x, const int& y);
+	void LVUP_TopColor(const int& x, const int& y, const short& fg, const short& bg);
+	void LVUP_BotColor(const int& x, const int& y, const short& fg, const short& bg);
+	void LVUP_MidLine(const int& x, const int& y);
+
 	void UpdateCollisionMatrix();
 	void UpdateGameScreen();
 	void UpdateGameState(float fElapsedTime);

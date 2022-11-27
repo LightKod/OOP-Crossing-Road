@@ -11,10 +11,10 @@ public:
 	virtual void Draw();
 
 	// Handle moving player
-	virtual bool MoveUp(const int& dY = s_CellSize);
-	virtual bool MoveDown(const int& dY = s_CellSize);
-	virtual bool MoveLeft(const int& dX = s_CellSize);
-	virtual bool MoveRight(const int& dX = s_CellSize);
+	virtual bool MoveUp(const int& dY = Player::s_CellSize);
+	virtual bool MoveDown(const int& dY = Player::s_CellSize);
+	virtual bool MoveLeft(const int& dX = Player::s_CellSize);
+	virtual bool MoveRight(const int& dX = Player::s_CellSize);
 
 private:
 	virtual void ReadyHandle();
@@ -44,7 +44,6 @@ private:
 	bool s_CanMove = 1;
 	bool m_OnRight = 1;
 
-	static const int s_CellSize;
 };
 
 #endif // !_DOG_H_

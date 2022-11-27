@@ -3,7 +3,6 @@
 #define _FROG_H_
 #include "Player.h"
 
-
 class Frog : public Player {
 public:
 	Frog(CrossingRoadGame* game);
@@ -21,10 +20,10 @@ protected:
 	virtual void Jumping();
 
 	// Handle moving player
-	virtual bool MoveUp(const int& dY = s_CellSize);
-	virtual bool MoveDown(const int& dY = s_CellSize);
-	virtual bool MoveLeft(const int& dX = s_CellSize);
-	virtual bool MoveRight(const int& dX = s_CellSize);
+	virtual bool MoveUp(const int& dY = Player::s_CellSize);
+	virtual bool MoveDown(const int& dY = Player::s_CellSize);
+	virtual bool MoveLeft(const int& dX = Player::s_CellSize);
+	virtual bool MoveRight(const int& dX = Player::s_CellSize);
 
 private:
 	olcSprite* sprAvatar = nullptr;
@@ -32,7 +31,6 @@ private:
 	ANIMATION_STATE g_State = ANIMATION_STATE::START;
 	Sound frogsound;
 
-	static const int s_CellSize;
 	static bool s_CanMove;
 
 };

@@ -1,7 +1,6 @@
 #include "Frog.h"
 
-const int Frog::s_CellSize = 8;
-bool	  Frog::s_CanMove = 1;
+bool Frog::s_CanMove = 1;
 
 Frog::Frog(CrossingRoadGame* game)
 	: Player(game,

@@ -1,7 +1,5 @@
 ﻿#include "Dog.h"
 
-const int Dog::s_CellSize = 8;
-
 Dog::Dog(CrossingRoadGame* game) 
 	: Player(game,
 		game->ScreenWidth() / 8 * 2,
