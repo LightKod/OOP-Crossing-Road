@@ -1,4 +1,6 @@
 ﻿#pragma once
+#ifndef _CROSSING_GAME_H_
+#define _CROSSING_GAME_H_
 #include <iostream>
 #include "GameEngine.h"
 #include <cwchar>
@@ -24,10 +26,10 @@ class CrossingRoadGame : public GameEngine {
 public:
 	static Sound sCreditSound;
 	
-	class State
-	{
+	class State {
 	protected:
 		CrossingRoadGame* game = nullptr;
+
 	public:
 		State(CrossingRoadGame* game) { this->game = game; }
 		State() = default;
@@ -54,9 +56,9 @@ public:
 		this->state = state;
 		this->state->OnStateEnter();
 	}
+
 public:
-	class Object
-	{
+	class Object {
 	protected:
 		int x, y;
 		int width, height;
@@ -78,7 +80,6 @@ public:
 		//Set vi tri
 		void SetPosition(int x, int y) { this->x = x; this->y = y; };
 
-
 		//Hai ham` ve voi Set Collision
 		//Minh` se edit chu yeu 3 ham nay de ve ra Object (vi du trong class Tile)
 		//Dung de update moi frame
@@ -87,7 +88,9 @@ public:
 		virtual void SetCollisionMatrix() {};
 		//Ve ra man hinh tuy` vi tri x, y
 		virtual void Draw() {};
+
 	};
+
 public:
 	CrossingRoadGame() {
 		m_sAppName = L"CrossingRoad";
@@ -104,17 +107,15 @@ private:
 	int gameScreenWidth = 112;
 	int gameScreenHeight = 96;
 
-private:
-	public:
-		void ConsOutput()
-		{
-			WriteConsoleOutput(m_hConsole, m_bufScreen, { (short)m_nScreenWidth, (short)m_nScreenHeight }, { 0,0 }, &m_rectWindow);
-		}
-		void ClearSprite(const int& x, const int& y, const int& w, const int& h)
-		{
-			Fill(x, y, x + w - 1, y + h - 1, L' ', COLOUR::BG_WHITE);
-			ConsOutput();
-		}
+public:
+	void ConsOutput() {
+		WriteConsoleOutput(m_hConsole, m_bufScreen, { (short)m_nScreenWidth, (short)m_nScreenHeight }, { 0,0 }, &m_rectWindow);
+	}
+	void ClearSprite(const int& x, const int& y, const int& w, const int& h) {
+		Fill(x, y, x + w - 1, y + h - 1, L' ', COLOUR::BG_WHITE);
+		ConsOutput();
+	}
+
 };
 
-
+#endif // !_CROSSING_GAME_H_

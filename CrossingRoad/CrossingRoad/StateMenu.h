@@ -1,4 +1,7 @@
 #pragma once
+#ifndef _STATE_MENU_H_
+#define _STATE_MENU_H_
+
 #include "CrossingRoadGame.h"
 
 class StateMenu : public CrossingRoadGame::State
@@ -20,3 +23,5 @@ public:
 	virtual bool OnStateExit();
 
 };
+
+#endif // !_STATE_MENU_H_

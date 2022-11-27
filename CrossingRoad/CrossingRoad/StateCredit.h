@@ -107,8 +107,4 @@ private:
 
 };
 
-
-
 #endif // !_STATE_CREDIT_H_
-
-

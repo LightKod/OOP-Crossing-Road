@@ -54,5 +54,3 @@ private:
 };
 
 #endif // !_STATE_LB_H_
-
-

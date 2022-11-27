@@ -32,9 +32,7 @@ protected:
 public:
 	friend class StateLoad;
 	friend class StateLB;
+
 };
 
-
 #endif // !_DATA_H_
-
-

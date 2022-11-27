@@ -6,6 +6,7 @@
 #include "StatePlay.h"
 #include "StateMenu.h"
 #include "Ambulance.h"
+
 class StateDead: public CrossingRoadGame::State
 {
 	Player* pPlayer = nullptr;
@@ -17,9 +18,9 @@ class StateDead: public CrossingRoadGame::State
 	float time = 0;
 	short col=COLOUR::BG_BLACK;
 	int m=0;
+
 public:
-	StateDead(CrossingRoadGame* game, Player* pplayer)
-	{
+	StateDead(CrossingRoadGame* game, Player* pplayer) {
 		this->game = game;
 		pPlayer = pplayer;
 	}
@@ -33,5 +34,7 @@ public:
 	void DrawOption(int x,int y,short col);
 	void DrawDeadScreen();
 	void DrawSavedScreen();
+
 };
+
 #endif

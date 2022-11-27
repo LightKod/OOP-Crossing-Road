@@ -67,5 +67,3 @@ private:
 };
 
 #endif // !_MENU_H_
-
-

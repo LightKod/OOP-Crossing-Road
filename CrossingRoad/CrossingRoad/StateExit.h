@@ -77,5 +77,3 @@ private:
 };
 
 #endif // !_STATE_EXIT_H_
-
-

@@ -6,8 +6,9 @@
 Character Set -> Use Unicode. Thanks! - Javidx9
 #endif
 
+#ifndef _GAME_ENGINE_H_
+#define _GAME_ENGINE_H_
 #include <windows.h>
-
 #include <iostream>
 #include <chrono>
 #include <vector>
@@ -16,8 +17,7 @@ Character Set -> Use Unicode. Thanks! - Javidx9
 #include <atomic>
 #include <condition_variable>
 
-enum COLOUR
-{
+enum COLOUR {
 	FG_BLACK = 0x0000,
 	FG_DARK_BLUE = 0x0001,
 	FG_DARK_GREEN = 0x0002,
@@ -52,33 +52,27 @@ enum COLOUR
 	BG_WHITE = 0x00F0,
 };
 
-enum PIXEL_TYPE
-{
+enum PIXEL_TYPE {
 	PIXEL_SOLID = 0x2588,
 	PIXEL_THREEQUARTERS = 0x2593,
 	PIXEL_HALF = 0x2592,
 	PIXEL_QUARTER = 0x2591,
 };
 
-class olcSprite
-{
+class olcSprite {
 public:
-	olcSprite()
-	{
-
+	olcSprite() {
 	}
 
-	olcSprite(int w, int h)
-	{
+	olcSprite(int w, int h) {
 		Create(w, h);
 	}
 
-	olcSprite(std::wstring sFile)
-	{
+	olcSprite(std::wstring sFile) {
 		if (!Load(sFile))
 			Create(8, 8);
-	}olcSprite(std::wstring sFile,int m)
-	{
+	}
+	olcSprite(std::wstring sFile,int m) {
 		if (!Load(sFile)&&m==2)
 			Create(160, 96);
 	}
@@ -90,54 +84,47 @@ private:
 	short* m_Glyphs = nullptr;
 	short* m_Colours = nullptr;
 
-	void Create(int w, int h)
-	{
+	void Create(int w, int h) {
 		nWidth = w;
 		nHeight = h;
 		m_Glyphs = new short[w * h];
 		m_Colours = new short[w * h];
-		for (int i = 0; i < w * h; i++)
-		{
+		for (int i = 0; i < w * h; i++) {
 			m_Glyphs[i] = L' ';
 			m_Colours[i] = FG_BLACK;
 		}
 	}
 
 public:
-	void SetGlyph(int x, int y, short c)
-	{
+	void SetGlyph(int x, int y, short c) {
 		if (x < 0 || x >= nWidth || y < 0 || y >= nHeight)
 			return;
 		else
 			m_Glyphs[y * nWidth + x] = c;
 	}
 
-	void SetColour(int x, int y, short c)
-	{
+	void SetColour(int x, int y, short c) {
 		if (x < 0 || x >= nWidth || y < 0 || y >= nHeight)
 			return;
 		else
 			m_Colours[y * nWidth + x] = c;
 	}
 
-	short GetGlyph(int x, int y)
-	{
+	short GetGlyph(int x, int y) {
 		if (x < 0 || x >= nWidth || y < 0 || y >= nHeight)
 			return L' ';
 		else
 			return m_Glyphs[y * nWidth + x];
 	}
 
-	short GetColour(int x, int y)
-	{
+	short GetColour(int x, int y) {
 		if (x < 0 || x >= nWidth || y < 0 || y >= nHeight)
 			return FG_BLACK;
 		else
 			return m_Colours[y * nWidth + x];
 	}
 
-	short SampleGlyph(float x, float y)
-	{
+	short SampleGlyph(float x, float y) {
 		int sx = (int)(x * (float)nWidth);
 		int sy = (int)(y * (float)nHeight - 1.0f);
 		if (sx < 0 || sx >= nWidth || sy < 0 || sy >= nHeight)
@@ -146,8 +133,7 @@ public:
 			return m_Glyphs[sy * nWidth + sx];
 	}
 
-	short SampleColour(float x, float y)
-	{
+	short SampleColour(float x, float y) {
 		int sx = (int)(x * (float)nWidth);
 		int sy = (int)(y * (float)nHeight - 1.0f);
 		if (sx < 0 || sx >= nWidth || sy < 0 || sy >= nHeight)
@@ -156,8 +142,7 @@ public:
 			return m_Colours[sy * nWidth + sx];
 	}
 
-	bool Save(std::wstring sFile)
-	{
+	bool Save(std::wstring sFile) {
 		FILE* f = nullptr;
 		_wfopen_s(&f, sFile.c_str(), L"wb");
 		if (f == nullptr)
@@ -173,8 +158,7 @@ public:
 		return true;
 	}
 
-	bool Load(std::wstring sFile)
-	{
+	bool Load(std::wstring sFile) {
 		delete[] m_Glyphs;
 		delete[] m_Colours;
 		nWidth = 0;
@@ -197,51 +181,39 @@ public:
 	}
 };
 
-class Sound
-{
+class Sound {
 public:
-	void OpenFrogSound()
-	{
+	void OpenFrogSound() {
 		mciSendString(TEXT("open \"sound/frog bounce.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
-	void CloseSound()
-	{
+	void CloseSound() {
 		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
 	}
-	void PlayFrogSound()
-	{
+	void PlayFrogSound() {
 		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
 	}
-	void OpenImpactsSound()
-	{
+	void OpenImpactsSound() {
 		mciSendString(TEXT("open \"sound/vehicles collided.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
-	void PlayImpactsSound()
-	{
+	void PlayImpactsSound() {
 		mciSendString(TEXT("play mp3 wait"), NULL, 0, NULL);
 	}
-	void OpenBGSound()
-	{
+	void OpenBGSound() {
 		mciSendString(TEXT("open \"sound/background sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
-	void PlayBGSound()
-	{
+	void PlayBGSound() {
 		mciSendString(TEXT("play mp3 repeat"), NULL, 0, NULL);
 	}
-	void PauseBGSound()
-	{
+	void PauseBGSound() {
 		mciSendString(TEXT("pause mp3"), NULL, 0, NULL);
 	}
-	void ResumeBGSound()
-	{
+	void ResumeBGSound() {
 		mciSendString(TEXT("resume mp3"), NULL, 0, NULL);
 	}
-	void OpenByeSound()
-	{
+	void OpenByeSound() {
 		mciSendString(TEXT("open \"sound/bye sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
-	void PlayByeSound()
-	{
+	void PlayByeSound() {
 		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
 	}
 
@@ -257,8 +229,7 @@ public:
 
 };
 
-class GameEngine
-{
+class GameEngine {
 public:
 	GameEngine();
 
@@ -280,37 +251,29 @@ public:
 	bool CheckCollision(int x, int y, int width, int height);
 	~GameEngine();
 
-	// Start: Writer 739 
-	void DrawSprite(int x, int y, olcSprite* sprite)
-	{
+	void DrawSprite(int x, int y, olcSprite* sprite) {
 		if (sprite == nullptr)
 			return;
 
-		for (int i = 0; i < sprite->nWidth; i++)
-		{
-			for (int j = 0; j < sprite->nHeight; j++)
-			{
+		for (int i = 0; i < sprite->nWidth; i++) {
+			for (int j = 0; j < sprite->nHeight; j++) {
 				if (sprite->GetGlyph(i, j) != L' ')
 					Draw(x + i, y + j, sprite->GetGlyph(i, j), sprite->GetColour(i, j));
 			}
 		}
 	}
 
-	void DrawPartialSprite(int x, int y, olcSprite* sprite, int ox, int oy, int w, int h)
-	{
+	void DrawPartialSprite(int x, int y, olcSprite* sprite, int ox, int oy, int w, int h) {
 		if (sprite == nullptr)
 			return;
 
-		for (int i = 0; i < w; i++)
-		{
-			for (int j = 0; j < h; j++)
-			{
+		for (int i = 0; i < w; i++) {
+			for (int j = 0; j < h; j++) {
 				if (sprite->GetGlyph(i + ox, j + oy) != L' ')
 					Draw(x + i, y + j, sprite->GetGlyph(i + ox, j + oy), sprite->GetColour(i + ox, j + oy));
 			}
 		}
 	}
-	// End
 
 public:
 	void ClearCollsionMatrix();
@@ -338,8 +301,7 @@ public:
 public:
 	Sound Effects;
 
-	struct sKeyState
-	{
+	struct sKeyState {
 		bool bPressed;
 		bool bReleased;
 		bool bHeld;
@@ -379,3 +341,4 @@ public:
 	static std::atomic<bool> m_bAtomActive;
 };
 
+#endif // !_GAME_ENGINE_H_

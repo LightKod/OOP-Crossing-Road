@@ -1,25 +1,23 @@
 #include "GameEngine.h"
 
-GameEngine::GameEngine()
-	{
-		m_nScreenWidth = 80;
-		m_nScreenHeight = 30;
+GameEngine::GameEngine() {
+	m_nScreenWidth = 80;
+	m_nScreenHeight = 30;
 
-		m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		m_hConsoleIn = GetStdHandle(STD_INPUT_HANDLE);
+	m_hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	m_hConsoleIn = GetStdHandle(STD_INPUT_HANDLE);
 
-		std::memset(m_keyNewState, 0, 256 * sizeof(short));
-		std::memset(m_keyOldState, 0, 256 * sizeof(short));
-		std::memset(m_keys, 0, 256 * sizeof(sKeyState));
+	std::memset(m_keyNewState, 0, 256 * sizeof(short));
+	std::memset(m_keyOldState, 0, 256 * sizeof(short));
+	std::memset(m_keys, 0, 256 * sizeof(sKeyState));
 
-		m_bEnableSound = false;
+	m_bEnableSound = false;
 
-		m_sAppName = L"Default";
-	}
+	m_sAppName = L"Default";
+}
 
 
-int GameEngine::ConstructConsole(int width, int height, int fontw, int fonth)
-{
+int GameEngine::ConstructConsole(int width, int height, int fontw, int fonth) {
 	if (m_hConsole == INVALID_HANDLE_VALUE)
 		return Error(L"Bad Handle");
 
@@ -100,17 +98,14 @@ int GameEngine::ConstructConsole(int width, int height, int fontw, int fonth)
 	return 1;
 }
 
-void GameEngine::Draw(int x, int y, short c, short col)
-{
-	if (x >= 0 && x < m_nScreenWidth && y >= 0 && y < m_nScreenHeight)
-	{
+void GameEngine::Draw(int x, int y, short c, short col) {
+	if (x >= 0 && x < m_nScreenWidth && y >= 0 && y < m_nScreenHeight) {
 		m_bufScreen[y * m_nScreenWidth + x].Char.UnicodeChar = c;
 		m_bufScreen[y * m_nScreenWidth + x].Attributes = col;
 	}
 }
 
-void GameEngine::Fill(int x1, int y1, int x2, int y2, short c, short col)
-{
+void GameEngine::Fill(int x1, int y1, int x2, int y2, short c, short col) {
 	Clip(x1, y1);
 	Clip(x2, y2);
 	for (int x = x1; x <= x2; x++)
@@ -118,87 +113,70 @@ void GameEngine::Fill(int x1, int y1, int x2, int y2, short c, short col)
 			Draw(x, y, c, col);
 }
 
-void GameEngine::DrawString(int x, int y, std::wstring c, short col)
-{
-	for (size_t i = 0; i < c.size(); i++)
-	{
+void GameEngine::DrawString(int x, int y, std::wstring c, short col) {
+	for (size_t i = 0; i < c.size(); i++) {
 		m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
 		m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
 	}
 }
 
-void GameEngine::DrawStringAlpha(int x, int y, std::wstring c, short col )
-{
-	for (size_t i = 0; i < c.size(); i++)
-	{
-		if (c[i] != L' ')
-		{
+void GameEngine::DrawStringAlpha(int x, int y, std::wstring c, short col ) {
+	for (size_t i = 0; i < c.size(); i++) {
+		if (c[i] != L' ') {
 			m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
 			m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
 		}
 	}
 }
 
-void GameEngine::Clip(int& x, int& y)
-{
+void GameEngine::Clip(int& x, int& y) {
 	if (x < 0) x = 0;
 	if (x >= m_nScreenWidth) x = m_nScreenWidth;
 	if (y < 0) y = 0;
 	if (y >= m_nScreenHeight) y = m_nScreenHeight;
 }
 
-void GameEngine::DrawLine(int x1, int y1, int x2, int y2, short c, short col)
-{
+void GameEngine::DrawLine(int x1, int y1, int x2, int y2, short c, short col) {
 	int x, y, dx, dy, dx1, dy1, px, py, xe, ye, i;
 	dx = x2 - x1; dy = y2 - y1;
 	dx1 = abs(dx); dy1 = abs(dy);
 	px = 2 * dy1 - dx1;	py = 2 * dx1 - dy1;
-	if (dy1 <= dx1)
-	{
-		if (dx >= 0)
-		{
+	if (dy1 <= dx1) {
+		if (dx >= 0) {
 			x = x1; y = y1; xe = x2;
 		}
-		else
-		{
+		else {
 			x = x2; y = y2; xe = x1;
 		}
 
 		Draw(x, y, c, col);
 
-		for (i = 0; x < xe; i++)
-		{
+		for (i = 0; x < xe; i++) {
 			x = x + 1;
 			if (px < 0)
 				px = px + 2 * dy1;
-			else
-			{
+			else {
 				if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) y = y + 1; else y = y - 1;
 				px = px + 2 * (dy1 - dx1);
 			}
 			Draw(x, y, c, col);
 		}
 	}
-	else
-	{
-		if (dy >= 0)
-		{
+	else {
+		if (dy >= 0) {
 			x = x1; y = y1; ye = y2;
 		}
-		else
-		{
+		else {
 			x = x2; y = y2; ye = y1;
 		}
 
 		Draw(x, y, c, col);
 
-		for (i = 0; y < ye; i++)
-		{
+		for (i = 0; y < ye; i++) {
 			y = y + 1;
 			if (py <= 0)
 				py = py + 2 * dx1;
-			else
-			{
+			else {
 				if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) x = x + 1; else x = x - 1;
 				py = py + 2 * (dx1 - dy1);
 			}
@@ -212,7 +190,7 @@ void GameEngine::ClearCollsionMatrix() {
 }
 
 void GameEngine::SetCollisionMatrix(int x, int y, bool state) {
-	if (x >= 0 && x < m_nScreenWidth && y >= 0 && y < m_nScreenHeight)
+	if (x >= 0 && x < m_nScreenWidth && y >= 0 && y < m_nScreenHeight) 
 	{
 		collisionMatrix[y * m_nScreenWidth + x] = state;
 	}
@@ -240,16 +218,15 @@ void GameEngine::UpdateCollisionMatrix() {
 }
 
 
-GameEngine::~GameEngine()
-{
+GameEngine::~GameEngine() {
 	SetConsoleActiveScreenBuffer(m_hOriginalConsole);
 	delete[] m_bufScreen;
+	m_bufScreen = nullptr;
 }
 
 
 
-void GameEngine::Start()
-{
+void GameEngine::Start() {
 	// Start the thread
 	m_bAtomActive = true;
 	std::thread t = std::thread(&GameEngine::GameThread, this);
@@ -257,8 +234,7 @@ void GameEngine::Start()
 	// Wait for thread to be exited
 	t.join();
 }
-void GameEngine::GameThread()
-{
+void GameEngine::GameThread() {
 	// Create user resources as part of this thread
 	if (!OnUserCreate())
 		m_bAtomActive = false;
@@ -266,10 +242,8 @@ void GameEngine::GameThread()
 	auto tp1 = std::chrono::system_clock::now();
 	auto tp2 = std::chrono::system_clock::now();
 
-	while (m_bAtomActive)
-	{
-		while (m_bAtomActive)
-		{
+	while (m_bAtomActive) {
+		while (m_bAtomActive) {
 			// Handle Timing
 			tp2 = std::chrono::system_clock::now();
 			std::chrono::duration<float> elapsedTime = tp2 - tp1;
@@ -277,23 +251,19 @@ void GameEngine::GameThread()
 			float fElapsedTime = elapsedTime.count();
 
 			// Handle Keyboard Input
-			for (int i = 0; i < 256; i++)
-			{
+			for (int i = 0; i < 256; i++) {
 				m_keyNewState[i] = GetAsyncKeyState(i);
 
 				m_keys[i].bPressed = false;
 				m_keys[i].bReleased = false;
 
-				if (m_keyNewState[i] != m_keyOldState[i])
-				{
+				if (m_keyNewState[i] != m_keyOldState[i]) {
 					//https://stackoverflow.com/questions/2746817/what-does-the-0x80-code-mean-when-referring-to-keyboard-controls
-					if (m_keyNewState[i] & 0x8000)
-					{
+					if (m_keyNewState[i] & 0x8000) {
 						m_keys[i].bPressed = !m_keys[i].bHeld;
 						m_keys[i].bHeld = true;
 					}
-					else
-					{
+					else {
 						m_keys[i].bReleased = true;
 						m_keys[i].bHeld = false;
 					}
@@ -317,13 +287,11 @@ void GameEngine::GameThread()
 
 
 		// Allow the user to free resources if they have overrided the destroy function
-		if (OnUserDestroy())
-		{
+		if (OnUserDestroy()) {
 			// User has permitted destroy, so exit and clean up
 			m_cvGameFinished.notify_one();
 		}
-		else
-		{
+		else {
 			// User denied destroy for some reason, so continue running
 			m_bAtomActive = true;
 		}
@@ -331,40 +299,34 @@ void GameEngine::GameThread()
 }
 
 
-int GameEngine::ScreenWidth()
-{
+int GameEngine::ScreenWidth() {
 	return m_nScreenWidth;
 }
-int GameEngine::ScreenHeight()
-{
+int GameEngine::ScreenHeight() {
 	return m_nScreenHeight;
 }
 
 
-
-	// Optional for clean up 
+// Optional for clean up 
 bool GameEngine::OnUserDestroy() { return true; }
 
 GameEngine::sKeyState GameEngine::GetKey(int nKeyID) { return m_keys[nKeyID]; }
 bool GameEngine::IsFocused() { return m_bConsoleInFocus; }
 
 
-	//DEBUGGER
-int GameEngine::Error(const wchar_t* msg)
-{
+//DEBUGGER
+int GameEngine::Error(const wchar_t* msg) {
 	wchar_t buf[256];
 	FormatMessage(FORMAT_MESSAGE_FROM_SYSTEM, NULL, GetLastError(), MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), buf, 256, NULL);
 	SetConsoleActiveScreenBuffer(m_hOriginalConsole);
 	wprintf(L"ERROR: %s\n\t%s\n", msg, buf);
 	return 0;
 }
-BOOL GameEngine::CloseHandler(DWORD evt)
-{
+BOOL GameEngine::CloseHandler(DWORD evt) {
 	// Note this gets called in a seperate OS thread, so it must
 	// only exit when the game has finished cleaning up, or else
 	// the process will be killed before OnUserDestroy() has finished
-	if (evt == CTRL_CLOSE_EVENT)
-	{
+	if (evt == CTRL_CLOSE_EVENT) {
 		m_bAtomActive = false;
 
 		// Wait for thread to be exited

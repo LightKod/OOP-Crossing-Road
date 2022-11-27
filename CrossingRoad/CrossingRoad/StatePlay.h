@@ -1,4 +1,6 @@
 #pragma once
+#ifndef _STATE_PLAY_H_
+#define _STATE_PLAY_H_
 #include "CrossingRoadGame.h"
 #include "Road.h"
 #include "River.h"
@@ -11,7 +13,7 @@
 
 using namespace std;
 
-class StatePlay : public CrossingRoadGame::State
+class StatePlay : public CrossingRoadGame::State 
 {
 private:
 	int optionIndex = 0;
@@ -46,3 +48,5 @@ private:
 	Data* ExportGameData();
 	
 };
+
+#endif // !_STATE_PLAY_H_
