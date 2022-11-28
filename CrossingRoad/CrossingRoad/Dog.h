@@ -45,6 +45,7 @@ private:
 	bool s_CanMove = 1;
 	bool m_OnRight = 1;
 
+	Sound dogsound;
 };
 
 #endif // !_DOG_H_

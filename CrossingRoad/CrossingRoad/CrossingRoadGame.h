@@ -25,7 +25,8 @@ class CrossingRoadGame : public GameEngine {
 
 public:
 	static Sound sCreditSound;
-	
+	Sound BGSound;
+	bool BGMusicOption=true;
 	class State {
 	protected:
 		CrossingRoadGame* game = nullptr;

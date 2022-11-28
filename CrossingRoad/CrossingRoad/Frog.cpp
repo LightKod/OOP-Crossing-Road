@@ -17,25 +17,25 @@ Frog::Frog(CrossingRoadGame* game)
 	s_CanMove = 1;
 	g_Dir = MOVING_DIRECTION::INVALID;
 	g_State = ANIMATION_STATE::START;
-	frogsound.OpenFrogSound();
+	frogsound.OpenBounceSound();
 }
 
 void Frog::Update(float fElapsedTime) {
 	if (game->m_keys[VK_W].bReleased) {
 		if(this->MoveUp())
-			frogsound.PlayFrogSound();
+			frogsound.PlayBounceSound();
 	}
 	if (game->m_keys[VK_S].bReleased) {
 		if(this->MoveDown())
-			frogsound.PlayFrogSound();
+			frogsound.PlayBounceSound();
 	}
 	if (game->m_keys[VK_A].bReleased) {
 		if(this->MoveLeft())
-			frogsound.PlayFrogSound();
+			frogsound.PlayBounceSound();
 	}
 	if (game->m_keys[VK_D].bReleased) {
 		if(this->MoveRight())
-			frogsound.PlayFrogSound();
+			frogsound.PlayBounceSound();
 	}
 	
 	CheckCollided();

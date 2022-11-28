@@ -183,13 +183,13 @@ public:
 
 class Sound {
 public:
-	void OpenFrogSound() {
-		mciSendString(TEXT("open \"sound/frog bounce.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	void OpenBounceSound() {
+		mciSendString(TEXT("open \"sound/bounce.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
 	void CloseSound() {
 		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
 	}
-	void PlayFrogSound() {
+	void PlayBounceSound() {
 		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
 	}
 	void OpenImpactsSound() {
@@ -225,6 +225,14 @@ public:
 	}
 	void CloseCreditSound() {
 		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
+	}
+	void OpenPlaySound()
+	{
+		mciSendString(TEXT("open \"sound/Play Sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	}
+	void PlayPlaySound()
+	{
+		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
 	}
 
 };
@@ -299,7 +307,6 @@ public:
 	virtual bool OnUserDestroy();
 
 public:
-	Sound Effects;
 
 	struct sKeyState {
 		bool bPressed;

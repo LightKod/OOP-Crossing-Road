@@ -10,26 +10,32 @@ Dog::Dog(CrossingRoadGame* game)
 	m_OnRight = 1;
 	g_Dir = MOVING_DIRECTION::INVALID;
 	g_State = ANIMATION_STATE::START;
+	game->BGSound.CloseSound();
+	dogsound.OpenBounceSound();
 }
 
 void Dog::Update(float fElapsedTime) {
 	if (game->m_keys[VK_W].bReleased) {
 		if (this->MoveUp()) {
+			dogsound.PlayBounceSound();
 			//
 		}
 	}
 	if (game->m_keys[VK_S].bReleased) {
 		if (this->MoveDown()) {
+			dogsound.PlayBounceSound();
 			//
 		}
 	}
 	if (game->m_keys[VK_A].bReleased) {
 		if (this->MoveLeft()) {
+			dogsound.PlayBounceSound();
 			//
 		}
 	}
 	if (game->m_keys[VK_D].bReleased) {
 		if (this->MoveRight()) {
+			dogsound.PlayBounceSound();
 			//
 		}
 	}
@@ -69,6 +75,7 @@ void Dog::Draw() {
 void Dog::CheckCollided() {
 	if (game->CheckCollision(x, y, width, height)) {
 		p_State = PLAYER_STATE::DEAD;
+		dogsound.CloseSound();
 	}
 }
 
