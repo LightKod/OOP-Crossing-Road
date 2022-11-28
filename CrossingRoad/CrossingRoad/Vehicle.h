@@ -1,6 +1,7 @@
 #pragma once
 #include "CrossingRoadGame.h"
-
+#include <string>
+#include <sstream>
 class Vehicle : public CrossingRoadGame::Object
 {
 protected:
@@ -16,11 +17,29 @@ public:
 	Vehicle(CrossingRoadGame* game, int x, int y) : CrossingRoadGame::Object(game, x, y, width = 8, height = 8) {}
 	Vehicle(CrossingRoadGame* game,int x, int y, float speed) : CrossingRoadGame::Object(game, x, y, width = 8, height = 8) {
 		this->speed = speed;
+		id = L'C';
 	}
 	Vehicle(CrossingRoadGame* game, int x, int y, float speed, COLOUR primary, COLOUR dark) :Object(game, x, y, width = 8, height = 8) {
 		primaryColor = primary;
 		darkColor = dark;
 		this->speed = speed;
+		id = L'C';
+	}
+	Vehicle(CrossingRoadGame* game, wstring dataString) : Object(game) {
+		wstringstream stream(dataString);
+		wstring temp;
+		getline(stream, temp, L'|');
+		x = stoi(temp);
+		getline(stream, temp, L'|');
+		y = stoi(temp);
+		getline(stream, temp, L'|');
+		speed = stof(temp);
+		getline(stream, temp, L'|');
+		primaryColor = (COLOUR)stoi(temp);
+		getline(stream, temp, L'|');
+		darkColor = (COLOUR)stoi(temp);
+
+		id = L'C';
 	}
 
 	//Viet lai ham draw de ve
@@ -32,7 +51,7 @@ public:
 
 	virtual wstring GetData() {
 		wstring idStr(1, id);
-		wstring data = idStr + L"|" + to_wstring(x) + L"|" + to_wstring(speed) + L"|" + to_wstring(primaryColor) + L"|" + to_wstring(darkColor) + L"|";
+		wstring data = idStr + L"|" + to_wstring(x) + L"|" + to_wstring(y) + L"|" + to_wstring(speed) + L"|" + to_wstring(primaryColor) + L"|" + to_wstring(darkColor) + L"|";
 		return data;
 	}
 };

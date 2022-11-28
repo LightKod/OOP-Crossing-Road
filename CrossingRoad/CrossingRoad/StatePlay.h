@@ -9,7 +9,11 @@
 #include "RestLane.h"
 #include "Data.h"
 #include <vector>
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "StateDead.h"
+#include "TrafficLane.h"
 
 using namespace std;
 
@@ -17,13 +21,21 @@ class StatePlay : public CrossingRoadGame::State
 {
 private:
 	int optionIndex = 0;
-	int level = 0;
 	float deltaTime = 0;
+
 	vector<Lane*> lanes;
 	Player* pPlayer = nullptr;
 	bool pause = false;
+	bool endState = false;
 
-	char laneSeed[10] = { 'R','R', 'R', 'R', 'R', 'R', 'W','W' ,'W' ,'W' };
+	int level = 0;
+	int score;
+	wstring date;
+
+	wstring saveName;
+
+
+	char laneSeed[10] = { 'R','R', 'R', 'R', 'G', 'G', 'T','T' ,'W' ,'W' };
 
 public:
 	StatePlay(CrossingRoadGame* game) : State(game) {};
@@ -42,14 +54,19 @@ private:
 	void LVUP_BotColor(const int& x, const int& y, const short& fg, const short& bg);
 	void LVUP_MidLine(const int& x, const int& y);
 
+	void DrawSaveBox(const int& x, const int& y);
+
 	void UpdateCollisionMatrix();
 	void UpdateGameScreen();
 	void UpdateGameState(float fElapsedTime);
 	void HandleInput();
+	void HandleSaveInput();
 
 	void GenerateNewLevel();
 	void ClearCurrentLevel();
 	void NextLevel();
+
+	void LoadLevel(wstring fileName);
 
 	Data* ExportGameData();
 	

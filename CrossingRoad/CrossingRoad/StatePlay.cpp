@@ -9,8 +9,8 @@ bool StatePlay::OnStateEnter() {
 	}
 	pPlayer->p_State = Player::PLAYER_STATE::ALIVE;
 
-	GenerateNewLevel();
-
+	LoadLevel(L"text");
+	//GenerateNewLevel();
 	return true;
 }
 bool StatePlay::OnStateExit() {
@@ -18,13 +18,17 @@ bool StatePlay::OnStateExit() {
 }
 
 bool StatePlay::Update(float fElapsedTime) {
+	HandleInput();
+	if (endState) return true;
+	if (pause) {
+		UpdateGameScreen();
+		return true;
+	}
+	
 	if (pPlayer->GetY() == 0) {
 		NextLevel();
 	}
-
-	HandleInput();
 	//UpdateGameScreen();
-	if (pause) return true;
 	UpdateGameState(fElapsedTime);
 
 	if (pPlayer->CheckPlayerState()) {
@@ -49,6 +53,10 @@ void StatePlay::UpdateCollisionMatrix() {
 }
 
 void StatePlay::UpdateGameScreen() {
+	if (pause) {
+		DrawSaveBox(32, 32);
+		return;
+	}
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 	for (int i = 0; i < lanes.size(); i++) {
 		lanes[i]->Draw();
@@ -58,7 +66,7 @@ void StatePlay::UpdateGameScreen() {
 	pPlayer->Draw();
 
 	if (pause) {
-		string2Pixel(L"PAUSE", 0, 0, FG_WHITE, BG_BLUE);
+		DrawSaveBox(32, 32);
 	}
 
 	string2Pixel(to_wstring(level), 140, 0, FG_WHITE, BG_BLUE);
@@ -80,22 +88,36 @@ void StatePlay::GenerateNewLevel() {
 	int laneSeedCount = sizeof(laneSeed);
 	
 	srand(seed);
+
+	wchar_t lastId = L' ';
 	//Starting Lane
 	lanes.push_back(new RestLane(game, 0));
 	for (int i = 0; i < 10; i++) {
 		int random = rand() % laneSeedCount;
 		int row = 8 * (i + 1);
-		switch (laneSeed[random]) {
+		wchar_t laneId = laneSeed[random];
+		switch (laneId) {
 		case 'R':
 			lanes.push_back(new Road(game, row));
 			break;
 		case 'W':
-			lanes.push_back(new River(game, row));
+			if (lastId == L'W') {
+				laneId = L'R';
+				lanes.push_back(new Road(game, row));
+			}else
+				lanes.push_back(new River(game, row));
+			break;
+		case 'G':
+			lanes.push_back(new RestLane(game, row));
+			break;
+		case 'T':
+			lanes.push_back(new TrafficLane(game, row));
 			break;
 		default:
 			lanes.push_back(new Road(game, row));
 			break;
 		}
+		lastId = laneId;
 	}
 	//Ending Lane
 	lanes.push_back(new RestLane(game, 88));
@@ -123,17 +145,62 @@ void StatePlay::UpdateGameState(float fElapsedTime) {
 
 
 void StatePlay::HandleInput() {
-	if (game->GetKey(VK_SPACE).bPressed) {
-		//pause = !pause;
-		NextLevel();
+	HandleSaveInput();
+}
+
+void StatePlay::HandleSaveInput() {
+	if (game->GetKey(VK_SPACE).bPressed && !pause) {
+		pause = !pause;
+		saveName = L"   ";
 	}
-	if (game->GetKey(VK_CAPITAL).bReleased) {
-		ExportGameData();
+	if (pause) {
+		if (game->GetKey(VK_ESCAPE).bPressed) {
+			switch (optionIndex)
+			{
+			case 0:
+				pause = !pause;
+				break;
+			case 1:
+			case 2:
+			case 3:
+				optionIndex--;
+				saveName[optionIndex] = L' ';
+				break;
+			default:
+				break;
+			}
+		}
+
+		if (optionIndex >= 0 && optionIndex < 3) {
+			for (int i = 0x41; i < 0x5A; i++) {
+				if (game->GetKey(i).bPressed) {
+					wchar_t temp = (wchar_t)i;
+					saveName[optionIndex] = temp;
+					optionIndex++;
+				}
+			}
+		}
+
+		if (game->GetKey(VK_SPACE).bPressed && optionIndex == 3) {
+			ExportGameData();
+			game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_WHITE);
+			string2Pixel(L"SAVED", 160 / 2 - 16, 96 / 2, COLOUR::FG_BLACK, COLOUR::BG_WHITE);
+			game->ConsOutput();
+			endState = true;
+			this_thread::sleep_for(std::chrono::milliseconds(2000));
+
+			game->SetState(new StateMenu(game));
+			return;
+		}
 	}
 }
 
 Data* StatePlay::ExportGameData() {
 	Data* data = new Data();
+	data->m_Name = saveName;
+	data->m_Date = L"11/28";
+	data->m_Level = to_wstring(level);
+	data->m_Score = to_wstring(score);
 	for (int i = 0; i < 12; i++) {
 		data->SetLaneData(i, lanes[i]->GetData());
 	}
@@ -141,6 +208,51 @@ Data* StatePlay::ExportGameData() {
 	return data;
 }
 
+void StatePlay::LoadLevel(wstring fileName) {
+	wifstream wIfs(Data::FormatDataPath(fileName));
+	wstring temp;
+	// Load data process
+	// Name
+	getline(wIfs, temp);
+
+	// Level
+	getline(wIfs, temp);
+	level = stoi(temp);
+
+	// Date
+	getline(wIfs, temp);
+
+	// Score
+	getline(wIfs, temp);
+	score = stoi(temp);
+
+	for (int i = 0; i < 12; i++)
+	{
+		getline(wIfs, temp);
+		wchar_t laneId = temp[0];
+		getline(wIfs, temp, L'#');
+		switch (laneId) {
+		case L'R':
+			lanes.push_back(new Road(game, temp));
+			break;
+		case L'W':
+			lanes.push_back(new River(game, temp));
+			break;
+		case L'G':
+			lanes.push_back(new RestLane(game, temp));
+			break;
+		case L'T':
+			lanes.push_back(new TrafficLane(game, temp));
+			break;
+		}
+
+		getline(wIfs, temp);
+	}
+
+}
+
+
+//Draw Levelup Banner
 void StatePlay::LevelUp(const int& x, const int& y) {
 	// Vẽ cổng
 	game->Fill(0, y -  4, game->ScreenWidth(), y -  4, L' ', COLOUR::BG_DARK_YELLOW);
@@ -402,4 +514,36 @@ void StatePlay::LVUP_MidLine(const int& x, const int& y) {
 	game->DrawLine(x + 66, y + 8, x + 71, y + 8, 9608, FG_DARK_GREY + BG_DARK_GREY);
 	game->DrawLine(x + 73, y + 8, x + 75, y + 8, 9608, FG_DARK_GREY + BG_DARK_GREY);
 
+}
+
+
+//Draw save box
+
+void StatePlay::DrawSaveBox(const int& x, const int& y) {
+	game->Fill(x + 0, y + 0, x + 96, y + 48, L' ', BG_BLACK);
+	game->Fill(x + 1, y + 1, x + 96 - 1, y + 48 - 1, L' ', BG_BLUE);
+
+	game->Fill(x + 36, y + 36, x + 59, y + 44, L' ', BG_BLACK);
+	game->Fill(x + 18, y + 31, x + 29, y + 31, L' ', BG_BLACK);
+	game->Fill(x + 42, y + 31, x + 53, y + 31, L' ', BG_BLACK);
+	game->Fill(x + 66, y + 31, x + 77, y + 31, L' ', BG_BLACK);
+	this->string2Pixel(L"Enter name", x + 24, y + 4, FG_BLACK, BG_BLUE);
+	this->string2Pixel(L"OK", x + 43, y + 39, FG_WHITE, BG_BLACK);
+	int offSet = 2;
+	this->char2Pixel(saveName[0], x + 22, y + 26, FG_BLACK, BG_BLUE, offSet);
+	this->char2Pixel(saveName[1], x + 46, y + 26, FG_BLACK, BG_BLUE, offSet);
+	this->char2Pixel(saveName[2], x + 70, y + 26, FG_BLACK, BG_BLUE, offSet);
+
+	switch (optionIndex)
+	{
+	case 0:
+	case 1:
+	case 2:
+		game->Fill(x + 23 + 24 * optionIndex, y + 22, x + 24 + 24 * optionIndex, y + 23, L' ', BG_BLACK);
+		break;
+	case 3:
+		game->Fill(x + 64 , y + 40, x + 66, y + 41, L' ', BG_BLACK);
+	default:
+		break;
+	}
 }

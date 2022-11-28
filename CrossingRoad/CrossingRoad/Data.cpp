@@ -1,6 +1,6 @@
 #include "Data.h"
 
-wstring Data::FormatDataPath(const wstring& path) const {
+wstring Data::FormatDataPath(const wstring& path) {
 	return L"data/" + path + L".txt";
 }
 void Data::LoadData(const wstring& path) {

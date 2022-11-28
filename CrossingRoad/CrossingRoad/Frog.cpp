@@ -76,7 +76,7 @@ void Frog::Draw() {
 }
 
 void Frog::CheckCollided() {
-	if (game->CheckCollision(x, y, width, height)) {
+	if (game->CheckCollision(x + 2, y + 2, width - 2, height - 2)) {
 		p_State = PLAYER_STATE::DEAD;
 		frogsound.CloseSound();
 	}

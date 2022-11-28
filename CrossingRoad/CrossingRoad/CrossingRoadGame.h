@@ -68,10 +68,11 @@ public:
 	public:
 		//Contructors de Object tuong tac duoc void Game
 		Object(CrossingRoadGame* game) : Object(game, 0, 0, 0, 0) {}
-		Object(CrossingRoadGame* game, int x, int y, int width, int height) 
-		{ this->game = game; this->x = x; this->y = y; this->width = width; this->height = height; }
+		Object(CrossingRoadGame* game, int x, int y, int width, int height)
+		{
+			this->game = game; this->x = x; this->y = y; this->width = width; this->height = height;
+		}
 		Object(CrossingRoadGame* game, int x, int y) : Object(game, x, y, 0, 0) {}
-
 		//Getters
 		int GetX() { return x; };
 		int GetY() { return y; };

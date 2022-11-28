@@ -4,6 +4,8 @@
 #include "Vehicle.h"
 #include <cstdlib>
 #include <ctime>
+#include <string>
+#include <sstream>
 
 #include <vector>
 
@@ -11,6 +13,9 @@ using namespace std;
 
 class Road : public Lane
 {
+private:
+	float count = 0;
+	bool stop = false;
 public:
 	Road(CrossingRoadGame* game, int row) :Lane(game, row) {
 		static unsigned int seed = time(NULL);
@@ -48,7 +53,14 @@ public:
 		vehicles.push_back(new Vehicle(game,randomValue2, row, speed, primary, secondary));
 		id = L'R';
 	}
+	Road(CrossingRoadGame* game, wstring dataString) : Lane(game, dataString) {
+		for (int i = 0; i < 14; i++)
+		{
+			tiles.push_back(new RoadTile(game, 8 * i, y));
+		}
 
+		id = L'R';
+	}
 	void GetRandomColor(COLOUR& primary, COLOUR& secondary, unsigned int seed) {
 		srand(seed);
 		int randomValue = rand() % 6;
@@ -85,20 +97,24 @@ public:
 			break;
 		}
 	}
-	void Draw() {
-		Lane::Draw();
-		for (int i = 0; i < vehicles.size(); i++) {
-			vehicles[i]->Draw();
-		}
-	}
 	void Update(float fElapsedTime) {
+		/*count += fElapsedTime;
+		if (count > 2.0f && !stop) {
+			stop = !stop;
+			count = 0;
+		}
+		else if (count > 1.0f && stop) {
+			stop = !stop;
+			count = 0;
+		}*/
+		if (stop) return;
 		Lane::Update(fElapsedTime);
 		for (int i = 0; i < vehicles.size(); i++) {
 			vehicles[i]->Update(fElapsedTime);
 		}
 	}
 
-	virtual void SetCollisionMatrix() {
+	void SetCollisionMatrix() {
 		for (int i = 0; i < vehicles.size(); i++) {
 			vehicles[i]->SetCollisionMatrix();
 		}

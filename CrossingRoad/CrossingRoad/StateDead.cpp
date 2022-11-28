@@ -1,6 +1,7 @@
 #include "StateDead.h"
-bool StateDead::OnStateEnter() {
-	ambulance=new Ambulance(game, 0, pPlayer->GetY());
+bool StateDead::OnStateEnter()
+{
+	ambulance=new Ambulance(game, 0, pPlayer->GetY(), 0.01);
 	game->Fill(0, 0, 120, 96, L' ', COLOUR::BG_BLUE);
 	pPlayer->Standing();
 	ambulance->Draw();
@@ -84,7 +85,7 @@ void StateDead::DeadAnimation(float fElapsedTime,bool Option)
 void StateDead::DrawSavedScreen()
 {
 	game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_WHITE);
-	string2Pixel(L"NICE", 160 / 2-8, 96 / 2, COLOUR::FG_YELLOW, COLOUR::BG_WHITE);
+	string2Pixel(L"TRY AGAIN", 160 / 2 - 20, 96 / 2, COLOUR::FG_BLACK, COLOUR::BG_WHITE);
 }
 void StateDead::DrawDeadScreen()
 {

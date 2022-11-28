@@ -102,14 +102,8 @@
     <ClCompile Include="Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateLB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="StateDead.cpp">
       <Filter>Source Files\States</Filter>
-    </ClCompile>
-    <ClCompile Include="StateExit.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GrassTile.cpp">
       <Filter>Source Files\Objects\Tiles</Filter>
@@ -117,17 +111,26 @@
     <ClCompile Include="RestLane.cpp">
       <Filter>Source Files\Objects\Lanes</Filter>
     </ClCompile>
-    <ClCompile Include="StateCredit.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Dog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Ambulance.cpp">
       <Filter>Source Files\Objects\Vehicles</Filter>
     </ClCompile>
     <ClCompile Include="Duck.cpp">
       <Filter>Source Files\Objects\Vehicles</Filter>
+    </ClCompile>
+    <ClCompile Include="Dog.cpp">
+      <Filter>Source Files\Objects\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="StateCredit.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateExit.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="StateLB.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="TrafficLane.cpp">
+      <Filter>Source Files\Objects\Lanes</Filter>
     </ClCompile>
     <ClCompile Include="StateSetting.cpp">
       <Filter>Source Files</Filter>
@@ -182,14 +185,8 @@
     <ClInclude Include="Data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateLB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="StateDead.h">
       <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="StateExit.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GrassTile.h">
       <Filter>Header Files\Objects\Tiles</Filter>
@@ -197,17 +194,26 @@
     <ClInclude Include="RestLane.h">
       <Filter>Header Files\Objects\Lanes</Filter>
     </ClInclude>
-    <ClInclude Include="StateCredit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Dog.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Ambulance.h">
       <Filter>Header Files\Objects\Vehicles</Filter>
     </ClInclude>
     <ClInclude Include="Duck.h">
       <Filter>Header Files\Objects\Vehicles</Filter>
+    </ClInclude>
+    <ClInclude Include="Dog.h">
+      <Filter>Header Files\Objects\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="StateCredit.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateExit.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateLB.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TrafficLane.h">
+      <Filter>Header Files\Objects\Lanes</Filter>
     </ClInclude>
     <ClInclude Include="StateSetting.h">
       <Filter>Header Files</Filter>

@@ -7,13 +7,27 @@ class Duck: public Vehicle
 	float time = 0;
 	bool spriteIndex=false;
 public:
-	Duck(CrossingRoadGame* game, int x, int y) : Vehicle(game, x, y)
-	{
+	Duck(CrossingRoadGame* game, int x, int y, float speed) : Vehicle(game, x, y, speed) {
 		width = 16;
-	};
-	Duck(CrossingRoadGame* game, int x, int y, float speed) : Vehicle(game, x, y) {
-		width = 16;
+		height = 8;
 		this->speed = speed;
+		id = L'D';
+	}
+	Duck(CrossingRoadGame* game, wstring dataString) : Vehicle(game, dataString) {
+		wstringstream stream(dataString);
+		wstring temp;
+		getline(stream, temp, L'|');
+		x = stoi(temp);
+		getline(stream, temp, L'|');
+		y = stoi(temp);
+		getline(stream, temp, L'|');
+		speed = stof(temp);
+		getline(stream, temp, L'|');
+		primaryColor = (COLOUR)stoi(temp);
+		getline(stream, temp, L'|');
+		darkColor = (COLOUR)stoi(temp);
+
+		id = L'D';
 	}
 	void Draw()
 	{
@@ -70,7 +84,7 @@ public:
 		time += fElapsedTime;
 		if (speed > 0) {
 			if (time > speed) {
-				x = x - 1;
+				x = x - 8;
 				if (x + width < 0) {
 					x = game->GetGameWidth();
 				}
@@ -81,7 +95,7 @@ public:
 		else
 		{
 			if (time > (abs)(speed)) {
-				x = x + 1;
+				x = x + 8;
 				if (x > game->GetGameWidth()) {
 					x = 0;
 				}
@@ -90,6 +104,10 @@ public:
 			}
 		}
 
+	}
+
+	void SetCollisionMatrix() {
+		game->FillCollisionMatrix(x, y, x + width - 1, y + height - 1, false);
 	}
 };
 

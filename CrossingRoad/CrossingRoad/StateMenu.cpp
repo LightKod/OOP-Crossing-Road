@@ -17,7 +17,7 @@ bool StateMenu::Update(float fElapsedTime) {
 	this->m_s_DeltaTime += fElapsedTime;
 
 	// Xử lý chuyển state
-	if (game->GetKey(VK_SPACE).bReleased) {
+	if (game->GetKey(VK_SPACE).bPressed) {
 		// Hiệu ứng chuyển state
 		p_Menu->SplashAnimation(game, this->m_s_OptionIdx);
 

@@ -164,6 +164,7 @@
     <ClCompile Include="StatePlay.cpp" />
     <ClCompile Include="StateSetting.cpp" />
     <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TrafficLane.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="WaterTile.cpp" />
   </ItemGroup>
@@ -192,6 +193,7 @@
     <ClInclude Include="StatePlay.h" />
     <ClInclude Include="StateSetting.h" />
     <ClInclude Include="Tile.h" />
+    <ClInclude Include="TrafficLane.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="WaterTile.h" />
   </ItemGroup>

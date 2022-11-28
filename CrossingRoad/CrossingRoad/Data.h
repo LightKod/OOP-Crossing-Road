@@ -18,9 +18,9 @@ public:
 	void SaveData(const wstring);
 
 	void SetLaneData(int index, wstring data);
+	static wstring FormatDataPath(const wstring&);
 
 protected:
-	wstring FormatDataPath(const wstring&) const;
 
 	wstring m_Name;
 	wstring m_Level;
@@ -31,6 +31,7 @@ protected:
 
 public:
 	friend class StateLoad;
+	friend class StatePlay;
 	friend class StateLB;
 
 };

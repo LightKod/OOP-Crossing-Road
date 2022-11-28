@@ -3,7 +3,7 @@
 class Ambulance :public Vehicle
 {
 public:
-	Ambulance(CrossingRoadGame* game, int x, int y) : Vehicle(game, x, y) {};
+	Ambulance(CrossingRoadGame* game, int x, int y, float speed) : Vehicle(game, x, y, speed) {};
 	void Draw();
 	void AmbulanceUpdate(float fElapsedTime, bool STOP_OR_CONTINUE);
 };
