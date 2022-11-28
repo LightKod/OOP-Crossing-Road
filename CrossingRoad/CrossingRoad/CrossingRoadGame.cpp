@@ -6,6 +6,7 @@
 #include "StateMenu.h"
 int optionIndex = 0;
 static CrossingRoadGame::State* state;
+int CrossingRoadGame::s_CharIdx = 0;
 
 bool CrossingRoadGame::OnUserCreate()
 {

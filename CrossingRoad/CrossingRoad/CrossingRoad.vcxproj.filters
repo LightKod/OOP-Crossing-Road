@@ -129,6 +129,9 @@
     <ClCompile Include="Duck.cpp">
       <Filter>Source Files\Objects\Vehicles</Filter>
     </ClCompile>
+    <ClCompile Include="StateSetting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="Duck.h">
       <Filter>Header Files\Objects\Vehicles</Filter>
+    </ClInclude>
+    <ClInclude Include="StateSetting.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

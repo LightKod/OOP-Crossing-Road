@@ -1,9 +1,14 @@
 ﻿#include "StatePlay.h"
 
 bool StatePlay::OnStateEnter() {
-	//pPlayer = new Frog(game);
+	if (CrossingRoadGame::s_CharIdx == 0) {
+		pPlayer = new Frog(game);
+	}
+	else if (CrossingRoadGame::s_CharIdx == 1) {
+		pPlayer = new Dog(game);
+	}
+	pPlayer->p_State = Player::PLAYER_STATE::ALIVE;
 
-	pPlayer = new Dog(game);
 	GenerateNewLevel();
 
 	return true;
@@ -23,6 +28,8 @@ bool StatePlay::Update(float fElapsedTime) {
 	UpdateGameState(fElapsedTime);
 
 	if (pPlayer->CheckPlayerState()) {
+		pPlayer->SetDefaultPosition();
+		pPlayer->p_State = Player::PLAYER_STATE::DEAD;
 		game->SetState(new StateDead(game, pPlayer));
 	}
 	else  {
@@ -58,6 +65,9 @@ void StatePlay::UpdateGameScreen() {
 }
 
 void StatePlay::NextLevel() {
+	UpdateGameScreen();
+	game->ConsOutput();
+
 	LevelUp();
 	ClearCurrentLevel();
 	GenerateNewLevel();
@@ -98,11 +108,11 @@ void StatePlay::ClearCurrentLevel() {
 		lanes.pop_back();
 		delete l;
 	}
+	
 }
 
 void StatePlay::UpdateGameState(float fElapsedTime) {
-	if (pPlayer->CheckPlayerState());
-	else {
+	if (!pPlayer->CheckPlayerState()) {
 		for (int i = 0; i < lanes.size(); i++) {
 			lanes[i]->Update(fElapsedTime);
 		}

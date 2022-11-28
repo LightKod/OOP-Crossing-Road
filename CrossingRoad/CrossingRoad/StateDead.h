@@ -14,7 +14,7 @@ class StateDead: public CrossingRoadGame::State
 	Ambulance* ambulance=nullptr;
 	//DUMMY
 	int h = 0;
-	bool DeadChoice;
+	bool DeadChoice=0;
 	float time = 0;
 	short col=COLOUR::BG_BLACK;
 	int m=0;

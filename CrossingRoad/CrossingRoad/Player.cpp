@@ -23,7 +23,8 @@ bool Player::SetX(const int& _x) {
 	return 1;
 }
 void Player::ResetPosition() {
-	this->SetY(GAME_SCREEN_LIMIT::BOT - s_CellSize);
+	this->SetX(40);
+	this->SetY(88);
 }
 void Player::Move(int xDir, int yDir) {
 	this->SetX(x + xDir);

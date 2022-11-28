@@ -1,6 +1,7 @@
 #include "Frog.h"
 
 bool Frog::s_CanMove = 1;
+int Frog::frameIdx = 0;
 
 Frog::Frog(CrossingRoadGame* game)
 	: Player(game,
@@ -8,9 +9,11 @@ Frog::Frog(CrossingRoadGame* game)
 		game->ScreenHeight() - s_CellSize,
 		s_CellSize, s_CellSize)
 {
-	sprAvatar = new olcSprite(L"spr/frog.spr");
+	if(!this->sprAvatar)
+		sprAvatar = new olcSprite(L"spr/frog.spr");
 
 	// Set up default state
+	frameIdx = 0;
 	s_CanMove = 1;
 	g_Dir = MOVING_DIRECTION::INVALID;
 	g_State = ANIMATION_STATE::START;
@@ -42,12 +45,12 @@ void Frog::Draw() {
 	switch (g_State) {
 	case ANIMATION_STATE::START:
 		Standing();
-		s_CanMove = 1;
+		if(p_State == PLAYER_STATE::ALIVE)
+			s_CanMove = 1;
 		return;
 
 	case ANIMATION_STATE::READY:
-		ReadyJumpAndLanding();
-		g_State = ANIMATION_STATE::JUMP;
+		ReadyHandle();
 		break;
 
 	case ANIMATION_STATE::JUMP:
@@ -55,8 +58,7 @@ void Frog::Draw() {
 		break;
 
 	case ANIMATION_STATE::LANDING:
-		ReadyJumpAndLanding();
-		g_State = ANIMATION_STATE::END;
+		LandingHandle();
 		break;
 
 	case ANIMATION_STATE::END:
@@ -70,7 +72,7 @@ void Frog::Draw() {
 	}
 
 	// pause thread
-	this_thread::sleep_for(std::chrono::milliseconds(25));
+	this_thread::sleep_for(std::chrono::milliseconds(25));// 25
 }
 
 void Frog::CheckCollided() {
@@ -80,38 +82,68 @@ void Frog::CheckCollided() {
 	}
 }
 
-void Frog::JumpHandle() {
-	static const int sFrameOfJumpState = 4;
-	static int frameIdx = 0;
+void Frog::SetDefaultPosition() {
+	this->SetX(40);
+	this->SetY(48);
+	s_CanMove = 0;
+	frameIdx = 0;
+	g_Dir = MOVING_DIRECTION::INVALID;
+	g_State = ANIMATION_STATE::START;
+}
 
+void Frog::ReadyHandle() {
+	ReadyJumpAndLanding();
+	g_State = ANIMATION_STATE::JUMP;
+}
+void Frog::LandingHandle() {
 	switch (g_Dir) {
 	case MOVING_DIRECTION::MOVING_UP:
-		this->Move(0, -s_CellSize / 8);
-		Jumping();
-		this->Move(0, -s_CellSize / 8);
+		this->Move(0, -2);
 		break;
 
 	case MOVING_DIRECTION::MOVING_DOWN:
-		this->Move(0, s_CellSize / 8);
-		Jumping();
-		this->Move(0, s_CellSize / 8);
+		this->Move(0, 2);
 		break;
 
 	case MOVING_DIRECTION::MOVING_LEFT:
-		this->Move(-s_CellSize / 8, 0);
-		Jumping();
-		this->Move(-s_CellSize / 8, 0);
+		this->Move(-2, 0);
 		break;
 
 	case MOVING_DIRECTION::MONIG_RIGHT:
-		this->Move(s_CellSize / 8, 0);
-		Jumping();
-		this->Move(s_CellSize / 8, 0);
+		this->Move(2, 0);
 		break;
 
 	default:
 		break;
 	}
+
+	ReadyJumpAndLanding();
+	g_State = ANIMATION_STATE::END;
+}
+void Frog::JumpHandle() {
+	static const int sFrameOfJumpState = 3;// 4
+
+	switch (g_Dir) {
+	case MOVING_DIRECTION::MOVING_UP:
+		this->Move(0, -2);
+		break;
+
+	case MOVING_DIRECTION::MOVING_DOWN:
+		this->Move(0, 2);
+		break;
+
+	case MOVING_DIRECTION::MOVING_LEFT:
+		this->Move(-2, 0);
+		break;
+
+	case MOVING_DIRECTION::MONIG_RIGHT:
+		this->Move(2, 0);
+		break;
+
+	default:
+		break;
+	}
+	Jumping();
 
 	if (++frameIdx >= sFrameOfJumpState) {
 		g_State = ANIMATION_STATE::LANDING;

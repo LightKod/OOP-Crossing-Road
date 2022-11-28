@@ -19,10 +19,12 @@ public:
 	{
 	}
 
-	virtual ~Player() = default;
+	virtual ~Player() {};
+	virtual void Standing() = 0;
 
 	virtual void Update(float fElapsedTime) = 0;
 	virtual void Draw() = 0;
+	virtual void SetDefaultPosition() = 0;
 
 	virtual int GetX() final { return x; }
 	virtual int GetY() final { return y; }
@@ -33,6 +35,7 @@ public:
 	virtual bool SetY(const int& _y) final;
 	virtual bool SetX(const int& _x) final;
 	virtual void ResetPosition() final;
+
 
 protected:
 	static const int s_CellSize;

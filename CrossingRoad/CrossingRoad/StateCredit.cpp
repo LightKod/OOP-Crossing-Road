@@ -352,7 +352,7 @@ void StateCredit::InstroduceInstructor() {
 	// clear screen
 	int tmpOffsetX = M_S_SRC_X0 + 2;
 	for (int i = 0; i < 18; i += 1) {
-		this_thread::sleep_for(std::chrono::milliseconds(45));
+		this_thread::sleep_for(std::chrono::milliseconds(26));
 
 		game->Fill(tmpOffsetX, M_S_SRC_Y0 + 25, tmpOffsetX + 7, M_S_SRC_Y1 - 1,
 			L' ', FG_CYAN + BG_CYAN);

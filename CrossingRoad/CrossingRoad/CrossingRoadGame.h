@@ -116,6 +116,8 @@ public:
 		ConsOutput();
 	}
 
+	static int s_CharIdx;
+
 };
 
 #endif // !_CROSSING_GAME_H_

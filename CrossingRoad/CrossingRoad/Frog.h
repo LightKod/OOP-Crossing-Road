@@ -12,8 +12,13 @@ public:
 	virtual void Draw();
 
 protected:
-	virtual void CheckCollided();
+	virtual void SetDefaultPosition();
+
+	virtual void ReadyHandle();
+	virtual void LandingHandle();
 	virtual void JumpHandle();
+
+	virtual void CheckCollided();
 
 	virtual void Standing();
 	virtual void ReadyJumpAndLanding();
@@ -32,6 +37,7 @@ private:
 	Sound frogsound;
 
 	static bool s_CanMove;
+	static int frameIdx;
 
 };
 

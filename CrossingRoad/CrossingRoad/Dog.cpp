@@ -40,7 +40,8 @@ void Dog::Draw() {
 	switch (g_State) {
 	case ANIMATION_STATE::START:
 		this->Standing();
-		s_CanMove = 1;
+		if (p_State == PLAYER_STATE::ALIVE)
+			s_CanMove = 1;
 		return;
 
 	case ANIMATION_STATE::READY:
@@ -69,6 +70,14 @@ void Dog::CheckCollided() {
 	if (game->CheckCollision(x, y, width, height)) {
 		p_State = PLAYER_STATE::DEAD;
 	}
+}
+
+void Dog::SetDefaultPosition() {
+	this->SetX(40);
+	this->SetY(48);
+	s_CanMove = 0;
+	g_Dir = MOVING_DIRECTION::INVALID;
+	g_State = ANIMATION_STATE::START;
 }
 
 void Dog::ReadyHandle() {

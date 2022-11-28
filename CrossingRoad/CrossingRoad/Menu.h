@@ -9,14 +9,14 @@ using namespace std;
 class Menu : public StateMenu
 {
 public:
-	void UpdateMenuUI(CrossingRoadGame* game, const int& opt,
+	virtual void UpdateMenuUI(CrossingRoadGame* game, const int& opt,
 		const int& innerOfset, const int& outerOfset);
-	void PressButtonAnimation(CrossingRoadGame* game, const int& x, 
+	virtual void PressButtonAnimation(CrossingRoadGame* game, const int& x,
 		const int& y, vector<wstring>& Strings);
 
 	Menu(CrossingRoadGame* game);
 
-	void SplashAnimation(CrossingRoadGame* game, const int& opt);
+	virtual void SplashAnimation(CrossingRoadGame* game, const int& opt);
 
 protected:
 	void UpdateMenuTitle(CrossingRoadGame*& game, const int& innerOfset, const int& outerOfset);

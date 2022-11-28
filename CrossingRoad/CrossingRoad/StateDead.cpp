@@ -1,62 +1,59 @@
 #include "StateDead.h"
-bool StateDead::OnStateEnter()
-{
+bool StateDead::OnStateEnter() {
 	ambulance=new Ambulance(game, 0, pPlayer->GetY());
 	game->Fill(0, 0, 120, 96, L' ', COLOUR::BG_BLUE);
-	pPlayer->Draw();
+	pPlayer->Standing();
 	ambulance->Draw();
 	return true;
 }
-bool StateDead::Update(float fElapsedTime)
-{
+bool StateDead::Update(float fElapsedTime) {
 	if (h == 0) {
 		DrawDeadBoard(fElapsedTime);
-		if (game->GetKey(VK_SPACE).bReleased)
-		{
-			switch (optionIndex)
-			{
-			case 0:
-			{
+		if (game->GetKey(VK_SPACE).bReleased) {
+			switch (optionIndex) {
+			case 0: {
 				h++;
 				DeadChoice = true;
 				break;
 			}
-			case 1:
-			{
+			case 1: {
 				h++;
 				DeadChoice = false;
 				break;
 			}
 			}
 		}
-		if (game->GetKey(VK_UP).bReleased)
-		{
+		if (game->GetKey(VK_UP).bReleased) {
 			optionIndex--;
 			if (optionIndex < 0)
 				optionIndex = 1;
 		}
-		if (game->GetKey(VK_DOWN).bReleased)
-		{
+		if (game->GetKey(VK_DOWN).bReleased) {
 			optionIndex++;
 			if (optionIndex >= 2)
 				optionIndex = 0;
 		}
-	}else DeadAnimation(fElapsedTime, DeadChoice);
+	}
+	else {
+		DeadAnimation(fElapsedTime, DeadChoice);
+	}
+
 	return true;
 }
 void StateDead::DeadAnimation(float fElapsedTime,bool Option)
 {
-	if (ambulance->GetX() == game->GetGameWidth()-8)
-	{
-		if (Option)
-		{
+	if (ambulance->GetX() == game->GetGameWidth()-8) {
+		if (Option) {
 			DrawSavedScreen();
 			time += fElapsedTime;
-			if (time > 2.0f)
+			if (time > 2.0f) {
+				// Reset player's position 
+				pPlayer->ResetPosition();
+
 				game->SetState(new StatePlay(game));
+			}
 		}
-		else
-		{
+		else {
 			DrawDeadScreen();
 			time += fElapsedTime;
 			if (time > 2.0f)
@@ -65,12 +62,11 @@ void StateDead::DeadAnimation(float fElapsedTime,bool Option)
 	}
 	else {
 		game->Fill(0, 0, 120, 96, L' ', COLOUR::BG_BLUE);
-		if (optionIndex != 2)
-		{
+		if (optionIndex != 2) {
 			if (pPlayer->GetX() <= ambulance->GetX())
 				if (Option);
-				else pPlayer->Draw();
-			else pPlayer->Draw();
+				else pPlayer->Standing();
+			else pPlayer->Standing();
 			ambulance->Draw();
 			ambulance->AmbulanceUpdate(fElapsedTime, true);
 			if (Option)

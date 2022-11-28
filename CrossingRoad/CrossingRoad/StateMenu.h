@@ -15,12 +15,20 @@ private:
 
 public:
 	StateMenu(CrossingRoadGame* game);
-	StateMenu() : State() {}
+	StateMenu(): State() {}
 	~StateMenu();
 
 	virtual bool Update(float fElapsedTime);
 	virtual bool OnStateEnter();
 	virtual bool OnStateExit();
+
+	virtual void UpdateMenuUI(CrossingRoadGame* game, const int& opt,
+		const int& innerOfset, const int& outerOfset) {}
+	virtual void PressButtonAnimation(CrossingRoadGame* game, const int& x,
+		const int& y, vector<wstring>& Strings) {}
+	virtual void SplashAnimation(CrossingRoadGame* game, const int& opt) {}
+	
+	StateMenu* p_Menu = nullptr;
 
 };
 

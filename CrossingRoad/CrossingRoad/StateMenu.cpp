@@ -2,14 +2,13 @@
 #include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateLB.h"
+#include "StateSetting.h"
 #include "StateCredit.h"
 #include "StateExit.h"
 #include "Menu.h"
 
-int		Menu::m_s_OptionIdx = 0;
-float	Menu::m_s_DeltaTime = 0.f;
-
-Menu* p_Menu = nullptr;
+int		StateMenu::m_s_OptionIdx = 0;
+float	StateMenu::m_s_DeltaTime = 0.f;
 
 bool StateMenu::Update(float fElapsedTime) {
 	static const int MAX_OPT = 6;
@@ -33,11 +32,14 @@ bool StateMenu::Update(float fElapsedTime) {
 		case 2: 
 			game->SetState(new StateLB(game));
 			break;
-			//case 3 : game->SetState(new StateSetting(game));
+		case 3: 
+			game->SetState(new StateSetting(game));
 			break;
-		case 4: game->SetState(new StateCredit(game));
+		case 4: 
+			game->SetState(new StateCredit(game));
 			break;
-		case 5: game->SetState(new StateExit(game));
+		case 5: 
+			game->SetState(new StateExit(game));
 			break;
 		default: /*game->SetState(new StatePlay(game));*/
 			break;

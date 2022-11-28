@@ -17,10 +17,11 @@ public:
 	virtual bool MoveRight(const int& dX = Player::s_CellSize);
 
 private:
+	virtual void SetDefaultPosition();
+
 	virtual void ReadyHandle();
 	virtual void LandingHandle();
 	virtual void JumpHandle();
-	
 	
 	virtual void CheckCollided();
 

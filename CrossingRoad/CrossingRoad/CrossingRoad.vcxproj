@@ -162,6 +162,7 @@
     <ClCompile Include="StateLoad.cpp" />
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePlay.cpp" />
+    <ClCompile Include="StateSetting.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="WaterTile.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="StateLoad.h" />
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePlay.h" />
+    <ClInclude Include="StateSetting.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="WaterTile.h" />
