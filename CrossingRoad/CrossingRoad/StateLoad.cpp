@@ -16,19 +16,19 @@ const COORD StateLoad::m_s_LINE_4{ m_s_X0 + m_s_OFFSET_X + 12, 70 };
 
 bool StateLoad::Update(float fElapsedTime) {
 	// Xử lý load data
-	if (game->GetKey(VK_SPACE).bReleased) {
+	if (game->GetKey(VK_SPACE).bPressed) {
 		LoadingThread();
 		exit(1);
 	}
 
 	// Xử lý quay về main menu
-	if (game->GetKey(VK_ESCAPE).bReleased) {
+	if (game->GetKey(VK_ESCAPE).bPressed) {
 		game->SetState(new StateMenu(game));
 		return true;
 	}
 
 	// Xử lý tương tác với người dùng
-	if (game->GetKey(VK_W).bReleased) {
+	if (game->GetKey(VK_W).bPressed) {
 		m_OptionIdx = (m_OptionIdx - 1 + MAX_OPTION) % MAX_OPTION;
 
 		// Xử lý đồ họa load screen
@@ -37,7 +37,7 @@ bool StateLoad::Update(float fElapsedTime) {
 
 		return 1;
 	}
-	else if (game->GetKey(VK_S).bReleased) {
+	else if (game->GetKey(VK_S).bPressed) {
 		m_OptionIdx = (m_OptionIdx + 1 + MAX_OPTION) % MAX_OPTION;
 
 		// Xử lý đồ họa load screen

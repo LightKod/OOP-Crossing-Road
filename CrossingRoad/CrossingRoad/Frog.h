@@ -37,7 +37,7 @@ private:
 	Sound frogsound;
 
 	static bool s_CanMove;
-	static int frameIdx;
+	int frameIdx = 0;
 
 };
 

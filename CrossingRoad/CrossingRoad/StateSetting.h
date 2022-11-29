@@ -94,6 +94,15 @@ protected:
 	void OuterBorder();
 	void InnerBorder();
 
+	void UpdateCorners(const float& fElapsedTime);
+	void DrawHorizontalLine(const int& x0, const int& x1, 
+		const int& y);
+	void DrawVerticalLine(const int& x, const int& y0,
+		const int& y1);
+	void InState_DrawHorizontalLine(const int& x0, const int& x1,
+		const int& y, const int& stateIdx);
+	void InState_DrawVerticalLine(const int& x, const int& y0,
+		const int& y1, const int& stateIdx);
 	void Draw_TL_Corner(const short& fg, const short& bg);
 	void Draw_TR_Corner(const short& fg, const short& bg);
 	void Draw_BL_Corner(const short& fg, const short& bg);
@@ -123,6 +132,10 @@ private:
 
 	static short curCharIdx;
 	static short lastCharIdx;
+	static const int maxStateIdx;
+	int curStateIdx = 1;
+	int curCornerIdx = 0;
+	int curLimitWaiting = 0;
 
 /*
 ref: https://stackoverflow.com/questions/70766824/how-i-can-run-two-threads-parallelly-one-by-one

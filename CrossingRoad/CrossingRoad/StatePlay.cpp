@@ -1,5 +1,10 @@
 ﻿#include "StatePlay.h"
-
+#include "StateLoad.h"
+/* HOT KEYS
+* T: LOAD GAME
+* L: SAVE GAME
+* 
+*/
 bool StatePlay::OnStateEnter() {
 	if (CrossingRoadGame::s_CharIdx == 0) {
 		pPlayer = new Frog(game);
@@ -130,7 +135,7 @@ void StatePlay::ClearCurrentLevel() {
 		lanes.pop_back();
 		delete l;
 	}
-	
+	delete pPlayer;
 }
 
 void StatePlay::UpdateGameState(float fElapsedTime) {
@@ -145,7 +150,19 @@ void StatePlay::UpdateGameState(float fElapsedTime) {
 
 
 void StatePlay::HandleInput() {
-	HandleSaveInput();
+	// Save game
+	if (game->GetKey(VK_L).bPressed) {
+		HandleSaveInput();
+	}
+
+	// Load game
+	if (game->GetKey(VK_T).bPressed) {
+		// Xử lý trước khi vào StateMenu nếu không sẽ bị lỗi
+
+		//
+		game->SetState(new StateLoad(game));
+		return;
+	}
 }
 
 void StatePlay::HandleSaveInput() {

@@ -1,7 +1,6 @@
 #include "Frog.h"
 
 bool Frog::s_CanMove = 1;
-int Frog::frameIdx = 0;
 
 Frog::Frog(CrossingRoadGame* game)
 	: Player(game,

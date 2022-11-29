@@ -1,6 +1,10 @@
 ﻿#include "StateSetting.h"
 #include "StateMenu.h"
 #define MAX_CHAR_IDX 2
+#define MAX_CORNER_IDX 4
+#define LINE_WAITING 1.f
+#define CORNER_WAITING 20.0f
+#define TIME_FACTOR 30
 
 // Biến để chạy thread
 bool iStop = true;
@@ -24,6 +28,7 @@ COORD StateSetting::C_MOUSE_POINTER = C_RING_1;
 const COORD StateSetting::DOG_COORD = { C_FRAME_2.X + 22, C_FRAME_2.Y + 4 };
 const COORD StateSetting::FROG_COORD = { C_FRAME_1.X + 19, C_FRAME_1.Y + 4 };
 
+const int StateSetting::maxStateIdx = 8; // dùng để điều chỉnh tốc độ hiển thị line chạy
 short StateSetting::curCharIdx = 0; // dùng để cập nhất mouse_pointer
 short StateSetting::lastCharIdx = 0; // lưu giá trị gán cho CrossingRoadGame::s_CharIdx
 
@@ -56,10 +61,12 @@ bool StateSetting::Update(float fElapsedTime) {
 		}
 	}
 
+	UpdateCorners(fElapsedTime);
 	return 1;
 }
 bool StateSetting::OnStateEnter() {
 	this->game = game;
+	this->curLimitWaiting = CORNER_WAITING;
 
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_DARK_CYAN);
@@ -563,9 +570,9 @@ void StateSetting::ClearRing(const int& x, const int& y,
 
 void StateSetting::MainBorder() {
 	Draw_TL_Corner(FG_WHITE, BG_WHITE);
-	Draw_TR_Corner(FG_WHITE, BG_WHITE);
-	Draw_BL_Corner(FG_WHITE, BG_WHITE);
-	Draw_BR_Corner(FG_WHITE, BG_WHITE);
+	Draw_TR_Corner(FG_DARK_GREY, BG_DARK_GREY);
+	Draw_BL_Corner(FG_DARK_GREY, BG_DARK_GREY);
+	Draw_BR_Corner(FG_DARK_GREY, BG_DARK_GREY);
 
 	OuterBorder();
 	InnerBorder();
@@ -679,6 +686,132 @@ void StateSetting::InnerBorder() {
 
 }
 
+void StateSetting::UpdateCorners(const float& fElapsedTime) {
+	static float deltaTm = 0.f;
+
+	static const int _x0 = M_S_SRC_X0;
+	static const int _y0 = M_S_SRC_Y0;
+	static const int _x1 = M_S_SRC_X1;
+	static const int _y1 = M_S_SRC_Y1;
+
+	deltaTm += fElapsedTime * TIME_FACTOR;
+
+	if (deltaTm >= this->curLimitWaiting) {
+		// Update old corner
+		if (this->curStateIdx == 1) {
+			switch (this->curCornerIdx) {
+			case 0:
+				Draw_TL_Corner(FG_DARK_GREY, BG_DARK_GREY);
+				break;
+
+			case 1:
+				Draw_TR_Corner(FG_DARK_GREY, BG_DARK_GREY);
+				break;
+
+			case 2:
+				Draw_BR_Corner(FG_DARK_GREY, BG_DARK_GREY);
+				break;
+
+			case 3:
+				Draw_BL_Corner(FG_DARK_GREY, BG_DARK_GREY);
+				break;
+			}
+
+			this->curLimitWaiting = LINE_WAITING;
+		}
+
+		// Update lines
+		switch (this->curCornerIdx) {
+		case 0:
+			InState_DrawHorizontalLine(_x0 + 5, _x1 - 5, _y0, this->curStateIdx);
+			break;
+
+		case 1:
+			InState_DrawVerticalLine(_x1, _y0 + 5, _y1 - 5, this->curStateIdx);
+			break;
+
+		case 2:
+			InState_DrawHorizontalLine(_x1 - 5, _x0 + 5, _y1, this->curStateIdx);
+			break;
+
+		case 3:
+			InState_DrawVerticalLine(_x0, _y1 - 5, _y0 + 5, this->curStateIdx);
+			break;
+		}
+
+		if (this->curStateIdx <= maxStateIdx) {
+			++this->curStateIdx;
+		}
+		else { 
+			// reset some curData
+			this->curCornerIdx = (this->curCornerIdx + 1) % MAX_CORNER_IDX;
+			this->curStateIdx = 1;
+			this->curLimitWaiting = CORNER_WAITING;
+			
+			// update new corner
+			switch (this->curCornerIdx) {
+			case 0:
+				Draw_TL_Corner(FG_WHITE, BG_WHITE);
+				break;
+
+			case 1:
+				Draw_TR_Corner(FG_WHITE, BG_WHITE);
+				break;
+
+			case 2:
+				Draw_BR_Corner(FG_WHITE, BG_WHITE);
+				break;
+
+			case 3:
+				Draw_BL_Corner(FG_WHITE, BG_WHITE);
+				break;
+			}
+		}
+
+		deltaTm = 0.f;
+	}
+
+}
+void StateSetting::InState_DrawHorizontalLine(const int& x0, const int& x1,
+	const int& y, const int& stateIdx)
+{
+	static const int distance = abs(x1 - x0) + 1;
+	int factor = (x0 < x1) ? 1 : -1;
+
+	// clear old line
+	if (stateIdx != 1) {
+		game->DrawLine(
+			x0 + factor * (stateIdx - 1 - 1) * distance / maxStateIdx, y,
+			x1 - factor * (maxStateIdx - stateIdx + 1) * distance / maxStateIdx, y, L' ', COLOUR::BG_DARK_CYAN);
+	}
+	// draw new line
+	if (stateIdx <= maxStateIdx) {
+		game->DrawLine(
+			x0 + factor * (stateIdx - 1) * distance / maxStateIdx, y,
+			x1 - factor * (maxStateIdx - stateIdx) * distance / maxStateIdx, y, 9608, FG_WHITE + BG_WHITE);
+	}
+
+}
+void StateSetting::InState_DrawVerticalLine(const int& x, const int& y0,
+	const int& y1, const int& stateIdx)
+{
+	static const int distance = abs(y1 - y0) + 1;
+	int factor = (y0 < y1) ? 1 : -1;
+
+	// clear old line
+	if (stateIdx != 1) {
+		game->DrawLine(
+			x, y0 + factor * (stateIdx - 1 - 1) * distance / maxStateIdx,
+			x, y1 - factor * (maxStateIdx - stateIdx + 1) * distance / maxStateIdx, L' ', COLOUR::BG_DARK_CYAN);
+	}
+	
+	if (stateIdx <= maxStateIdx) {
+		game->DrawLine(
+			x, y0 + factor * (stateIdx - 1) * distance / maxStateIdx,
+			x, y1 - factor * (maxStateIdx - stateIdx) * distance / maxStateIdx, 9608, FG_WHITE + BG_WHITE);
+	}
+
+}
 void StateSetting::Draw_TL_Corner(const short& fg, const short& bg) {
 	static const int _x = M_S_SRC_X0;
 	static const int _y = M_S_SRC_Y0;
@@ -769,7 +902,7 @@ void StateSetting::InState_FrameFlowAnimation(const COORD& _C,
 void StateSetting::InState_SelectedAnimation(const int& x, const int& y,
 	const int& stateIdx)
 {
-	static const short _tm = 30;
+	static const short _tm = 28;
 	
 	this_thread::sleep_for(std::chrono::milliseconds(_tm));
 	ClearRing(x, y, FG_BLUE, BG_BLUE);
@@ -807,7 +940,7 @@ void StateSetting::InState_SelectedAnimation(const int& x, const int& y,
 void StateSetting::InState_UnselectedAnimation(const int& x, const int& y,
 	const int& stateIdx)
 {
-	static const short _tm = 30;
+	static const short _tm = 28;// 30
 
 	this_thread::sleep_for(std::chrono::milliseconds(_tm));
 	ClearRing(x, y, FG_BLUE, BG_BLUE);
