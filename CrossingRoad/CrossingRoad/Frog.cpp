@@ -21,19 +21,19 @@ Frog::Frog(CrossingRoadGame* game)
 }
 
 void Frog::Update(float fElapsedTime) {
-	if (game->m_keys[VK_W].bReleased) {
+	if (game->m_keys[VK_W].bPressed) {
 		if(this->MoveUp())
 			frogsound.PlayBounceSound();
 	}
-	if (game->m_keys[VK_S].bReleased) {
+	if (game->m_keys[VK_S].bPressed) {
 		if(this->MoveDown())
 			frogsound.PlayBounceSound();
 	}
-	if (game->m_keys[VK_A].bReleased) {
+	if (game->m_keys[VK_A].bPressed) {
 		if(this->MoveLeft())
 			frogsound.PlayBounceSound();
 	}
-	if (game->m_keys[VK_D].bReleased) {
+	if (game->m_keys[VK_D].bPressed) {
 		if(this->MoveRight())
 			frogsound.PlayBounceSound();
 	}

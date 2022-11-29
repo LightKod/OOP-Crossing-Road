@@ -1,88 +1,124 @@
 ﻿#include "StateSetting.h"
+#include "StateMenu.h"
+#define MAX_CHAR_IDX 2
+
+// Biến để chạy thread
+bool iStop = true;
+mutex mtx;
+condition_variable cv;
+bool ready = false;
+
+// ==============================================================
+const int StateSetting::M_S_SRC_X0 = 9;
+const int StateSetting::M_S_SRC_X1 = 151;
+const int StateSetting::M_S_SRC_Y0 = 24;
+const int StateSetting::M_S_SRC_Y1 = 90;
+
+const pair<short, short> StateSetting::MB_COLOR = { FG_BLUE, BG_BLUE };// FG_BLUE, BG_BLUE
+
+const COORD StateSetting::C_FRAME_1 = { 38, 38 };
+const COORD StateSetting::C_FRAME_2 = { 38, 60 };
+const COORD StateSetting::C_RING_1 = { 102, 40 };
+const COORD StateSetting::C_RING_2 = { 102, 62 };
+COORD StateSetting::C_MOUSE_POINTER = C_RING_1;
+const COORD StateSetting::DOG_COORD = { C_FRAME_2.X + 22, C_FRAME_2.Y + 4 };
+const COORD StateSetting::FROG_COORD = { C_FRAME_1.X + 19, C_FRAME_1.Y + 4 };
+
+short StateSetting::curCharIdx = 0; // dùng để cập nhất mouse_pointer
+short StateSetting::lastCharIdx = 0; // lưu giá trị gán cho CrossingRoadGame::s_CharIdx
 
 bool StateSetting::Update(float fElapsedTime) {
-	//MousePointer(50, 50);
-	//Clicking(50, 50);
-	
-	while (1) {
-	SelectedAnimation(10, 10);
-	this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-	UnselectedAnimation(10, 10);
-	this_thread::sleep_for(std::chrono::milliseconds(1000));
-
+	if (game->GetKey(VK_ESCAPE).bPressed) {
+		CrossingRoadGame::s_CharIdx = StateSetting::lastCharIdx;
+		game->SetState(new StateMenu(game));
+		return 1;
 	}
 
-	//SelectedFrame(10, 10);
-	//UnselectedFrame(50,50);
+	if (game->GetKey(VK_W).bPressed) {
+		curCharIdx = (curCharIdx - 1 + MAX_CHAR_IDX) % MAX_CHAR_IDX;
+		PointerHandle();
+	}
 
-	//Frog(10, 10, FG_BLACK, BG_BLACK);
+	if (game->GetKey(VK_S).bPressed) {
+		curCharIdx = (curCharIdx + 1) % MAX_CHAR_IDX;
+		PointerHandle();
+	}
 
-	game->DrawLine(22, 5, 127, 5, 9608);
+	if (game->GetKey(VK_SPACE).bPressed) {
+		if (lastCharIdx != curCharIdx) {
+			// clicking animation
+			Clicking();
 
+			// cập nhật character_idx
+			lastCharIdx = curCharIdx;
 
+			UpdateMainBorder();
+		}
+	}
 
-	DrawTitle(16, 10);
-
-	game->ConsOutput();
-
-	exit(1);
 	return 1;
 }
 bool StateSetting::OnStateEnter() {
 	this->game = game;
 
 	// clear screen
-	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
+	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_DARK_CYAN);
+
+	DrawTitle(16, 2);
+	MainBorder();
+
+	UpdateMainBorder();
 
 	return 1;
 }
 bool StateSetting::OnStateExit() {
-
 	return 1;
 }
 
-void StateSetting::DrawTitle(const int& x, const int& y) {
-	TitleBorder(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW);
-	TitleBackground(x, y, FG_YELLOW, BG_YELLOW);
-	string2Pixel(L"SELECT YOUR CHARACTER", x + 12, y + 8, FG_BLACK, BG_YELLOW);
-}
-void StateSetting::TitleBorder(const int& x, const int& y,
-	const short& fg, const short& bg)
-{
-	game->DrawLine(x, y + 6, x, y +13, 9608, fg + bg);
-	game->Fill(x, y + 4, x + 1, y + 5, 9608, fg + bg);
-	game->Fill(x + 1, y + 1, x + 3, y + 3, 9608, fg + bg);
-	game->Fill(x + 4, y, x + 5, y + 1, 9608, fg + bg);
-	game->Fill(x, y +14, x + 1, y +15, 9608, fg + bg);
-	game->Fill(x + 2, y +15, x + 4, y +17, 9608, fg + bg);
-	game->Fill(x + 5, y +17, x + 6, y +18, 9608, fg + bg);
 
-	game->DrawLine(x + 6, y   , x +122, y , 9608, fg + bg);
-	game->DrawLine(x + 7, y +18, x +121, y + 18, 9608, fg + bg);
+void StateSetting::UpdateMainBorder() {
+	// clear everything in main border
+	MainBorderColor();
 
-	game->Fill(x+123, y , x +124, y + 1, 9608, fg + bg);
-	game->Fill(x+125, y + 1, x +127, y + 3, 9608, fg + bg);
-	game->Fill(x+127, y + 4, x +128, y + 5, 9608, fg + bg);
-	game->Fill(x+122, y +17, x +123, y +18, 9608, fg + bg);
-	game->Fill(x+124, y +15, x +126, y +17, 9608, fg + bg);
-	game->Fill(x+127, y +14, x +128, y +15, 9608, fg + bg);
-	game->DrawLine(x+128, y + 6, x+128, y + 13, 9608, fg + bg);
+	// draw mouse pointer
+	UpdatePointerCoord();
+	DrawMousePointer();
 
-}
-void StateSetting::TitleBackground(const int& x, const int& y,
-	const short& fg, const short& bg)
-{
-	game->Fill(x + 6, y + 1, x + 122, y + 1, 9608, fg + bg);
-	game->Fill(x + 4, y + 2, x + 124, y + 3, 9608, fg + bg);
-	game->Fill(x + 2, y + 4, x + 126, y +  5, 9608, fg + bg);
-	game->Fill(x + 1, y + 6, x + 127, y + 13, 9608, fg + bg);
-	game->Fill(x + 2, y +14, x + 126, y + 14, 9608, fg + bg);
-	game->Fill(x + 5, y +15, x + 123, y + 16, 9608, fg + bg);
-	game->Fill(x + 7, y +17, x + 121, y + 17, 9608, fg + bg);
+	// ==================== running 2 threads ====================
+	//// rings rotation
+	//UpdateRing1();
+	//UpdateRing2();
+	//// draw frame 
+	//FrameFlowAnimation(C_FRAME_1, &StateSetting::DrawFrogFrame);
+	//FrameFlowAnimation(C_FRAME_2, &StateSetting::DrawDogFrame);
+
+	iStop = false;
+	ThreadDriver(this);
+	while (!iStop);
 
 }
 
+
+void StateSetting::DrawFrogFrame(const int& offsetX) {
+	if (lastCharIdx == 0) {
+		SelectedFrame(C_FRAME_1.X + offsetX, C_FRAME_1.Y);
+		Frog(FROG_COORD.X + offsetX, FROG_COORD.Y, FG_BLACK, BG_BLACK);
+	}
+	else {
+		UnselectedFrame(C_FRAME_1.X + offsetX, C_FRAME_1.Y);
+		Frog(FROG_COORD.X + offsetX, FROG_COORD.Y, FG_DARK_GREY, BG_DARK_GREY);
+	}
+}
+void StateSetting::DrawDogFrame(const int& offsetX) {
+	if (lastCharIdx == 1) {
+		SelectedFrame(C_FRAME_2.X + offsetX, C_FRAME_2.Y);
+		Dog(DOG_COORD.X + offsetX, DOG_COORD.Y, FG_BLACK, BG_BLACK);
+	}
+	else {
+		UnselectedFrame(C_FRAME_2.X + offsetX, C_FRAME_2.Y);
+		Dog(DOG_COORD.X + offsetX, DOG_COORD.Y, FG_DARK_GREY, BG_DARK_GREY);
+	}
+}
 void StateSetting::Dog(const int& x, const int& y,
 	const short& fg, const short& bg)
 {
@@ -146,6 +182,29 @@ void StateSetting::D(const int& x, const int& y,
 }
 
 
+void StateSetting::ClearFrame(const int& x, const int& y) {
+	UIFrame(x, y,
+		MB_COLOR.first, MB_COLOR.second,
+		MB_COLOR.first, MB_COLOR.second,
+		MB_COLOR.first, MB_COLOR.second,
+		MB_COLOR.first, MB_COLOR.second);
+}
+void StateSetting::FrameFlowAnimation(const COORD& _C, 
+	void(StateSetting::*pFunc)(const int&))
+{
+	static const int _tm = 10;
+
+	for (int i = 7; i >= 0; --i) {
+		this_thread::sleep_for(std::chrono::milliseconds(_tm));
+
+		(this->*pFunc)(i);
+		game->ConsOutput();
+
+		if (!i) return;
+		ClearFrame(_C.X + i, _C.Y);
+	}
+
+}
 void StateSetting::SelectedFrame(const int& x, const int& y) {
 	UIFrame(x, y,
 		FG_BLACK, BG_BLACK,
@@ -198,8 +257,37 @@ void StateSetting::UIFrame(const int& x, const int& y,
 }
 
 
-void StateSetting::MousePointer(const int& x, const int& y) {
-	// vẽ viền ngoải
+void StateSetting::PointerHandle() {
+	ClearPointer();
+	UpdatePointerCoord();
+	DrawMousePointer();
+}
+void StateSetting::ClearPointer() {
+	game->Fill(C_MOUSE_POINTER.X, C_MOUSE_POINTER.Y, 
+		C_MOUSE_POINTER.X + 15, C_MOUSE_POINTER.Y + 14, L' ', MB_COLOR.second);//  MB_COLOR.second
+}
+void StateSetting::UpdatePointerCoord() {
+	static const int offsetX = 14;
+	static const int offsetY = 6;
+
+	switch (curCharIdx) {
+	default:
+	case 0:
+		C_MOUSE_POINTER.X = C_RING_1.X + offsetX;
+		C_MOUSE_POINTER.Y = C_RING_1.Y + offsetY;
+		break;
+	case 1:
+		C_MOUSE_POINTER.X = C_RING_2.X + offsetX;
+		C_MOUSE_POINTER.Y = C_RING_2.Y + offsetY;
+		break;
+	}
+
+}
+void StateSetting::DrawMousePointer() {
+	int x = C_MOUSE_POINTER.X;
+	int y = C_MOUSE_POINTER.Y;
+	
+	// vẽ viền ngoài
 	game->DrawLine(x + 1, y	   , x + 2, y, 9608, FG_BLACK + BG_BLACK);
 	game->DrawLine(x + 3, y	+ 1, x + 4, y + 2, 9608, FG_BLACK + BG_BLACK);
 	game->DrawLine(x + 5, y	+ 2, x + 6, y + 3, 9608, FG_BLACK + BG_BLACK);
@@ -258,15 +346,49 @@ void StateSetting::MousePointer(const int& x, const int& y) {
 	game->Draw(x +14, y + 9, 9608, FG_WHITE + BG_WHITE);
 
 }
-void StateSetting::Clicking(const int& x, const int& y) {
+void StateSetting::Clicking() {
+	// clear old pointer
+	ClearPointer();
+
+	// update new coord
+	C_MOUSE_POINTER.X -= 6;
+	C_MOUSE_POINTER.Y -= 2;
+
+	// draw new one
+	DrawMousePointer();
+
+	// clicking
+	int x = C_MOUSE_POINTER.X;
+	int y = C_MOUSE_POINTER.Y;
+
 	game->DrawLine(x - 4, y, x - 3, y, 9608, FG_BLACK + BG_BLACK);
 	game->DrawLine(x, y - 4, x, y - 3, 9608, FG_BLACK + BG_BLACK);
 	game->DrawLine(x - 4, y - 4, x - 2, y - 2, 9608, FG_BLACK + BG_BLACK);
+
+	game->ConsOutput();
+	this_thread::sleep_for(std::chrono::milliseconds(100));
 }
 
 
+void StateSetting::UpdateRing1() {
+	if (lastCharIdx == 0) {
+		SelectedAnimation(C_RING_1.X, C_RING_1.Y);
+	}
+	else {
+		UnselectedAnimation(C_RING_1.X, C_RING_1.Y);
+	}
+}
+void StateSetting::UpdateRing2() {
+	if (lastCharIdx == 1) {
+		SelectedAnimation(C_RING_2.X, C_RING_2.Y);
+	}
+	else {
+		UnselectedAnimation(C_RING_2.X, C_RING_2.Y);
+	}
+
+}
 void StateSetting::SelectedAnimation(const int& x, const int& y) {
-	static const short _tm = 100;
+	static const short _tm = 90;
 
 	for (int stateIdx = 1; stateIdx <= 8; stateIdx++) {
 		this_thread::sleep_for(std::chrono::milliseconds(_tm));
@@ -435,5 +557,396 @@ void StateSetting::Ring8(const int& x, const int& y,
 void StateSetting::ClearRing(const int& x, const int& y,
 	const short& fg, const short& bg)
 {
-	game->Fill(x, y, x + 9, y + 9, L' ', COLOUR::BG_BLUE);
+	game->Fill(x, y, x + 9, y + 9, L' ', MB_COLOR.second);
 }
+
+
+void StateSetting::MainBorder() {
+	Draw_TL_Corner(FG_WHITE, BG_WHITE);
+	Draw_TR_Corner(FG_WHITE, BG_WHITE);
+	Draw_BL_Corner(FG_WHITE, BG_WHITE);
+	Draw_BR_Corner(FG_WHITE, BG_WHITE);
+
+	OuterBorder();
+	InnerBorder();
+
+	OuterBorderColor();
+	InnerBorderColor();
+
+	MainBorderColor();
+}
+void StateSetting::MainBorderColor() {
+	static const int _x0 = M_S_SRC_X0 + 5;
+	static const int _y0 = M_S_SRC_Y0 + 5;
+	static const int _x1 = M_S_SRC_X1 - 5;
+	static const int _y1 = M_S_SRC_Y1 - 5;
+
+	// first row
+	game->DrawLine(_x0 + 1, _y0, _x1 - 1, _y0, 9608, MB_COLOR.first + MB_COLOR.second);
+
+	// the rest
+	game->Fill(_x0 + 1, _y0 + 1, _x1, _y1 - 1, 9608, MB_COLOR.first + MB_COLOR.second);
+
+}
+
+void StateSetting::OuterBorderColor() {
+	static const int _x0 = M_S_SRC_X0 + 3;
+	static const int _y0 = M_S_SRC_Y0 + 3;
+	static const int _x1 = M_S_SRC_X1 - 3;
+	static const int _y1 = M_S_SRC_Y1 - 3;
+
+	// 4 .
+	game->Draw(_x0 + 1, _y0 + 1, 9608, FG_GREY + BG_GREY);// TL
+	game->Draw(_x1 - 1, _y0 + 1, 9608, FG_GREY + BG_GREY);// TR
+	game->Draw(_x0 + 1, _y1 - 1, 9608, FG_DARK_GREY + BG_DARK_GREY);// BL
+	game->Draw(_x1 - 1, _y1 - 1, 9608, FG_DARK_GREY + BG_DARK_GREY);// BR
+
+	// Corner
+	game->DrawLine(_x0 + 1, _y0 + 2, _x0 + 2, _y0 + 1, 9608, FG_GREY + BG_GREY);		  // TL
+	game->DrawLine(_x1 - 1, _y0 + 2, _x1 - 2, _y0 + 1, 9608, FG_GREY + BG_GREY);		  // TR
+	game->DrawLine(_x0 + 1, _y1 - 2, _x0 + 2, _y1 - 1, 9608, FG_DARK_GREY + BG_DARK_GREY);// BL
+	game->DrawLine(_x1 - 1, _y1 - 2, _x1 - 2, _y1 - 1, 9608, FG_DARK_GREY + BG_DARK_GREY);// BR
+
+	// Line
+	game->DrawLine(_x0 + 3, _y0, _x1 - 3, _y0, 9608, FG_GREY + BG_GREY);		  // T
+	game->DrawLine(_x1, _y0 + 3, _x1, _y1 - 3, 9608, FG_GREY + BG_GREY);		  // R
+	game->DrawLine(_x0, _y0 + 3, _x0, _y1 - 3, 9608, FG_DARK_GREY + BG_DARK_GREY);// L
+	game->DrawLine(_x0 + 3, _y1, _x1 - 3, _y1, 9608, FG_DARK_GREY + BG_DARK_GREY);// B
+}
+void StateSetting::InnerBorderColor() {
+	static const int _x0 = M_S_SRC_X0 + 5;
+	static const int _y0 = M_S_SRC_Y0 + 5;
+	static const int _x1 = M_S_SRC_X1 - 5;
+	static const int _y1 = M_S_SRC_Y1 - 5;
+
+	static const short fg = FG_DARK_BLUE;// fg + bg
+	static const short bg = BG_DARK_BLUE;
+
+	// Line
+	game->DrawLine(_x0, _y0 + 1, _x0, _y1 - 1, 9608, fg + bg);// L
+	game->DrawLine(_x0 + 1, _y1, _x1 - 1, _y1, 9608, fg + bg);// B
+}
+
+void StateSetting::OuterBorder() {
+	static const int _x0 = M_S_SRC_X0;
+	static const int _y0 = M_S_SRC_Y0;
+	static const int _x1 = M_S_SRC_X1;
+	static const int _y1 = M_S_SRC_Y1;
+
+	// 4 .
+	game->Draw(_x0 + 2, _y0 + 2, 9608, FG_WHITE + BG_WHITE);// TL
+	game->Draw(_x0 + 2, _y1 - 2, 9608, FG_WHITE + BG_WHITE);// BL
+	game->Draw(_x1 - 2, _y0 + 2, 9608, FG_WHITE + BG_WHITE);// TR
+	game->Draw(_x1 - 2, _y1 - 2, 9608, FG_WHITE + BG_WHITE);// BR
+
+	game->DrawLine(_x0 + 5, _y0 + 2, _x1 - 5, _y0 + 2, 9608, FG_BLACK + BG_BLACK);// T
+	game->DrawLine(_x0 + 5, _y1 - 2, _x1 - 5, _y1 - 2, 9608, FG_BLACK + BG_BLACK);// B
+	game->DrawLine(_x0 + 2, _y0 + 5, _x0 + 2, _y1 - 5, 9608, FG_BLACK + BG_BLACK);// L
+	game->DrawLine(_x1 - 2, _y0 + 5, _x1 - 2, _y1 - 5, 9608, FG_BLACK + BG_BLACK);// R
+
+	// TL corner
+	game->DrawLine(_x0 + 3, _y0 + 3, _x0 + 5, _y0 + 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x0 + 3, _y0 + 4, _x0 + 3, _y0 + 5, 9608, FG_BLACK + BG_BLACK);
+
+	// BL corner
+	game->DrawLine(_x0 + 3, _y1 - 3, _x0 + 5, _y1 - 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x0 + 3, _y1 - 4, _x0 + 3, _y1 - 5, 9608, FG_BLACK + BG_BLACK);
+
+	// TR Corner
+	game->DrawLine(_x1 - 3, _y0 + 3, _x1 - 5, _y0 + 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x1 - 3, _y0 + 4, _x1 - 3, _y0 + 5, 9608, FG_BLACK + BG_BLACK);
+
+	// BR Corner
+	game->DrawLine(_x1 - 3, _y1 - 3, _x1 - 5, _y1 - 3, 9608, FG_BLACK + BG_BLACK);
+	game->DrawLine(_x1 - 3, _y1 - 4, _x1 - 3, _y1 - 5, 9608, FG_BLACK + BG_BLACK);
+}
+void StateSetting::InnerBorder() {
+	static const int _x0 = M_S_SRC_X0 + 4;
+	static const int _y0 = M_S_SRC_Y0 + 4;
+	static const int _x1 = M_S_SRC_X1 - 4;
+	static const int _y1 = M_S_SRC_Y1 - 4;
+
+	// 4 .
+	game->Draw(_x0 + 1, _y0 + 1, 9608, FG_BLACK + BG_BLACK);// TL
+	game->Draw(_x0 + 1, _y1 - 1, 9608, FG_BLACK + BG_BLACK);// BL
+	game->Draw(_x1 - 1, _y0 + 1, 9608, FG_BLACK + BG_BLACK);// TR
+	game->Draw(_x1 - 1, _y1 - 1, 9608, FG_BLACK + BG_BLACK);// BR
+
+	game->DrawLine(_x0 + 2, _y0, _x1 - 2, _y0, 9608, FG_BLACK + BG_BLACK);// T
+	game->DrawLine(_x0 + 2, _y1, _x1 - 2, _y1, 9608, FG_BLACK + BG_BLACK);// B
+	game->DrawLine(_x0, _y0 + 2, _x0, _y1 - 2, 9608, FG_BLACK + BG_BLACK);// L
+	game->DrawLine(_x1, _y0 + 2, _x1, _y1 - 2, 9608, FG_BLACK + BG_BLACK);// R
+
+}
+
+void StateSetting::Draw_TL_Corner(const short& fg, const short& bg) {
+	static const int _x = M_S_SRC_X0;
+	static const int _y = M_S_SRC_Y0;
+
+	game->DrawLine(_x, _y, _x + 2, _y, 9608, fg + bg);
+	game->DrawLine(_x, _y + 1, _x, _y + 2, 9608, fg + bg);
+}
+void StateSetting::Draw_TR_Corner(const short& fg, const short& bg) {
+	static const int _x = M_S_SRC_X1;
+	static const int _y = M_S_SRC_Y0;
+
+	game->DrawLine(_x - 2, _y, _x, _y, 9608, fg + bg);
+	game->DrawLine(_x, _y + 1, _x, _y + 2, 9608, fg + bg);
+}
+void StateSetting::Draw_BL_Corner(const short& fg, const short& bg) {
+	static const int _x = M_S_SRC_X0;
+	static const int _y = M_S_SRC_Y1;
+
+	game->DrawLine(_x, _y, _x + 2, _y, 9608, fg + bg);
+	game->DrawLine(_x, _y - 2, _x, _y - 1, 9608, fg + bg);
+}
+void StateSetting::Draw_BR_Corner(const short& fg, const short& bg) {
+	static const int _x = M_S_SRC_X1;
+	static const int _y = M_S_SRC_Y1;
+
+	game->DrawLine(_x - 2, _y, _x, _y, 9608, fg + bg);
+	game->DrawLine(_x, _y - 2, _x, _y - 1, 9608, fg + bg);
+}
+
+
+void StateSetting::DrawTitle(const int& x, const int& y) {
+	TitleBorder(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW);
+	TitleBackground(x, y, FG_YELLOW, BG_YELLOW);
+	string2Pixel(L"SELECT YOUR CHARACTER", x + 12, y + 8, FG_BLACK, BG_YELLOW);
+}
+void StateSetting::TitleBorder(const int& x, const int& y,
+	const short& fg, const short& bg)
+{
+	game->DrawLine(x, y + 6, x, y + 13, 9608, fg + bg);
+	game->Fill(x, y + 4, x + 1, y + 5, 9608, fg + bg);
+	game->Fill(x + 1, y + 1, x + 3, y + 3, 9608, fg + bg);
+	game->Fill(x + 4, y, x + 5, y + 1, 9608, fg + bg);
+	game->Fill(x, y + 14, x + 1, y + 15, 9608, fg + bg);
+	game->Fill(x + 2, y + 15, x + 4, y + 17, 9608, fg + bg);
+	game->Fill(x + 5, y + 17, x + 6, y + 18, 9608, fg + bg);
+
+	game->DrawLine(x + 6, y, x + 122, y, 9608, fg + bg);
+	game->DrawLine(x + 7, y + 18, x + 121, y + 18, 9608, fg + bg);
+
+	game->Fill(x + 123, y, x + 124, y + 1, 9608, fg + bg);
+	game->Fill(x + 125, y + 1, x + 127, y + 3, 9608, fg + bg);
+	game->Fill(x + 127, y + 4, x + 128, y + 5, 9608, fg + bg);
+	game->Fill(x + 122, y + 17, x + 123, y + 18, 9608, fg + bg);
+	game->Fill(x + 124, y + 15, x + 126, y + 17, 9608, fg + bg);
+	game->Fill(x + 127, y + 14, x + 128, y + 15, 9608, fg + bg);
+	game->DrawLine(x + 128, y + 6, x + 128, y + 13, 9608, fg + bg);
+
+}
+void StateSetting::TitleBackground(const int& x, const int& y,
+	const short& fg, const short& bg)
+{
+	game->Fill(x + 6, y + 1, x + 122, y + 1, 9608, fg + bg);
+	game->Fill(x + 4, y + 2, x + 124, y + 3, 9608, fg + bg);
+	game->Fill(x + 2, y + 4, x + 126, y + 5, 9608, fg + bg);
+	game->Fill(x + 1, y + 6, x + 127, y + 13, 9608, fg + bg);
+	game->Fill(x + 2, y + 14, x + 126, y + 14, 9608, fg + bg);
+	game->Fill(x + 5, y + 15, x + 123, y + 16, 9608, fg + bg);
+	game->Fill(x + 7, y + 17, x + 121, y + 17, 9608, fg + bg);
+
+}
+
+
+// ======================= CuncurrentThread =======================
+void StateSetting::InState_FrameFlowAnimation(const COORD& _C,
+	void(StateSetting::* pFunc)(const int&), const int& stateIdx)
+{
+	static const int _tm = 0;// 1
+
+	if (stateIdx < 7) {
+		ClearFrame(_C.X + stateIdx + 1, _C.Y);
+	}
+
+	(this->*pFunc)(stateIdx);
+	game->ConsOutput();
+	
+	this_thread::sleep_for(std::chrono::milliseconds(_tm));
+}
+void StateSetting::InState_SelectedAnimation(const int& x, const int& y,
+	const int& stateIdx)
+{
+	static const short _tm = 30;
+	
+	this_thread::sleep_for(std::chrono::milliseconds(_tm));
+	ClearRing(x, y, FG_BLUE, BG_BLUE);
+
+	switch (stateIdx) {
+	case 1:
+		Ring1(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	case 2:
+		Ring2(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	case 3:
+		Ring3(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	case 4:
+		Ring4(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	case 5:
+		Ring5(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	case 6:
+		Ring6(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	case 7:
+		Ring7(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	case 8:
+		Ring8(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	}
+
+	game->ConsOutput();
+	
+}
+void StateSetting::InState_UnselectedAnimation(const int& x, const int& y,
+	const int& stateIdx)
+{
+	static const short _tm = 30;
+
+	this_thread::sleep_for(std::chrono::milliseconds(_tm));
+	ClearRing(x, y, FG_BLUE, BG_BLUE);
+
+	switch (stateIdx) {
+	case 1:
+		Ring1(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	case 2:
+		Ring2(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	case 3:
+		Ring3(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	case 4:
+		Ring4(x, y, FG_DARK_YELLOW, BG_DARK_YELLOW, FG_YELLOW, BG_YELLOW);
+		break;
+	case 5:
+		Ring5(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	case 6:
+		Ring6(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	case 7:
+		Ring7(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	case 8:
+		Ring8(x, y, FG_DARK_GREY, BG_DARK_GREY, FG_GREY, BG_GREY);
+		break;
+	}
+
+	game->ConsOutput();
+	
+}
+void StateSetting::procThread1() {
+	// rotate ring
+	if (lastCharIdx == 0) {
+		for (int stateIdx = 1; stateIdx <= 8; stateIdx++) {
+			unique_lock<mutex> lk(mtx);
+
+			// wait until this condition is true i.e. until ready is false
+			cv.wait(lk, [&]() { return !ready; });
+
+			InState_SelectedAnimation(C_RING_1.X, C_RING_1.Y, stateIdx);
+
+			// set ready to true and notify waiting thread
+			ready = true;
+			lk.unlock();
+			cv.notify_one();
+		}
+	}
+	else {
+		for (int stateIdx = 1; stateIdx <= 8; stateIdx++) {
+			unique_lock<mutex> lk(mtx);
+
+			// wait until this condition is true i.e. until ready is false
+			cv.wait(lk, [&]() { return !ready; });
+
+			InState_UnselectedAnimation(C_RING_1.X, C_RING_1.Y, stateIdx);
+
+			// set ready to true and notify waiting thread
+			ready = true;
+			lk.unlock();
+			cv.notify_one();
+		}
+	}
+
+	// frame flow
+	for (int stateIdx = 7; stateIdx >= 0; --stateIdx) {
+		unique_lock<mutex> lk(mtx);
+
+		// wait until this condition is true i.e. until ready is false
+		cv.wait(lk, [&]() { return !ready; });
+
+		InState_FrameFlowAnimation(C_FRAME_1, &StateSetting::DrawFrogFrame, stateIdx);
+		
+		// set ready to true and notify waiting thread
+		ready = true;
+		lk.unlock();
+		cv.notify_one();
+	}
+
+};
+void StateSetting::procThread2() {
+	// rotate ring
+	if (lastCharIdx == 1) {
+		for (int stateIdx = 1; stateIdx <= 8; stateIdx++) {
+			unique_lock<mutex> lk(mtx);
+
+			// wait until this condition is true i.e. until ready is true
+			cv.wait(lk, [&]() { return ready; });
+
+			InState_SelectedAnimation(C_RING_2.X, C_RING_2.Y, stateIdx);
+
+			// set ready to false and notify waiting thread
+			ready = false;
+			lk.unlock();
+			cv.notify_one();
+		}
+	}
+	else {
+		for (int stateIdx = 1; stateIdx <= 8; stateIdx++) {
+			unique_lock<mutex> lk(mtx);
+
+			// wait until this condition is true i.e. until ready is true
+			cv.wait(lk, [&]() { return ready; });
+
+			InState_UnselectedAnimation(C_RING_2.X, C_RING_2.Y, stateIdx);
+
+			// set ready to false and notify waiting thread
+			ready = false;
+			lk.unlock();
+			cv.notify_one();
+		}
+	}
+
+	// frame flow
+	for (int stateIdx = 7; stateIdx >= 0; --stateIdx) {
+		unique_lock<mutex> lk(mtx);
+
+		// wait until this condition is true i.e. until ready is true
+		cv.wait(lk, [&]() { return ready; });
+
+		InState_FrameFlowAnimation(C_FRAME_2, &StateSetting::DrawDogFrame, stateIdx);
+
+		// set ready to false and notify waiting thread
+		ready = false;
+		lk.unlock();
+		cv.notify_one();
+	}
+};
+void StateSetting::ThreadDriver(StateSetting* thr) {
+	vector<thread> threads;
+	threads.push_back(thread(&procThread1, thr));
+	threads.push_back(thread(&procThread2, thr));
+
+	for (auto& thread : threads)
+		thread.join();
+
+	ready = false;
+	iStop = true;
+};

@@ -15,28 +15,24 @@ Dog::Dog(CrossingRoadGame* game)
 }
 
 void Dog::Update(float fElapsedTime) {
-	if (game->m_keys[VK_W].bReleased) {
+	if (game->m_keys[VK_W].bPressed) {
 		if (this->MoveUp()) {
 			dogsound.PlayBounceSound();
-			//
 		}
 	}
-	if (game->m_keys[VK_S].bReleased) {
+	if (game->m_keys[VK_S].bPressed) {
 		if (this->MoveDown()) {
 			dogsound.PlayBounceSound();
-			//
 		}
 	}
-	if (game->m_keys[VK_A].bReleased) {
+	if (game->m_keys[VK_A].bPressed) {
 		if (this->MoveLeft()) {
 			dogsound.PlayBounceSound();
-			//
 		}
 	}
-	if (game->m_keys[VK_D].bReleased) {
+	if (game->m_keys[VK_D].bPressed) {
 		if (this->MoveRight()) {
 			dogsound.PlayBounceSound();
-			//
 		}
 	}
 	CheckCollided();
