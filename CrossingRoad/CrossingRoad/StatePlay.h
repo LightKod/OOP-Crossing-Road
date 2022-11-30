@@ -48,6 +48,29 @@ public:
 	}
 
 private:
+	void ForestBG();
+	void MiniGrass(const int& x, const int& y);
+	void MiniMushroom(const int& x, const int& y);
+	
+	void OpenWinProcess();
+	void WinProcess();
+
+	void CompleteCGBanner(const int& x, const int& y);
+
+	void DrawTrainWheel(const int& x = 20, const int& y = 20);
+	void MiniWheel(const int& x = 20, const int& y = 20);
+	void TrainLocomotive(const int& x = 20, const int& y = 20);
+	void TrainWagon(const int& x = 1, const int& y = 20);
+
+	void CompleteWinBanner();
+	void YouWin(const int& x = 20, const int& y = 20);
+	void WinBorder();
+	void WinningCup(const int& x = 50, const int& y = 50);
+	
+	void Congratulations(const int& x = 10, const int& y = 10);
+	void CG_BannerBorder(const int& x = 10, const int& y = 10);
+	void DrawCGBanner(const int& x = 10, const int& y = 10);
+
 	void LevelUp(const int& x = -75, const int& y = 36);
 	void LVUP_Border(const int& x, const int& y);
 	void LVUP_TopColor(const int& x, const int& y, const short& fg, const short& bg);
