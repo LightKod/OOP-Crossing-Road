@@ -48,6 +48,7 @@ protected:
 	void DrawMarkXTreasure();
 
 	void GetDataRecord();
+	void ModifyDataRecord();
 	void ShowDataRecord();
 
 	void UpdateDataLine1();
@@ -59,6 +60,8 @@ private:
 	COORD m_ArrowCoord{ 0,0 };
 	int m_OptionIdx = 0;
 	vector<Data> m_Datas;
+
+	static const int S_MAX_DATA_LINE;
 
 	static const int m_s_OFFSET_X;
 	static const int m_s_X0;

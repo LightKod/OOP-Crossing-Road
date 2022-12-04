@@ -10,15 +10,21 @@ bool StatePlay::OnStateEnter() {
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
-	if (CrossingRoadGame::s_CharIdx == 0) {
+	//WinProcess();
+	//exit(1);
+
+	if (this->charIdx == 0) {
 		pPlayer = new Frog(game);
 	}
-	else if (CrossingRoadGame::s_CharIdx == 1) {
+	else if (this->charIdx == 1) {
 		pPlayer = new Dog(game);
 	}
 	pPlayer->p_State = Player::PLAYER_STATE::ALIVE;
 
-	LoadLevel(L"text");
+	GenerateNewLevel();
+
+
+	//LoadLevel(L"text");
 	//GenerateNewLevel();
 	return true;
 }
@@ -80,15 +86,17 @@ void StatePlay::UpdateGameScreen() {
 	}
 
 	string2Pixel(to_wstring(level), 140, 0, FG_WHITE, BG_BLUE);
+	string2Pixel(to_wstring(this->score), 140, 20, FG_WHITE, BG_BLUE);
+	string2Pixel(this->saveName, 140, 40, FG_WHITE, BG_BLUE);
 }
 
 void StatePlay::NextLevel() {
-	// cmt cái này
 	if (++this->level == MAX_LEVEL) {
 		WinProcess();
 		return;
 	}
 
+	this->score += 50 * this->level;
 	UpdateGameScreen();
 	game->ConsOutput();
 
@@ -96,7 +104,6 @@ void StatePlay::NextLevel() {
 	ClearCurrentLevel();
 	GenerateNewLevel();
 	pPlayer->ResetPosition();
-	//level++;
 }
 
 void StatePlay::GenerateNewLevel() {
@@ -163,19 +170,18 @@ void StatePlay::UpdateGameState(float fElapsedTime) {
 void StatePlay::HandleInput() {
 	// Save game
 	if (game->GetKey(VK_L).bPressed) {
-		HandleSaveInput();
-	}
-
-	// Load game
-	if (game->GetKey(VK_T).bPressed) {
-		// Xử lý trước khi vào StateMenu nếu không sẽ bị lỗi
-
-		//
-		game->SetState(new StateLoad(game));
+		ExportGameData();
 		return;
 	}
 
 	// Load game
+	if (game->GetKey(VK_T).bPressed) {
+		game->SetState(new StateLoad(game));
+		// Xử lý trước khi vào StateMenu nếu không sẽ bị lỗi
+		endState = true;
+		return;
+	}
+
 	if (game->GetKey(VK_SPACE).bPressed) {
 		NextLevel();
 		return;
@@ -238,7 +244,10 @@ Data* StatePlay::ExportGameData() {
 	for (int i = 0; i < 12; i++) {
 		data->SetLaneData(i, lanes[i]->GetData());
 	}
-	data->SaveData(L"text");
+	//data->SaveData(L"text");
+	data->SaveData(L"SAVE_LOAD");
+	data->SaveHighscore(L"HIGHSCORE");
+
 	return data;
 }
 
@@ -284,6 +293,7 @@ void StatePlay::LoadLevel(wstring fileName) {
 	}
 
 }
+
 
 //Draw save box
 void StatePlay::DrawSaveBox(const int& x, const int& y) {
@@ -385,7 +395,7 @@ void StatePlay::WinProcess() {
 			this_thread::sleep_for(std::chrono::milliseconds(500));
 
 		// xóa spr cũ
-		game->Fill(1, 28, game->ScreenWidth(), 62, L' ', COLOUR::BG_DARK_CYAN);
+		game->Fill(1, 8, game->ScreenWidth(), 62, L' ', COLOUR::BG_DARK_CYAN);
 	}
 	this_thread::sleep_for(std::chrono::milliseconds(500));
 
@@ -729,6 +739,7 @@ void StatePlay::WinningCup(const int& x, const int& y) {
 
 //Draw Congratulations Banner
 void StatePlay::CompleteCGBanner(const int& x, const int& y) {
+	Smoke(x + 11, y - 21);
 	TrainLocomotive(x, y);
 	TrainWagon(x + 49, y + 20);
 	DrawCGBanner(x + 56, y - 1);
@@ -1258,6 +1269,92 @@ void StatePlay::TrainWagon(const int& x, const int& y) {
 	game->DrawLine(x + 1, y + 2, x + 149, y + 2, 9608, FG_RED + BG_RED);
 
 }
+void StatePlay::Smoke(const int& x, const int& y) {
+	const vector<pair<short, short>> ColorList = {
+		{FG_BLACK, BG_BLACK},
+		{FG_DARK_GREY, BG_DARK_GREY},
+		{FG_WHITE, BG_WHITE}
+	};
+
+	int dummy = 0;
+	// layer 1
+	game->Fill(x + 5, y + 21, x + 6, y + 22, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 7, y + 20, x + 8, y + 19, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 8, y + 17, x + 10, y + 18, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x +11, y +16, x +14, y +17, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Draw(x +12, y +15, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +15, y +16, x +16, y +15, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +12, y +10, x +13, y + 9, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +13, y + 4, x +15, y + 4, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +15, y + 7, x +15, y + 9, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +16, y + 9, x +16, y +10, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +20, y +10, x +21, y + 9, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x +17, y +10, x +19, y +11, 9608, ColorList[dummy].first + ColorList[dummy].second);
+
+	++dummy;
+	// layer 2
+	game->Fill(x + 1, y +17, x + 2, y +18, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 2, y +21, x + 4, y +22, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 3, y +19, x + 6, y +20, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 3, y +12, x + 6, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 3, y +12, x + 6, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 9, y + 9, x +11, y +11, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x +12, y + 2, x +13, y + 3, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +14, y + 3, x +16, y + 3, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +16, y + 8, x +17, y + 9, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +18, y + 9, x +19, y + 9, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +20, y + 9, x +21, y + 8, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +20, y + 8, x +21, y + 7, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +16, y +13, x +16, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +11, y +15, x +12, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +12, y +13, x +13, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +13, y +15, x +15, y +15, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 2, y +11, x + 2, y +13, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 4, y +15, x + 7, y +15, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 7, y +16, x +10, y +16, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 7, y +12, x + 8, y +11, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 7, y +11, x + 8, y +10, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +11, y +12, x +12, y +11, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +12, y + 9, x +13, y + 8, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 9, y + 8, x +10, y + 8, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x    , y +18, x    , y +22, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Draw(x + 1, y +22, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Draw(x + 3, y +16, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Draw(x + 9, y + 7, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Draw(x + 7, y +19, 9608, ColorList[dummy].first + ColorList[dummy].second);
+
+	++dummy;
+	// layer 3
+	game->Fill(x + 1, y +19, x + 2, y +20, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 1, y +14, x + 2, y +16, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 3, y +17, x + 7, y +18, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 8, y +12, x +10, y +15, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x +17, y + 5, x +19, y + 8, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x +14, y + 1, x +16, y + 2, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x + 3, y + 8, x + 7, y +10, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x +10, y + 6, x +13, y + 7, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Fill(x +13, y +12, x +15, y +13, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x    , y +15, x    , y +17, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 3, y +15, x + 4, y +16, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 5, y +16, x + 6, y +16, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +12, y + 1, x +13, y + 1, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +13, y    , x +15, y    , 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +16, y + 6, x +16, y + 7, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +20, y + 6, x +20, y + 7, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +14, y +14, x +15, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +14, y +11, x +12, y +12, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +11, y + 8, x +12, y + 8, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 9, y + 6, x +10, y + 5, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +11, y + 5, x +12, y + 5, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 2, y + 9, x + 2, y +10, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 3, y +11, x + 6, y +11, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 4, y + 7, x + 7, y + 7, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 8, y + 8, x + 8, y + 9, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x + 7, y +13, x + 7, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->DrawLine(x +11, y +13, x +11, y +14, 9608, ColorList[dummy].first + ColorList[dummy].second);
+	game->Draw(x +1, y +21, 9608, ColorList[dummy].first + ColorList[dummy].second);
+
+}
 
 
 //Draw Levelup Banner
@@ -1401,9 +1498,7 @@ void StatePlay::LVUP_TopColor(const int& x, const int& y,
 	// +
 	game->Fill(x + 3, y + 5, x + 5, y + 6, 9608, fg + bg);
 	game->DrawLine(x + 1, y + 7, x + 7, y + 7, 9608, fg + bg);
-	//game->Draw(x + 2, y + 2, 9608, FG_BLACK + BG_BLACK);
-	//game->Draw(x + 4, y + 2, 9608, FG_BLACK + BG_BLACK);
-
+	
 	int offsetX = 0;
 
 	// L

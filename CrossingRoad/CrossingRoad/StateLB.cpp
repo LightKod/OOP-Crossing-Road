@@ -548,19 +548,28 @@ void StateLB::DrawCopperMedal(const int& x, const int& y) {
 }
 
 void StateLB::GetDataRecord() {
-	wifstream wIfs(L"data_path.txt");
-	wstring tmpPath;
+	wifstream wIfs(L"data/HIGHSCORE.txt");
+	
+	wstring tmpwStr = L"";
+	wstring tmpName = L"";
+	wstring tmpScore = L"";
+
 	if (wIfs.is_open()) {
-		int n;
-		wIfs >> n;
-		wIfs.ignore();
-		m_Datas.resize(n);
+		while (!wIfs.eof()) {
+			getline(wIfs, tmpwStr);
 
-		for (int i = 0; i < n; i++) {
-			getline(wIfs, tmpPath);
-			m_Datas[i].LoadData(tmpPath);
+			if (tmpwStr == L"") continue;
+
+			wstringstream wSS(tmpwStr);
+			// trích xuất name
+			getline(wSS, tmpName, L',');
+
+			// trích xuất score
+			getline(wSS, tmpScore, L',');
+
+			m_Datas.emplace_back(Data(tmpName, tmpScore));
 		}
-
+		
 		wIfs.close();
 	}
 }

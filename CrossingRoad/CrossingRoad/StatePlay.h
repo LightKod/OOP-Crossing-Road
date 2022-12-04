@@ -28,17 +28,25 @@ private:
 	bool pause = false;
 	bool endState = false;
 
-	int level = 0;
-	int score;
+	wstring saveName = L"";
+	int level = 1;
+	int score = 0;
+	int charIdx = 0;
+
 	wstring date;
-
-	wstring saveName;
-
 
 	char laneSeed[10] = { 'R','R', 'R', 'R', 'G', 'G', 'T','T' ,'W' ,'W' };
 
 public:
-	StatePlay(CrossingRoadGame* game) : State(game) {};
+	StatePlay(CrossingRoadGame* game) : State(game) {}
+	StatePlay(CrossingRoadGame* game, const wstring& savedName,
+		const wstring& lv, const wstring& score, const wstring& cIdx) : State(game) {
+		this->saveName = savedName;
+		this->level = stoi(lv);
+		this->score = stoi(score);
+		this->charIdx = stoi(cIdx);
+	}
+	
 	virtual bool Update(float fElapsedTime);
 	virtual bool OnStateEnter();
 	virtual bool OnStateExit();
@@ -61,6 +69,7 @@ private:
 	void MiniWheel(const int& x = 20, const int& y = 20);
 	void TrainLocomotive(const int& x = 20, const int& y = 20);
 	void TrainWagon(const int& x = 1, const int& y = 20);
+	void Smoke(const int& x = 1, const int& y = 20);
 
 	void CompleteWinBanner();
 	void YouWin(const int& x = 20, const int& y = 20);
