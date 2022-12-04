@@ -85,9 +85,27 @@ void StatePlay::UpdateGameScreen() {
 		DrawSaveBox(32, 32);
 	}
 
-	string2Pixel(to_wstring(level), 140, 0, FG_WHITE, BG_BLUE);
-	string2Pixel(to_wstring(this->score), 140, 20, FG_WHITE, BG_BLUE);
-	string2Pixel(this->saveName, 140, 40, FG_WHITE, BG_BLUE);
+	string2Pixel(to_wstring(level), 140, 25, FG_WHITE, BG_BLUE);
+	string2Pixel(to_wstring(this->score), 140, 35, FG_WHITE, BG_BLUE);
+	string2Pixel(this->saveName, 140, 15, FG_WHITE, BG_BLUE);
+
+	game->Fill(112, 0, 130, 100, L' ', BG_BLUE);
+	game->Fill(112, 0, 112, 100, L' ', BG_WHITE);
+	game->Fill(113, 100, 0, 100, L' ', BG_WHITE);
+	game->Fill(113, 55, 180, 55, L' ', BG_WHITE);
+
+	string2Pixel(L"Crossing", 114, 1, FG_WHITE, BG_BLUE);
+	string2Pixel(L"Road Game", 114, 5, FG_WHITE, BG_BLUE);
+	string2Pixel(L"Name: ", 114, 15, FG_WHITE, BG_BLUE);
+	string2Pixel(L". . . ", 114, 20, FG_WHITE, BG_BLUE);
+	string2Pixel(L"Level: ", 114, 25, FG_WHITE, BG_BLUE);
+	string2Pixel(L". . . ", 114, 30, FG_WHITE, BG_BLUE);
+	string2Pixel(L"SCORE: ", 114, 35, FG_WHITE, BG_BLUE);
+	string2Pixel(L". . . ", 114, 40, FG_WHITE, BG_BLUE);
+
+	string2Pixel(L"T to LOAD", 114, 65, FG_WHITE, BG_BLUE);
+	string2Pixel(L"L to SAVE", 114, 80, FG_WHITE, BG_BLUE);
+
 }
 
 void StatePlay::NextLevel() {

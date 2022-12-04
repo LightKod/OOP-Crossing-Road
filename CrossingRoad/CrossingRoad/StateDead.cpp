@@ -24,15 +24,11 @@ bool StateDead::Update(float fElapsedTime) {
 			}
 			}
 		}
-		if (game->GetKey(VK_UP).bReleased) {
-			optionIndex--;
-			if (optionIndex < 0)
-				optionIndex = 1;
+		if (game->GetKey(VK_Y).bReleased) {
+			optionIndex=0;
 		}
-		if (game->GetKey(VK_DOWN).bReleased) {
-			optionIndex++;
-			if (optionIndex >= 2)
-				optionIndex = 0;
+		if (game->GetKey(VK_N).bReleased) {
+			optionIndex=1;
 		}
 	}
 	else {
