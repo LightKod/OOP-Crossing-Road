@@ -163,6 +163,7 @@
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePlay.cpp" />
     <ClCompile Include="StateSetting.cpp" />
+    <ClCompile Include="StateWin.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TrafficLane.cpp" />
     <ClCompile Include="Vehicle.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePlay.h" />
     <ClInclude Include="StateSetting.h" />
+    <ClInclude Include="StateWin.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TrafficLane.h" />
     <ClInclude Include="Vehicle.h" />

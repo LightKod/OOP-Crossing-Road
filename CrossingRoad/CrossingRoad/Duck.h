@@ -26,6 +26,8 @@ public:
 		primaryColor = (COLOUR)stoi(temp);
 		getline(stream, temp, L'|');
 		darkColor = (COLOUR)stoi(temp);
+		width = 16;
+		height = 8;
 
 		id = L'D';
 	}

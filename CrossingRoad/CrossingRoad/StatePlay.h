@@ -1,6 +1,4 @@
 #pragma once
-#ifndef _STATE_PLAY_H_
-#define _STATE_PLAY_H_
 #include "CrossingRoadGame.h"
 #include "Road.h"
 #include "River.h"
@@ -21,6 +19,9 @@ class StatePlay : public CrossingRoadGame::State
 {
 private:
 	int optionIndex = 0;
+
+	int saveIndex = 0;
+
 	float deltaTime = 0;
 
 	vector<Lane*> lanes;
@@ -34,6 +35,8 @@ private:
 	int charIdx = 0;
 
 	wstring date;
+	wstring* dataNames;
+
 
 	char laneSeed[10] = { 'R','R', 'R', 'R', 'G', 'G', 'T','T' ,'W' ,'W' };
 
@@ -56,29 +59,37 @@ public:
 	}
 
 private:
-	void ForestBG();
-	void MiniGrass(const int& x, const int& y);
-	void MiniMushroom(const int& x, const int& y);
+	void UpdateCollisionMatrix();
+	void UpdateGameScreen();
+	void UpdateGameState(float fElapsedTime);
+
+	void DrawSaveSystem();
+	void DrawSideBar();
+	void DrawGameScreen();
+
+	void DrawSaveBox(const int& x = 32, const int& y = 32);
+	void DrawChooseSaveSlot(const int& x = 16, const int& y = 16);
+	void DrawContinue(const int& x = 48, const int& y = 32);
+
+	void HandleInput();
+
+	void HandleSaveInput();
+	void HandleEnterName();
+	void HandleChooseSlot();
+	void HandleContinue();
+
+
+	void GenerateNewLevel();
+	void ClearCurrentLevel();
+	void NextLevel();
+	void LoadLevel(wstring fileName);
+	void ExportGameData(wstring path);
 	
-	void OpenWinProcess();
-	void WinProcess();
 
-	void CompleteCGBanner(const int& x, const int& y);
+	void DrawBoxAnimationOpen(const int& x, const int& y, const int& width, const int& height);
+	void DrawBoxAnimationClose(const int& x, const int& y, const int& width, const int& height);
 
-	void DrawTrainWheel(const int& x = 20, const int& y = 20);
-	void MiniWheel(const int& x = 20, const int& y = 20);
-	void TrainLocomotive(const int& x = 20, const int& y = 20);
-	void TrainWagon(const int& x = 1, const int& y = 20);
-	void Smoke(const int& x = 1, const int& y = 20);
 
-	void CompleteWinBanner();
-	void YouWin(const int& x = 20, const int& y = 20);
-	void WinBorder();
-	void WinningCup(const int& x = 50, const int& y = 50);
-	
-	void Congratulations(const int& x = 10, const int& y = 10);
-	void CG_BannerBorder(const int& x = 10, const int& y = 10);
-	void DrawCGBanner(const int& x = 10, const int& y = 10);
 
 	void LevelUp(const int& x = -75, const int& y = 36);
 	void LVUP_Border(const int& x, const int& y);
@@ -86,22 +97,5 @@ private:
 	void LVUP_BotColor(const int& x, const int& y, const short& fg, const short& bg);
 	void LVUP_MidLine(const int& x, const int& y);
 
-	void DrawSaveBox(const int& x, const int& y);
-
-	void UpdateCollisionMatrix();
-	void UpdateGameScreen();
-	void UpdateGameState(float fElapsedTime);
-	void HandleInput();
-	void HandleSaveInput();
-
-	void GenerateNewLevel();
-	void ClearCurrentLevel();
-	void NextLevel();
-
-	void LoadLevel(wstring fileName);
-
-	Data* ExportGameData();
-	
 };
 
-#endif // !_STATE_PLAY_H_

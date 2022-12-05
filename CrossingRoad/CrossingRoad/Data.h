@@ -11,6 +11,11 @@
 
 using namespace std;
 
+struct LBData {
+	wstring name;
+	int score;
+};
+
 class Data {
 public:
 	Data();
@@ -19,11 +24,14 @@ public:
 		const wstring& score, const wstring& cIdx);
 
 	void LoadData(const wstring&);
-	void SaveData(const wstring&);
+	void SaveData(const wstring& path);
 	void SaveHighscore(const wstring&);
 
 	void SetLaneData(int index, wstring data);
 	static wstring FormatDataPath(const wstring&);
+	static LBData* GetLeaderboard();
+	static wstring* GetSaveSlotName();
+	static void AddLeaderboard(wstring name, int score);
 
 protected:
 	bool SetName   (const wstring& name);
@@ -36,8 +44,6 @@ protected:
 	wstring m_Score;
 	wstring m_CharIdx;
 
-
-	wstring m_Date;
 	wstring laneData[12];
 
 public:

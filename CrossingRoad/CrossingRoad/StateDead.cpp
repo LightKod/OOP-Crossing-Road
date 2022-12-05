@@ -1,16 +1,21 @@
 #include "StateDead.h"
 bool StateDead::OnStateEnter()
 {
-	ambulance=new Ambulance(game, 0, pPlayer->GetY(), 0.01);
+	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
+	ambulance=new Ambulance(game, 0, pPlayer->GetY(), 0.01f);
 	game->Fill(0, 0, 120, 96, L' ', COLOUR::BG_BLUE);
 	pPlayer->Standing();
 	ambulance->Draw();
+	saveName = L"   ";
+
+	optionIndex = 0;
 	return true;
 }
 bool StateDead::Update(float fElapsedTime) {
+
 	if (h == 0) {
 		DrawDeadBoard(fElapsedTime);
-		if (game->GetKey(VK_SPACE).bReleased) {
+		if (game->GetKey(VK_SPACE).bPressed) {
 			switch (optionIndex) {
 			case 0: {
 				h++;
@@ -24,16 +29,22 @@ bool StateDead::Update(float fElapsedTime) {
 			}
 			}
 		}
-		if (game->GetKey(VK_Y).bReleased) {
-			optionIndex=0;
+		if (game->GetKey(VK_W).bPressed) {
+			optionIndex--;
+			if (optionIndex < 0)
+				optionIndex = 1;
 		}
-		if (game->GetKey(VK_N).bReleased) {
-			optionIndex=1;
+		if (game->GetKey(VK_S).bPressed) {
+			optionIndex++;
+			if (optionIndex >= 2)
+				optionIndex = 0;
 		}
 	}
 	else {
 		DeadAnimation(fElapsedTime, DeadChoice);
 	}
+
+
 
 	return true;
 }
@@ -41,7 +52,6 @@ void StateDead::DeadAnimation(float fElapsedTime,bool Option)
 {
 	if (ambulance->GetX() == game->GetGameWidth()-8) {
 		if (Option) {
-			DrawSavedScreen();
 			time += fElapsedTime;
 			if (time > 2.0f) {
 				// Reset player's position 
@@ -78,11 +88,6 @@ void StateDead::DeadAnimation(float fElapsedTime,bool Option)
 		}
 	}
 }
-void StateDead::DrawSavedScreen()
-{
-	game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_WHITE);
-	string2Pixel(L"TRY AGAIN", 160 / 2 - 20, 96 / 2, COLOUR::FG_BLACK, COLOUR::BG_WHITE);
-}
 void StateDead::DrawDeadScreen()
 {
 	game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_BLACK);
@@ -91,6 +96,7 @@ void StateDead::DrawDeadScreen()
 void StateDead::DrawDeadBoard(float fElapsedTime)
 {
 	//WHITE BOARD
+
 	int x = ambulance->GetX() + 10;
 	int y = ambulance->GetY() - 44 - 2;
 	if (x > game->GetGameWidth() - 55)

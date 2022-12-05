@@ -19,10 +19,17 @@ class StateDead: public CrossingRoadGame::State
 	short col=COLOUR::BG_BLACK;
 	int m=0;
 
+	bool saving = true;
+
+	int score;
+
+	wstring saveName;
+
 public:
-	StateDead(CrossingRoadGame* game, Player* pplayer) {
+	StateDead(CrossingRoadGame* game, Player* pplayer, int score) {
 		this->game = game;
 		pPlayer = pplayer;
+		this->score = score;
 	}
 	virtual bool Update(float fElapsedTime);
 	virtual bool OnStateEnter();
@@ -33,8 +40,16 @@ public:
 	void DrawDeadBoard(float fElapsedTime);
 	void DrawOption(int x,int y,short col);
 	void DrawDeadScreen();
-	void DrawSavedScreen();
 
+
+	~StateDead() {
+		if (ambulance != nullptr) {
+			delete ambulance;
+		}
+		if (pPlayer != nullptr) {
+			delete pPlayer;
+		}
+	}
 };
 
 #endif

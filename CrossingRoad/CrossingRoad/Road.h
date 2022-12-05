@@ -43,13 +43,13 @@ public:
 		{
 			tiles.push_back(new RoadTile(game, 8 * i, row));
 		}
-		COLOUR primary;
-		COLOUR secondary;
-		GetRandomColor(primary, secondary, seed++);
+		COLOUR primary = BG_BLUE;
+		COLOUR secondary = BG_DARK_BLUE;
+		//GetRandomColor(primary, secondary, seed++);
 		vehicles.push_back(new Vehicle(game, randomValue, row, speed, primary, secondary));
-		GetRandomColor(primary, secondary, seed++);
+		//GetRandomColor(primary, secondary, seed++);
 		vehicles.push_back(new Vehicle(game,randomValue1, row, speed, primary, secondary));
-		GetRandomColor(primary, secondary, seed++);
+		//GetRandomColor(primary, secondary, seed++);
 		vehicles.push_back(new Vehicle(game,randomValue2, row, speed, primary, secondary));
 		id = L'R';
 	}
@@ -62,6 +62,7 @@ public:
 		id = L'R';
 	}
 	void GetRandomColor(COLOUR& primary, COLOUR& secondary, unsigned int seed) {
+		//Nhin roi mat nen khong xai nua
 		srand(seed);
 		int randomValue = rand() % 6;
 

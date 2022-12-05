@@ -15,41 +15,44 @@ void Data::LoadData(const wstring& path) {
 		getline(wIfs, m_Level);
 
 		// Date
-		getline(wIfs, m_Date);
+		getline(wIfs, m_CharIdx);
 
 		// Score
 		getline(wIfs, m_Score);
 
 		wIfs.close();
-		/*wstring temp;
-		for (int i = 0; i < 12; i++) {
+		wstring temp;
+		/*for (int i = 0; i < 12; i++) {
 			getline(wIfs, temp, L'|');
 			laneCodes[i] = temp[0];
 		}*/
 	}
 }
-
-void Data::SaveData(const wstring& path) {
-	//file << m_Name << endl;
-	//file << m_Level << endl;
-	//file << m_Date << endl;
-	//file << m_Score << endl;
-
-	//for (int i = 0; i < 12; i++) {
-	//	file << laneData[i];
-	//}
-	//cout << endl;
-
-	wofstream file(FormatDataPath(path), ios_base::app);
-	if (file.is_open()) {
-		// format: TEN,LEVEL,SCORE,CHAR_IDX
-		file << m_Name << L",";
-		file << m_Level << L",";
-		file << m_Score << L",";
-		file << m_CharIdx << endl;
-
-		file.close();
+LBData* Data::GetLeaderboard() {
+	wifstream wIfs(FormatDataPath(L"lb"));
+	LBData* datas = new LBData[3];
+	wstring temp;
+	for (int i = 0; i < 3; i++)
+	{
+		getline(wIfs, temp);
+		datas[i].name = temp.substr(0, 3);
+		datas[i].score = stoi(temp.substr(4));
 	}
+
+	wIfs.close();
+	return datas;
+}
+void Data::SaveData(const wstring& path) {
+	wofstream file(FormatDataPath(path));
+	file << m_Name << endl;
+	file << m_Level << endl;
+	file << m_CharIdx << endl;
+	file << m_Score << endl;
+
+	for (int i = 0; i < 12; i++) {
+		file << laneData[i];
+	}
+	cout << endl;
 }
 void Data::SaveHighscore(const wstring& path) {
 	wofstream file(FormatDataPath(path), ios_base::app);
@@ -86,11 +89,63 @@ bool Data::SetCharIdx(const wstring& cIdx) {
 		this->m_CharIdx = cIdx;
 		return 1;
 	}
-	return 0;
+}
+
+void Data::AddLeaderboard(wstring name, int score) {
+
+	LBData* datas = GetLeaderboard();
+	wofstream file(FormatDataPath(L"lb"));
+	LBData curData = { name, score };
+
+	for (int i = 0; i < 3; i++)
+	{
+		if (score >= datas[i].score) {
+
+			for (int k = 2; k > i; k--)
+			{
+				datas[k] = datas[k - 1];
+			}
+			datas[i] = curData;
+			break;
+		}
+	}
+
+	for (int i = 0; i < 3; i++)
+	{
+		file << datas[i].name << " " << datas[i].score << endl;
+	}
+
+	file.close();
+}
+
+wstring* Data::GetSaveSlotName() {
+	wstring* names = new wstring[4];
+	wstring temp;
+	wifstream wIfs(FormatDataPath(L"A"));
+	getline(wIfs, temp);
+	names[0] = temp;
+	
+	wIfs.close();
+	wIfs.open(FormatDataPath(L"B"));
+	getline(wIfs, temp);
+	names[1] = temp;
+
+	wIfs.close();
+	wIfs.open(FormatDataPath(L"C"));
+	getline(wIfs, temp);
+	names[2] = temp;
+
+	wIfs.close();
+	wIfs.open(FormatDataPath(L"D"));
+	getline(wIfs, temp);
+	names[3] = temp;
+
+	wIfs.close();
+	return names;
 }
 
 Data::Data() : m_Name(L""), m_Level(L""), 
-				m_Date(L""), m_Score(L""), m_CharIdx(L"")
+				m_Score(L""), m_CharIdx(L"")
 {
 
 }
