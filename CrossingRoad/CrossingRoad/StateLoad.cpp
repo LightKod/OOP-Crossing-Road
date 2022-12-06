@@ -4,6 +4,8 @@
 
 #define MAX_OPTION 4
 
+const vector<wstring> StateLoad::S_PATH_NAME = { L"A",L"B",L"C",L"D" };
+
 const int StateLoad::S_MAX_DATA_LINE = 4;
 
 const int	StateLoad::m_s_X0 = 20;
@@ -23,9 +25,7 @@ bool StateLoad::Update(float fElapsedTime) {
 		LoadingThread();
 
 		// change state
-		game->SetState(new StatePlay(game, m_Datas[m_OptionIdx].m_Name,
-			m_Datas[m_OptionIdx].m_Level, m_Datas[m_OptionIdx].m_Score,
-			m_Datas[m_OptionIdx].m_CharIdx));
+		game->SetState(new StatePlay(game, S_PATH_NAME[m_OptionIdx]));
 
 		return 1;
 	}
@@ -722,41 +722,29 @@ void StateLoad::ModifyDataRecord() {
 	}
 }
 void StateLoad::GetDataRecord() {
-	wstring tmpWStr = L"";
+	m_Datas.reserve(4);
 	wstring tmpName = L"";
-	wstring tmpLv = L"";
-	wstring tmpScore = L"";
-	wstring tmpCIdx = L"";
-	
-	wifstream wIfs(L"data/SAVE_LOAD.txt");
-	if (wIfs.is_open()) {
-		// load introduction line
-		getline(wIfs, tmpWStr);
 
-		// load real data
-		while (!wIfs.eof()) {
-			getline(wIfs, tmpWStr);
+	wifstream wIfs(L"data/A.txt");
+	getline(wIfs, tmpName);
+	m_Datas.emplace_back(Data(tmpName));
+	wIfs.close();
 
-			if (tmpWStr == L"") continue;
+	wIfs.open(L"data/B.txt");
+	getline(wIfs, tmpName);
+	m_Datas.emplace_back(Data(tmpName));
+	wIfs.close();
 
-			wstringstream wSS(tmpWStr);
+	wIfs.open(L"data/C.txt");
+	getline(wIfs, tmpName);
+	m_Datas.emplace_back(Data(tmpName));
+	wIfs.close();
 
-			// trích xuất name
-			getline(wSS, tmpName, L',');
+	wIfs.open(L"data/D.txt");
+	getline(wIfs, tmpName);
+	m_Datas.emplace_back(Data(tmpName));
+	wIfs.close();
 
-			// trích xuất level
-			getline(wSS, tmpLv, L',');
-
-			// trích xuất score
-			getline(wSS, tmpScore, L',');
-
-			// trích xuất char_idx
-			getline(wSS, tmpCIdx, L',');
-			
-			m_Datas.emplace_back(Data(tmpName, tmpLv, tmpScore, tmpCIdx));
-		}
-		wIfs.close();
-	}
 }
 void StateLoad::ShowDataRecord() {
 	switch (m_Datas.size()) {

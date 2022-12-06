@@ -35,13 +35,17 @@ private:
 	int charIdx = 0;
 
 	wstring date;
-	wstring* dataNames;
-
+	wstring* dataNames = nullptr;
+	bool isLoaded = false;
 
 	char laneSeed[10] = { 'R','R', 'R', 'R', 'G', 'G', 'T','T' ,'W' ,'W' };
 
 public:
 	StatePlay(CrossingRoadGame* game) : State(game) {}
+	StatePlay(CrossingRoadGame* game, const wstring& fileName) : StatePlay(game) {
+		LoadLevel(fileName);
+		isLoaded = true;
+	}
 	StatePlay(CrossingRoadGame* game, const wstring& savedName,
 		const wstring& lv, const wstring& score, const wstring& cIdx) : State(game) {
 		this->saveName = savedName;
@@ -82,13 +86,12 @@ private:
 	void GenerateNewLevel();
 	void ClearCurrentLevel();
 	void NextLevel();
-	void LoadLevel(wstring fileName);
-	void ExportGameData(wstring path);
+	void LoadLevel(const wstring& fileName);
+	void ExportGameData(const wstring& path);
 	
 
 	void DrawBoxAnimationOpen(const int& x, const int& y, const int& width, const int& height);
 	void DrawBoxAnimationClose(const int& x, const int& y, const int& width, const int& height);
-
 
 
 	void LevelUp(const int& x = -75, const int& y = 36);

@@ -58,7 +58,7 @@ bool StateLB::OnStateEnter() {
 	GetDataRecord();
 	sort(m_Datas.begin(), m_Datas.end(),
 		[&](const Data& a, const Data& b) -> bool {
-			if (a.m_Score > b.m_Score)
+			if (stoi(a.m_Score) > stoi(b.m_Score))
 				return 1;
 			return 0;
 		});
@@ -548,7 +548,7 @@ void StateLB::DrawCopperMedal(const int& x, const int& y) {
 }
 
 void StateLB::GetDataRecord() {
-	wifstream wIfs(L"data/HIGHSCORE.txt");
+	wifstream wIfs(L"data/lb.txt");
 	
 	wstring tmpwStr = L"";
 	wstring tmpName = L"";
@@ -561,6 +561,7 @@ void StateLB::GetDataRecord() {
 			if (tmpwStr == L"") continue;
 
 			wstringstream wSS(tmpwStr);
+
 			// trích xuất name
 			getline(wSS, tmpName, L',');
 

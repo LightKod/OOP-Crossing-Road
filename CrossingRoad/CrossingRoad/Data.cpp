@@ -112,7 +112,7 @@ void Data::AddLeaderboard(wstring name, int score) {
 
 	for (int i = 0; i < 3; i++)
 	{
-		file << datas[i].name << " " << datas[i].score << endl;
+		file << datas[i].name << ',' << datas[i].score << endl;
 	}
 
 	file.close();
@@ -120,27 +120,28 @@ void Data::AddLeaderboard(wstring name, int score) {
 
 wstring* Data::GetSaveSlotName() {
 	wstring* names = new wstring[4];
-	wstring temp;
+	wstring temp = L"";
+
 	wifstream wIfs(FormatDataPath(L"A"));
 	getline(wIfs, temp);
 	names[0] = temp;
-	
 	wIfs.close();
+	
 	wIfs.open(FormatDataPath(L"B"));
 	getline(wIfs, temp);
 	names[1] = temp;
-
 	wIfs.close();
+	
 	wIfs.open(FormatDataPath(L"C"));
 	getline(wIfs, temp);
 	names[2] = temp;
-
 	wIfs.close();
+	
 	wIfs.open(FormatDataPath(L"D"));
 	getline(wIfs, temp);
 	names[3] = temp;
-
 	wIfs.close();
+	
 	return names;
 }
 
@@ -148,6 +149,9 @@ Data::Data() : m_Name(L""), m_Level(L""),
 				m_Score(L""), m_CharIdx(L"")
 {
 
+}
+Data::Data(const wstring& name) : Data() {
+	this->SetName(name);
 }
 Data::Data(const wstring& name, const wstring& score) : Data() {
 	this->SetName(name);

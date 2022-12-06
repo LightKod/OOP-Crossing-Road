@@ -22,8 +22,8 @@ bool StatePlay::OnStateEnter() {
 	}
 	pPlayer->p_State = Player::PLAYER_STATE::ALIVE;
 
-	GenerateNewLevel();
-
+	if(!isLoaded)
+		GenerateNewLevel();
 
 	//LoadLevel(L"text");
 	//GenerateNewLevel();
@@ -87,12 +87,14 @@ void StatePlay::UpdateGameState(float fElapsedTime) {
 
 //Level Handler
 void StatePlay::NextLevel() {
+	//
+	this->score += 50 * this->level;
+
 	if (++this->level == MAX_LEVEL) {
 		game->SetState(new StateWin(game, score));
 		return;
 	}
 
-	this->score += 50 * this->level;
 	UpdateGameScreen();
 	game->ConsOutput();
 
@@ -154,10 +156,10 @@ void StatePlay::ClearCurrentLevel() {
 void StatePlay::HandleInput() {
 	HandleSaveInput();
 	//Xoa cai cmt nay de test cai win
-	/*if (game->GetKey(VK_SPACE).bPressed) {
+	if (game->GetKey(VK_SPACE).bPressed) {
 		NextLevel();
 		return;
-	}*/
+	}
 }
 void StatePlay::HandleSaveInput() {
 	if (game->GetKey(L'L').bPressed && !pause) {
@@ -302,7 +304,7 @@ void StatePlay::HandleContinue() {
 	}
 }
 
-void StatePlay::ExportGameData(wstring path) {
+void StatePlay::ExportGameData(const wstring& path) {
 	Data data;
 	data.m_Name = saveName;
 	data.m_CharIdx = to_wstring(CrossingRoadGame::s_CharIdx);
@@ -314,12 +316,13 @@ void StatePlay::ExportGameData(wstring path) {
 	data.SaveData(path);
 }
 
-void StatePlay::LoadLevel(wstring fileName) {
+void StatePlay::LoadLevel(const wstring& fileName) {
 	wifstream wIfs(Data::FormatDataPath(fileName));
 	wstring temp;
 	// Load data process
 	// Name
 	getline(wIfs, temp);
+	saveName = temp;
 
 	// Level
 	getline(wIfs, temp);
@@ -459,7 +462,6 @@ void StatePlay::DrawGameScreen() {
 void StatePlay::DrawSideBar() {
 	game->Fill(112, 0, 159, 95, L' ', BG_WHITE);
 	game->Fill(113, 1, 158, 94, L' ', BG_BLUE);
-
 
 
 	string2Pixel(to_wstring(level), 140, 25, FG_WHITE, BG_BLUE);
@@ -759,5 +761,3 @@ void StatePlay::LVUP_MidLine(const int& x, const int& y) {
 	game->DrawLine(x + 73, y + 8, x + 75, y + 8, 9608, FG_DARK_GREY + BG_DARK_GREY);
 
 }
-
-

@@ -1,9 +1,6 @@
 ﻿#include "StateWin.h"
 #include "Data.h"
 
-
-
-
 bool StateWin::OnStateEnter() {
 	WinProcess();
 	return true;
@@ -49,7 +46,6 @@ void StateWin::WinProcess() {
 	
 	this_thread::sleep_for(std::chrono::milliseconds(1000));
 }
-
 
 
 void StateWin::DrawSaveBox(const int& x, const int& y) {
@@ -922,7 +918,6 @@ void StateWin::TrainLocomotive(const int& x, const int& y) {
 	DrawTrainWheel(x + 28, y + 24);
 
 	// Tô màu cho xe lửa
-
 	game->DrawLine(x + 1, y + 26, x + 6, y + 21, 9608, FG_DARK_RED + BG_DARK_RED);
 	game->DrawLine(x + 3, y + 26, x + 7, y + 22, 9608, FG_DARK_RED + BG_DARK_RED);
 	game->DrawLine(x + 3, y + 27, x + 4, y + 27, 9608, FG_DARK_RED + BG_DARK_RED);

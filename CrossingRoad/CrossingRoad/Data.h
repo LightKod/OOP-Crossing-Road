@@ -20,6 +20,7 @@ class Data {
 public:
 	Data();
 	Data(const wstring& name, const wstring& score);
+	Data(const wstring& name);
 	Data(const wstring& name, const wstring& lv,
 		const wstring& score, const wstring& cIdx);
 

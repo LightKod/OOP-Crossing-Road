@@ -62,6 +62,7 @@ private:
 	vector<Data> m_Datas;
 
 	static const int S_MAX_DATA_LINE;
+	static const vector<wstring> S_PATH_NAME;
 
 	static const int m_s_OFFSET_X;
 	static const int m_s_X0;
