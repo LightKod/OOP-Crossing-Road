@@ -235,6 +235,13 @@ public:
 		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
 	}
 
+	void OpenLBSound() {
+		mciSendString(TEXT("open \"sound/Cheering Sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+	}
+	void PlayLBSound() {
+		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+	}
+
 };
 
 class GameEngine {

@@ -15,6 +15,7 @@ bool StateLB::Update(float fElapsedTime) {
 
 	while (!m_bBack);
 
+
 	//https://stackoverflow.com/questions/23129870/how-do-i-clean-input-buffer-before-using-getch
 	char escChar = ' ';
 	FlushConsoleInputBuffer(GetStdHandle(STD_INPUT_HANDLE));
@@ -28,7 +29,8 @@ bool StateLB::Update(float fElapsedTime) {
 
 	// Kết thúc thread Animation
 	t1.join();
-
+	
+	LBSound.CloseSound();
 	// Xử lý quay về main menu
 	game->SetState(new StateMenu(game));
 
@@ -36,12 +38,11 @@ bool StateLB::Update(float fElapsedTime) {
 }
 
 void StateLB::AnimationThread() {
+	LBSound.OpenLBSound();
 	Intro();
-
 	ShowRank3();
 	ShowRank2();
 	ShowRank1();
-
 	PostEffect();
 
 	m_bBack = true;
@@ -105,7 +106,7 @@ void StateLB::Intro() {
 void StateLB::PostEffect() {
 	static const int _x = M_S_COL_1.X + 8;
 	static const int _y = M_S_SRC_Y0 - 18;
-	static const int _tm = 25;// 25
+	static const int _tm = 35;// 25
 	
 	this_thread::sleep_for(std::chrono::milliseconds(100));
 	DrawCrown(_x, _y);
@@ -124,6 +125,7 @@ void StateLB::PostEffect() {
 	this_thread::sleep_for(std::chrono::milliseconds(120));
 	Firework(_x, _y);
 	game->ConsOutput();
+	this_thread::sleep_for(std::chrono::milliseconds(500));
 }
 void StateLB::Firework(const int& _x, const int& _y) {
 	game->Fill(_x - 30, _y + 40, _x - 29, _y + 41, 9608, FG_DARK_RED + BG_DARK_RED);
@@ -326,7 +328,7 @@ void StateLB::ShowRank1() {
 		--m_CurrIndex;
 		return;
 	}
-
+	LBSound.PlayLBSound();
 	DrawMedal(M_S_COL_1.X + 8, M_S_COL_1.Y - 1, 1);
 	ShowDataEffect(M_S_COL_1);
 }

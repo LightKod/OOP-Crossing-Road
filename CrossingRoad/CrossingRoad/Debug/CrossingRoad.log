@@ -1,17 +1,6 @@
-﻿  StateLoad.cpp
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(47,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(50,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(56,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(70,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(21,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(113,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(119,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(36,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(43,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(27,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(36,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(40,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(44,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(59,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateLoad.cpp(714,21): warning C4018: '<': signed/unsigned mismatch
+﻿  StateLB.cpp
+D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateLB.cpp(23,7): warning C4551: function call missing argument list
+D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateLB.cpp(305,18): warning C4018: '>=': signed/unsigned mismatch
+D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateLB.cpp(316,18): warning C4018: '>=': signed/unsigned mismatch
+D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateLB.cpp(327,18): warning C4018: '>=': signed/unsigned mismatch
   CrossingRoad.vcxproj -> D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe

@@ -35,6 +35,7 @@ protected:
 	void ShowDataEffect(const COORD&);
 
 private:
+	Sound LBSound;
 	void GetDataRecord();
 
 	vector<Data> m_Datas;
