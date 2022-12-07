@@ -226,13 +226,12 @@ public:
 	void CloseCreditSound() {
 		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
 	}
-	void OpenPlaySound()
+	void OpenMenuSelectSound()
 	{
-		mciSendString(TEXT("open \"sound/Play Sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"sound/Menu sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
-	void PlayPlaySound()
-	{
-		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+	void PlayMenuSelectSound() {
+		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
 	}
 
 	void OpenLBSound() {

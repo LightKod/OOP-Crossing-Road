@@ -10,7 +10,6 @@ Dog::Dog(CrossingRoadGame* game)
 	m_OnRight = 1;
 	g_Dir = MOVING_DIRECTION::INVALID;
 	g_State = ANIMATION_STATE::START;
-	game->BGSound.CloseSound();
 	dogsound.OpenBounceSound();
 }
 
