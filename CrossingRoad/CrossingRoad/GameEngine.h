@@ -231,7 +231,7 @@ public:
 		mciSendString(TEXT("open \"sound/Menu sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
 	void PlayMenuSelectSound() {
-		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
+		mciSendString(TEXT("play mp3 from 0"), NULL, 0, 0);
 	}
 
 	void OpenLBSound() {

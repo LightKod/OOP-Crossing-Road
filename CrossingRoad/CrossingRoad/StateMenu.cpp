@@ -23,44 +23,37 @@ bool StateMenu::Update(float fElapsedTime) {
 
 		// Tạo state mới
 		switch (this->m_s_OptionIdx) {
-		case 0: 
-		{
+		case 0 : {
 			SMenu.CloseSound();
 			game->SetState(new StatePlay(game));
 			break;
 		}
-		case 1: 
-		{
+		case 1 : {
 			SMenu.CloseSound();
 			game->SetState(new StateLoad(game));
 			break;
 		}
-		case 2: 
-		{
+		case 2 : {
 			SMenu.CloseSound();
 			game->SetState(new StateLB(game));
 			break;
 		}
-		case 3: 
-		{
+		case 3 : {
 			SMenu.CloseSound();
 			game->SetState(new StateSetting(game));
 			break;
 		}
-		case 4: 
-		{
+		case 4 : {
 			SMenu.CloseSound();
 			game->SetState(new StateCredit(game));
 			break;
 		}
-		case 5: 
-		{
+		case 5 : {
 			SMenu.CloseSound();
 			game->SetState(new StateExit(game));
 			break;
 		}
-		default: /*game->SetState(new StatePlay(game));*/
-		{
+		default:{/*game->SetState(new StatePlay(game));*/
 			SMenu.CloseSound();
 			break;
 		}
@@ -70,13 +63,13 @@ bool StateMenu::Update(float fElapsedTime) {
 	}
 
 	// Xử lý tương tác với người dùng
-	if (game->GetKey(VK_W).bReleased) {
-		SMenu.PlayMenuSelectSound();
+	if (game->GetKey(VK_W).bPressed) {
 		m_s_OptionIdx = (m_s_OptionIdx - 1 + MAX_OPT) % MAX_OPT;
-	}
-	if (game->GetKey(VK_S).bReleased) {
 		SMenu.PlayMenuSelectSound();
+	}
+	if (game->GetKey(VK_S).bPressed) {
 		m_s_OptionIdx = (m_s_OptionIdx + 1) % MAX_OPT;
+		SMenu.PlayMenuSelectSound();
 	}
 
 	// Xử lý đồ họa main menu
@@ -92,7 +85,6 @@ bool StateMenu::OnStateEnter() {
 bool StateMenu::OnStateExit() {
 	return true;
 }
-
 
 void StateMenu::DrawMainMenu() {
 	if (this->m_s_DeltaTime > .5f) {
