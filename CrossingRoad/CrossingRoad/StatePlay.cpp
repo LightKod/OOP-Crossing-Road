@@ -1,7 +1,7 @@
 ﻿#include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateWin.h"
-#define MAX_LEVEL 2
+#define MAX_LEVEL 4
 /* HOT KEYS
 * T: LOAD GAME
 * L: SAVE GAME
@@ -45,13 +45,16 @@ bool StatePlay::Update(float fElapsedTime) {
 	
 	if (pPlayer->GetY() == 0) {
 		NextLevel();
+		return 1;
 	}
+
 	//UpdateGameScreen();
 	UpdateGameState(fElapsedTime);
 
 	if (pPlayer->CheckPlayerState()) {
 		pPlayer->SetDefaultPosition();
 		pPlayer->p_State = Player::PLAYER_STATE::DEAD;
+		pPlayer->CloseSound();
 		game->SetState(new StateDead(game, pPlayer, score));
 	}
 	else  {
@@ -91,6 +94,7 @@ void StatePlay::NextLevel() {
 	this->score += 50 * this->level;
 
 	if (++this->level == MAX_LEVEL) {
+		pPlayer->CloseSound();
 		game->SetState(new StateWin(game, score));
 		return;
 	}

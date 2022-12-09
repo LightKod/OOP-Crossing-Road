@@ -36,6 +36,7 @@ public:
 	virtual bool SetX(const int& _x) final;
 	virtual void ResetPosition() final;
 
+	virtual void CloseSound() = 0;
 
 protected:
 	static const int s_CellSize;

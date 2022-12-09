@@ -11,6 +11,9 @@ public:
 	virtual void Update(float fElapsedTime);
 	virtual void Draw();
 
+	virtual void CloseSound() {
+		frogsound.CloseSound();
+	}
 protected:
 	virtual void SetDefaultPosition();
 

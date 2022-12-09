@@ -16,6 +16,11 @@ public:
 	virtual bool MoveLeft(const int& dX = Player::s_CellSize);
 	virtual bool MoveRight(const int& dX = Player::s_CellSize);
 
+
+	virtual void CloseSound() {
+		dogsound.CloseSound();
+	}
+
 private:
 	virtual void SetDefaultPosition();
 
