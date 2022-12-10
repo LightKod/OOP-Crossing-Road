@@ -27,6 +27,7 @@ protected:
 	virtual void ReadyJumpAndLanding();
 	virtual void Jumping();
 
+public:
 	// Handle moving player
 	virtual bool MoveUp(const int& dY = Player::s_CellSize);
 	virtual bool MoveDown(const int& dY = Player::s_CellSize);

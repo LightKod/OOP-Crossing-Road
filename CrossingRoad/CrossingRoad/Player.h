@@ -38,6 +38,11 @@ public:
 
 	virtual void CloseSound() = 0;
 
+	virtual bool MoveUp(const int& dY = Player::s_CellSize) = 0;
+	virtual bool MoveDown(const int& dY = Player::s_CellSize) = 0;
+	virtual bool MoveLeft(const int& dX = Player::s_CellSize) = 0;
+	virtual bool MoveRight(const int& dX = Player::s_CellSize) = 0;
+
 protected:
 	static const int s_CellSize;
 

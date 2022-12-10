@@ -60,6 +60,18 @@ public:
 
 	virtual void SetCollisionMatrix() {}
 
+	void SetRow(int row) {
+		y = row;
+		for (int i = 0; i < vehicles.size(); i++)
+		{
+			vehicles[i]->SetRow(row);
+		}
+		for (int i = 0; i < tiles.size(); i++)
+		{
+			tiles[i]->SetRow(row);
+		}
+	}
+
 	wchar_t GetLaneID() {
 		return id;
 	}

@@ -55,6 +55,12 @@
     <Filter Include="Source Files\Others">
       <UniqueIdentifier>{93d25ba4-3f30-431b-a6d8-a93de6d6521a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\States\StatePlay">
+      <UniqueIdentifier>{982594a8-a8ed-40cc-b934-9086e10559e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\States\StatePlay">
+      <UniqueIdentifier>{0d334124-0e9d-426f-b63a-33387fc14e64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -92,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="River.cpp">
       <Filter>Source Files\Objects\Lanes</Filter>
-    </ClCompile>
-    <ClCompile Include="StatePlay.cpp">
-      <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="StateMenu.cpp">
       <Filter>Source Files\States</Filter>
@@ -144,6 +147,15 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files\Others</Filter>
     </ClCompile>
+    <ClCompile Include="StatePlay.cpp">
+      <Filter>Source Files\States\StatePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="StatePlay_Deadline.cpp">
+      <Filter>Source Files\States\StatePlay</Filter>
+    </ClCompile>
+    <ClCompile Include="StatePlay_Endless.cpp">
+      <Filter>Source Files\States\StatePlay</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -177,9 +189,6 @@
       <Filter>Header Files\Objects\Lanes</Filter>
     </ClInclude>
     <ClInclude Include="StateMenu.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="StatePlay.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="River.h">
@@ -229,6 +238,15 @@
     </ClInclude>
     <ClInclude Include="Data.h">
       <Filter>Header Files\Others</Filter>
+    </ClInclude>
+    <ClInclude Include="StatePlay.h">
+      <Filter>Header Files\States\StatePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="StatePlay_Deadline.h">
+      <Filter>Header Files\States\StatePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="StatePlay_Endless.h">
+      <Filter>Header Files\States\StatePlay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

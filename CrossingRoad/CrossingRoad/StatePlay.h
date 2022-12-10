@@ -17,28 +17,33 @@ using namespace std;
 
 class StatePlay : public CrossingRoadGame::State 
 {
+protected:
+	float deltaTime = 0;
+	char laneSeed[10] = { 'R','R', 'R', 'R', 'G', 'G', 'T','T' ,'W' ,'W' };
+
+	vector<Lane*> lanes;
+	Player* pPlayer = nullptr;
+
+	int score = 0;
+	int charIdx = 0;
+
+	wchar_t prevLane = L'0';
+
+
 private:
 	int optionIndex = 0;
 
 	int saveIndex = 0;
 
-	float deltaTime = 0;
-
-	vector<Lane*> lanes;
-	Player* pPlayer = nullptr;
 	bool pause = false;
 	bool endState = false;
 
 	wstring saveName = L"";
 	int level = 1;
-	int score = 0;
-	int charIdx = 0;
 
 	wstring date;
 	wstring* dataNames = nullptr;
 	bool isLoaded = false;
-
-	char laneSeed[10] = { 'R','R', 'R', 'R', 'G', 'G', 'T','T' ,'W' ,'W' };
 
 public:
 	StatePlay(CrossingRoadGame* game) : State(game) {}
@@ -62,14 +67,21 @@ public:
 		ClearCurrentLevel();
 	}
 
-private:
-	void UpdateCollisionMatrix();
-	void UpdateGameScreen();
-	void UpdateGameState(float fElapsedTime);
+protected:
+	virtual void UpdateCollisionMatrix();
+	virtual void UpdateGameScreen();
+	virtual void UpdateGameState(float fElapsedTime);
 
+	virtual void GenerateNewLevel();
+	virtual void DrawGameScreen();
+	virtual void DrawSideBar();
+
+	Lane* GetRandomLane(int index);
+	void ClearCurrentLevel();
+
+
+private:
 	void DrawSaveSystem();
-	void DrawSideBar();
-	void DrawGameScreen();
 
 	void DrawSaveBox(const int& x = 32, const int& y = 32);
 	void DrawChooseSaveSlot(const int& x = 16, const int& y = 16);
@@ -82,9 +94,6 @@ private:
 	void HandleChooseSlot();
 	void HandleContinue();
 
-
-	void GenerateNewLevel();
-	void ClearCurrentLevel();
 	void NextLevel();
 	void LoadLevel(const wstring& fileName);
 	void ExportGameData(const wstring& path);

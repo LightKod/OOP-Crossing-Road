@@ -85,7 +85,6 @@ void StatePlay::UpdateGameState(float fElapsedTime) {
 		}
 		pPlayer->Update(fElapsedTime);
 	}
-	
 }
 
 //Level Handler
@@ -113,39 +112,48 @@ void StatePlay::GenerateNewLevel() {
 	
 	srand(seed);
 
-	wchar_t lastId = L' ';
 	//Starting Lane
 	lanes.push_back(new RestLane(game, 0));
 	for (int i = 0; i < 10; i++) {
-		int random = rand() % laneSeedCount;
-		int row = 8 * (i + 1);
-		wchar_t laneId = laneSeed[random];
-		switch (laneId) {
-		case 'R':
-			lanes.push_back(new Road(game, row));
-			break;
-		case 'W':
-			if (lastId == L'W') {
-				laneId = L'R';
-				lanes.push_back(new Road(game, row));
-			}else
-				lanes.push_back(new River(game, row));
-			break;
-		case 'G':
-			lanes.push_back(new RestLane(game, row));
-			break;
-		case 'T':
-			lanes.push_back(new TrafficLane(game, row));
-			break;
-		default:
-			lanes.push_back(new Road(game, row));
-			break;
-		}
-		lastId = laneId;
+		lanes.push_back(GetRandomLane(i));
 	}
 	//Ending Lane
 	lanes.push_back(new RestLane(game, 88));
 
+}
+Lane* StatePlay::GetRandomLane(int index) {
+	static unsigned int seed = time(NULL);
+	seed++;
+	int laneSeedCount = sizeof(laneSeed);
+	int random = rand() % laneSeedCount;
+	int row = 8 * (index + 1);
+	wchar_t laneId = laneSeed[random];
+	Lane* randLane = nullptr;
+	switch (laneId) {
+	case 'R':
+		randLane = new Road(game, row);
+		break;
+	case 'W':
+		if (prevLane == L'W') {
+			laneId = L'R';
+			randLane = new Road(game, row);
+		}
+		else
+			randLane = new River(game, row);
+		break;
+	case 'G':
+		randLane = new RestLane(game, row);
+		break;
+	case 'T':
+		randLane = new TrafficLane(game, row);
+		break;
+	default:
+		randLane = new Road(game, row);
+		break;
+	}
+	prevLane = laneId;
+
+	return randLane;
 }
 void StatePlay::ClearCurrentLevel() {
 	while (!lanes.empty()) {

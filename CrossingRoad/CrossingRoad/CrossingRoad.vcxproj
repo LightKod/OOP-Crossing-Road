@@ -162,6 +162,8 @@
     <ClCompile Include="StateLoad.cpp" />
     <ClCompile Include="StateMenu.cpp" />
     <ClCompile Include="StatePlay.cpp" />
+    <ClCompile Include="StatePlay_Deadline.cpp" />
+    <ClCompile Include="StatePlay_Endless.cpp" />
     <ClCompile Include="StateSetting.cpp" />
     <ClCompile Include="StateWin.cpp" />
     <ClCompile Include="Tile.cpp" />
@@ -192,6 +194,8 @@
     <ClInclude Include="StateLoad.h" />
     <ClInclude Include="StateMenu.h" />
     <ClInclude Include="StatePlay.h" />
+    <ClInclude Include="StatePlay_Deadline.h" />
+    <ClInclude Include="StatePlay_Endless.h" />
     <ClInclude Include="StateSetting.h" />
     <ClInclude Include="StateWin.h" />
     <ClInclude Include="Tile.h" />

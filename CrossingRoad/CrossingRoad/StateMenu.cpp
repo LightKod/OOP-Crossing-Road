@@ -1,5 +1,7 @@
 ﻿#include "StateMenu.h"
 #include "StatePlay.h"
+#include "StatePlay_Deadline.h"
+#include "StatePlay_Endless.h"
 #include "StateLoad.h"
 #include "StateLB.h"
 #include "StateSetting.h"
@@ -61,7 +63,15 @@ bool StateMenu::Update(float fElapsedTime) {
 
 		return 1;
 	}
-
+	
+	if (game->GetKey(L'D').bPressed) {
+		game->SetState(new StatePlay_Deadline(game));
+		return true;
+	}
+	if (game->GetKey(L'E').bPressed) {
+		game->SetState(new StatePlay_Endless(game));
+		return true;
+	}
 	// Xử lý tương tác với người dùng
 	if (game->GetKey(VK_W).bPressed) {
 		m_s_OptionIdx = (m_s_OptionIdx - 1 + MAX_OPT) % MAX_OPT;

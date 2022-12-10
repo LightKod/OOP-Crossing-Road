@@ -42,6 +42,10 @@ public:
 		id = L'C';
 	}
 
+	void SetRow(int row) {
+		y = row;
+	}
+
 	//Viet lai ham draw de ve
 	virtual void Draw();
 	void Draw1();
