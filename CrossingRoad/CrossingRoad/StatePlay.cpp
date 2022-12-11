@@ -472,25 +472,125 @@ void StatePlay::DrawGameScreen() {
 	DrawSideBar();
 }	
 void StatePlay::DrawSideBar() {
+	//ve vien
 	game->Fill(112, 0, 159, 95, L' ', BG_WHITE);
 	game->Fill(113, 1, 158, 94, L' ', BG_BLUE);
+	//
+	game->Fill(112, 15, 180, 15, L' ', BG_WHITE);
 
+	string2Pixel(to_wstring(level), 148, 19, FG_BLACK, BG_BLUE);
+	string2Pixel(to_wstring(this->score), 148, 25, FG_BLACK, BG_BLUE);
+	//string2Pixel(this->saveName, 140, 15, FG_WHITE, BG_BLUE);
 
-	string2Pixel(to_wstring(level), 140, 25, FG_WHITE, BG_BLUE);
-	string2Pixel(to_wstring(this->score), 140, 35, FG_WHITE, BG_BLUE);
-	string2Pixel(this->saveName, 140, 15, FG_WHITE, BG_BLUE);
+	//T
+	game->DrawLine(116 - 1, 4, 121 - 1, 4);
+	game->DrawLine(116 - 1, 5, 121 - 1, 5);
 
+	game->Fill(116 - 1, 4, 121 - 1, 4, L' ', BG_DARK_BLUE);
+	game->Fill(116 - 1, 5, 121 - 1, 5, L' ', BG_DARK_BLUE);
 
-	string2Pixel(L"Crossing", 114, 3, FG_WHITE, BG_BLUE);
-	string2Pixel(L"Road Game", 114, 7, FG_WHITE, BG_BLUE);
-	string2Pixel(L"Name: ", 114, 15, FG_WHITE, BG_BLUE);
-	//string2Pixel(L". . . ", 114, 20, FG_WHITE, BG_BLUE);
-	string2Pixel(L"Level: ", 114, 25, FG_WHITE, BG_BLUE);
-	//string2Pixel(L". . . ", 114, 30, FG_WHITE, BG_BLUE);
-	string2Pixel(L"SCORE: ", 114, 35, FG_WHITE, BG_BLUE);
-	//string2Pixel(L". . . ", 114, 40, FG_WHITE, BG_BLUE);
+	game->DrawLine(119 - 1, 5, 119 - 1, 11);
+	game->DrawLine(118 - 1, 5, 118 - 1, 11);
 
-	string2Pixel(L"L to SAVE", 114, 80, FG_WHITE, BG_BLUE);
+	game->DrawLine(119 - 1, 5, 119 - 1, 11, L' ', BG_DARK_BLUE);
+	game->DrawLine(118 - 1, 5, 118 - 1, 11, L' ', BG_DARK_BLUE);
+
+	//I
+	game->DrawLine(124 - 1, 4, 124 - 1, 11, L' ', BG_DARK_BLUE);
+	game->DrawLine(125 - 1, 4, 125 - 1, 11, L' ', BG_DARK_BLUE);
+
+	//M
+	game->DrawLine(128 - 1, 4, 128 - 1, 11, L' ', BG_DARK_BLUE);
+	game->DrawLine(129 - 1, 4, 129 - 1, 11, L' ', BG_DARK_BLUE);
+
+	game->DrawLine(130 - 1, 4, 132 - 1, 7, L' ', BG_DARK_BLUE);
+	game->DrawLine(131 - 1, 5, 132 - 1, 8, L' ', BG_DARK_BLUE);
+	game->DrawLine(132 - 1, 7, 134 - 1, 4, L' ', BG_DARK_BLUE);
+
+	game->DrawLine(135 - 1, 4, 135 - 1, 11, L' ', BG_DARK_BLUE);
+	game->DrawLine(136 - 1, 4, 136 - 1, 11, L' ', BG_DARK_BLUE);
+
+	//E
+	game->DrawLine(139 - 1, 4, 139 - 1, 11, L' ', BG_DARK_BLUE);
+	game->DrawLine(140 - 1, 4, 140 - 1, 11, L' ', BG_DARK_BLUE);
+
+	game->DrawLine(139 - 1, 4, 143 - 1, 4, L' ', BG_DARK_BLUE);
+	game->DrawLine(140 - 1, 5, 143 - 1, 5, L' ', BG_DARK_BLUE);
+
+	game->DrawLine(139 - 1, 7, 143 - 1, 7, L' ', BG_DARK_BLUE);
+	game->DrawLine(140 - 1, 8, 143 - 1, 8, L' ', BG_DARK_BLUE);
+
+	game->DrawLine(139 - 1, 10, 143 - 1, 10, L' ', BG_DARK_BLUE);
+	game->DrawLine(140 - 1, 11, 143 - 1, 11, L' ', BG_DARK_BLUE);
+
+	game->DrawLine(144, 11, 144, 11, L' ', BG_WHITE);
+	//game->DrawLine(144, 10, 145, 10);
+	game->DrawLine(144, 8, 144, 8, L' ', BG_WHITE);
+	//game->DrawLine(144, 7, 145, 7);
+
+	game->Fill(112, 48, 180, 48, L' ', BG_WHITE);
+
+	// GUIDE
+	string2Pixel(L" W ", 115, 55, FG_BLACK, BG_BLUE);
+	string2Pixel(L" A ", 115, 65 - 1, FG_BLACK, BG_BLUE);
+	string2Pixel(L" S ", 115, 75 - 1, FG_BLACK, BG_BLUE);
+	string2Pixel(L" D ", 115, 85 - 1, FG_BLACK, BG_BLUE);
+
+	game->Fill(115, 53, 115, 89, L' ', BG_DARK_BLUE);//vien doc
+	game->Fill(115, 52, 127, 52, L' ', BG_DARK_BLUE);//vien ngang
+	game->Fill(127, 52, 127, 90, L' ', BG_DARK_BLUE);//doc
+	game->Fill(115, 90, 127, 90, L' ', BG_DARK_BLUE);//ngang
+
+	game->Fill(115, 60, 127, 60, L' ', BG_DARK_BLUE);//ngang w
+	game->Fill(115, 70, 127, 70, L' ', BG_DARK_BLUE);//ngang a
+	game->Fill(115, 80, 127, 80, L' ', BG_DARK_BLUE);//ngang s
+	game->Fill(115, 90, 127, 90, L' ', BG_DARK_BLUE);//ngang d
+
+	game->Fill(129, 52, 129, 90, L' ', BG_DARK_BLUE);
+	game->Fill(131, 52, 131, 90, L' ', BG_DARK_BLUE);
+
+	game->Fill(129, 60, 140, 60, L' ', BG_BLUE);
+	game->Fill(129, 70, 140, 70, L' ', BG_BLUE);
+	game->Fill(129, 80, 140, 80, L' ', BG_BLUE);
+	game->Fill(129, 90, 140, 90, L' ', BG_BLUE);
+
+	game->Fill(129, 52, 130, 52, L' ', BG_DARK_BLUE);//doc ngang o vuong
+	game->Fill(129, 59, 130, 59, L' ', BG_DARK_BLUE);
+	game->Fill(129, 61, 130, 61, L' ', BG_DARK_BLUE);
+	game->Fill(129, 69, 130, 69, L' ', BG_DARK_BLUE);
+	game->Fill(129, 71, 130, 71, L' ', BG_DARK_BLUE);
+	game->Fill(129, 79, 130, 79, L' ', BG_DARK_BLUE);
+	game->Fill(129, 81, 130, 81, L' ', BG_DARK_BLUE);
+	game->Fill(129, 89, 130, 89, L' ', BG_DARK_BLUE);
+
+	string2Pixel(L" UP ", 131, 55, FG_BLACK, BG_BLUE);
+	string2Pixel(L" LEFT ", 131, 65 - 1, FG_BLACK, BG_BLUE);
+	string2Pixel(L" DOWN ", 131, 75 - 1, FG_BLACK, BG_BLUE);
+	string2Pixel(L" RIGHT ", 131, 85 - 1, FG_BLACK, BG_BLUE);
+	game->Fill(135, 59, 143, 59, L' ', BG_BLACK);
+	game->Fill(135, 69, 154, 69, L' ', BG_BLACK);
+	game->Fill(135, 79, 155, 79, L' ', BG_BLACK);
+	game->Fill(135, 89, 157, 89, L' ', BG_BLACK);
+
+	string2Pixel(L" LEVEL ", 113, 19, FG_DARK_MAGENTA, BG_BLUE);
+	string2Pixel(L" SCORE ", 113, 25, FG_DARK_MAGENTA, BG_BLUE);
+
+	game->Draw(144, 21);
+	game->Draw(145, 21);
+	game->Draw(144, 27);
+	game->Draw(145, 27);
+
+	string2Pixel(L" T ", 113, 33, FG_DARK_MAGENTA, BG_BLUE); //T load L Save
+	string2Pixel(L" S ", 113, 40, FG_DARK_MAGENTA, BG_BLUE);
+	string2Pixel(L"  LOAD ", 125, 33, FG_DARK_BLUE, BG_BLUE);
+	string2Pixel(L"  SAVE ", 125, 40, FG_DARK_BLUE, BG_BLUE);
+
+	game->Draw(128, 33);
+	game->Draw(128, 35);
+
+	game->Draw(128, 40);
+	game->Draw(128, 42);
+
 }
 void StatePlay::DrawSaveSystem() {
 	if (pause) {
