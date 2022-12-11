@@ -18,6 +18,7 @@ using namespace std;
 #define VK_T		0x54
 #define VK_W		0x57
 #define VK_Y		0x59
+#define VK_E		0x45
 #define VK_ENTER	0x0D
 
 //KHONG DUOC INCLUDE MAY CAI LIEN QUAN TOI OBJECT O DAY, QUA BEN .CPP INCLUDE

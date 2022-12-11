@@ -1,7 +1,7 @@
 ﻿#include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateWin.h"
-#define MAX_LEVEL 4
+#define MAX_LEVEL 2
 /* HOT KEYS
 * T: LOAD GAME
 * L: SAVE GAME

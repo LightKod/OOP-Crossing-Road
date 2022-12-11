@@ -5,6 +5,8 @@ class StateWin : public CrossingRoadGame::State
 	int score;
 	wstring saveName = L"";
 	int optionIndex;
+
+	Sound TrainSound;
 public:
 	StateWin(CrossingRoadGame* game, int score) {
 		this->game = game;

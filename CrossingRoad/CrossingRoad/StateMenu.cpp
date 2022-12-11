@@ -64,14 +64,17 @@ bool StateMenu::Update(float fElapsedTime) {
 		return 1;
 	}
 	
-	if (game->GetKey(L'D').bPressed) {
+	if (game->GetKey(VK_D).bPressed) {
 		game->SetState(new StatePlay_Deadline(game));
+		SMenu.CloseSound();
 		return true;
 	}
-	if (game->GetKey(L'E').bPressed) {
+	if (game->GetKey(VK_E).bPressed) {
 		game->SetState(new StatePlay_Endless(game));
+		SMenu.CloseSound();
 		return true;
 	}
+	
 	// Xử lý tương tác với người dùng
 	if (game->GetKey(VK_W).bPressed) {
 		m_s_OptionIdx = (m_s_OptionIdx - 1 + MAX_OPT) % MAX_OPT;

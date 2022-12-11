@@ -2,7 +2,9 @@
 #include "Data.h"
 
 bool StateWin::OnStateEnter() {
+	TrainSound.OpenTrainSound();
 	WinProcess();
+	TrainSound.CloseTrainSound();
 	return true;
 }
 
@@ -120,16 +122,6 @@ void StateWin::OpenWinProcess() {
 	static const int deltaX = x1 - x0 + 1;
 	static const int deltaY = y1 - y0 + 1;
 
-	//for (int stateIdx = 1; stateIdx <= maxStateIdx; ++stateIdx) {
-	//	this_thread::sleep_for(std::chrono::milliseconds(_tm));
-
-	//	game->Fill(
-	//		x0 + (stateIdx - 1) * deltaX / maxStateIdx, y0,
-	//		x1 - (maxStateIdx - stateIdx) * deltaX / maxStateIdx, y1, L' ', COLOUR::BG_DARK_CYAN);
-
-	//	game->ConsOutput();
-	//}
-
 	for (int x = x0; x <= x1 / 2; ++x) {
 		this_thread::sleep_for(std::chrono::milliseconds(_tm));
 
@@ -140,6 +132,7 @@ void StateWin::OpenWinProcess() {
 
 		game->ConsOutput();
 	}
+	TrainSound.PlayTrainSound();
 	this_thread::sleep_for(std::chrono::milliseconds(changeState));
 
 	for (int x = x1 / 2; x <= x1; ++x) {

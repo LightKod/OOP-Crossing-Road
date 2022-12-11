@@ -226,12 +226,11 @@ public:
 	void CloseCreditSound() {
 		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
 	}
-	void OpenMenuSelectSound()
-	{
+	void OpenMenuSelectSound() {
 		mciSendString(TEXT("open \"sound/Menu sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
 	}
 	void PlayMenuSelectSound() {
-		mciSendString(TEXT("play mp3 from 0"), NULL, 0, 0);
+		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
 	}
 
 	void OpenLBSound() {
@@ -241,6 +240,15 @@ public:
 		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
 	}
 
+	void OpenTrainSound() {
+		mciSendString(TEXT("open \"sound/train.mp3\" type mpegvideo alias train"), NULL, 0, NULL);
+	}
+	void PlayTrainSound() {
+		mciSendString(TEXT("play train"), NULL, 0, NULL);
+	}
+	void CloseTrainSound() {
+		mciSendString(TEXT("close train"), NULL, 0, NULL);
+	}
 };
 
 class GameEngine {
