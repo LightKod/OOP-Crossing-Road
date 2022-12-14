@@ -45,6 +45,8 @@ private:
 	wstring* dataNames = nullptr;
 	bool isLoaded = false;
 
+	float ToTalTimeConsume = 0.f;
+
 public:
 	StatePlay(CrossingRoadGame* game) : State(game) {}
 	StatePlay(CrossingRoadGame* game, const wstring& fileName) : StatePlay(game) {
@@ -68,6 +70,7 @@ public:
 	}
 
 protected:
+	virtual void UpdateScorePerLV();
 	virtual void UpdateCollisionMatrix();
 	virtual void UpdateGameScreen();
 	virtual void UpdateGameState(float fElapsedTime);

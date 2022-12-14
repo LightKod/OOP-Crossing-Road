@@ -7,6 +7,7 @@
 * L: SAVE GAME
 * 
 */
+
 bool StatePlay::OnStateEnter() {
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
@@ -36,7 +37,9 @@ bool StatePlay::OnStateExit() {
 
 //Updater
 bool StatePlay::Update(float fElapsedTime) {
-
+	// tính tổng thời gian cần thiết để qua màn
+	ToTalTimeConsume += fElapsedTime;
+	
 	HandleInput();
 	if (endState) return true;
 	if (pause) {
@@ -88,6 +91,14 @@ void StatePlay::UpdateGameState(float fElapsedTime) {
 		pPlayer->Update(fElapsedTime);
 	}
 }
+void StatePlay::UpdateScorePerLV() {
+	const static vector<float> MAX_SCORE_PER_LV = {
+		100.f, 200.f, 300.f, 400.f, 500.f, 600.f, 700.f, 800.f, 900.f, 1000.f
+	};
+
+	this->score = MAX_SCORE_PER_LV[this->level] - (int)ToTalTimeConsume;
+	ToTalTimeConsume = 0.f;
+}
 
 //Level Handler
 void StatePlay::NextLevel() {
@@ -95,8 +106,8 @@ void StatePlay::NextLevel() {
 	this_thread::yield();
 	Sound::PlayLVUpSound();
 	
-	//
-	this->score += 50 * this->level;
+	// update score
+	UpdateScorePerLV();
 
 	if (++this->level == MAX_LEVEL) {
 		pPlayer->CloseSound();
