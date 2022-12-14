@@ -7,7 +7,6 @@ class Dog : public Player {
 public:
 	Dog(CrossingRoadGame* game);
 
-	virtual void Update(float fElapsedTime);
 	virtual void Draw();
 
 	// Handle moving player
@@ -27,8 +26,8 @@ private:
 	virtual void ReadyHandle();
 	virtual void LandingHandle();
 	virtual void JumpHandle();
-	
-	virtual void CheckCollided();
+	virtual void OnDied();
+	virtual void OnMoved();
 
 	virtual void Standing();
 	virtual void Ready();

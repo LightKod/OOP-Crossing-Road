@@ -1,14 +1,43 @@
 #include "StatePlay_Deadline.h"
 
 
-bool StatePlay_Deadline::Update(float fElapsedTime) {
+bool StatePlay_Deadline::OnStateEnter() {
+	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
-	//HandleDEADLINE
+	//WinProcess();
+	//exit(1);
+	
+
+	if (this->charIdx == 0) {
+		pPlayer = new Frog(game);
+	}
+	else if (this->charIdx == 1) {
+		pPlayer = new Dog(game);
+	}
+	pPlayer->SetY(72);
+	pPlayer->p_State = Player::PLAYER_STATE::ALIVE;	
+
+	GenerateNewLevel();
+
+	//LoadLevel(L"text");
+	//GenerateNewLevel();
+	return true;
+}
+bool StatePlay_Deadline::OnStateExit() {
+	return true;
+}
+
+void StatePlay_Deadline::HandleDeadline(float fElapsedTime) {
 	counter -= fElapsedTime;
 	if (counter <= 0) {
 		NextLane();
 		counter = 2;
 	}
+}
+bool StatePlay_Deadline::Update(float fElapsedTime) {
+
+	//HandleDEADLINE
+	
 
 	//UpdateGameScreen();
 	UpdateGameState(fElapsedTime);
@@ -26,6 +55,11 @@ bool StatePlay_Deadline::Update(float fElapsedTime) {
 
 	return true;
 }
+void StatePlay_Deadline::UpdateGameScreen() {
+	DrawGameScreen();
+}
+
+
 void StatePlay_Deadline::GenerateNewLevel() {
 	unsigned int seed = time(NULL);
 	int laneSeedCount = sizeof(laneSeed);
@@ -68,38 +102,6 @@ void StatePlay_Deadline::GenerateNewLevel() {
 	lanes.push_back(new RestLane(game, 80));
 	lanes.push_back(new RestLane(game, 88));
 }
-bool StatePlay_Deadline::OnStateEnter() {
-	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
-
-	//WinProcess();
-	//exit(1);
-	
-
-	if (this->charIdx == 0) {
-		pPlayer = new Frog(game);
-	}
-	else if (this->charIdx == 1) {
-		pPlayer = new Dog(game);
-	}
-	pPlayer->SetY(72);
-	pPlayer->p_State = Player::PLAYER_STATE::ALIVE;	
-
-	GenerateNewLevel();
-
-	//LoadLevel(L"text");
-	//GenerateNewLevel();
-	return true;
-}
-bool StatePlay_Deadline::OnStateExit() {
-	return true;
-}
-
-
-void StatePlay_Deadline::UpdateGameScreen() {
-	DrawGameScreen();
-}
-
-
 void StatePlay_Deadline::NextLane() {
 	Lane* temp = lanes.back();
 	lanes.pop_back();

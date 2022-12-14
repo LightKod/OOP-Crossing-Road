@@ -8,20 +8,19 @@ public:
 	Frog(CrossingRoadGame* game);
 	virtual ~Frog();
 
-	virtual void Update(float fElapsedTime);
 	virtual void Draw();
 
 	virtual void CloseSound() {
 		frogsound.CloseSound();
 	}
-protected:
+private:
 	virtual void SetDefaultPosition();
 
 	virtual void ReadyHandle();
 	virtual void LandingHandle();
 	virtual void JumpHandle();
-
-	virtual void CheckCollided();
+	virtual void OnDied();
+	virtual void OnMoved();
 
 	virtual void Standing();
 	virtual void ReadyJumpAndLanding();

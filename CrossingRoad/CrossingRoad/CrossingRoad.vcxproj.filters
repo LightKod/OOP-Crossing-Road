@@ -156,6 +156,9 @@
     <ClCompile Include="StatePlay_Endless.cpp">
       <Filter>Source Files\States\StatePlay</Filter>
     </ClCompile>
+    <ClCompile Include="StatePlay_Versus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -247,6 +250,9 @@
     </ClInclude>
     <ClInclude Include="StatePlay_Endless.h">
       <Filter>Header Files\States\StatePlay</Filter>
+    </ClInclude>
+    <ClInclude Include="StatePlay_Versus.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

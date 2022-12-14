@@ -13,29 +13,6 @@ Dog::Dog(CrossingRoadGame* game)
 	dogsound.OpenBounceSound();
 }
 
-void Dog::Update(float fElapsedTime) {
-	if (game->m_keys[VK_W].bPressed) {
-		if (this->MoveUp()) {
-			dogsound.PlayBounceSound();
-		}
-	}
-	if (game->m_keys[VK_S].bPressed) {
-		if (this->MoveDown()) {
-			dogsound.PlayBounceSound();
-		}
-	}
-	if (game->m_keys[VK_A].bPressed) {
-		if (this->MoveLeft()) {
-			dogsound.PlayBounceSound();
-		}
-	}
-	if (game->m_keys[VK_D].bPressed) {
-		if (this->MoveRight()) {
-			dogsound.PlayBounceSound();
-		}
-	}
-	CheckCollided();
-}
 
 void Dog::Draw() {
 	switch (g_State) {
@@ -65,14 +42,7 @@ void Dog::Draw() {
 
 	// pause thread
 	this_thread::sleep_for(std::chrono::milliseconds(25));
-}
-
-void Dog::CheckCollided() {
-	if (game->CheckCollision(x + 2, y + 2, width - 2, height - 2)) {
-		p_State = PLAYER_STATE::DEAD;
-		dogsound.CloseSound();
-	}
-}
+}	
 
 void Dog::SetDefaultPosition() {
 	this->SetX(40);
@@ -152,6 +122,12 @@ void Dog::LandingHandle() {
 	g_State = ANIMATION_STATE::END;
 }
 
+void Dog::OnMoved() {
+	dogsound.PlayBounceSound();
+}
+void Dog::OnDied() {
+	dogsound.CloseSound();
+}
 
 // Handle moving player
 bool Dog::MoveUp(const int& dY) {

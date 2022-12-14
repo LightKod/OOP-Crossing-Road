@@ -6,6 +6,7 @@ using namespace std;
 
 class Player : public CrossingRoadGame::Object {
 private:
+	int controllerIndex = 0;
 public:
 	enum class PLAYER_STATE {
 		ALIVE,
@@ -17,12 +18,13 @@ public:
 	Player(CrossingRoadGame* game, const int& x, const int& y, const int& w, const int& h)
 		: Object(game, x, y, w, h)
 	{
+		controllerIndex = 0;
 	}
 
 	virtual ~Player() {};
 	virtual void Standing() = 0;
 
-	virtual void Update(float fElapsedTime) = 0;
+	virtual void Update(float fElapsedTime);
 	virtual void Draw() = 0;
 	virtual void SetDefaultPosition() = 0;
 
@@ -31,6 +33,7 @@ public:
 
 	virtual void SetCollisionMatrix() {}
 	virtual bool CheckPlayerState();
+	virtual void CheckCollided();
 
 	virtual bool SetY(const int& _y) final;
 	virtual bool SetX(const int& _x) final;
@@ -43,8 +46,15 @@ public:
 	virtual bool MoveLeft(const int& dX = Player::s_CellSize) = 0;
 	virtual bool MoveRight(const int& dX = Player::s_CellSize) = 0;
 
+	void SetControllerInput(int index) {
+		controllerIndex = index;
+	}
+
 protected:
 	static const int s_CellSize;
+
+	virtual void OnDied() {}
+	virtual void OnMoved() {}
 
 	enum GAME_SCREEN_LIMIT : short {
 		TOP = 0,

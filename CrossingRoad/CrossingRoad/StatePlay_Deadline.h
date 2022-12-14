@@ -22,6 +22,7 @@ public:
 
 	~StatePlay_Deadline() {
 		ClearCurrentLevel();
+		game->ClearCollsionMatrix();
 		if (pPlayer != nullptr) {
 			delete pPlayer;
 		}
@@ -30,6 +31,7 @@ public:
 protected:
 	void UpdateGameScreen() override;
 	void GenerateNewLevel() override;
-	void NextLane();
+	virtual void NextLane();
+	void HandleDeadline(float fElapsedTime);
 };
 

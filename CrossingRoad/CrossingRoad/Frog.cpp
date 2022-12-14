@@ -19,27 +19,6 @@ Frog::Frog(CrossingRoadGame* game)
 	frogsound.OpenBounceSound();
 }
 
-void Frog::Update(float fElapsedTime) {
-	if (game->m_keys[VK_W].bPressed) {
-		if(this->MoveUp())
-			frogsound.PlayBounceSound();
-	}
-	if (game->m_keys[VK_S].bPressed) {
-		if(this->MoveDown())
-			frogsound.PlayBounceSound();
-	}
-	if (game->m_keys[VK_A].bPressed) {
-		if(this->MoveLeft())
-			frogsound.PlayBounceSound();
-	}
-	if (game->m_keys[VK_D].bPressed) {
-		if(this->MoveRight())
-			frogsound.PlayBounceSound();
-	}
-	
-	CheckCollided();
-}
-
 void Frog::Draw() {
 	switch (g_State) {
 	case ANIMATION_STATE::START:
@@ -72,13 +51,6 @@ void Frog::Draw() {
 
 	// pause thread
 	this_thread::sleep_for(std::chrono::milliseconds(25));// 25
-}
-
-void Frog::CheckCollided() {
-	if (game->CheckCollision(x + 2, y + 2, width - 2, height - 2)) {
-		p_State = PLAYER_STATE::DEAD;
-		frogsound.CloseSound();
-	}
 }
 
 void Frog::SetDefaultPosition() {
@@ -150,6 +122,12 @@ void Frog::JumpHandle() {
 	}
 }
 
+void Frog::OnMoved() {
+	frogsound.PlayBounceSound();
+}
+void Frog::OnDied() {
+	frogsound.CloseSound();
+}
 
 // Handle moving player
 bool Frog::MoveUp(const int& dY) {
