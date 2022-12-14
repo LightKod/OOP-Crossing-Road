@@ -19,7 +19,7 @@ bool StateExit::Update(float fElapsedTime) {
 
 	while (!m_bBack);
 	t1.join();
-	ByeSound.CloseSound();
+	ByeSound.CloseByeSound();
 
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLACK);

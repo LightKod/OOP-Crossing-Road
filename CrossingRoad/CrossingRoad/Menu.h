@@ -64,6 +64,7 @@ private:
 	vector<wstring> m_Setting;
 	vector<wstring> m_Credit;
 	vector<wstring> m_Exit;
+
 };
 
 #endif // !_MENU_H_

@@ -12,6 +12,8 @@ private:
 	bool down = false;
 
 	void DrawMainMenu();
+	bool isClicked = 0;
+	float WaitSndTm = 0.f;
 
 public:
 	StateMenu(CrossingRoadGame* game);
@@ -28,7 +30,6 @@ public:
 		const int& y, vector<wstring>& Strings) {}
 	virtual void SplashAnimation(CrossingRoadGame* game, const int& opt) {}
 	
-	Sound SMenu;
 	StateMenu* p_Menu = nullptr;
 
 };

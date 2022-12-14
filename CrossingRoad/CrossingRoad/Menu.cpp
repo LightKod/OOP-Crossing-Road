@@ -498,4 +498,5 @@ Menu::Menu(CrossingRoadGame* game) {
 	m_Exit.push_back(L"█▀▀▀ ▀▄ ▄▀ ▀█▀ ▀▀█▀▀");
 	m_Exit.push_back(L"█▀▀▀   █    █    █  ");
 	m_Exit.push_back(L"█▄▄▄ ▄▀ ▀▄ ▄█▄   █  ");
+
 }

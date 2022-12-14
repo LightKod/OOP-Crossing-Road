@@ -6,6 +6,6 @@
 
 int main() {
 	CrossingRoadGame game;
-	game.ConstructConsole(160, 96, 2, 2);// 160, 96, 8, 8
+	game.ConstructConsole(160, 96, 8, 8);// 160, 96, 8, 8
 	game.Start();
 }

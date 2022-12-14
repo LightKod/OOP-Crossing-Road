@@ -210,44 +210,83 @@ public:
 	void ResumeBGSound() {
 		mciSendString(TEXT("resume mp3"), NULL, 0, NULL);
 	}
+
+	// exit's sound
 	void OpenByeSound() {
-		mciSendString(TEXT("open \"sound/bye sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"sound/ByeSound.mp3\" type mpegvideo alias byeSnd"), NULL, 0, NULL);
 	}
 	void PlayByeSound() {
-		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+		mciSendString(TEXT("play byeSnd from 0"), NULL, 0, NULL);
+	}
+	void CloseByeSound() {
+		mciSendString(TEXT("play byeSnd"), NULL, 0, NULL);
 	}
 
+	// credit's sound
 	void OpenCreditSound() {
-		mciSendString(TEXT("open \"sound/credit sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"sound/CreditSound.mp3\" type mpegvideo alias creSnd"), NULL, 0, NULL);
 	}
 	void PlayCreditSound() {
-		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+		mciSendString(TEXT("play creSnd from 0"), NULL, 0, NULL);
 	}
 	void CloseCreditSound() {
-		mciSendString(TEXT("close mp3"), NULL, 0, NULL);
-	}
-	void OpenMenuSelectSound() {
-		mciSendString(TEXT("open \"sound/Menu sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
-	}
-	void PlayMenuSelectSound() {
-		mciSendString(TEXT("play mp3 from 0"), NULL, 0, NULL);
+		mciSendString(TEXT("close creSnd"), NULL, 0, NULL);
 	}
 
+	// select-option-in-menu's sound
+	static void OpenMenuSelectSound() {
+		mciSendString(TEXT("open \"sound/MenuSound1.mp3\" type mpegvideo alias menuSound"), NULL, 0, NULL);
+	}
+	static void PlayMenuSelectSound() {
+		//mciSendString(TEXT("play menuSound from 0 wait"), NULL, 0, NULL);
+		mciSendString(L"play menuSound from 0", NULL, 0, NULL);
+	}
+	static void CloseMenuSelectSound() {
+		mciSendString(TEXT("close menuSound"), NULL, 0, NULL);
+	}
+
+	// leaderboard's sound
 	void OpenLBSound() {
-		mciSendString(TEXT("open \"sound/Cheering Sound.mp3\" type mpegvideo alias mp3"), NULL, 0, NULL);
+		mciSendString(TEXT("open \"sound/CheeringSound.mp3\" type mpegvideo alias chrSnd"), NULL, 0, NULL);
 	}
 	void PlayLBSound() {
-		mciSendString(TEXT("play mp3"), NULL, 0, NULL);
+		mciSendString(TEXT("play chrSnd from 0"), NULL, 0, NULL);
+	}
+	void CloseLBSound() {
+		mciSendString(TEXT("close chrSnd"), NULL, 0, NULL);
 	}
 
+	// train's sound
 	void OpenTrainSound() {
 		mciSendString(TEXT("open \"sound/train.mp3\" type mpegvideo alias train"), NULL, 0, NULL);
 	}
 	void PlayTrainSound() {
-		mciSendString(TEXT("play train"), NULL, 0, NULL);
+		mciSendString(TEXT("play train from 0"), NULL, 0, NULL);
 	}
 	void CloseTrainSound() {
 		mciSendString(TEXT("close train"), NULL, 0, NULL);
+	}
+
+	// enter-a-state's sound
+	static void OpenEnterSound() {
+		mciSendString(TEXT("open \"sound/EnterSound.mp3\" type mpegvideo alias entSnd"), NULL, 0, NULL);
+	}
+	static void PlayEnterSound() {
+		mciSendString(L"play entSnd", NULL, 0, NULL);
+	}
+	static void CloseEnterSound() {
+		mciSendString(TEXT("close entSnd"), NULL, 0, NULL);
+	}
+
+	// levelup sound
+	static void  OpenLVUpSound() {
+		mciSendString(TEXT("open \"sound/LVUp.mp3\" type mpegvideo alias lvup"), NULL, 0, NULL);
+	}
+	static void  PlayLVUpSound() {
+		mciSendString(TEXT("play lvup from 0"), NULL, 0, NULL);
+	}
+	static void CloseLVUpSound() {
+		mciSendString(TEXT("close lvup"), NULL, 0, NULL);
 	}
 };
 

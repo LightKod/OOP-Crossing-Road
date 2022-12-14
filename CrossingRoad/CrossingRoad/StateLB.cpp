@@ -30,7 +30,7 @@ bool StateLB::Update(float fElapsedTime) {
 	// Kết thúc thread Animation
 	t1.join();
 	
-	LBSound.CloseSound();
+	LBSound.CloseLBSound();
 	// Xử lý quay về main menu
 	game->SetState(new StateMenu(game));
 

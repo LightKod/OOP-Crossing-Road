@@ -1,7 +1,7 @@
 ﻿#include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateWin.h"
-#define MAX_LEVEL 2
+#define MAX_LEVEL 4
 /* HOT KEYS
 * T: LOAD GAME
 * L: SAVE GAME
@@ -25,6 +25,7 @@ bool StatePlay::OnStateEnter() {
 	if(!isLoaded)
 		GenerateNewLevel();
 
+	Sound::OpenLVUpSound();
 	//LoadLevel(L"text");
 	//GenerateNewLevel();
 	return true;
@@ -39,7 +40,7 @@ bool StatePlay::Update(float fElapsedTime) {
 	HandleInput();
 	if (endState) return true;
 	if (pause) {
-		UpdateGameScreen();
+		UpdateGameScreen();//
 		return true;
 	}
 	
@@ -55,6 +56,7 @@ bool StatePlay::Update(float fElapsedTime) {
 		pPlayer->SetDefaultPosition();
 		pPlayer->p_State = Player::PLAYER_STATE::DEAD;
 		pPlayer->CloseSound();
+		Sound::CloseLVUpSound();
 		game->SetState(new StateDead(game, pPlayer, score));
 	}
 	else  {
@@ -89,11 +91,16 @@ void StatePlay::UpdateGameState(float fElapsedTime) {
 
 //Level Handler
 void StatePlay::NextLevel() {
+	// âm thanh level up
+	this_thread::yield();
+	Sound::PlayLVUpSound();
+	
 	//
 	this->score += 50 * this->level;
 
 	if (++this->level == MAX_LEVEL) {
 		pPlayer->CloseSound();
+		Sound::CloseLVUpSound();
 		game->SetState(new StateWin(game, score));
 		return;
 	}
@@ -307,7 +314,7 @@ void StatePlay::HandleContinue() {
 			game->ConsOutput();
 			endState = true;
 			this_thread::sleep_for(std::chrono::milliseconds(2000));
-
+			Sound::CloseLVUpSound();
 			game->SetState(new StateMenu(game));
 			break;
 		default:
