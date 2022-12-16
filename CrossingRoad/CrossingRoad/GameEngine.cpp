@@ -115,8 +115,12 @@ void GameEngine::Fill(int x1, int y1, int x2, int y2, short c, short col) {
 
 void GameEngine::DrawString(int x, int y, std::wstring c, short col) {
 	for (size_t i = 0; i < c.size(); i++) {
-		m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
-		m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
+		//m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
+		//m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
+		if ((x + i >= 0) && (x + i <= 159)) {
+			m_bufScreen[y * m_nScreenWidth + x + i].Char.UnicodeChar = c[i];
+			m_bufScreen[y * m_nScreenWidth + x + i].Attributes = col;
+		}
 	}
 }
 

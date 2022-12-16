@@ -25,6 +25,9 @@ bool StateChoosePlayMode::Update(float fElapsedTime) {
 	if (game->GetKey(VK_SPACE).bPressed) {
 		ChangeStateAnimation();
 
+		//game->SetState(new StateChoosePlayMode(game));
+		//return 1;
+
 		// Tạo state mới
 		switch (this->UserChoice) {
 		case 0:
@@ -74,7 +77,7 @@ bool StateChoosePlayMode::OnStateExit() {
 }
 
 void StateChoosePlayMode::ChangeStateAnimation() {
-	static const int _tm = 12;
+	static const int _tm = 24;//24
 	static const int step = 2;
 	
 	game->Fill(0, 0, 159, 95, L' ', BG_COLOR);
@@ -82,20 +85,22 @@ void StateChoosePlayMode::ChangeStateAnimation() {
 	int x = -40;
 	int y = BORDER_COORD_LIST[UserChoice].Y - 24;
 	int dummy = 0;
-	for (int i = 0; i < 200; ) {
+	for (int i = 0; i < 260; ) {
 		this_thread::sleep_for(std::chrono::milliseconds(_tm));
 		game->Fill(x + i, y, x + i + 21, y + 33, L' ', BG_COLOR);
 		
-		OpenLand();
-		if (++dummy & 1) {
-			i += step;
-			DrawLoadingState1(x + i, y);
-		}
-		else {
-			i += 4*step;
-			DrawLoadingState2(x + i, y);
-		}
+		if (++dummy & 1) i += step;
+		else  i += 4 * step;
+
+		OpenLand(x + i + 28);
+		if (dummy & 1)  DrawLoadingState1(x + i, y);
+		else DrawLoadingState2(x + i, y);
+		
 		game->ConsOutput();
+
+		if (i == 160) {
+			this_thread::sleep_for(std::chrono::milliseconds(500));
+		}
 	}
 }
 // ================ CHỌN CHẾ ĐỘ CHƠI ================
@@ -348,19 +353,21 @@ void StateChoosePlayMode::DrawLoadingState2(const int& x, const int& y) {
 
 	game->Fill(x + 26, y + 30, x + 27, y + 31, 9608, FG_BLUE + BG_BLUE);
 }
-void StateChoosePlayMode::OpenLand() {
-	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 1, 159, 
+void StateChoosePlayMode::OpenLand(const int& desX) {
+	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 1, desX,
 		BORDER_COORD_LIST[UserChoice].Y + 1, 9608, FG_BLACK + BG_BLACK);
-	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 11, 159,
+	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 11, desX,
 		BORDER_COORD_LIST[UserChoice].Y + 11, 9608, FG_BLACK + BG_BLACK);
 
-	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 2, 159,
+	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 2, desX,
 		BORDER_COORD_LIST[UserChoice].Y + 2, 9608, FG_DARK_YELLOW + BG_DARK_YELLOW);
-	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 10, 159,
+	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 10, desX,
 		BORDER_COORD_LIST[UserChoice].Y + 10, 9608, FG_DARK_YELLOW + BG_DARK_YELLOW);
 
-	game->Fill(0, BORDER_COORD_LIST[UserChoice].Y + 3, 159,
+	game->Fill(0, BORDER_COORD_LIST[UserChoice].Y + 3, desX,
 		BORDER_COORD_LIST[UserChoice].Y + 9, L' ', BG_YELLOW);
+	static const int offsetX = 85;
+	string2Pixel(L"GAME ON!", desX - offsetX, BORDER_COORD_LIST[UserChoice].Y + 5, FG_BLACK, BG_YELLOW);
 }
 
 void StateChoosePlayMode::UpdatePointerCoord() {

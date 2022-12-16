@@ -14,7 +14,7 @@ public:
 
 private:
 	void ChangeStateAnimation();
-	void OpenLand();
+	void OpenLand(const int& desX);
 	void UpdateUserChoice();
 
 	void DrawLoadingState(const int& x, const int& y);

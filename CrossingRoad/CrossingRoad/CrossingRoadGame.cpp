@@ -252,6 +252,12 @@ void CrossingRoadGame::State::char2Pixel(const wchar_t& ch, const int& x,
 		Strings[2] = L"██";
 		offsetX += 5;
 		break;
+	case L'!':
+		Strings[0] = L"█";
+		Strings[1] = L"█";
+		Strings[2] = L"▄";
+		offsetX += 2;
+		break;
 	case L' ':
 		offsetX += 4;
 		break;
