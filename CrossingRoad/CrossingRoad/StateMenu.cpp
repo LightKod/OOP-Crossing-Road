@@ -9,6 +9,7 @@
 #include "StateCredit.h"
 #include "StateExit.h"
 #include "Menu.h"
+#include "StateChoosePlayMode.h"
 
 #define TIME_LIMIT 10.f
 #define TIME_FACTOR 51.f
@@ -33,7 +34,8 @@ bool StateMenu::Update(float fElapsedTime) {
 		// Tạo state mới
 		switch (this->m_s_OptionIdx) {
 		case 0 :
-			game->SetState(new StatePlay(game));
+			//game->SetState(new StatePlay(game));
+			game->SetState(new StateChoosePlayMode(game));
 			break;
 		case 1 : 
 			game->SetState(new StateLoad(game));

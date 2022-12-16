@@ -159,6 +159,9 @@
     <ClCompile Include="StatePlay_Versus.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="StateChoosePlayMode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CrossingRoadGame.h">
@@ -252,6 +255,9 @@
       <Filter>Header Files\States\StatePlay</Filter>
     </ClInclude>
     <ClInclude Include="StatePlay_Versus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StateChoosePlayMode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

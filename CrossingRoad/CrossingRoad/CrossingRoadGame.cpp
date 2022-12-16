@@ -4,6 +4,7 @@
 #include "River.h"
 #include "Frog.h"
 #include "StateMenu.h"
+
 int optionIndex = 0;
 static CrossingRoadGame::State* state;
 int CrossingRoadGame::s_CharIdx = 0;
