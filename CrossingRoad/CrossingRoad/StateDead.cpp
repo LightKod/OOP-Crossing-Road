@@ -175,5 +175,11 @@ void StateDead::DrawOption(int x, int y, short col)
 }
 bool StateDead::OnStateExit()
 {
+	if (ambulance != nullptr) {
+		delete ambulance;
+	}
+	if (pPlayer != nullptr) {
+		delete pPlayer;
+	}
 	return true;
 }

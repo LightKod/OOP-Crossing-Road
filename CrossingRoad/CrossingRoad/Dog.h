@@ -7,29 +7,19 @@ class Dog : public Player {
 public:
 	Dog(CrossingRoadGame* game);
 
-	virtual void Draw();
-
+	virtual void Standing();
 	// Handle moving player
 	virtual bool MoveUp(const int& dY = Player::s_CellSize);
 	virtual bool MoveDown(const int& dY = Player::s_CellSize);
 	virtual bool MoveLeft(const int& dX = Player::s_CellSize);
 	virtual bool MoveRight(const int& dX = Player::s_CellSize);
 
-
-	virtual void CloseSound() {
-		dogsound.CloseSound();
-	}
-
 private:
-	virtual void SetDefaultPosition();
 
 	virtual void ReadyHandle();
 	virtual void LandingHandle();
 	virtual void JumpHandle();
-	virtual void OnDied();
-	virtual void OnMoved();
 
-	virtual void Standing();
 	virtual void Ready();
 	virtual void Jumping();
 	virtual void Landing();
@@ -44,12 +34,7 @@ private:
 	virtual void LeftOnAir2();
 	virtual void LeftLanding();
 
-	MOVING_DIRECTION g_Dir = MOVING_DIRECTION::INVALID;
-	ANIMATION_STATE g_State = ANIMATION_STATE::START;
-	bool s_CanMove = 1;
 	bool m_OnRight = 1;
-
-	Sound dogsound;
 };
 
 #endif // !_DOG_H_

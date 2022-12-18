@@ -1,7 +1,7 @@
 #pragma once
 #include "CrossingRoadGame.h"
 #include <windows.h>
-
+#define FPS 0.1f
 using namespace std;
 
 class Player : public CrossingRoadGame::Object {
@@ -21,12 +21,17 @@ public:
 		controllerIndex = 0;
 	}
 
+	virtual void CloseSound() {
+		sound.CloseSound();
+	}
+
 	virtual ~Player() {};
-	virtual void Standing() = 0;
 
 	virtual void Update(float fElapsedTime);
-	virtual void Draw() = 0;
-	virtual void SetDefaultPosition() = 0;
+	virtual void Draw();
+	virtual void Standing() = 0;
+	virtual void HandleAnimation(float fElapsedTime);
+	virtual void SetDefaultPosition();
 
 	virtual int GetX() final { return x; }
 	virtual int GetY() final { return y; }
@@ -39,8 +44,6 @@ public:
 	virtual bool SetX(const int& _x) final;
 	virtual void ResetPosition() final;
 
-	virtual void CloseSound() = 0;
-
 	virtual bool MoveUp(const int& dY = Player::s_CellSize) = 0;
 	virtual bool MoveDown(const int& dY = Player::s_CellSize) = 0;
 	virtual bool MoveLeft(const int& dX = Player::s_CellSize) = 0;
@@ -51,10 +54,13 @@ public:
 	}
 
 protected:
+	int counter = 0.1f;
+	bool endAnimation = false;
+
 	static const int s_CellSize;
 
-	virtual void OnDied() {}
-	virtual void OnMoved() {}
+	virtual void OnDied();
+	virtual void OnMoved();
 
 	enum GAME_SCREEN_LIMIT : short {
 		TOP = 0,
@@ -77,5 +83,17 @@ protected:
 		LANDING=3,
 		END	  = 4,
 	};
+
+	
+	virtual void ReadyHandle() = 0;
+	virtual void LandingHandle() = 0;
+	virtual void JumpHandle() = 0;
+
+	Sound sound;
+	MOVING_DIRECTION g_Dir = MOVING_DIRECTION::INVALID;
+	ANIMATION_STATE g_State = ANIMATION_STATE::START;
+
+	static bool s_CanMove;
+	int frameIdx = 0;
 
 };

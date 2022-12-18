@@ -18,7 +18,6 @@ private:
 public:
 	StateMenu(CrossingRoadGame* game);
 	StateMenu(): State() {}
-	~StateMenu();
 
 	virtual bool Update(float fElapsedTime);
 	virtual bool OnStateEnter();

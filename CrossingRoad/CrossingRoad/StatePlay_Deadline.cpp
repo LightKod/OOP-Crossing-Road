@@ -23,9 +23,6 @@ bool StatePlay_Deadline::OnStateEnter() {
 	//GenerateNewLevel();
 	return true;
 }
-bool StatePlay_Deadline::OnStateExit() {
-	return true;
-}
 
 void StatePlay_Deadline::HandleDeadline(float fElapsedTime) {
 	counter -= fElapsedTime;
@@ -37,8 +34,7 @@ void StatePlay_Deadline::HandleDeadline(float fElapsedTime) {
 bool StatePlay_Deadline::Update(float fElapsedTime) {
 
 	//HandleDEADLINE
-	
-
+	HandleDeadline(fElapsedTime);
 	//UpdateGameScreen();
 	UpdateGameState(fElapsedTime);
 
@@ -55,6 +51,16 @@ bool StatePlay_Deadline::Update(float fElapsedTime) {
 
 	return true;
 }
+
+bool StatePlay_Deadline::OnStateExit() {
+	game->ClearCollsionMatrix();
+	ClearCurrentLevel();
+	if (pPlayer != nullptr) {
+		delete pPlayer;
+	}
+	return true;
+}
+
 void StatePlay_Deadline::UpdateGameScreen() {
 	DrawGameScreen();
 }

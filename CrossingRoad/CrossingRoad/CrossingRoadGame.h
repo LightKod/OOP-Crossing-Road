@@ -50,8 +50,8 @@ public:
 
 	void SetState(State* state) {
 		if (this->state != nullptr) {
-			if (this->state != state)
-				delete this->state;
+			this->state->OnStateExit();
+			delete this->state;
 		}
 		this->state = state;
 		this->state->OnStateEnter();
@@ -89,6 +89,7 @@ public:
 		virtual void SetCollisionMatrix() {};
 		//Ve ra man hinh tuy` vi tri x, y
 		virtual void Draw() {};
+		virtual ~Object(){}
 
 	};
 

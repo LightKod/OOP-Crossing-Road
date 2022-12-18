@@ -16,57 +16,22 @@ Frog::Frog(CrossingRoadGame* game)
 	s_CanMove = 1;
 	g_Dir = MOVING_DIRECTION::INVALID;
 	g_State = ANIMATION_STATE::START;
-	frogsound.OpenBounceSound();
+	sound.OpenBounceSound();
 }
 
-void Frog::Draw() {
-	switch (g_State) {
-	case ANIMATION_STATE::START:
-		Standing();
-		if(p_State == PLAYER_STATE::ALIVE)
-			s_CanMove = 1;
-		return;
-
-	case ANIMATION_STATE::READY:
-		ReadyHandle();
-		break;
-
-	case ANIMATION_STATE::JUMP:
-		JumpHandle();
-		break;
-
-	case ANIMATION_STATE::LANDING:
-		LandingHandle();
-		break;
-
-	case ANIMATION_STATE::END:
-		Standing();
-		g_State = ANIMATION_STATE::START;
-		break;
-
-	default:
-		Standing();
-		return;
-	}
-
-	// pause thread
-	this_thread::sleep_for(std::chrono::milliseconds(25));// 25
-}
 
 void Frog::SetDefaultPosition() {
-	this->SetX(40);
-	this->SetY(48);
-	s_CanMove = 0;
+	Player::SetDefaultPosition();
 	frameIdx = 0;
-	g_Dir = MOVING_DIRECTION::INVALID;
-	g_State = ANIMATION_STATE::START;
 }
 
 void Frog::ReadyHandle() {
+	if (endAnimation) return;
 	ReadyJumpAndLanding();
-	g_State = ANIMATION_STATE::JUMP;
+	endAnimation = true;
 }
 void Frog::LandingHandle() {
+	if (endAnimation) return;
 	switch (g_Dir) {
 	case MOVING_DIRECTION::MOVING_UP:
 		this->Move(0, -2);
@@ -89,11 +54,11 @@ void Frog::LandingHandle() {
 	}
 
 	ReadyJumpAndLanding();
-	g_State = ANIMATION_STATE::END;
+	endAnimation = true;
 }
 void Frog::JumpHandle() {
 	static const int sFrameOfJumpState = 3;// 4
-
+	if (endAnimation) return;
 	switch (g_Dir) {
 	case MOVING_DIRECTION::MOVING_UP:
 		this->Move(0, -2);
@@ -117,17 +82,11 @@ void Frog::JumpHandle() {
 	Jumping();
 
 	if (++frameIdx >= sFrameOfJumpState) {
-		g_State = ANIMATION_STATE::LANDING;
+		endAnimation = true;
 		frameIdx = 0;
 	}
 }
 
-void Frog::OnMoved() {
-	frogsound.PlayBounceSound();
-}
-void Frog::OnDied() {
-	frogsound.CloseSound();
-}
 
 // Handle moving player
 bool Frog::MoveUp(const int& dY) {

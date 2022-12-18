@@ -40,16 +40,6 @@ public:
 	void DrawDeadBoard(float fElapsedTime);
 	void DrawOption(int x,int y,short col);
 	void DrawDeadScreen();
-
-
-	~StateDead() {
-		if (ambulance != nullptr) {
-			delete ambulance;
-		}
-		if (pPlayer != nullptr) {
-			delete pPlayer;
-		}
-	}
 };
 
 #endif

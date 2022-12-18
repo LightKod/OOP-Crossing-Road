@@ -10,49 +10,11 @@ Dog::Dog(CrossingRoadGame* game)
 	m_OnRight = 1;
 	g_Dir = MOVING_DIRECTION::INVALID;
 	g_State = ANIMATION_STATE::START;
-	dogsound.OpenBounceSound();
-}
-
-
-void Dog::Draw() {
-	switch (g_State) {
-	case ANIMATION_STATE::START:
-		this->Standing();
-		if (p_State == PLAYER_STATE::ALIVE)
-			s_CanMove = 1;
-		return;
-
-	case ANIMATION_STATE::READY:
-		this->ReadyHandle();
-		break;
-
-	case ANIMATION_STATE::JUMP:
-		this->JumpHandle();
-		break;
-
-	case ANIMATION_STATE::LANDING:
-		this->LandingHandle();
-		break;
-
-	case ANIMATION_STATE::END:
-		this->Standing();
-		g_State = ANIMATION_STATE::START;
-		break;
-	}
-
-	// pause thread
-	this_thread::sleep_for(std::chrono::milliseconds(25));
-}	
-
-void Dog::SetDefaultPosition() {
-	this->SetX(40);
-	this->SetY(48);
-	s_CanMove = 0;
-	g_Dir = MOVING_DIRECTION::INVALID;
-	g_State = ANIMATION_STATE::START;
+	sound.OpenBounceSound();
 }
 
 void Dog::ReadyHandle() {
+	if (endAnimation) return;
 	switch (g_Dir) {
 	case MOVING_DIRECTION::MOVING_UP:
 		this->Move(0, -3);
@@ -72,9 +34,10 @@ void Dog::ReadyHandle() {
 	}
 
 	Ready();
-	g_State = ANIMATION_STATE::JUMP;
+	endAnimation = true;
 }
 void Dog::JumpHandle() {
+	if (endAnimation) return;
 	switch (g_Dir) {
 	case MOVING_DIRECTION::MOVING_UP:
 		this->Move(0, -3);
@@ -94,9 +57,10 @@ void Dog::JumpHandle() {
 	}
 
 	Jumping();
-	g_State = ANIMATION_STATE::LANDING;
+	endAnimation = true;
 }
 void Dog::LandingHandle() {
+	if (endAnimation) return;
 	switch (g_Dir) {
 	case MOVING_DIRECTION::MOVING_UP:
 		this->Move(0, -2);
@@ -119,16 +83,8 @@ void Dog::LandingHandle() {
 	}
 
 	Landing();
-	g_State = ANIMATION_STATE::END;
+	endAnimation = true;
 }
-
-void Dog::OnMoved() {
-	dogsound.PlayBounceSound();
-}
-void Dog::OnDied() {
-	dogsound.CloseSound();
-}
-
 // Handle moving player
 bool Dog::MoveUp(const int& dY) {
 	if (!s_CanMove)

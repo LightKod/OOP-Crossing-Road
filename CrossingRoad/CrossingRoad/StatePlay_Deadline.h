@@ -5,7 +5,7 @@
 class StatePlay_Deadline : public StatePlay
 {
 private:
-	float counter = 2;
+	float counter = 1;
 public:
 
 	StatePlay_Deadline(CrossingRoadGame* game) : StatePlay(game) {
@@ -18,15 +18,6 @@ public:
 	virtual bool Update(float fElapsedTime);
 	virtual bool OnStateEnter();
 	virtual bool OnStateExit();
-
-
-	~StatePlay_Deadline() {
-		ClearCurrentLevel();
-		game->ClearCollsionMatrix();
-		if (pPlayer != nullptr) {
-			delete pPlayer;
-		}
-	}
 
 protected:
 	void UpdateGameScreen() override;

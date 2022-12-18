@@ -9,6 +9,7 @@
 */
 
 bool StatePlay::OnStateEnter() {
+	endGame = false;
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
@@ -32,6 +33,9 @@ bool StatePlay::OnStateEnter() {
 	return true;
 }
 bool StatePlay::OnStateExit() {
+	ClearCurrentLevel();
+	if (dataNames != nullptr) delete dataNames;
+	if (pPlayer != nullptr) delete pPlayer;
 	return true;
 }
 
@@ -41,6 +45,7 @@ bool StatePlay::Update(float fElapsedTime) {
 	ToTalTimeConsume += fElapsedTime;
 	
 	HandleInput();
+	if (endGame) return true;
 	if (endState) return true;
 	if (pause) {
 		UpdateGameScreen();//
@@ -60,7 +65,15 @@ bool StatePlay::Update(float fElapsedTime) {
 		pPlayer->p_State = Player::PLAYER_STATE::DEAD;
 		pPlayer->CloseSound();
 		Sound::CloseLVUpSound();
-		game->SetState(new StateDead(game, pPlayer, score));
+		Player* paraPlayer = nullptr;
+		if (this->charIdx == 0) {
+			paraPlayer = new Frog(game);
+		}
+		else if (this->charIdx == 1) {
+			paraPlayer = new Dog(game);
+		}
+		paraPlayer->SetPosition(pPlayer->GetX(), pPlayer->GetY());
+		game->SetState(new StateDead(game, paraPlayer, score));
 	}
 	else  {
 		UpdateCollisionMatrix();
@@ -112,13 +125,14 @@ void StatePlay::NextLevel() {
 	if (++this->level == MAX_LEVEL) {
 		pPlayer->CloseSound();
 		Sound::CloseLVUpSound();
+ 		endGame = true;
 		game->SetState(new StateWin(game, score));
 		return;
 	}
 
 	UpdateGameScreen();
 	game->ConsOutput();
-
+	
 	LevelUp();
 	ClearCurrentLevel();
 	GenerateNewLevel();
@@ -251,6 +265,7 @@ void StatePlay::HandleEnterName() {
 	if (game->GetKey(VK_SPACE).bPressed && optionIndex == 3) {
 		optionIndex = 0;
 		saveIndex = 1;
+		if (dataNames != nullptr) delete dataNames;
 		dataNames = Data::GetSaveSlotName();
 		DrawBoxAnimationClose(32, 32, 96, 48);
 		DrawBoxAnimationOpen(16, 16, 128, 64);

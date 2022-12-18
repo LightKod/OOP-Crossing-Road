@@ -89,6 +89,11 @@ bool StatePlay_Endless::OnStateEnter() {
 	return true;
 }
 bool StatePlay_Endless::OnStateExit() {
+	ClearCurrentLevel();
+	game->ClearCollsionMatrix();
+	if (pPlayer != nullptr) {
+		delete pPlayer;
+	}
 	return true;
 }
 

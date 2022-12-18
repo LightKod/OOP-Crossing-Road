@@ -26,6 +26,7 @@ protected:
 
 	int score = 0;
 	int charIdx = 0;
+	bool endGame = false;
 
 	wchar_t prevLane = L'0';
 
@@ -65,9 +66,6 @@ public:
 	virtual bool OnStateEnter();
 	virtual bool OnStateExit();
 
-	~StatePlay() {
-		ClearCurrentLevel();
-	}
 
 protected:
 	virtual void UpdateScorePerLV();

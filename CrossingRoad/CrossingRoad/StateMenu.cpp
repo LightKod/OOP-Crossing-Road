@@ -119,6 +119,10 @@ bool StateMenu::OnStateEnter() {
 	return true;
 }
 bool StateMenu::OnStateExit() {
+	if (p_Menu) {
+		delete p_Menu;
+		p_Menu = nullptr;
+	}
 	return true;
 }
 
@@ -143,9 +147,3 @@ StateMenu::StateMenu(CrossingRoadGame* game) : State(game) {
 	Sound::OpenMenuSelectSound();
 	Sound::OpenEnterSound();
 };
-StateMenu::~StateMenu() {
-	if (p_Menu) {
-		delete p_Menu;
-		p_Menu = nullptr;
-	}
-}

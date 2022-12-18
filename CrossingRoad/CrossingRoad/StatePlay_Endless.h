@@ -16,14 +16,6 @@ public:
 	virtual bool OnStateEnter();
 	virtual bool OnStateExit();
 
-
-	~StatePlay_Endless() {
-		ClearCurrentLevel();
-		if (pPlayer != nullptr) {
-			delete pPlayer;
-		}
-	}
-
 protected:
 	void UpdateGameScreen() override;
 	void GenerateNewLevel() override;
