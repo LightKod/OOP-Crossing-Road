@@ -511,8 +511,7 @@ void StatePlay::DrawSideBar() {
 	//
 	game->Fill(112, 15, 180, 15, L' ', BG_WHITE);
 
-	string2Pixel(to_wstring(level), 148, 19, FG_BLACK, BG_BLUE);
-	string2Pixel(to_wstring(this->score), 148, 25, FG_BLACK, BG_BLUE);
+	
 	//string2Pixel(this->saveName, 140, 15, FG_WHITE, BG_BLUE);
 
 	//T
@@ -605,13 +604,16 @@ void StatePlay::DrawSideBar() {
 	game->Fill(135, 79, 155, 79, L' ', BG_BLACK);
 	game->Fill(135, 89, 157, 89, L' ', BG_BLACK);
 
-	string2Pixel(L" LEVEL ", 113, 19, FG_DARK_MAGENTA, BG_BLUE);
-	string2Pixel(L" SCORE ", 113, 25, FG_DARK_MAGENTA, BG_BLUE);
+	string2Pixel(L"LEVEL ", 115, 19, FG_DARK_MAGENTA, BG_BLUE);
+	string2Pixel(L"SCORE ", 115, 25, FG_DARK_MAGENTA, BG_BLUE);
 
-	game->Draw(144, 21);
-	game->Draw(145, 21);
-	game->Draw(144, 27);
-	game->Draw(145, 27);
+	string2Pixel(to_wstring(level),       146, 19, FG_BLACK, BG_BLUE);
+	string2Pixel(to_wstring(this->score), 146, 25, FG_BLACK, BG_BLUE);
+
+	game->Draw(142, 21);
+	game->Draw(142, 27);
+	game->Draw(143, 21);
+	game->Draw(143, 27);
 
 	string2Pixel(L" T ", 113, 33, FG_DARK_MAGENTA, BG_BLUE); //T load L Save
 	string2Pixel(L" S ", 113, 40, FG_DARK_MAGENTA, BG_BLUE);

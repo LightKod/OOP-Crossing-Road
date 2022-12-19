@@ -20,6 +20,8 @@ private:
 	void DrawLoadingState(const int& x, const int& y);
 	void DrawLoadingState1(const int& x, const int& y);
 	void DrawLoadingState2(const int& x, const int& y);
+	void DrawLoadingState3(const int& x, const int& y);
+	void DrawLoadingState4(const int& x, const int& y);
 
 	void DrawTextBorder(const int& x, const int& y, const short& bg);
 	void DrawText_();

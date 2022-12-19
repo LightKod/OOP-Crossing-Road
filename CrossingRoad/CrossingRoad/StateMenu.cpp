@@ -61,21 +61,21 @@ bool StateMenu::Update(float fElapsedTime) {
 		return 1;
 	}
 	
-	if (game->GetKey(VK_D).bPressed) {
-		game->SetState(new StatePlay_Deadline(game));
-		Sound::CloseMenuSelectSound();
-		return true;
-	}
-	if (game->GetKey(VK_E).bPressed) {
-		game->SetState(new StatePlay_Endless(game));
-		Sound::CloseMenuSelectSound();
-		return true;
-	}
-	if (game->GetKey(L'V').bPressed) {
-		game->SetState(new StatePlay_Versus(game));
-		Sound::CloseMenuSelectSound();
-		return true;
-	}
+	//if (game->GetKey(VK_D).bPressed) {
+	//	game->SetState(new StatePlay_Deadline(game));
+	//	Sound::CloseMenuSelectSound();
+	//	return true;
+	//}
+	//if (game->GetKey(VK_E).bPressed) {
+	//	game->SetState(new StatePlay_Endless(game));
+	//	Sound::CloseMenuSelectSound();
+	//	return true;
+	//}
+	//if (game->GetKey(L'V').bPressed) {
+	//	game->SetState(new StatePlay_Versus(game));
+	//	Sound::CloseMenuSelectSound();
+	//	return true;
+	//}
 
 	// Xử lý tương tác với người dùng
 	if (game->GetKey(VK_W).bPressed) {

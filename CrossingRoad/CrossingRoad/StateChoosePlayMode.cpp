@@ -70,6 +70,11 @@ bool StateChoosePlayMode::OnStateEnter() {
 	DrawTitle();
 	DrawText_();
 
+	//DrawLoadingState1(2, 10);
+	//DrawLoadingState2(30, 10);
+	//DrawLoadingState3(62, 10);
+	//DrawLoadingState4(92, 10);
+	
 	return true;
 }
 bool StateChoosePlayMode::OnStateExit() {
@@ -77,29 +82,37 @@ bool StateChoosePlayMode::OnStateExit() {
 }
 
 void StateChoosePlayMode::ChangeStateAnimation() {
+	//static const int _tm = 240;//24
 	static const int _tm = 24;//24
-	static const int step = 2;
+	static const int step = 3;
 	
 	game->Fill(0, 0, 159, 95, L' ', BG_COLOR);
 
-	int x = -40;
-	int y = BORDER_COORD_LIST[UserChoice].Y - 24;
+	int x = -34;//  -40
+	int y = BORDER_COORD_LIST[UserChoice].Y - 23;
 	int dummy = 0;
-	for (int i = 0; i < 260; ) {
+	int stateIdx = 0;
+	for (int i = 0; i < 280; ) {
 		this_thread::sleep_for(std::chrono::milliseconds(_tm));
-		game->Fill(x + i, y, x + i + 21, y + 33, L' ', BG_COLOR);
+		game->Fill(x + i, y, x + i + 30, y + 33, L' ', BG_COLOR);
 		
 		if (++dummy & 1) i += step;
-		else  i += 4 * step;
+		else i += 2 * step;
 
-		OpenLand(x + i + 28);
-		if (dummy & 1)  DrawLoadingState1(x + i, y);
-		else DrawLoadingState2(x + i, y);
-		
+		OpenLand(x + i - 1);
+		stateIdx = (stateIdx + 1) % 3;
+		switch (stateIdx) {
+		case 0: DrawLoadingState1(x + i, y);
+			break;	
+		case 1: DrawLoadingState2(x + i, y);
+			break;		
+		case 2: DrawLoadingState4(x + i, y);
+			break;	
+		}
 		game->ConsOutput();
 
-		if (i == 160) {
-			this_thread::sleep_for(std::chrono::milliseconds(500));
+		if (i == 162) {//180
+			this_thread::sleep_for(std::chrono::milliseconds(600));
 		}
 	}
 }
@@ -353,6 +366,131 @@ void StateChoosePlayMode::DrawLoadingState2(const int& x, const int& y) {
 
 	game->Fill(x + 26, y + 30, x + 27, y + 31, 9608, FG_BLUE + BG_BLUE);
 }
+void StateChoosePlayMode::DrawLoadingState3(const int& x, const int& y) {
+	static const vector<pair<short, short>> COLOR_LIST = {
+		{FG_BLACK, BG_BLACK},// viền
+		{FG_DARK_BLUE, BG_DARK_BLUE},// lông
+		{FG_BLUE, BG_BLUE},// lông
+	};
+	int dummy = 0;
+	
+	// prepare
+	DrawLoadingState1(x, y);
+	game->Fill(x + 1, y + 26, x + 19, y + 33, L' ', BG_COLOR);
+	game->Fill(x + 7, y + 25, x + 10, y + 25, L' ', BG_COLOR);
+	game->Fill(x + 9, y + 22, x +  9, y + 24, L' ', BG_COLOR);
+
+	// viền
+border: {
+	game->DrawLine(x + 10, y + 22, x + 10, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 11, y + 25, x + 12, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 13, y + 27, x + 14, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 28, x + 17, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 28, x + 11, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x +  9, y + 29, x +  9, y + 30, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 31, x + 11, y + 31, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 30, x + 14, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 30, x + 14, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 18, y + 30, x + 19, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 19, y + 30, x + 20, y + 30, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Fill(x + 21, y + 29, x + 22, y + 30, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 22, y + 28, x + 21, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 19, y + 26, x + 20, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 17, y + 25, x + 18, y + 25, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 23, x + 16, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 14, y + 22, x + 15, y + 22, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 19, y + 31, x + 19, y + 33, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Draw(x + 14, y + 21, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	}
+	// lông
+fur: {
+	++dummy;
+	game->DrawLine(x + 10, y + 29, x + 12, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 30, x + 12, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 17, x + 12, y + 19, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 11, y + 19, x + 11, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 20, x + 10, y + 21, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 24, x + 14, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 25, x + 13, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 26, x + 18, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 27, x + 16, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 20, y + 32, x + 23, y + 32, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Draw(x + 20, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+
+	++dummy;
+	game->DrawLine(x + 11, y + 30, x + 12, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 13, y + 28, x + 14, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 13, y + 18, x + 13, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 20, x + 12, y + 23, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 14, y + 24, x + 18, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 14, y + 23, x + 19, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 18, y + 26, x + 20, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 20, y + 27, x + 21, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Draw(x + 14, y + 25, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+}
+}
+void StateChoosePlayMode::DrawLoadingState4(const int& x, const int& y) {
+	static const vector<pair<short, short>> COLOR_LIST = {
+		{FG_BLACK, BG_BLACK},// viền
+		{FG_DARK_BLUE, BG_DARK_BLUE},// lông
+		{FG_BLUE, BG_BLUE},// lông
+	};
+	int dummy = 0;
+	
+	// prepare
+	DrawLoadingState2(x, y);
+	game->Fill(x + 1, y + 26, x + 19, y + 33, L' ', BG_COLOR);
+	game->Fill(x + 19, y + 32, x + 22, y + 33, L' ', BG_COLOR);
+	game->Fill(x + 7, y + 25, x + 10, y + 25, L' ', BG_COLOR);
+	game->Fill(x + 9, y + 22, x +  9, y + 24, L' ', BG_COLOR);
+
+	// viền
+border: {
+	game->DrawLine(x + 10, y + 22, x + 10, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 11, y + 25, x + 12, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 13, y + 27, x + 14, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 28, x + 17, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 28, x + 11, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x +  9, y + 29, x +  9, y + 30, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 31, x + 11, y + 31, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 30, x + 14, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 30, x + 14, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 18, y + 30, x + 19, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 19, y + 30, x + 20, y + 30, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Fill(x + 21, y + 29, x + 22, y + 30, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 22, y + 28, x + 21, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 19, y + 26, x + 20, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 17, y + 25, x + 18, y + 25, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 23, x + 16, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 14, y + 22, x + 15, y + 22, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Draw(x + 14, y + 21, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	}
+	// lông
+fur: {
+	++dummy;
+	game->DrawLine(x + 10, y + 29, x + 12, y + 27, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 30, x + 12, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 17, x + 12, y + 19, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 11, y + 19, x + 11, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 10, y + 20, x + 10, y + 21, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 24, x + 14, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 25, x + 13, y + 26, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 26, x + 18, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 15, y + 27, x + 16, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Draw(x + 20, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+
+	++dummy;
+	game->DrawLine(x + 11, y + 30, x + 12, y + 29, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 13, y + 28, x + 14, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 13, y + 18, x + 13, y + 24, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 12, y + 20, x + 12, y + 23, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 14, y + 24, x + 18, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 14, y + 23, x + 19, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 18, y + 26, x + 20, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->DrawLine(x + 20, y + 27, x + 21, y + 28, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+	game->Draw(x + 14, y + 25, 9608, COLOR_LIST[dummy].first + COLOR_LIST[dummy].second);
+}
+}
 void StateChoosePlayMode::OpenLand(const int& desX) {
 	game->DrawLine(0, BORDER_COORD_LIST[UserChoice].Y + 1, desX,
 		BORDER_COORD_LIST[UserChoice].Y + 1, 9608, FG_BLACK + BG_BLACK);
@@ -366,7 +504,7 @@ void StateChoosePlayMode::OpenLand(const int& desX) {
 
 	game->Fill(0, BORDER_COORD_LIST[UserChoice].Y + 3, desX,
 		BORDER_COORD_LIST[UserChoice].Y + 9, L' ', BG_YELLOW);
-	static const int offsetX = 85;
+	static const int offsetX = 68;
 	string2Pixel(L"GAME ON!", desX - offsetX, BORDER_COORD_LIST[UserChoice].Y + 5, FG_BLACK, BG_YELLOW);
 }
 

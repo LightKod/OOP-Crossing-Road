@@ -4,6 +4,7 @@
 #include "River.h"
 #include "Frog.h"
 #include "StateMenu.h"
+//#include "StateChoosePlayMode.h"//
 
 int optionIndex = 0;
 static CrossingRoadGame::State* state;
@@ -12,6 +13,7 @@ int CrossingRoadGame::s_CharIdx = 0;
 bool CrossingRoadGame::OnUserCreate()
 {
 	SetState(new StateMenu(this));
+	//SetState(new StateChoosePlayMode(this));
 	return true;
 }
 
