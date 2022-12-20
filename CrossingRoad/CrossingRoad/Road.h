@@ -34,8 +34,7 @@ public:
 		{
 			speed = -0.1f;
 		}
-		{
-		else
+		else{
 			speed = 0.15f;
 		}
 

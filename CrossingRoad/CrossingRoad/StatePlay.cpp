@@ -1,7 +1,7 @@
 ﻿#include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateWin.h"
-#define MAX_LEVEL 2
+#define MAX_LEVEL 4
 /* HOT KEYS
 * T: LOAD GAME
 * L: SAVE GAME
@@ -27,7 +27,7 @@ bool StatePlay::OnStateEnter() {
 }
 bool StatePlay::OnStateExit() {
 	ClearCurrentLevel();
-	if (dataNames != nullptr) delete dataNames;
+	//if (dataNames != nullptr) delete dataNames;
 	if (pPlayer != nullptr) delete pPlayer;
 	return true;
 }
@@ -191,10 +191,10 @@ void StatePlay::ClearCurrentLevel() {
 void StatePlay::HandleInput() {
 	HandleSaveInput();
 	//Xoa cai cmt nay de test cai win
-	if (game->GetKey(VK_SPACE).bPressed) {
+	/*if (game->GetKey(VK_SPACE).bPressed) {
 		NextLevel();
 		return;
-	}
+	}*/
 }
 void StatePlay::HandleSaveInput() {
 	if (game->GetKey(L'L').bPressed && !pause) {
