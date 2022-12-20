@@ -609,7 +609,7 @@ void StatePlay::DrawSideBar() {
 	game->Draw(143, 27);
 
 	string2Pixel(L" P ", 113, 33, FG_DARK_MAGENTA, BG_BLUE); //T load L Save
-	string2Pixel(L" S ", 113, 40, FG_DARK_MAGENTA, BG_BLUE);
+	string2Pixel(L" L ", 113, 40, FG_DARK_MAGENTA, BG_BLUE);
 	string2Pixel(L"  PAUSE ", 125, 33, FG_DARK_BLUE, BG_BLUE);
 	string2Pixel(L"  SAVE ", 125, 40, FG_DARK_BLUE, BG_BLUE);
 

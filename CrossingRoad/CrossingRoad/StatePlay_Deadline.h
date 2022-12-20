@@ -5,7 +5,7 @@
 class StatePlay_Deadline : public StatePlay
 {
 private:
-	float counter = 1000;
+	float counter = 5;
 public:
 
 	StatePlay_Deadline(CrossingRoadGame* game) : StatePlay(game) {

@@ -1,22 +1,128 @@
-﻿  StatePlay_Endless.cpp
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(48,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(51,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(57,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(60,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(69,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(73,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(86,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(21,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(112,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(118,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(36,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(43,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Player.h(57,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(27,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(36,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(40,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(44,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(59,21): warning C4018: '<': signed/unsigned mismatch
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay_Endless.cpp(32,20): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay_Endless.cpp(115,20): warning C4018: '<': signed/unsigned mismatch
-  CrossingRoad.vcxproj -> D:\GitHubProj\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe
+﻿  StateChoosePlayMode.cpp
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(48,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(51,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(57,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(60,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(69,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(73,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(86,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(21,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(112,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(118,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(36,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(43,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Player.h(57,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(27,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(36,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(40,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(44,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(59,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(134,7): warning C4102: 'border': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(219,4): warning C4102: 'bag': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(242,12): warning C4102: 'belly_n_eye': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(287,4): warning C4102: 'fur': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(384,7): warning C4102: 'border': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(406,4): warning C4102: 'fur': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(448,7): warning C4102: 'border': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(469,4): warning C4102: 'fur': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(516,7): warning C4102: 'border': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(525,6): warning C4102: 'color': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(540,7): warning C4102: 'border': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(546,6): warning C4102: 'color': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(632,7): warning C4102: 'border': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(642,7): warning C4102: 'layer1': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(651,7): warning C4102: 'layer2': unreferenced label
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StateChoosePlayMode.cpp(658,6): warning C4102: 'color': unreferenced label
+  StateMenu.cpp
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(48,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(51,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(57,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(60,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(69,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(73,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(86,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(21,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(112,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(118,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(36,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(43,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Player.h(57,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(27,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(36,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(40,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(44,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(59,21): warning C4018: '<': signed/unsigned mismatch
+  StatePlay.cpp
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(48,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(51,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(57,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(60,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(69,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(73,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(86,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(21,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(112,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(118,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(36,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(43,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Player.h(57,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(27,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(36,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(40,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(44,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(59,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(80,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(93,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(104,46): warning C4244: '=': conversion from '_Ty' to 'int', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(133,20): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(148,27): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay.cpp(491,20): warning C4018: '<': signed/unsigned mismatch
+  StatePlay_Deadline.cpp
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(48,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(51,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(57,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(60,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(69,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(73,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(86,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(21,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(112,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(118,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(36,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(43,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Player.h(57,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(27,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(36,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(40,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(44,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(59,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay_Deadline.cpp(74,20): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay_Deadline.cpp(120,20): warning C4018: '<': signed/unsigned mismatch
+  StatePlay_Versus.cpp
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(48,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(51,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(57,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(60,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(69,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(73,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Lane.h(86,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(21,28): warning C4244: 'initializing': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(112,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Road.h(118,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(36,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\River.h(43,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\Player.h(57,16): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\RestLane.h(27,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(36,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(40,23): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(44,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\TrafficLane.h(59,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay_Versus.cpp(60,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay_Versus.cpp(73,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\CrossingRoad\StatePlay_Versus.cpp(83,21): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+  CrossingRoad.vcxproj -> C:\Users\Nhat Quang\Documents\Projects\Github\OOP-Crossing-Road\CrossingRoad\Debug\CrossingRoad.exe
