@@ -364,8 +364,9 @@ void StatePlay::LoadLevel(const wstring& fileName) {
 	getline(wIfs, temp);
 	level = stoi(temp);
 
-	// Date
+	// CharIdx
 	getline(wIfs, temp);
+	charIdx = stoi(temp);
 
 	// Score
 	getline(wIfs, temp);

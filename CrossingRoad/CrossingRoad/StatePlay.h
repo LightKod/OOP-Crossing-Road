@@ -25,7 +25,7 @@ protected:
 	Player* pPlayer = nullptr;
 
 	int score = 0;
-	int charIdx = 0;
+	int charIdx = CrossingRoadGame::s_CharIdx;
 
 	wchar_t prevLane = L'0';
 
@@ -48,7 +48,8 @@ private:
 	float ToTalTimeConsume = 0.f;
 
 public:
-	StatePlay(CrossingRoadGame* game) : State(game) {}
+	StatePlay(CrossingRoadGame* game) : State(game) {
+	}
 	StatePlay(CrossingRoadGame* game, const wstring& fileName) : StatePlay(game) {
 		LoadLevel(fileName);
 		isLoaded = true;

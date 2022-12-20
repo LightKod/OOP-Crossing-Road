@@ -15,6 +15,7 @@ bool StatePlay_Endless::Update(float fElapsedTime) {
 		pPlayer->SetDefaultPosition();
 		pPlayer->p_State = Player::PLAYER_STATE::DEAD;
 		pPlayer->CloseSound();
+		game->Fill(0, 0, 159, 95, L' ', COLOUR::BG_BLACK);
 		string2Pixel(L"YOU DIED", 160 / 2 - 20, 96 / 2, COLOUR::FG_RED, COLOUR::BG_BLACK);
 		game->ConsOutput();
 		this_thread::sleep_for(chrono::seconds(2));
