@@ -42,6 +42,10 @@ bool StatePlay_Deadline::Update(float fElapsedTime) {
 		pPlayer->SetDefaultPosition();
 		pPlayer->p_State = Player::PLAYER_STATE::DEAD;
 		pPlayer->CloseSound();
+		game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_BLACK);
+		string2Pixel(L"YOU DIED", 160 / 2 - 20, 96 / 2, COLOUR::FG_RED, COLOUR::BG_BLACK);
+		game->ConsOutput();
+		this_thread::sleep_for(chrono::seconds(2));
 		game->SetState(new StateMenu(game));
 	}
 	else {
@@ -120,4 +124,5 @@ void StatePlay_Deadline::NextLane() {
 	}
 	pPlayer->SetY(pPlayer->GetY() + 8);
 	UpdateCollisionMatrix();
+	score += 10;
 }

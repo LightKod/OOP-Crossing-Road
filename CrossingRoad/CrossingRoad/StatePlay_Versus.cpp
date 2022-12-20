@@ -65,6 +65,7 @@ void StatePlay_Versus::NextLane() {
 	pPlayer->SetY(pPlayer->GetY() + 8);
 	pPlayer2->SetY(pPlayer2->GetY() + 8);
 	UpdateCollisionMatrix();
+	score += 10;
 }
 
 void StatePlay_Versus::DrawGameScreen() {

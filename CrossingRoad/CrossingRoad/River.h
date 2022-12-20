@@ -16,9 +16,9 @@ public:
 		int randomValue = (rand() % 4) * 8;
 		int randomValue1 = (rand() % 4) * 8 + 32;
 		int randomValue2 = (rand() % 4) * 8 + 64;
-		vehicles.push_back(new Duck(game, randomValue, row, 1));
-		vehicles.push_back(new Duck(game, randomValue1, row, 1));
-		vehicles.push_back(new Duck(game, randomValue2, row, 1));
+		vehicles.push_back(new Duck(game, randomValue, row, 1.5));
+		vehicles.push_back(new Duck(game, randomValue1, row, 1.5));
+		vehicles.push_back(new Duck(game, randomValue2, row, 1.5));
 
 
 	}

@@ -28,15 +28,15 @@ public:
 		int random = rand() % 3;
 		if (random == 1)
 		{
-			speed = 0.07f;
+			speed = 0.1f;
 		}
 		else if(random==2)
 		{
-			speed = -0.09f;
+			speed = -0.1f;
 		}
-		else
 		{
-			speed = 0.05f;
+		else
+			speed = 0.15f;
 		}
 
 		for (int i = 0; i < 14; i++)

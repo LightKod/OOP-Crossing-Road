@@ -26,7 +26,6 @@ protected:
 
 	int score = 0;
 	int charIdx = 0;
-	bool endGame = false;
 
 	wchar_t prevLane = L'0';
 

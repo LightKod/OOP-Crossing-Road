@@ -9,7 +9,6 @@
 */
 
 bool StatePlay::OnStateEnter() {		
-	endGame = false;
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
@@ -39,7 +38,6 @@ bool StatePlay::Update(float fElapsedTime) {
 	ToTalTimeConsume += fElapsedTime;
 	
 	HandleInput();
-	if (endGame) return true;
 	if (endState) return true;
 	if (pause) {
 		UpdateGameScreen();//
@@ -119,7 +117,6 @@ void StatePlay::NextLevel() {
 	if (++this->level == MAX_LEVEL) {
 		pPlayer->CloseSound();
 		Sound::CloseLVUpSound();
- 		endGame = true;
 		game->SetState(new StateWin(game, score));
 		return;
 	}
