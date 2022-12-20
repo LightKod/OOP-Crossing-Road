@@ -4,8 +4,6 @@
 bool StatePlay_Versus::OnStateEnter() {
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
-	//WinProcess();
-	//exit(1);
 	pPlayer = new Frog(game);
 	pPlayer2 = new Dog(game);
 	pPlayer->SetY(72);
@@ -17,9 +15,6 @@ bool StatePlay_Versus::OnStateEnter() {
 	pPlayer2->SetX(80);
 
 	GenerateNewLevel();
-
-	//LoadLevel(L"text");
-	//GenerateNewLevel();
 	return true;
 }
 
@@ -34,12 +29,20 @@ bool StatePlay_Versus::Update(float fElapsedTime) {
 		pPlayer->SetDefaultPosition();
 		pPlayer->p_State = Player::PLAYER_STATE::DEAD;
 		pPlayer->CloseSound();
+		game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_BLACK);
+		string2Pixel(L"Player 2 WIN", 160 / 2 - 25, 96 / 2, COLOUR::FG_RED, COLOUR::BG_BLACK);
+		game->ConsOutput();
+		this_thread::sleep_for(std::chrono::seconds(2));
 		game->SetState(new StateMenu(game));
 	}
 	else if (pPlayer2->CheckPlayerState() || pPlayer2->GetY() == 88) {
 		pPlayer2->SetDefaultPosition();
 		pPlayer2->p_State = Player::PLAYER_STATE::DEAD;
 		pPlayer2->CloseSound();
+		game->Fill(0, 0, 160, 96, L' ', COLOUR::BG_BLACK);
+		string2Pixel(L"Player 1 WIN", 160 / 2 - 25, 96 / 2, COLOUR::FG_RED, COLOUR::BG_BLACK);
+		game->ConsOutput();
+		this_thread::sleep_for(std::chrono::seconds(2));
 		game->SetState(new StateMenu(game));
 	}
 	else {

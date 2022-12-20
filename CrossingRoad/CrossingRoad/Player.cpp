@@ -23,7 +23,7 @@ void Player::Draw() {
 	case ANIMATION_STATE::JUMP:
 		JumpHandle();
 		break;
-
+			
 	case ANIMATION_STATE::LANDING:
 		LandingHandle();
 		break;
@@ -91,19 +91,16 @@ void Player::HandleAnimation(float fElapsedTime) {
 		case ANIMATION_STATE::READY:
 			g_State = ANIMATION_STATE::JUMP;
 			break;
-
 		case ANIMATION_STATE::JUMP:
 			g_State = ANIMATION_STATE::LANDING;
 			break;
 
 		case ANIMATION_STATE::LANDING:
 			g_State = ANIMATION_STATE::END;
-			endAnimation = true;
 			return;
 
 		case ANIMATION_STATE::END:
 			g_State = ANIMATION_STATE::START;
-			endAnimation = true;
 			return;
 		}
 		counter = FPS;

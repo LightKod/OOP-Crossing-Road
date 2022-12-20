@@ -19,7 +19,7 @@ class StatePlay : public CrossingRoadGame::State
 {
 protected:
 	float deltaTime = 0;
-	char laneSeed[10] = { 'R','R', 'R', 'R', 'G', 'G', 'T','T' ,'W' ,'W' };
+	char laneSeed[10] = { 'R','G', 'G', 'G', 'G', 'G', 'T','T' ,'W' ,'W' };
 
 	vector<Lane*> lanes;
 	Player* pPlayer = nullptr;

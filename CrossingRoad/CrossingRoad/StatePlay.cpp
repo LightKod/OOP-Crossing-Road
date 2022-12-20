@@ -1,35 +1,29 @@
 ﻿#include "StatePlay.h"
 #include "StateLoad.h"
 #include "StateWin.h"
-#define MAX_LEVEL 4
+#define MAX_LEVEL 2
 /* HOT KEYS
 * T: LOAD GAME
 * L: SAVE GAME
 * 
 */
 
-bool StatePlay::OnStateEnter() {
+bool StatePlay::OnStateEnter() {		
 	endGame = false;
 	// clear screen
 	game->Fill(0, 0, game->ScreenWidth(), game->ScreenHeight(), L' ', COLOUR::BG_BLUE);
 
-	//WinProcess();
-	//exit(1);
-
 	if (this->charIdx == 0) {
 		pPlayer = new Frog(game);
 	}
-	else if (this->charIdx == 1) {
+	else {
 		pPlayer = new Dog(game);
 	}
 	pPlayer->p_State = Player::PLAYER_STATE::ALIVE;
 
 	if(!isLoaded)
 		GenerateNewLevel();
-
 	Sound::OpenLVUpSound();
-	//LoadLevel(L"text");
-	//GenerateNewLevel();
 	return true;
 }
 bool StatePlay::OnStateExit() {
@@ -515,50 +509,51 @@ void StatePlay::DrawSideBar() {
 	//string2Pixel(this->saveName, 140, 15, FG_WHITE, BG_BLUE);
 
 	//T
-	game->DrawLine(116 - 1, 4, 121 - 1, 4);
-	game->DrawLine(116 - 1, 5, 121 - 1, 5);
+	//game->DrawLine(116 - 1, 4, 121 - 1, 4);
+	//game->DrawLine(116 - 1, 5, 121 - 1, 5);
 
-	game->Fill(116 - 1, 4, 121 - 1, 4, L' ', BG_DARK_BLUE);
-	game->Fill(116 - 1, 5, 121 - 1, 5, L' ', BG_DARK_BLUE);
+	//game->Fill(116 - 1, 4, 121 - 1, 4, L' ', BG_DARK_BLUE);
+	//game->Fill(116 - 1, 5, 121 - 1, 5, L' ', BG_DARK_BLUE);
 
-	game->DrawLine(119 - 1, 5, 119 - 1, 11);
-	game->DrawLine(118 - 1, 5, 118 - 1, 11);
+	//game->DrawLine(119 - 1, 5, 119 - 1, 11);
+	//game->DrawLine(118 - 1, 5, 118 - 1, 11);
 
-	game->DrawLine(119 - 1, 5, 119 - 1, 11, L' ', BG_DARK_BLUE);
-	game->DrawLine(118 - 1, 5, 118 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(119 - 1, 5, 119 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(118 - 1, 5, 118 - 1, 11, L' ', BG_DARK_BLUE);
 
-	//I
-	game->DrawLine(124 - 1, 4, 124 - 1, 11, L' ', BG_DARK_BLUE);
-	game->DrawLine(125 - 1, 4, 125 - 1, 11, L' ', BG_DARK_BLUE);
+	////I
+	//game->DrawLine(124 - 1, 4, 124 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(125 - 1, 4, 125 - 1, 11, L' ', BG_DARK_BLUE);
 
-	//M
-	game->DrawLine(128 - 1, 4, 128 - 1, 11, L' ', BG_DARK_BLUE);
-	game->DrawLine(129 - 1, 4, 129 - 1, 11, L' ', BG_DARK_BLUE);
+	////M
+	//game->DrawLine(128 - 1, 4, 128 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(129 - 1, 4, 129 - 1, 11, L' ', BG_DARK_BLUE);
 
-	game->DrawLine(130 - 1, 4, 132 - 1, 7, L' ', BG_DARK_BLUE);
-	game->DrawLine(131 - 1, 5, 132 - 1, 8, L' ', BG_DARK_BLUE);
-	game->DrawLine(132 - 1, 7, 134 - 1, 4, L' ', BG_DARK_BLUE);
+	//game->DrawLine(130 - 1, 4, 132 - 1, 7, L' ', BG_DARK_BLUE);
+	//game->DrawLine(131 - 1, 5, 132 - 1, 8, L' ', BG_DARK_BLUE);
+	//game->DrawLine(132 - 1, 7, 134 - 1, 4, L' ', BG_DARK_BLUE);
 
-	game->DrawLine(135 - 1, 4, 135 - 1, 11, L' ', BG_DARK_BLUE);
-	game->DrawLine(136 - 1, 4, 136 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(135 - 1, 4, 135 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(136 - 1, 4, 136 - 1, 11, L' ', BG_DARK_BLUE);
 
-	//E
-	game->DrawLine(139 - 1, 4, 139 - 1, 11, L' ', BG_DARK_BLUE);
-	game->DrawLine(140 - 1, 4, 140 - 1, 11, L' ', BG_DARK_BLUE);
+	////E
+	//game->DrawLine(139 - 1, 4, 139 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(140 - 1, 4, 140 - 1, 11, L' ', BG_DARK_BLUE);
 
-	game->DrawLine(139 - 1, 4, 143 - 1, 4, L' ', BG_DARK_BLUE);
-	game->DrawLine(140 - 1, 5, 143 - 1, 5, L' ', BG_DARK_BLUE);
+	//game->DrawLine(139 - 1, 4, 143 - 1, 4, L' ', BG_DARK_BLUE);
+	//game->DrawLine(140 - 1, 5, 143 - 1, 5, L' ', BG_DARK_BLUE);
 
-	game->DrawLine(139 - 1, 7, 143 - 1, 7, L' ', BG_DARK_BLUE);
-	game->DrawLine(140 - 1, 8, 143 - 1, 8, L' ', BG_DARK_BLUE);
+	//game->DrawLine(139 - 1, 7, 143 - 1, 7, L' ', BG_DARK_BLUE);
+	//game->DrawLine(140 - 1, 8, 143 - 1, 8, L' ', BG_DARK_BLUE);
 
-	game->DrawLine(139 - 1, 10, 143 - 1, 10, L' ', BG_DARK_BLUE);
-	game->DrawLine(140 - 1, 11, 143 - 1, 11, L' ', BG_DARK_BLUE);
+	//game->DrawLine(139 - 1, 10, 143 - 1, 10, L' ', BG_DARK_BLUE);
+	//game->DrawLine(140 - 1, 11, 143 - 1, 11, L' ', BG_DARK_BLUE);
 
-	game->DrawLine(144, 11, 144, 11, L' ', BG_WHITE);
+	//game->DrawLine(144, 11, 144, 11, L' ', BG_WHITE);
 	//game->DrawLine(144, 10, 145, 10);
-	game->DrawLine(144, 8, 144, 8, L' ', BG_WHITE);
+	//game->DrawLine(144, 8, 144, 8, L' ', BG_WHITE);
 	//game->DrawLine(144, 7, 145, 7);
+	string2Pixel(L" GROUP 6 ", 115, 7, FG_BLACK, BG_BLUE);
 
 	game->Fill(112, 48, 180, 48, L' ', BG_WHITE);
 
@@ -615,9 +610,9 @@ void StatePlay::DrawSideBar() {
 	game->Draw(143, 21);
 	game->Draw(143, 27);
 
-	string2Pixel(L" T ", 113, 33, FG_DARK_MAGENTA, BG_BLUE); //T load L Save
+	string2Pixel(L" P ", 113, 33, FG_DARK_MAGENTA, BG_BLUE); //T load L Save
 	string2Pixel(L" S ", 113, 40, FG_DARK_MAGENTA, BG_BLUE);
-	string2Pixel(L"  LOAD ", 125, 33, FG_DARK_BLUE, BG_BLUE);
+	string2Pixel(L"  PAUSE ", 125, 33, FG_DARK_BLUE, BG_BLUE);
 	string2Pixel(L"  SAVE ", 125, 40, FG_DARK_BLUE, BG_BLUE);
 
 	game->Draw(128, 33);

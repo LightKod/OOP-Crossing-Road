@@ -1,7 +1,5 @@
 #include "Frog.h"
 
-bool Frog::s_CanMove = 1;
-
 Frog::Frog(CrossingRoadGame* game)
 	: Player(game,
 		game->ScreenWidth() / 8 * 2,
@@ -141,6 +139,7 @@ bool Frog::MoveRight(const int& dX) {
 
 void Frog::Standing() {
 	game->DrawSprite(x, y, sprAvatar);
+	endAnimation = true;
 }
 void Frog::ReadyJumpAndLanding() {
 	// row 0

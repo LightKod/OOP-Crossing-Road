@@ -43,6 +43,7 @@ public:
 			getline(stream, temp);
 		}
 	}
+
 	virtual void Draw() {
 		for (int i = 0; i < tiles.size(); i++) {
 			tiles[i]->Draw();
@@ -55,6 +56,9 @@ public:
 	virtual void Update(float fElapsedTime) {
 		for (int i = 0; i < tiles.size(); i++) {
 			tiles[i]->Update(fElapsedTime);
+		}
+		for (int i = 0; i < vehicles.size(); i++) {
+			vehicles[i]->Update(fElapsedTime);
 		}
 	}
 

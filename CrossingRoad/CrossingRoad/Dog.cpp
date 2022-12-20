@@ -93,7 +93,9 @@ bool Dog::MoveUp(const int& dY) {
 	if ((this->GetY() - dY) >= GAME_SCREEN_LIMIT::TOP) {
 		g_Dir = MOVING_DIRECTION::MOVING_UP;
 		g_State = ANIMATION_STATE::READY;
+		counter = FPS;
 		s_CanMove = false;
+		endAnimation = false;
 		return 1;
 	}
 	return 0;
@@ -105,6 +107,8 @@ bool Dog::MoveDown(const int& dY) {
 	if ((this->GetY() + dY) < GAME_SCREEN_LIMIT::BOT) {
 		g_Dir = MOVING_DIRECTION::MOVING_DOWN;
 		g_State = ANIMATION_STATE::READY;
+		counter = FPS;
+		endAnimation = false;
 		s_CanMove = false;
 		return 1;
 	}
@@ -121,6 +125,8 @@ bool Dog::MoveLeft(const int& dX) {
 	if ((this->GetX() - dX) >= GAME_SCREEN_LIMIT::LEFT) {
 		g_Dir = MOVING_DIRECTION::MOVING_LEFT;
 		g_State = ANIMATION_STATE::READY;
+		counter = FPS;
+		endAnimation = false;
 		s_CanMove = false;
 		return 1;
 	}
@@ -137,6 +143,8 @@ bool Dog::MoveRight(const int& dX) {
 	if ((this->GetX() + dX) < GAME_SCREEN_LIMIT::RIGHT) {
 		g_Dir = MOVING_DIRECTION::MONIG_RIGHT;
 		g_State = ANIMATION_STATE::READY;
+		counter = FPS;
+		endAnimation = false;
 		s_CanMove = false;
 		return 1;
 	}
@@ -151,6 +159,7 @@ void Dog::Standing() {
 	else {
 		LeftStanding();
 	}
+	endAnimation = true;
 }
 void Dog::Ready() {
 	if (m_OnRight) {

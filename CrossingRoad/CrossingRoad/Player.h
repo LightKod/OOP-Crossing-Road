@@ -93,7 +93,7 @@ protected:
 	MOVING_DIRECTION g_Dir = MOVING_DIRECTION::INVALID;
 	ANIMATION_STATE g_State = ANIMATION_STATE::START;
 
-	static bool s_CanMove;
+	bool s_CanMove = 1;
 	int frameIdx = 0;
 
 };
